@@ -7,8 +7,8 @@
 
 ## 🔗 **Links**
 
-[📂 GitHub Repository](https://github.com/turbinecrew/turbin_electrical)  
-[📑 Project Documentation](https://www.notion.so/sniperfactory1/Pixel-Crew-PC-149d8844b387802db9dbd93f5a950f99)  
+[📂 GitHub Repository](https://github.com/)  
+[📑 Project Documentation](https://docs.google.com/)  
 
 ---
 
@@ -23,7 +23,7 @@
       <br />
       <strong>👑 Riel</strong>
       <br />
-      **Front-End Lead**
+      Front-End Lead
     </td>
     <td align="center">
       <a href="https://github.com/nrkcode">
@@ -32,7 +32,7 @@
       <br />
       <strong>🔥 강나림</strong>
       <br />
-      **Front-End**
+      Front-End
     </td>
     <td align="center">
       <a href="https://github.com/Giradon">
@@ -41,7 +41,7 @@
       <br />
       <strong>💡 김성훈</strong>
       <br />
-      **Front-End**
+      Front-End
     </td>
     <td align="center">
       <a href="https://github.com/seongyun4359">
@@ -50,7 +50,7 @@
       <br />
       <strong>🚀 천성윤</strong>
       <br />
-      **Front-End**
+      Front-End
     </td>
   </tr>
 </table>
@@ -78,28 +78,20 @@
 
 ## 🛠️ **Tech Stacks**
 
-### **Languages**  
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)  
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)  
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+### **Languages**
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
 
-### **Framework**  
+### **Framework**
 ![Next.js](https://img.shields.io/badge/Next.js-000?style=flat-square&logo=next.js&logoColor=white)
 
-### **Library**  
-![NextUI](https://img.shields.io/badge/NextUI-000?style=flat-square&logo=nextui&logoColor=white)  
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)  
-![React Query](https://img.shields.io/badge/React%20Query-FF4154?style=flat-square&logo=reactquery&logoColor=white)
+### **Library**
+![NextUI](https://img.shields.io/badge/NextUI-000?style=flat-square&logo=nextui&logoColor=white) ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white) ![React Query](https://img.shields.io/badge/React%20Query-FF4154?style=flat-square&logo=reactquery&logoColor=white)
 
-### **Tools**  
-![Figma](https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=figma&logoColor=white)  
-![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-007ACC?style=flat-square&logo=visual-studio-code&logoColor=white)  
-![NPM](https://img.shields.io/badge/NPM-CB3837?style=flat-square&logo=npm&logoColor=white)
+### **Tools**
+![Figma](https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=figma&logoColor=white) ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-007ACC?style=flat-square&logo=visual-studio-code&logoColor=white) ![NPM](https://img.shields.io/badge/NPM-CB3837?style=flat-square&logo=npm&logoColor=white)
 
-### **Communication**  
-![GitHub](https://img.shields.io/badge/GitHub-000000?style=flat-square&logo=github&logoColor=white)  
-![Discord](https://img.shields.io/badge/Discord-5865F2?style=flat-square&logo=discord&logoColor=white)  
-![Notion](https://img.shields.io/badge/Notion-000000?style=flat-square&logo=notion&logoColor=white)
+### **Communication**
+![GitHub](https://img.shields.io/badge/GitHub-000000?style=flat-square&logo=github&logoColor=white) ![Discord](https://img.shields.io/badge/Discord-5865F2?style=flat-square&logo=discord&logoColor=white) ![Notion](https://img.shields.io/badge/Notion-000000?style=flat-square&logo=notion&logoColor=white)
 
 ---
 
