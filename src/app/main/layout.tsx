@@ -1,4 +1,4 @@
-import Header from '@/common/header';
+import Header from "@/common/header";
 
 export default function Layout({
   children,
