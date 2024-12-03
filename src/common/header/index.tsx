@@ -1,7 +1,11 @@
+"use client"
+import { usePathname } from "next/navigation"
 import Link from "next/link"
 import { Search, Slash, House, Settings, CircleUser, Bell } from "lucide-react"
 
 export default function Header() {
+	const pathName = usePathname()
+	const thisPage = pathName.split("/").pop()
 	return (
 		<div className="box-border flex h-20 w-full items-center justify-between rounded-2xl bg-slate-400 p-4 shadow-md">
 			<div className="w-fit flex-col gap-1 bg-slate-300">
@@ -10,10 +14,12 @@ export default function Header() {
 						<Link href={"/"} />
 					</House>
 					<Slash size={16} />
-					<span>Dashboard</span>
+					<span>
+						{thisPage === "main" || thisPage === "" ? "Dashboard" : thisPage}
+					</span>
 				</nav>
 				<h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
-					Dashboard
+					{thisPage === "main" || thisPage === "" ? "Dashboard" : thisPage}
 				</h4>
 			</div>
 			<div className="flex w-fit items-center bg-slate-500">
