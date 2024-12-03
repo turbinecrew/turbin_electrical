@@ -43,6 +43,6 @@
 		"@typescript-eslint/consistent-type-imports": "error",
 		"@typescript-eslint/consistent-type-exports": "error",
 		"@typescript-eslint/consistent-type-definitions": ["error", "type"],
-         "tailwindcss/no-custom-classname": "off"
+		"tailwindcss/no-custom-classname": "off"
 	}
 }
