@@ -1,4 +1,5 @@
 "use client"
+
 import { usePathname } from "next/navigation"
 import { useState } from "react"
 import Link from "next/link"
@@ -9,18 +10,22 @@ export default function Header() {
 	const thisPage = pathName.split("/").pop()
 	const [searchText, setSearchText] = useState("")
 
-	const handleKeyPress = (event) => {
+	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchText(event.target.value)
+		console.log(`handleInputChange/ event.target.value:${event.target.value}`)
+	}
+
+	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		// console.log(`event.key:${event.key}`)
+		// console.log(`event.currentTarget.value:${event.currentTarget.value}`)
 		if (event.key === "Enter") {
-			console.log(`검색:${searchText}`)
+			console.log(`handleKeyDown-Enter/ 검색: ${searchText}`)
 			setSearchText("")
 		}
 	}
-	const handleInputChange = (event) => {
-		setSearchText(event.target.value)
-	}
 
 	return (
-		<div className="box-border flex h-20 w-full items-center justify-between rounded-2xl p-4 shadow-md">
+		<div className="fix box-border flex h-20 w-full items-center justify-between rounded-2xl p-4 shadow-md">
 			<div className="w-fit flex-col gap-1">
 				<nav className="flex items-center justify-start gap-1">
 					<Link href="/">
@@ -41,11 +46,11 @@ export default function Header() {
 						<Search color="gray" size={16} />
 					</label>
 					<input
-						className="h-full w-48 border-none bg-transparent pl-3 text-white outline-none valid:placeholder-gray-500"
+						className="h-full w-48 border-none bg-transparent pl-3 text-lime-500 outline-none valid:placeholder-gray-500"
 						placeholder="Type here..."
 						value={searchText}
 						onChange={handleInputChange}
-						onKeyPress={handleKeyPress}
+						onKeyDown={handleKeyDown}
 					/>
 				</div>
 				<div className="m-2 flex w-fit items-center gap-1">
