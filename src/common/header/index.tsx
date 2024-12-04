@@ -36,7 +36,7 @@ export default function Header() {
 				</h4>
 			</div>
 			<div className="flex w-fit items-center">
-				<div className="flex h-10 w-fit items-center justify-center rounded-2xl border border-gray-600 bg-[#2d2d2d] px-4 focus-within:border-sky-400">
+				<div className="flex h-10 w-fit items-center justify-center rounded-2xl border border-gray-600 px-4 focus-within:border-sky-400">
 					<label>
 						<Search color="gray" size={16} />
 					</label>
