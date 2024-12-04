@@ -20,8 +20,8 @@ export default function Header() {
 	}
 
 	return (
-		<div className="box-border flex h-20 w-full items-center justify-between rounded-2xl bg-slate-400 p-4 shadow-md">
-			<div className="w-fit flex-col gap-1 bg-slate-300">
+		<div className="box-border flex h-20 w-full items-center justify-between rounded-2xl p-4 shadow-md">
+			<div className="w-fit flex-col gap-1">
 				<nav className="flex items-center justify-start gap-1">
 					<Link href="/">
 						<House size={16} />
@@ -35,7 +35,7 @@ export default function Header() {
 					{thisPage === "main" || thisPage === "" ? "Dashboard" : thisPage}
 				</h4>
 			</div>
-			<div className="flex w-fit items-center bg-slate-500">
+			<div className="flex w-fit items-center">
 				<div className="flex h-10 w-fit items-center justify-center rounded-2xl border border-gray-600 bg-[#2d2d2d] px-4 focus-within:border-sky-400">
 					<label>
 						<Search color="gray" size={16} />
