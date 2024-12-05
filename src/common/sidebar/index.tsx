@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Home, User, LogIn, Rocket, TrendingUp } from 'lucide-react';
 import Image from 'next/image';
 
-const Sidebar = () => {
+export default function Sidebar() {
   return (
     <aside className='w-64 bg-tbPastelGreen text-tbGreen h-screen fixed p-6 font-poppins'>
       {/* 상단 이미지 */}
@@ -105,6 +105,4 @@ const Sidebar = () => {
       </nav>
     </aside>
   );
-};
-
-export default Sidebar;
+}
