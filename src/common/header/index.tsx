@@ -1,13 +1,18 @@
 "use client"
+
+import Link from "next/link"
+
+import { Search, Slash, House, Settings, CircleUser, Bell } from "lucide-react"
+
 import { usePathname } from "next/navigation"
 import { useState } from "react"
-import Link from "next/link"
-import { Search, Slash, House, Settings, CircleUser, Bell } from "lucide-react"
+import SignInModal from "../modal/sign-in-modal"
 
 export default function Header() {
 	const pathName = usePathname()
 	const thisPage = pathName.split("/").pop()
 	const [searchText, setSearchText] = useState("")
+	const [isModalOpen, setIsModalOpen] = useState(false)
 
 	const handleKeyPress = (event) => {
 		if (event.key === "Enter") {
@@ -17,6 +22,10 @@ export default function Header() {
 	}
 	const handleInputChange = (event) => {
 		setSearchText(event.target.value)
+	}
+
+	const toggleModal = () => {
+		setIsModalOpen(!isModalOpen)
 	}
 
 	return (
@@ -48,15 +57,19 @@ export default function Header() {
 						onKeyPress={handleKeyPress}
 					/>
 				</div>
-				<div className="m-2 flex w-fit items-center gap-1">
+				<div
+					className="m-2 flex w-fit items-center gap-1"
+					onClick={toggleModal}
+				>
 					<CircleUser size={16} />
 					<h4 className="scroll-m-20 text-lg font-semibold tracking-tight">
-						<Link href="/signin">Sign in</Link>
+						Sign in
 					</h4>
 				</div>
 				<Settings size={16} className="m-2" />
 				<Bell size={16} className="m-2" />
 			</div>
+			{isModalOpen && <SignInModal closeModal={toggleModal} />}
 		</div>
 	)
 }
