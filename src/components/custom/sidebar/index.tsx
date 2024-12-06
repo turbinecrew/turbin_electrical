@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 export default function Sidebar() {
   return (
-    <aside className='w-64 bg-tbPastelGreen text-tbGreen h-screen fixed p-6 font-poppins'>
+    <aside className='w-64 bg-tbPastelGreen text-tbGreen h-screen p-6 font-poppins'>
       {/* 상단 이미지 */}
       <div className='flex justify-center mb-6'>
         <Link href='/main'>
