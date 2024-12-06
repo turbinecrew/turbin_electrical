@@ -13,15 +13,22 @@ export default function TitleCard({
 	className,
 }: TitleProps) {
 	return (
-		<CardComponent className={className}>
-			{title && (
-				<span className="text-start text-lg font-bold text-black">{title}</span>
-			)}
-			{lowerTitle && (
-				<span className="mb-1 mt-1 text-start text-sm font-normal text-black/75">
-					{lowerTitle}
-				</span>
-			)}
+		<CardComponent
+			className={`${className} "flex flex-col p-5`}
+			isColored={true}
+		>
+			<div className="flex flex-col">
+				{title && (
+					<span className="mb-1 text-start text-lg font-bold text-black">
+						{title}
+					</span>
+				)}
+				{lowerTitle && (
+					<span className="mb-1 text-start text-sm font-normal text-black/75">
+						{lowerTitle}
+					</span>
+				)}
+			</div>
 			{children}
 		</CardComponent>
 	)
