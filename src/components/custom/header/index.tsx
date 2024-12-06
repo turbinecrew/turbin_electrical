@@ -6,7 +6,7 @@ import { Search, Slash, House, Settings, CircleUser, Bell } from "lucide-react"
 
 import { usePathname } from "next/navigation"
 import { useState } from "react"
-import SignInModal from "../modal/sign-in-modal"
+import SignInModal from "../../common/modal/sign-in-modal"
 
 export default function Header() {
 	const pathName = usePathname()
