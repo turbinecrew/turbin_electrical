@@ -17,12 +17,16 @@ export default function MiniCard({
 			className={`${className} h-[100px] flex-col rounded-xl p-5`}
 			isColored={false}
 		>
-			<div>
-				<span>{title}</span>
-			</div>
-			<div className="flex justify-end">
-				<span>{value}</span>
-				<span>{unit}</span>
+			<span className="text-sm text-muted-foreground">{title}</span>
+
+			<div className="flex items-baseline justify-end gap-1">
+				<span className="scroll-m-20 text-xl font-semibold tracking-tight text-emerald-600">
+					{value}
+				</span>
+
+				<span className="scroll-m-20 text-sm font-semibold tracking-tight text-slate-600">
+					{unit}
+				</span>
 			</div>
 		</CardComponent>
 	)
