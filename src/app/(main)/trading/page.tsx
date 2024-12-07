@@ -18,14 +18,10 @@ export default function Trading() {
 			- SMP 및 REC 가격 변화 선형 그래프 */}
 			{/* ------top------ */}
 			<div className="grid h-[320px] grid-cols-5 gap-4">
-				<TitleCard
-					className="col-span-1"
-					title="총 거래량"
-					lowerTitle="단위: 원"
-				>
+				<TitleCard className="col-span-1" title="총 거래량">
 					<TitleContent className="flex flex-col gap-4">
-						<MiniCard title="SMP 변동추이" value={200} unit="원" />
-						<MiniCard title="SMP 변동추이" value={200} unit="원" />
+						<MiniCard title="총 거래량" value="10,000" unit="MWh" />
+						<MiniCard title="총 거래 금액" value="1,000,000" unit="원" />
 					</TitleContent>
 				</TitleCard>
 				<TitleCard
@@ -43,8 +39,8 @@ export default function Trading() {
 				>
 					<TitleContent className="grid grid-cols-4 gap-4">
 						<div className="col-span-1 flex flex-col gap-4 align-middle">
-							<MiniCard title="총 거래량" value={200} unit="원" />
-							<MiniCard title="금액" value={200} unit="원" />
+							<MiniCard title="총 REC 거래량" value="2,000" unit="REC" />
+							<MiniCard title="평균 가격" value="50,000" unit="원/REC" />
 						</div>
 						<div className="col-span-1">
 							<div>원형 차트</div>
@@ -108,37 +104,6 @@ export default function Trading() {
 								</div>
 							</div>
 						</div>
-						<table className="mt-5">
-							<thead>
-								<tr>
-									<th className="border border-black">#</th>
-									<th className="border border-black">First Name</th>
-									<th className="border border-black">Last Name</th>
-									<th className="border border-black">Username</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td className="border border-black">1</td>
-									<td className="border border-black">Mark</td>
-									<td className="border border-black">Otto</td>
-									<td className="border border-black">@mdo</td>
-								</tr>
-								<tr>
-									<td className="border border-black">2</td>
-									<td className="border border-black">Jacob</td>
-									<td className="border border-black">Thornton</td>
-									<td className="border border-black">@fat</td>
-								</tr>
-								<tr>
-									<td className="border border-black">3</td>
-									<td className="border border-black" colSpan={2}>
-										Larry the Bird
-									</td>
-									<td className="border border-black">@twitter</td>
-								</tr>
-							</tbody>
-						</table>
 					</div>
 				</TitleCard>
 			</div>

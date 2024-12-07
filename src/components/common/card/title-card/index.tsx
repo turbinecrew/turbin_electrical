@@ -19,7 +19,7 @@ export default function TitleCard({
 		>
 			<div className="flex flex-col">
 				{title && (
-					<span className="mb-1 text-start text-lg font-bold text-black">
+					<span className="mb-1 text-start text-xl font-bold text-black">
 						{title}
 					</span>
 				)}
