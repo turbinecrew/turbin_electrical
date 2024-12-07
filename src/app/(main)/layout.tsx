@@ -1,28 +1,28 @@
-import Header from '@/components/custom/header'
-import Sidebar from '@/components/custom/sidebar'
+import Header from "@/components/custom/header"
+import Sidebar from "@/components/custom/sidebar"
 
 export default function Layout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode
 }>) {
-  return (
-    <div className='flex h-screen overflow-hidden'>
-      {/* Sidebar 영역 */}
-      <aside>
-        <Sidebar />
-      </aside>
+	return (
+		<div className="flex h-screen overflow-hidden">
+			{/* Sidebar 영역 */}
+			<aside>
+				<Sidebar />
+			</aside>
 
-      {/* 메인 영역 */}
-      <div className='flex-1 flex flex-col'>
-        {/* Header */}
-        <header>
-          <Header />
-        </header>
+			{/* 메인 영역 */}
+			<div className="flex flex-1 flex-col">
+				{/* Header */}
+				<header>
+					<Header />
+				</header>
 
-        {/* Main 콘텐츠 */}
-        <main>{children}</main>
-      </div>
-    </div>
-  );
+				{/* Main 콘텐츠 */}
+				<main>{children}</main>
+			</div>
+		</div>
+	)
 }

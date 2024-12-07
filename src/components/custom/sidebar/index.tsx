@@ -1,108 +1,108 @@
-'use client';
+"use client"
 
-import Link from 'next/link';
-import { Home, User, LogIn, Rocket, TrendingUp } from 'lucide-react';
-import Image from 'next/image';
+import { Home, User, LogIn, Rocket, TrendingUp } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
 
 export default function Sidebar() {
-  return (
-    <aside className='w-64 bg-tbPastelGreen text-tbGreen h-screen p-6 font-poppins'>
-      {/* 상단 이미지 */}
-      <div className='flex justify-center mb-6'>
-        <Link href='/main'>
-          <Image
-            src='/img/turbinecrew.svg'
-            alt='Turbine Crew Logo'
-            width={200}
-            height={70}
-            className='cursor-pointer rounded-lg'
-          />
-        </Link>
-      </div>
+	return (
+		<aside className="bg-tbPastelGreen text-tbGreen font-poppins h-screen w-64 p-6">
+			{/* 상단 이미지 */}
+			<div className="mb-6 flex justify-center">
+				<Link href="/main">
+					<Image
+						src="/img/turbinecrew.svg"
+						alt="Turbine Crew Logo"
+						width={200}
+						height={70}
+						className="cursor-pointer rounded-lg"
+					/>
+				</Link>
+			</div>
 
-      {/* Separator */}
-      <hr className='border-gray-300 mb-6' />
+			{/* Separator */}
+			<hr className="mb-6 border-gray-300" />
 
-      {/* Navigation */}
-      <nav>
-        <ul className='space-y-4'>
-          {/* Dashboard */}
-          <li>
-            <Link
-              href='/main/dashboard'
-              className='flex items-center space-x-4 hover:text-gray-600 group'
-            >
-              <div className='flex items-center justify-center w-10 h-10 bg-white text-tbGreen rounded-full group-hover:bg-tbGreen group-hover:text-white transition-colors duration-300'>
-                <Home className='w-5 h-5' />
-              </div>
-              <span className='text-lg font-medium'>Dashboard</span>
-            </Link>
-          </li>
+			{/* Navigation */}
+			<nav>
+				<ul className="space-y-4">
+					{/* Dashboard */}
+					<li>
+						<Link
+							href="/main/dashboard"
+							className="group flex items-center space-x-4 hover:text-gray-600"
+						>
+							<div className="text-tbGreen group-hover:bg-tbGreen flex h-10 w-10 items-center justify-center rounded-full bg-white transition-colors duration-300 group-hover:text-white">
+								<Home className="h-5 w-5" />
+							</div>
+							<span className="text-lg font-medium">Dashboard</span>
+						</Link>
+					</li>
 
-          {/* Trading */}
-          <li>
-            <Link
-              href='/trading'
-              className='flex items-center space-x-4 hover:text-gray-600 group'
-            >
-              <div className='flex items-center justify-center w-10 h-10 bg-white text-tbGreen rounded-full group-hover:bg-tbGreen group-hover:text-white transition-colors duration-300'>
-                <TrendingUp className='w-5 h-5' />
-              </div>
-              <span className='text-lg font-medium'>Trading</span>
-            </Link>
-          </li>
-        </ul>
+					{/* Trading */}
+					<li>
+						<Link
+							href="/trading"
+							className="group flex items-center space-x-4 hover:text-gray-600"
+						>
+							<div className="text-tbGreen group-hover:bg-tbGreen flex h-10 w-10 items-center justify-center rounded-full bg-white transition-colors duration-300 group-hover:text-white">
+								<TrendingUp className="h-5 w-5" />
+							</div>
+							<span className="text-lg font-medium">Trading</span>
+						</Link>
+					</li>
+				</ul>
 
-        {/* Separator */}
-        <hr className='border-gray-300 my-6' />
+				{/* Separator */}
+				<hr className="my-6 border-gray-300" />
 
-        {/* Account Pages Section */}
-        <div>
-          <h3 className='text-gray-600 text-sm font-semibold mb-4'>
-            ACCOUNT PAGES
-          </h3>
-          <ul className='space-y-4'>
-            {/* Profile */}
-            <li>
-              <Link
-                href='/profile'
-                className='flex items-center space-x-4 hover:text-gray-600 group'
-              >
-                <div className='flex items-center justify-center w-10 h-10 bg-white text-tbGreen rounded-full group-hover:bg-tbGreen group-hover:text-white transition-colors duration-300'>
-                  <User className='w-5 h-5' />
-                </div>
-                <span className='text-lg font-medium'>Profile</span>
-              </Link>
-            </li>
+				{/* Account Pages Section */}
+				<div>
+					<h3 className="mb-4 text-sm font-semibold text-gray-600">
+						ACCOUNT PAGES
+					</h3>
+					<ul className="space-y-4">
+						{/* Profile */}
+						<li>
+							<Link
+								href="/profile"
+								className="group flex items-center space-x-4 hover:text-gray-600"
+							>
+								<div className="text-tbGreen group-hover:bg-tbGreen flex h-10 w-10 items-center justify-center rounded-full bg-white transition-colors duration-300 group-hover:text-white">
+									<User className="h-5 w-5" />
+								</div>
+								<span className="text-lg font-medium">Profile</span>
+							</Link>
+						</li>
 
-            {/* Sign In */}
-            <li>
-              <Link
-                href='/signin'
-                className='flex items-center space-x-4 hover:text-gray-600 group'
-              >
-                <div className='flex items-center justify-center w-10 h-10 bg-white text-tbGreen rounded-full group-hover:bg-tbGreen group-hover:text-white transition-colors duration-300'>
-                  <LogIn className='w-5 h-5' />
-                </div>
-                <span className='text-lg font-medium'>Sign In</span>
-              </Link>
-            </li>
+						{/* Sign In */}
+						<li>
+							<Link
+								href="/signin"
+								className="group flex items-center space-x-4 hover:text-gray-600"
+							>
+								<div className="text-tbGreen group-hover:bg-tbGreen flex h-10 w-10 items-center justify-center rounded-full bg-white transition-colors duration-300 group-hover:text-white">
+									<LogIn className="h-5 w-5" />
+								</div>
+								<span className="text-lg font-medium">Sign In</span>
+							</Link>
+						</li>
 
-            {/* Sign Up */}
-            <li>
-              <Link
-                href='/signup'
-                className='flex items-center space-x-4 hover:text-gray-600 group'
-              >
-                <div className='flex items-center justify-center w-10 h-10 bg-white text-tbGreen rounded-full group-hover:bg-tbGreen group-hover:text-white transition-colors duration-300'>
-                  <Rocket className='w-5 h-5' />
-                </div>
-                <span className='text-lg font-medium'>Sign Up</span>
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </aside>
-  );
+						{/* Sign Up */}
+						<li>
+							<Link
+								href="/signup"
+								className="group flex items-center space-x-4 hover:text-gray-600"
+							>
+								<div className="text-tbGreen group-hover:bg-tbGreen flex h-10 w-10 items-center justify-center rounded-full bg-white transition-colors duration-300 group-hover:text-white">
+									<Rocket className="h-5 w-5" />
+								</div>
+								<span className="text-lg font-medium">Sign Up</span>
+							</Link>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</aside>
+	)
 }
