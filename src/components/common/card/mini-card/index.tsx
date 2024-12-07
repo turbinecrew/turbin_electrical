@@ -17,7 +17,7 @@ export default function MiniCard({
 			className={`${className} h-[100px] flex-col rounded-xl p-5`}
 			isColored={false}
 		>
-			<span className="text-sm text-muted-foreground">{title}</span>
+			<span className="text-sm font-light text-teal-950">{title}</span>
 
 			<div className="flex items-baseline justify-end gap-1">
 				<span className="scroll-m-20 text-xl font-semibold tracking-tight text-emerald-600">
