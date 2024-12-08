@@ -1,14 +1,14 @@
 import React from "react"
-import { X } from "lucide-react" // X 아이콘 임포트
+import { X } from "lucide-react"
 
 type ModalProps = {
 	closeModal: () => void
 }
 
-const SignInModal: React.FC<ModalProps> = ({ closeModal }) => {
+const SignUpModal: React.FC<ModalProps> = ({ closeModal }) => {
 	const handleSubmit = (event: React.FormEvent) => {
 		event.preventDefault()
-		// 로그인 처리 로직 추가해야 함
+		// 회원가입 처리 로직 추가해야 함
 	}
 
 	return (
@@ -17,12 +17,12 @@ const SignInModal: React.FC<ModalProps> = ({ closeModal }) => {
 				{/* X 아이콘을 이용한 Close 버튼 */}
 				<div className="absolute right-4 top-4">
 					<button type="button" onClick={closeModal} className="text-black">
-						<X size={32} /> {/* X 아이콘 크기를 32로 키움 */}
+						<X size={32} />
 					</button>
 				</div>
 
 				{/* 제목 */}
-				<h2 className="mb-8 text-center text-2xl font-semibold">Welcome!</h2>
+				<h2 className="mb-8 text-center text-2xl font-semibold">Sign Up</h2>
 
 				{/* 소셜 로그인 버튼들  */}
 				<div className="mb-6 flex justify-between gap-4">
@@ -43,13 +43,13 @@ const SignInModal: React.FC<ModalProps> = ({ closeModal }) => {
 				{/* "or" 구분 */}
 				<div className="mb-4 text-center text-gray-500">or</div>
 
-				{/* 기본 로그인 폼 */}
+				{/* 기본 회원가입 폼 */}
 				<form onSubmit={handleSubmit}>
 					<input
 						type="text"
 						placeholder="Your full name"
 						className="mb-4 w-full rounded border p-2"
-						aria-label="Username"
+						aria-label="Full Name"
 					/>
 					<input
 						type="email"
@@ -64,9 +64,9 @@ const SignInModal: React.FC<ModalProps> = ({ closeModal }) => {
 						aria-label="Password"
 					/>
 					<div className="mb-4 flex items-center">
-						<input type="checkbox" id="rememberMe" className="mr-2" />
-						<label htmlFor="rememberMe" className="text-gray-700">
-							Remember me
+						<input type="checkbox" id="agreeTerms" className="mr-2" />
+						<label htmlFor="agreeTerms" className="text-gray-700">
+							I agree to the terms and conditions
 						</label>
 					</div>
 					<button
@@ -77,14 +77,15 @@ const SignInModal: React.FC<ModalProps> = ({ closeModal }) => {
 					</button>
 				</form>
 
-				{/* 계정이 이미 있는 경우 로그인 링크 */}
+				{/* 이미 계정이 있는 경우 로그인 링크 */}
 				<div className="mt-4 flex justify-center">
 					<button
 						type="button"
 						onClick={closeModal}
 						className="text-sm text-gray-500"
 					>
-						Already have an account? Sign in
+						Already have an account?{" "}
+						<span className="text-blue-500">Sign In</span>
 					</button>
 				</div>
 			</div>
@@ -92,4 +93,4 @@ const SignInModal: React.FC<ModalProps> = ({ closeModal }) => {
 	)
 }
 
-export default SignInModal
+export default SignUpModal

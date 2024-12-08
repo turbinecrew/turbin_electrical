@@ -4,8 +4,8 @@ import Link from "next/link"
 import { Home, User, LogIn, Rocket, TrendingUp } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
-import SignInModal from "../../common/modal/sign-in-modal"
-import SignUpModal from "../../common/modal/sign-up-modal"
+import SignInModal from "../modal/sign-in-modal"
+import SignUpModal from "../modal/sign-up-modal"
 
 export default function Sidebar() {
 	const [isSignInModalOpen, setIsSignInModalOpen] = useState(false)

@@ -1,11 +1,11 @@
 import React from "react"
-import { X } from "lucide-react" // X 아이콘 임포트
+import { X } from "lucide-react"
 
 type ModalProps = {
 	closeModal: () => void
 }
 
-const signUpModal: React.FC<ModalProps> = ({ closeModal }) => {
+const SignInModal: React.FC<ModalProps> = ({ closeModal }) => {
 	const handleSubmit = (event: React.FormEvent) => {
 		event.preventDefault()
 		// 로그인 처리 로직 추가해야 함
@@ -84,7 +84,7 @@ const signUpModal: React.FC<ModalProps> = ({ closeModal }) => {
 						onClick={closeModal}
 						className="text-sm text-gray-500"
 					>
-						Already have an account? Sign Up
+						Already have an account? Sign in
 					</button>
 				</div>
 			</div>
@@ -92,4 +92,4 @@ const signUpModal: React.FC<ModalProps> = ({ closeModal }) => {
 	)
 }
 
-export default signUpModal
+export default SignInModal
