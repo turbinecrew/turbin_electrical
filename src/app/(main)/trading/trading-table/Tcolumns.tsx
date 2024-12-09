@@ -4,11 +4,11 @@ import { ColumnDef } from "@tanstack/react-table"
 
 export type DataTablePT = {
 	id: string
-	tradeTime: string // 거래 시간
-	plantName: string // 발전소 이름
-	volume: string // 거래량
-	bidPrice: string // 입찰 가격
-	matchingStatus: "matched" | "unmatched" // 매칭 여부
+	tradeTime: string
+	plantName: string
+	volume: string
+	bidPrice: string
+	matchingStatus: "matched" | "unmatched"
 }
 
 export const columns: ColumnDef<DataTablePT>[] = [

@@ -1,5 +1,5 @@
 import { columns } from "./Tcolumns"
-import { DataTable } from "../../../../components/common/data-table"
+import { DataTable } from "@/components/ui/table/data-table"
 import getData from "./data"
 
 export default async function DemoPage() {

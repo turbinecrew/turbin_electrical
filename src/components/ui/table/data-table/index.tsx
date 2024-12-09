@@ -1,8 +1,7 @@
 "use client"
-import * as React from "react"
+
 import {
 	ColumnDef,
-	SortingState,
 	flexRender,
 	getCoreRowModel,
 	getPaginationRowModel,
@@ -16,11 +15,11 @@ import {
 	TableHead,
 	TableHeader,
 	TableRow,
-} from "@/components/ui/table"
+} from ".."
 import Button from "@/components/common/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
-interface DataTableProps<TData, TValue> {
+type DataTablePT<TData, TValue> = {
 	columns: ColumnDef<TData, TValue>[]
 	data: TData[]
 }
@@ -28,7 +27,7 @@ interface DataTableProps<TData, TValue> {
 export function DataTable<TData, TValue>({
 	columns,
 	data,
-}: DataTableProps<TData, TValue>) {
+}: DataTablePT<TData, TValue>) {
 	const table = useReactTable({
 		data,
 		columns,
