@@ -1,5 +1,5 @@
-import React, { ReactNode } from "react"
 import { X } from "lucide-react"
+import React, { ReactNode } from "react"
 
 type ModalProps = {
 	isOpen: boolean
@@ -41,20 +41,20 @@ type ModalHeaderProps = {
 
 export const ModalHeader = ({ children, className }: ModalHeaderProps) => {
 	return (
-		<div className={`border-b p-4 text-lg font-bold ${className}`}>
+		<div className={`border-b p-4 text-lg font-bold ${className || ""}`}>
 			{children}
 		</div>
 	)
 }
 
-// Modal context
+// Modal Context
 type ModalContextProps = {
 	children: ReactNode
 	className?: string
 }
 
 export const ModalContext = ({ children, className }: ModalContextProps) => {
-	return <div className={`p-4 ${className}`}>{children}</div>
+	return <div className={`p-4 ${className || ""}`}>{children}</div>
 }
 
 // Modal Footer
@@ -65,7 +65,9 @@ type ModalFooterProps = {
 
 export const ModalFooter = ({ children, className }: ModalFooterProps) => {
 	return (
-		<div className={`flex justify-end space-x-2 border-t p-4 ${className}`}>
+		<div
+			className={`flex justify-end space-x-2 border-t p-4 ${className || ""}`}
+		>
 			{children}
 		</div>
 	)

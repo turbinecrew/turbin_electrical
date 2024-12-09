@@ -1,12 +1,13 @@
-import React from "react"
-import { Modal, ModalHeader, ModalContext, ModalFooter } from "../Modal"
+import { Modal, ModalHeader, ModalContext, ModalFooter } from "@/common/modal"
 
-type SignUpModalProps = {
+type SignUpModalPT = {
 	isOpen: boolean
 	closeModal: () => void
 }
 
-const SignUpModal: React.FC<SignUpModalProps> = ({ isOpen, closeModal }) => {
+export function SignUpModal({ isOpen, closeModal }: SignUpModalPT) {
+	if (!isOpen) return null
+
 	return (
 		<Modal isOpen={isOpen} closeModal={closeModal}>
 			<ModalHeader>
@@ -45,5 +46,3 @@ const SignUpModal: React.FC<SignUpModalProps> = ({ isOpen, closeModal }) => {
 		</Modal>
 	)
 }
-
-export default SignUpModal
