@@ -29,6 +29,8 @@ export default function Sidebar() {
 						alt="Turbine Crew Logo"
 						width={200}
 						height={70}
+						style={{ width: "auto", height: "auto" }}
+						priority
 						className="cursor-pointer rounded-lg"
 					/>
 				</Link>
@@ -119,7 +121,12 @@ export default function Sidebar() {
 			</nav>
 
 			{isSignInModalOpen && <SignInModal closeModal={toggleSignInModal} />}
-			{isSignUpModalOpen && <SignUpModal closeModal={toggleSignUpModal} />}
+			{isSignUpModalOpen && (
+				<SignUpModal
+					isOpen={isSignUpModalOpen}
+					closeModal={toggleSignUpModal}
+				/>
+			)}
 		</aside>
 	)
 }
