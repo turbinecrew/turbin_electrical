@@ -1,21 +1,24 @@
 "use client"
-import { usePathname } from "next/navigation"
-import { useState } from "react"
-import Link from "next/link"
 import { Search, Slash, House, Settings, CircleUser, Bell } from "lucide-react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import type { SetStateAction } from "react"
+import { useState } from "react"
 
 export default function Header() {
 	const pathName = usePathname()
 	const thisPage = pathName.split("/").pop()
 	const [searchText, setSearchText] = useState("")
 
-	const handleKeyPress = (event) => {
+	const handleKeyPress = (event: { key: string }) => {
 		if (event.key === "Enter") {
 			console.log(`검색:${searchText}`)
 			setSearchText("")
 		}
 	}
-	const handleInputChange = (event) => {
+	const handleInputChange = (event: {
+		target: { value: SetStateAction<string> }
+	}) => {
 		setSearchText(event.target.value)
 	}
 
