@@ -6,7 +6,7 @@ import Link from "next/link"
 
 export default function Sidebar() {
 	return (
-		<aside className="bg-tbPastelGreen text-tbGreen font-poppins h-screen w-64 p-6">
+		<aside className="bg-tbPastelGreen font-poppins text-tbGreen h-screen w-64 p-6">
 			{/* 상단 이미지 */}
 			<div className="mb-6 flex justify-center">
 				<Link href="/main">
