@@ -57,5 +57,22 @@ export const columns: ColumnDef<EnergyTrade>[] = [
 	{
 		accessorKey: "matchingStatus",
 		header: "matchingStatus",
+		cell: ({ row }) => {
+			const matchingStatus = row.getValue("matchingStatus")
+
+			if (matchingStatus === "matched") {
+				return (
+					<div className="border-1 w-20 rounded-xl border bg-lime-700 text-center font-normal text-white">
+						{matchingStatus}
+					</div>
+				)
+			} else if (matchingStatus === "unmatched") {
+				return (
+					<div className="border-1 w-20 rounded-xl border bg-red-700 text-center font-normal text-white">
+						{matchingStatus}
+					</div>
+				)
+			}
+		},
 	},
 ]
