@@ -14,13 +14,15 @@ export default function Header() {
 	const [searchText, setSearchText] = useState("")
 	const [isModalOpen, setIsModalOpen] = useState(false)
 
-	const handleKeyPress = (event) => {
+	const handleKeyPress = (event: { key: string }) => {
 		if (event.key === "Enter") {
 			console.log(`검색:${searchText}`)
 			setSearchText("")
 		}
 	}
-	const handleInputChange = (event) => {
+	const handleInputChange = (event: {
+		target: { value: SetStateAction<string> }
+	}) => {
 		setSearchText(event.target.value)
 	}
 
