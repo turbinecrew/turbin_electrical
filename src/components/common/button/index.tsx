@@ -3,7 +3,7 @@ import { ButtonHTMLAttributes } from "react"
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	className?: string
 }
-const Button = (props: ButtonProps) => {
+export default function Button(props: ButtonProps) {
 	const { className, ...rest } = props
 	return (
 		<button
@@ -17,4 +17,3 @@ const Button = (props: ButtonProps) => {
 		</button>
 	)
 }
-export default Button

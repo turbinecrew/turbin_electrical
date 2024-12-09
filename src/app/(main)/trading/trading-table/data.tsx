@@ -1,5 +1,5 @@
-import { EnergyTrade } from "./columns"
-async function getData(): Promise<EnergyTrade[]> {
+import { DataTablePT } from "./Tcolumns"
+export default async function getData(): Promise<DataTablePT[]> {
 	return [
 		{
 			id: "trade001",
@@ -124,5 +124,3 @@ async function getData(): Promise<EnergyTrade[]> {
 		},
 	]
 }
-
-export default getData

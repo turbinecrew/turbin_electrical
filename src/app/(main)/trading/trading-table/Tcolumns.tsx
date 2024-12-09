@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 
-export type EnergyTrade = {
+export type DataTablePT = {
 	id: string
 	tradeTime: string // 거래 시간
 	plantName: string // 발전소 이름
@@ -11,7 +11,7 @@ export type EnergyTrade = {
 	matchingStatus: "matched" | "unmatched" // 매칭 여부
 }
 
-export const columns: ColumnDef<EnergyTrade>[] = [
+export const columns: ColumnDef<DataTablePT>[] = [
 	{
 		accessorKey: "tradeTime",
 		header: "tradeTime",

@@ -1,4 +1,4 @@
-import { columns } from "./columns"
+import { columns } from "./Tcolumns"
 import { DataTable } from "../../../../components/common/data-table"
 import getData from "./data"
 
