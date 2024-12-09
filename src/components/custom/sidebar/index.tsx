@@ -23,7 +23,7 @@ export default function Sidebar() {
 		<aside className="h-screen w-64 bg-tbPastelGreen p-6 font-poppins text-tbGreen">
 			{/* 상단 이미지 */}
 			<div className="mb-6 flex justify-center">
-				<Link href="/main">
+				<Link href="/">
 					<Image
 						src="/img/turbinecrew.svg"
 						alt="Turbine Crew Logo"
@@ -43,7 +43,7 @@ export default function Sidebar() {
 					{/* Dashboard */}
 					<li>
 						<Link
-							href="/main/dashboard"
+							href="/dashboard"
 							className="group flex items-center space-x-4 hover:text-gray-600"
 						>
 							<div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-tbGreen transition-colors duration-300 group-hover:bg-tbGreen group-hover:text-white">
