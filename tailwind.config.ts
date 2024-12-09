@@ -1,14 +1,14 @@
-import { COLORS } from "@/config/style/colors"
-import { BORDERRADIUS, FontFamily } from "@/config/style/styles"
+import { COLORS } from "./src/config/style/colors"
+import { BORDERRADIUS, FontFamily } from "./src/config/style/styles"
 
 module.exports = {
 	darkMode: ["class"],
 	content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
 	theme: {
 		extend: {
-			FontFamily,
-			COLORS,
-			BORDERRADIUS,
+			colors: COLORS,
+			borderRadius: BORDERRADIUS,
+			fontFamily: FontFamily,
 		},
 	},
 	plugins: [require("tailwindcss-animate")],
