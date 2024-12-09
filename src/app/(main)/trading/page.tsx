@@ -7,15 +7,6 @@ export default function Trading() {
 	return (
 		<div className="container mx-auto flex h-screen flex-col gap-4 overflow-y-auto p-10">
 			<div className="mb-6 text-3xl">Trading</div>
-			{/* 1. 상단 섹션
-			- 총 거래량
-			- 입찰/매칭 비율
-			- 총 REC 거래량과 평균 거래 가격
-			3가지를 가로로 배열
-			2. 중앙 테이블
-			3. 하단
-			- 시간대별 거래량 막대그래프
-			- SMP 및 REC 가격 변화 선형 그래프 */}
 			{/* ------top------ */}
 			<div className="grid h-[320px] grid-cols-5 gap-4">
 				<TitleCard className="col-span-1" title="총 거래량">
