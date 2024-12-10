@@ -1,6 +1,6 @@
 "use client"
 
-import { DataTable } from "@/components/custom/data-table"
+import { DataTable } from "./data-table"
 import { getColumns } from "./Tcolumns"
 import getData from "./data"
 
