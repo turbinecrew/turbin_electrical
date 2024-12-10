@@ -1,15 +1,14 @@
 import { Modal, ModalHeader, ModalContext, ModalFooter } from "@/common/modal"
 
-type SignUpModalPT = {
+export default function SignUpModal({
+	isOpen,
+	setIsOpen,
+}: {
 	isOpen: boolean
-	closeModal: () => void
-}
-
-export function SignUpModal({ isOpen, closeModal }: SignUpModalPT) {
-	if (!isOpen) return null
-
+	setIsOpen: (state: boolean) => void
+}) {
 	return (
-		<Modal isOpen={isOpen} closeModal={closeModal}>
+		<Modal isOpen={isOpen} setIsOpen={setIsOpen}>
 			<ModalHeader>
 				<h2>Sign Up</h2>
 			</ModalHeader>
@@ -35,7 +34,7 @@ export function SignUpModal({ isOpen, closeModal }: SignUpModalPT) {
 			<ModalFooter>
 				<button
 					className="rounded bg-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-400"
-					onClick={closeModal}
+					onClick={() => setIsOpen(false)}
 				>
 					Cancel
 				</button>

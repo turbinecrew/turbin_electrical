@@ -1,24 +1,16 @@
 "use client"
 
-import Link from "next/link"
 import { Home, User, LogIn, Rocket, TrendingUp } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 import { useState } from "react"
 
-import { SignInModal } from "../modal/sign-in-modal"
-import { SignUpModal } from "../modal/sign-up-modal"
+import SignInModal from "../modal/sign-in-modal"
+import SignUpModal from "../modal/sign-up-modal"
 
 export default function Sidebar() {
 	const [isSignInModalOpen, setIsSignInModalOpen] = useState(false)
 	const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false)
-
-	const toggleSignInModal = () => {
-		setIsSignInModalOpen(!isSignInModalOpen)
-	}
-
-	const toggleSignUpModal = () => {
-		setIsSignUpModalOpen(!isSignUpModalOpen)
-	}
 
 	return (
 		<aside className="h-screen w-64 bg-tbPastelGreen p-6 font-poppins text-tbGreen">
@@ -95,7 +87,7 @@ export default function Sidebar() {
 						{/* Sign In */}
 						<li>
 							<button
-								onClick={toggleSignInModal}
+								onClick={() => setIsSignInModalOpen(true)}
 								className="group flex items-center space-x-4 hover:text-gray-600"
 							>
 								<div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-tbGreen transition-colors duration-300 group-hover:bg-tbGreen group-hover:text-white">
@@ -108,7 +100,7 @@ export default function Sidebar() {
 						{/* Sign Up */}
 						<li>
 							<button
-								onClick={toggleSignUpModal}
+								onClick={() => setIsSignUpModalOpen(true)}
 								className="group flex items-center space-x-4 hover:text-gray-600"
 							>
 								<div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-tbGreen transition-colors duration-300 group-hover:bg-tbGreen group-hover:text-white">
@@ -122,19 +114,16 @@ export default function Sidebar() {
 			</nav>
 
 			{/* SignIn Modal */}
-			{isSignInModalOpen && (
-				<SignInModal
-					isOpen={isSignInModalOpen}
-					closeModal={toggleSignInModal}
-				/>
-			)}
+			<SignInModal
+				isOpen={isSignInModalOpen}
+				setIsOpen={setIsSignInModalOpen}
+			/>
+
 			{/* SignUp Modal */}
-			{isSignUpModalOpen && (
-				<SignUpModal
-					isOpen={isSignUpModalOpen}
-					closeModal={toggleSignUpModal}
-				/>
-			)}
+			<SignUpModal
+				isOpen={isSignUpModalOpen}
+				setIsOpen={setIsSignUpModalOpen}
+			/>
 		</aside>
 	)
 }
