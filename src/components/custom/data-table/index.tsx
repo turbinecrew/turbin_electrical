@@ -15,7 +15,7 @@ import {
 	TableHead,
 	TableHeader,
 	TableRow,
-} from ".."
+} from "@/components/ui/table"
 import Button from "@/components/common/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 

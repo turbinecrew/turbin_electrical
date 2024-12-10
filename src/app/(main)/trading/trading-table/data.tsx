@@ -1,5 +1,5 @@
 import { DataTablePT } from "./Tcolumns"
-export default async function getData(): Promise<DataTablePT[]> {
+export default function getData(): DataTablePT[] {
 	return [
 		{
 			id: "trade001",

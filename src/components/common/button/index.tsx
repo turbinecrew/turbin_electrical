@@ -1,6 +1,6 @@
 import cn from "clsx"
 import { ButtonHTMLAttributes } from "react"
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 	className?: string
 }
 export default function Button(props: ButtonProps) {
