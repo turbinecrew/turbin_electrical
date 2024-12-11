@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation"
 import { useState } from "react"
 
 // `SignInModal`의 named export 확인
-import { SignInModal } from "../modal/sign-in-modal"
+import SignInModal from "../modal/sign-in-modal"
 
 export default function Header() {
 	const pathName = usePathname()
@@ -70,12 +70,11 @@ export default function Header() {
 				<Settings size={16} className="m-2" />
 				<Bell size={16} className="m-2" />
 			</div>
-			{isSignInModalOpen && (
-				<SignInModal
-					isOpen={isSignInModalOpen}
-					closeModal={toggleSignInModal}
-				/>
-			)}
+			{/* SignIn Modal */}
+			<SignInModal
+				isOpen={isSignInModalOpen}
+				setIsOpen={setIsSignInModalOpen}
+			/>
 		</div>
 	)
 }

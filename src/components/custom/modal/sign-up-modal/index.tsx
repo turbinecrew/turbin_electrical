@@ -10,37 +10,20 @@ export default function SignUpModal({
 	return (
 		<Modal isOpen={isOpen} setIsOpen={setIsOpen}>
 			<ModalHeader>
-				<h2>Sign Up</h2>
+				<h1>Sign Up</h1>
 			</ModalHeader>
 			<ModalContext>
-				<form>
-					<input
-						type="text"
-						placeholder="Full Name"
-						className="mb-4 w-full rounded border p-2"
-					/>
-					<input
-						type="email"
-						placeholder="Email"
-						className="mb-4 w-full rounded border p-2"
-					/>
-					<input
-						type="password"
-						placeholder="Password"
-						className="mb-4 w-full rounded border p-2"
-					/>
-				</form>
+				<div className="flex flex-col items-center gap-4">
+					<button className="w-full rounded bg-yellow-400 px-4 py-2 text-white hover:bg-yellow-500">
+						Kakao Sign up
+					</button>
+					<button className="w-full rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
+						Google Sign up
+					</button>
+				</div>
 			</ModalContext>
 			<ModalFooter>
-				<button
-					className="rounded bg-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-400"
-					onClick={() => setIsOpen(false)}
-				>
-					Cancel
-				</button>
-				<button className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
-					Submit
-				</button>
+				<h3>Join with Turbin Crew !</h3>
 			</ModalFooter>
 		</Modal>
 	)
