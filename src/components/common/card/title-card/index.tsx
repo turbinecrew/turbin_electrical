@@ -1,6 +1,6 @@
-import CardComponent from ".."
+import CardComponent from "../default-card"
 
-type TitleProps = {
+type TitlePT = {
 	title?: string
 	lowerTitle?: string
 	children?: React.ReactNode
@@ -11,7 +11,7 @@ export default function TitleCard({
 	lowerTitle,
 	children,
 	className,
-}: TitleProps) {
+}: TitlePT) {
 	return (
 		<CardComponent
 			className={`${className} "flex flex-col p-5`}

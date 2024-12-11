@@ -1,6 +1,6 @@
-import CardComponent from ".."
+import CardComponent from "../default-card"
 
-type TitleProps = {
+type MiniCardPT = {
 	title: string
 	value: string | number
 	unit: string
@@ -11,7 +11,7 @@ export default function MiniCard({
 	value = 0,
 	unit = "",
 	className = "",
-}: TitleProps) {
+}: MiniCardPT) {
 	return (
 		<CardComponent
 			className={`${className} h-[100px] flex-col rounded-xl p-5`}
