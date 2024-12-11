@@ -1,14 +1,18 @@
 "use client"
+
 import { Search, Slash, House, Settings, CircleUser, Bell } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import type { SetStateAction } from "react"
 import { useState } from "react"
+
+// `SignInModal`의 named export 확인
+import SignInModal from "../modal/sign-in-modal"
 
 export default function Header() {
 	const pathName = usePathname()
 	const thisPage = pathName.split("/").pop()
 	const [searchText, setSearchText] = useState("")
+	const [isSignInModalOpen, setIsSignInModalOpen] = useState(false)
 
 	const handleKeyPress = (event: { key: string }) => {
 		if (event.key === "Enter") {
@@ -16,10 +20,13 @@ export default function Header() {
 			setSearchText("")
 		}
 	}
-	const handleInputChange = (event: {
-		target: { value: SetStateAction<string> }
-	}) => {
+
+	const handleInputChange = (event: { target: { value: string } }) => {
 		setSearchText(event.target.value)
+	}
+
+	const toggleSignInModal = () => {
+		setIsSignInModalOpen((prevState) => !prevState) // 안전한 상태 업데이트
 	}
 
 	return (
@@ -51,15 +58,23 @@ export default function Header() {
 						onKeyPress={handleKeyPress}
 					/>
 				</div>
-				<div className="m-2 flex w-fit items-center gap-1">
+				<div
+					className="m-2 flex w-fit items-center gap-1"
+					onClick={toggleSignInModal}
+				>
 					<CircleUser size={16} />
 					<h4 className="scroll-m-20 text-lg font-semibold tracking-tight">
-						<Link href="/signin">Sign in</Link>
+						Sign in
 					</h4>
 				</div>
 				<Settings size={16} className="m-2" />
 				<Bell size={16} className="m-2" />
 			</div>
+			{/* SignIn Modal */}
+			<SignInModal
+				isOpen={isSignInModalOpen}
+				setIsOpen={setIsSignInModalOpen}
+			/>
 		</div>
 	)
 }
