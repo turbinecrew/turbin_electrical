@@ -3,18 +3,27 @@
 import { Home, User, LogIn, Rocket, TrendingUp } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { useState } from "react"
+
+import SignInModal from "../modal/sign-in-modal"
+import SignUpModal from "../modal/sign-up-modal"
 
 export default function Sidebar() {
+	const [isSignInModalOpen, setIsSignInModalOpen] = useState(false)
+	const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false)
+
 	return (
 		<aside className="h-screen w-64 bg-tbPastelGreen p-6 font-poppins text-tbGreen">
 			{/* 상단 이미지 */}
 			<div className="mb-6 flex justify-center">
-				<Link href="/main">
+				<Link href="/">
 					<Image
 						src="/img/turbinecrew.svg"
 						alt="Turbine Crew Logo"
 						width={200}
 						height={70}
+						style={{ width: "auto", height: "auto" }}
+						priority
 						className="cursor-pointer rounded-lg"
 					/>
 				</Link>
@@ -29,7 +38,7 @@ export default function Sidebar() {
 					{/* Dashboard */}
 					<li>
 						<Link
-							href="/main/dashboard"
+							href="/dashboard"
 							className="group flex items-center space-x-4 hover:text-gray-600"
 						>
 							<div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-tbGreen transition-colors duration-300 group-hover:bg-tbGreen group-hover:text-white">
@@ -77,32 +86,44 @@ export default function Sidebar() {
 
 						{/* Sign In */}
 						<li>
-							<Link
-								href="/signin"
+							<button
+								onClick={() => setIsSignInModalOpen(true)}
 								className="group flex items-center space-x-4 hover:text-gray-600"
 							>
 								<div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-tbGreen transition-colors duration-300 group-hover:bg-tbGreen group-hover:text-white">
 									<LogIn className="h-5 w-5" />
 								</div>
 								<span className="text-lg font-medium">Sign In</span>
-							</Link>
+							</button>
 						</li>
 
 						{/* Sign Up */}
 						<li>
-							<Link
-								href="/signup"
+							<button
+								onClick={() => setIsSignUpModalOpen(true)}
 								className="group flex items-center space-x-4 hover:text-gray-600"
 							>
 								<div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-tbGreen transition-colors duration-300 group-hover:bg-tbGreen group-hover:text-white">
 									<Rocket className="h-5 w-5" />
 								</div>
 								<span className="text-lg font-medium">Sign Up</span>
-							</Link>
+							</button>
 						</li>
 					</ul>
 				</div>
 			</nav>
+
+			{/* SignIn Modal */}
+			<SignInModal
+				isOpen={isSignInModalOpen}
+				setIsOpen={setIsSignInModalOpen}
+			/>
+
+			{/* SignUp Modal */}
+			<SignUpModal
+				isOpen={isSignUpModalOpen}
+				setIsOpen={setIsSignUpModalOpen}
+			/>
 		</aside>
 	)
 }
