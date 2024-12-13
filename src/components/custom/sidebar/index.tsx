@@ -1,6 +1,13 @@
 "use client"
 
-import { Home, User, LogIn, Rocket, TrendingUp } from "lucide-react"
+import {
+	Home,
+	User,
+	LogIn,
+	Rocket,
+	TrendingUp,
+	LockKeyhole,
+} from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
@@ -81,6 +88,19 @@ export default function Sidebar() {
 									<User className="h-5 w-5" />
 								</div>
 								<span className="text-lg font-medium">Profile</span>
+							</Link>
+						</li>
+
+						{/* Admin Button */}
+						<li>
+							<Link
+								href="/manage"
+								className="group flex items-center space-x-4 hover:text-gray-600"
+							>
+								<div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-tbGreen transition-colors duration-300 group-hover:bg-tbGreen group-hover:text-white">
+									<LockKeyhole className="h-5 w-5" />
+								</div>
+								<span className="text-lg font-medium">Admin</span>
 							</Link>
 						</li>
 
