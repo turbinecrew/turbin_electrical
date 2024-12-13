@@ -6,7 +6,7 @@ import Link from "next/link"
 
 export default function Sidebar() {
 	return (
-		<aside className="bg-tbPastelGreen font-poppins text-tbGreen h-screen w-64 p-6">
+		<aside className="h-screen w-64 bg-tbPastelGreen p-6 font-poppins text-tbGreen">
 			{/* 상단 이미지 */}
 			<div className="mb-6 flex justify-center">
 				<Link href="/main">
@@ -32,7 +32,7 @@ export default function Sidebar() {
 							href="/main/dashboard"
 							className="group flex items-center space-x-4 hover:text-gray-600"
 						>
-							<div className="text-tbGreen group-hover:bg-tbGreen flex h-10 w-10 items-center justify-center rounded-full bg-white transition-colors duration-300 group-hover:text-white">
+							<div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-tbGreen transition-colors duration-300 group-hover:bg-tbGreen group-hover:text-white">
 								<Home className="h-5 w-5" />
 							</div>
 							<span className="text-lg font-medium">Dashboard</span>
@@ -45,7 +45,7 @@ export default function Sidebar() {
 							href="/trading"
 							className="group flex items-center space-x-4 hover:text-gray-600"
 						>
-							<div className="text-tbGreen group-hover:bg-tbGreen flex h-10 w-10 items-center justify-center rounded-full bg-white transition-colors duration-300 group-hover:text-white">
+							<div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-tbGreen transition-colors duration-300 group-hover:bg-tbGreen group-hover:text-white">
 								<TrendingUp className="h-5 w-5" />
 							</div>
 							<span className="text-lg font-medium">Trading</span>
@@ -68,7 +68,7 @@ export default function Sidebar() {
 								href="/profile"
 								className="group flex items-center space-x-4 hover:text-gray-600"
 							>
-								<div className="text-tbGreen group-hover:bg-tbGreen flex h-10 w-10 items-center justify-center rounded-full bg-white transition-colors duration-300 group-hover:text-white">
+								<div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-tbGreen transition-colors duration-300 group-hover:bg-tbGreen group-hover:text-white">
 									<User className="h-5 w-5" />
 								</div>
 								<span className="text-lg font-medium">Profile</span>
@@ -81,7 +81,7 @@ export default function Sidebar() {
 								href="/signin"
 								className="group flex items-center space-x-4 hover:text-gray-600"
 							>
-								<div className="text-tbGreen group-hover:bg-tbGreen flex h-10 w-10 items-center justify-center rounded-full bg-white transition-colors duration-300 group-hover:text-white">
+								<div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-tbGreen transition-colors duration-300 group-hover:bg-tbGreen group-hover:text-white">
 									<LogIn className="h-5 w-5" />
 								</div>
 								<span className="text-lg font-medium">Sign In</span>
@@ -94,7 +94,7 @@ export default function Sidebar() {
 								href="/signup"
 								className="group flex items-center space-x-4 hover:text-gray-600"
 							>
-								<div className="text-tbGreen group-hover:bg-tbGreen flex h-10 w-10 items-center justify-center rounded-full bg-white transition-colors duration-300 group-hover:text-white">
+								<div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-tbGreen transition-colors duration-300 group-hover:bg-tbGreen group-hover:text-white">
 									<Rocket className="h-5 w-5" />
 								</div>
 								<span className="text-lg font-medium">Sign Up</span>
