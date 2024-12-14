@@ -1,3 +1,4 @@
+import { generateChartConfig } from "@/components/custom/chart/generate-chartConfig"
 import { ChartConfig } from "@/components/ui/chart"
 
 export const chartData = [
@@ -13,13 +14,4 @@ export const chartData = [
 	{ date: "2024-09-10", smp: 124, rec: 233 },
 ]
 
-export const chartConfig: ChartConfig = {
-	rec: {
-		label: "rec",
-		color: "hsl(var(--chart-1))",
-	},
-	smp: {
-		label: "smp",
-		color: "hsl(var(--chart-2))",
-	},
-}
+export const chartConfig: ChartConfig = generateChartConfig({ data: chartData })

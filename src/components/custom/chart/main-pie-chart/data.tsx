@@ -1,19 +1,19 @@
 import { ChartConfig } from "@/components/ui/chart"
 
-export const chartD = [
-	{ browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-	{ browser: "safari", visitors: 200, fill: "var(--color-safari)" },
+export const chartData = [
+	{ type: "REC", revenue: 275, fill: "var(--color-REC)" },
+	{ type: "SMP", revenue: 200, fill: "var(--color-SMP)" },
 ]
 
-export const chartC = {
-	visitors: {
-		label: "Visitors",
+export const chartConfig = {
+	revenue: {
+		label: "Revenue",
 	},
-	chrome: {
+	REC: {
 		label: "REC",
 		color: "hsl(var(--chart-1))",
 	},
-	safari: {
+	SMP: {
 		label: "SMP",
 		color: "hsl(var(--chart-2))",
 	},

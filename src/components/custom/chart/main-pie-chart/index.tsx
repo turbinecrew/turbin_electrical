@@ -20,7 +20,7 @@ import {
 	ChartTooltipContent,
 } from "@/components/ui/chart"
 
-import { chartC, chartD } from "./data"
+import { chartConfig, chartData } from "./data"
 
 export function PieComponent() {
 	return (
@@ -31,20 +31,22 @@ export function PieComponent() {
 			</CardHeader>
 			<CardContent className="flex-1 pb-0">
 				<ChartContainer
-					config={chartC}
+					config={chartConfig}
 					className="mx-auto aspect-square max-h-[250px] [&_.recharts-text]:fill-background"
 				>
 					<PieChart>
 						<ChartTooltip
-							content={<ChartTooltipContent nameKey="visitors" hideLabel />}
+							content={<ChartTooltipContent nameKey="revenue" hideLabel />}
 						/>
-						<Pie data={chartD} dataKey="visitors">
+						<Pie data={chartData} dataKey="revenue">
 							<LabelList
-								dataKey="browser"
+								dataKey="type"
 								className="fill-background"
 								stroke="none"
 								fontSize={12}
-								formatter={(value: keyof typeof chartC) => chartC[value]?.label}
+								formatter={(value: keyof typeof chartConfig) =>
+									chartConfig[value]?.label
+								}
 							/>
 						</Pie>
 						<ChartLegend content={<ChartLegendContent />} />
