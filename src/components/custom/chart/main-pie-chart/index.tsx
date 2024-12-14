@@ -20,9 +20,12 @@ import {
 	ChartTooltipContent,
 } from "@/components/ui/chart"
 
-import { chartConfig, chartData } from "./data"
+import { getChartConfig, getChartData } from "./data"
 
 export function PieComponent() {
+	const chartData = getChartData()
+	const chartConfig = getChartConfig()
+
 	return (
 		<Card className="flex flex-col">
 			<CardHeader className="items-center pb-0">

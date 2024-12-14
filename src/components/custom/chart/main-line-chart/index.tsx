@@ -20,9 +20,12 @@ import {
 	ChartTooltipContent,
 } from "@/components/ui/chart"
 
-import { chartConfig, chartData } from "./data"
+import { getChartConfig, getChartData } from "./data"
 
 export function LineComponent() {
+	const chartData = getChartData()
+	const chartConfig = getChartConfig()
+
 	return (
 		<Card>
 			<CardHeader>
