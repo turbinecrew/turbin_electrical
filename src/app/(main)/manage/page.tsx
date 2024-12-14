@@ -39,7 +39,6 @@ export default function Manage() {
 	const [isLoading, setIsLoading] = useState(true)
 
 	useEffect(() => {
-		// Mock 데이터 로드
 		const mockBids: Bid[] = [
 			{
 				id: 1,
@@ -128,8 +127,6 @@ export default function Manage() {
 	return (
 		<div className="min-h-screen bg-white p-8 text-gray-800">
 			<h1 className="mb-6 text-2xl font-bold">관리자 대시보드</h1>
-
-			{/* 발전량 상태 */}
 			<div className="mb-8 grid grid-cols-3 gap-4">
 				<Card>
 					<CardHeader>
@@ -168,8 +165,6 @@ export default function Manage() {
 					</CardContent>
 				</Card>
 			</div>
-
-			{/* 입찰 요청 */}
 			<div>
 				<h2 className="mb-2 text-lg font-semibold">입찰 요청</h2>
 				<div className="overflow-x-auto">
