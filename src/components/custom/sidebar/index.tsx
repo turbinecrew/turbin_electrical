@@ -21,7 +21,6 @@ export default function Sidebar() {
 
 	return (
 		<aside className="h-screen w-64 bg-tbPastelGreen p-6 font-poppins text-tbGreen">
-			{/* 상단 이미지 */}
 			<div className="mb-6 flex justify-center">
 				<Link href="/">
 					<Image
@@ -35,14 +34,9 @@ export default function Sidebar() {
 					/>
 				</Link>
 			</div>
-
-			{/* Separator */}
 			<hr className="mb-6 border-gray-300" />
-
-			{/* Navigation */}
 			<nav>
 				<ul className="space-y-4">
-					{/* Dashboard */}
 					<li>
 						<Link
 							href="/dashboard"
@@ -69,16 +63,13 @@ export default function Sidebar() {
 					</li>
 				</ul>
 
-				{/* Separator */}
 				<hr className="my-6 border-gray-300" />
 
-				{/* Account Pages Section */}
 				<div>
 					<h3 className="mb-4 text-sm font-semibold text-gray-600">
 						ACCOUNT PAGES
 					</h3>
 					<ul className="space-y-4">
-						{/* Profile */}
 						<li>
 							<Link
 								href="/profile"
@@ -90,8 +81,6 @@ export default function Sidebar() {
 								<span className="text-lg font-medium">Profile</span>
 							</Link>
 						</li>
-
-						{/* Admin Button */}
 						<li>
 							<Link
 								href="/manage"
@@ -104,7 +93,6 @@ export default function Sidebar() {
 							</Link>
 						</li>
 
-						{/* Sign In */}
 						<li>
 							<button
 								onClick={() => setIsSignInModalOpen(true)}
@@ -117,7 +105,6 @@ export default function Sidebar() {
 							</button>
 						</li>
 
-						{/* Sign Up */}
 						<li>
 							<button
 								onClick={() => setIsSignUpModalOpen(true)}
@@ -133,13 +120,11 @@ export default function Sidebar() {
 				</div>
 			</nav>
 
-			{/* SignIn Modal */}
 			<SignInModal
 				isOpen={isSignInModalOpen}
 				setIsOpen={setIsSignInModalOpen}
 			/>
 
-			{/* SignUp Modal */}
 			<SignUpModal
 				isOpen={isSignUpModalOpen}
 				setIsOpen={setIsSignUpModalOpen}
