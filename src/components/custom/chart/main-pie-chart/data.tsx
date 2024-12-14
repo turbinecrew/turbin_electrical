@@ -1,13 +1,13 @@
 import { ChartConfig } from "@/components/ui/chart"
 
 export const chartData = [
-	{ type: "REC", revenue: 275, fill: "var(--color-REC)" },
-	{ type: "SMP", revenue: 200, fill: "var(--color-SMP)" },
+	{ type: "REC", price: 275, fill: "var(--color-REC)" },
+	{ type: "SMP", price: 200, fill: "var(--color-SMP)" },
 ]
 
 export const chartConfig = {
-	revenue: {
-		label: "Revenue",
+	price: {
+		label: "price",
 	},
 	REC: {
 		label: "REC",
