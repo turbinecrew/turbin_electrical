@@ -1,5 +1,5 @@
 import cn from "clsx"
-import { ButtonHTMLAttributes } from "react"
+import type { ButtonHTMLAttributes } from "react"
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 	className?: string
 }

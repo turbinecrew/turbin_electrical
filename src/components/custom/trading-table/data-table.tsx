@@ -1,13 +1,15 @@
 "use client"
 
+import type { ColumnDef } from "@tanstack/react-table"
 import {
-	ColumnDef,
 	flexRender,
 	getCoreRowModel,
 	getPaginationRowModel,
 	useReactTable,
 } from "@tanstack/react-table"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
+import Button from "@/components/common/button"
 import {
 	Table,
 	TableBody,
@@ -16,8 +18,6 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table"
-import Button from "@/components/common/button"
-import { ChevronLeft, ChevronRight } from "lucide-react"
 
 type DataTablePT<TData, TValue> = {
 	columns: ColumnDef<TData, TValue>[]
