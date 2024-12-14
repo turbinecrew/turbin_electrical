@@ -1,4 +1,4 @@
-import { DataTablePT } from "./Tcolumns"
+import type { DataTablePT } from "./Tcolumns"
 export default function getData(): DataTablePT[] {
 	return [
 		{
