@@ -10,9 +10,9 @@
 		"format": "prettier --write ."
 	},
 	"dependencies": {
+		"@tanstack/react-query": "^5.62.7",
 		"@tanstack/react-table": "^8.20.5",
 		"animate": "^1.0.0",
-		"@tanstack/react-query": "^5.62.3",
 		"axios": "^1.7.9",
 		"lucide-react": "^0.468.0",
 		"next": "15.0.3",
