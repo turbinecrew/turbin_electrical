@@ -1,3 +1,9 @@
+import { LineComponent } from "@/components/custom/chart"
+
 export default function Trading() {
-	return <div>Trading</div>
+	return (
+		<div>
+			<LineComponent />
+		</div>
+	)
 }

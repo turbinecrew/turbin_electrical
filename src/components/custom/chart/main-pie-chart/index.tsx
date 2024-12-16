@@ -20,10 +20,10 @@ import {
 	ChartTooltipContent,
 } from "@/components/ui/chart"
 
-import { getChartConfig, getChartData } from "./data"
+import { getChartConfig } from "./data"
+import { chartData } from "./mock"
 
 export function PieComponent() {
-	const chartData = getChartData()
 	const chartConfig = getChartConfig()
 
 	return (
