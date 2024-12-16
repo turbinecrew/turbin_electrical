@@ -5,10 +5,10 @@
     - 관련된 issue 티켓과 링크를 작성해주세요.
 
       ex)
-        * issue: [NAILCASE-100001](https://nailcase.atlassian.net/browse/NAILCASE-100001)
+        * issue: [KAN-](https://turbinelectrical.atlassian.net/browse/KAN-)
         sub-issues:
-          - [NAILCASE-100002](https://nailcase.atlassian.net/browse/NAILCASE-100002)
-          - [NAILCASE-100003](https://nailcase.atlassian.net/browse/NAILCASE-100003)
+          - [KAN-](https://turbinelectrical.atlassian.net/browse/KAN-)
+          - [KAN-](https://turbinelectrical.atlassian.net/browse/KAN-)
 
 
 [여기까지 주석] -->
