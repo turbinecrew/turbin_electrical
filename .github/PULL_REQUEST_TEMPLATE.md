@@ -5,7 +5,7 @@
     - 관련된 issue 티켓과 링크를 작성해주세요.
 
       ex)
-        * issue:  -[KAN-](https://turbinelectrical.atlassian.net/browse/KAN-)
+        * issue: [KAN-](https://turbinelectrical.atlassian.net/browse/KAN-)
         sub-issues:
           - [KAN-](https://turbinelectrical.atlassian.net/browse/KAN-)
           - [KAN-](https://turbinelectrical.atlassian.net/browse/KAN-)
