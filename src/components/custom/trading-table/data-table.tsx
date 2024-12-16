@@ -1,15 +1,15 @@
 "use client"
-
-import type { ColumnDef } from "@tanstack/react-table"
+import * as React from "react"
 import {
+	ColumnDef,
+	SortingState,
 	flexRender,
 	getCoreRowModel,
 	getPaginationRowModel,
+	getSortedRowModel,
 	useReactTable,
 } from "@tanstack/react-table"
-import { ChevronLeft, ChevronRight } from "lucide-react"
 
-import Button from "@/components/common/button"
 import {
 	Table,
 	TableBody,
@@ -18,6 +18,8 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table"
+import Button from "@/components/common/button"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 type DataTablePT<TData, TValue> = {
 	columns: ColumnDef<TData, TValue>[]
@@ -28,11 +30,17 @@ export function DataTableSet<TData, TValue>({
 	columns,
 	data,
 }: DataTablePT<TData, TValue>) {
+	const [sorting, setSorting] = React.useState<SortingState>([])
 	const table = useReactTable({
 		data,
 		columns,
 		getCoreRowModel: getCoreRowModel(),
 		getPaginationRowModel: getPaginationRowModel(),
+		onSortingChange: setSorting,
+		getSortedRowModel: getSortedRowModel(),
+		state: {
+			sorting,
+		},
 	})
 
 	return (
