@@ -1,6 +1,4 @@
-"use client"
 import { Globe } from "lucide-react"
-import { Component } from "@/components/common/chart/bar"
 
 export default function Dashboard() {
 	return (
@@ -34,7 +32,7 @@ export default function Dashboard() {
 				<div className="flex w-full justify-center">
 					<div className="h-[400px] w-full max-w-[1200px]">
 						{/* 차트 컴포넌트 */}
-						<Component />
+						{/* <Component /> */}
 					</div>
 				</div>
 			</div>
