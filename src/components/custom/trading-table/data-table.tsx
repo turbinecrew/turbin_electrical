@@ -24,7 +24,7 @@ type DataTablePT<TData, TValue> = {
 	data: TData[]
 }
 
-export function DataTable<TData, TValue>({
+export function DataTableSet<TData, TValue>({
 	columns,
 	data,
 }: DataTablePT<TData, TValue>) {

@@ -2,9 +2,9 @@
 
 import { getColumns } from "./Tcolumns"
 import getData from "./data"
-import { DataTable } from "./data-table"
+import { DataTableSet } from "./data-table"
 
 export function TradingDataTable() {
 	const data = getData()
-	return <DataTable columns={getColumns()} data={data} />
+	return <DataTableSet columns={getColumns()} data={data} />
 }

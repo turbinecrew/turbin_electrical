@@ -1,6 +1,8 @@
 "use client"
 
-import type { ColumnDef } from "@tanstack/react-table"
+import Button from "@/components/common/button"
+import { ColumnDef } from "@tanstack/react-table"
+import { ArrowUpDown } from "lucide-react"
 
 export type DataTablePT = {
 	id: string
@@ -15,7 +17,21 @@ export function getColumns(): ColumnDef<DataTablePT>[] {
 	return [
 		{
 			accessorKey: "tradeTime",
-			header: "tradeTime",
+			header: ({ column }) => {
+				return (
+					<div className=" ">
+						<Button
+							className="border-none hover:bg-gray-200"
+							onClick={() =>
+								column.toggleSorting(column.getIsSorted() === "asc")
+							}
+						>
+							tradeTime
+							<ArrowUpDown className="ml-2 h-4 w-4" />
+						</Button>
+					</div>
+				)
+			},
 			cell: ({ row }) => {
 				const tradeTime = new Date(row.getValue("tradeTime"))
 				const formatted = new Intl.DateTimeFormat("ko-KR", {
@@ -33,7 +49,18 @@ export function getColumns(): ColumnDef<DataTablePT>[] {
 		},
 		{
 			accessorKey: "volume",
-			header: "volume",
+			header: ({ column }) => {
+				return (
+					<Button
+						className="border-none hover:bg-gray-200"
+						onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+					>
+						volume
+						<ArrowUpDown className="ml-2 h-4 w-4" />
+					</Button>
+				)
+			},
+
 			cell: ({ row }) => {
 				const volume = parseFloat(row.getValue("volume"))
 				const formatted = new Intl.NumberFormat("ko-KR", {}).format(volume)
@@ -43,7 +70,18 @@ export function getColumns(): ColumnDef<DataTablePT>[] {
 		},
 		{
 			accessorKey: "bidPrice",
-			header: "bidPrice",
+			header: ({ column }) => {
+				return (
+					<Button
+						className="border-none hover:bg-gray-200"
+						onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+					>
+						bidPrice
+						<ArrowUpDown className="ml-2 h-4 w-4" />
+					</Button>
+				)
+			},
+
 			cell: ({ row }) => {
 				const bidPrice = parseFloat(row.getValue("bidPrice"))
 				const formatted = new Intl.NumberFormat("ko-KR", {

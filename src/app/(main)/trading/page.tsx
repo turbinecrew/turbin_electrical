@@ -1,10 +1,13 @@
 import { TitleCard, MiniCard, TitleContent } from "@/components/common/card"
+import { Component } from "@/components/common/chart/bar"
+import { LineComponent, PieComponent } from "@/components/custom/chart"
+import { TradingDataTable } from "@/components/custom/trading-table"
 
-import { PieChart, Search } from "lucide-react"
+import { PieChart } from "lucide-react"
 
 export default function Trading() {
 	return (
-		<div className="container mx-auto flex h-screen flex-col gap-4 overflow-y-auto p-10">
+		<div className="container flex h-full w-full flex-col gap-4 overflow-y-auto">
 			<div className="mb-6 text-3xl">Trading</div>
 			{/* ------top------ */}
 			<div className="grid h-[320px] grid-cols-5 gap-4">
@@ -20,7 +23,7 @@ export default function Trading() {
 					lowerTitle="단위: 원"
 				>
 					<TitleContent className="">
-						<PieChart size={60} />
+						<PieComponent />
 					</TitleContent>
 				</TitleCard>
 				<TitleCard
@@ -33,8 +36,7 @@ export default function Trading() {
 							<MiniCard title="평균 가격" value="50,000" unit="원/REC" />
 						</div>
 						<div className="col-span-1">
-							<div>원형 차트</div>
-							<PieChart size={60} />
+							<PieComponent />
 						</div>
 						<TitleCard className="col-span-2" title="REC 거래 요약 카드">
 							거래요약
@@ -76,25 +78,7 @@ export default function Trading() {
 			{/* ------middle------ */}
 			<div className="">
 				<TitleCard title="거래 상세 테이블">
-					<div className="flex w-full flex-col items-center">
-						<div>
-							<div className="flex h-10 w-fit items-center justify-center rounded-2xl border border-gray-600 px-4 focus-within:border-sky-400">
-								<label>
-									<Search color="gray" size={16} />
-								</label>
-								<input
-									className="h-full w-48 border-none bg-transparent pl-3 text-white outline-none valid:placeholder-gray-500"
-									placeholder="Type here..."
-								/>
-								<div className="m-1 rounded-2xl border border-gray-600">
-									combobox
-								</div>
-								<div className="m-1 rounded-2xl border border-gray-600">
-									combobox
-								</div>
-							</div>
-						</div>
-					</div>
+					<TradingDataTable />
 				</TitleCard>
 			</div>
 			{/* ------bottom------ */}
@@ -106,6 +90,7 @@ export default function Trading() {
 						lowerTitle="단위: 원"
 					>
 						<TitleContent className="flex flex-col gap-4">
+							<Component />
 							막대그래프(Bar Chart): ● X축: 시간대. ● Y축: 거래량(MWh).
 						</TitleContent>
 					</TitleCard>
@@ -115,7 +100,7 @@ export default function Trading() {
 						lowerTitle="단위: 원"
 					>
 						<TitleContent className="">
-							<PieChart size={60} />
+							<LineComponent />
 							선형 그래프(Line Chart): ● X축: 시간대. ● Y축: 가격(₩). 두 개의
 							선(SMP, REC)을 색상으로 구분.
 						</TitleContent>
