@@ -1,7 +1,10 @@
-import { TitleCard, MiniCard, TitleContent } from "@/components/common/card"
-import { Component } from "@/components/common/chart/bar"
-import { LineComponent, PieComponent } from "@/components/custom/chart"
-import { TradingDataTable } from "@/components/custom/trading-table"
+import { TitleCard, MiniCard, TitleContent } from "@/common/components/card"
+import { BarChartComponent } from "@/shadcn/components/chart/bar"
+import {
+	LineComponent,
+	PieComponent,
+} from "@/features/realtime/components/chart"
+import { TradingDataTable } from "@/features/realtime/components/trading-table"
 
 import { PieChart } from "lucide-react"
 
@@ -90,7 +93,7 @@ export default function Trading() {
 						lowerTitle="단위: 원"
 					>
 						<TitleContent className="flex flex-col gap-4">
-							<Component />
+							<BarChartComponent />
 							막대그래프(Bar Chart): ● X축: 시간대. ● Y축: 거래량(MWh).
 						</TitleContent>
 					</TitleCard>

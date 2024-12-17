@@ -1,5 +1,5 @@
-import Header from "@/components/custom/header"
-import Sidebar from "@/components/custom/sidebar"
+import Header from "@/common/components/header"
+import Sidebar from "@/common/components/sidebar"
 
 export default function Layout({
 	children,
