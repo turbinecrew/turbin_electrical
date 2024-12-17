@@ -1,6 +1,6 @@
-import { TitleCard, MiniCard, TitleContent } from "@/components/common/card"
-
 import { PieChart, Search } from "lucide-react"
+
+import { TitleCard, MiniCard, TitleContent } from "@/common/components/card"
 
 export default function Trading() {
 	return (
