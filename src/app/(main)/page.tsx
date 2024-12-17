@@ -1,4 +1,4 @@
-import { RegionalEnergyChart } from "@/components/custom/chart/RegionalEnergyChart"
+import { RegionalEnergyChart } from "@/features/region/components/RegionalEnergyChart"
 
 export default function Home() {
 	return (
