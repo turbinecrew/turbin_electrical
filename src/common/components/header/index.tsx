@@ -26,51 +26,53 @@ export default function Header() {
 	}
 
 	const toggleSignInModal = () => {
-		setIsSignInModalOpen((prevState) => !prevState) // 안전한 상태 업데이트
+		setIsSignInModalOpen((prevState) => !prevState)
 	}
 
 	return (
-		<div className="box-border flex h-20 w-full items-center justify-between rounded-2xl p-4 shadow-md">
-			<div className="w-fit flex-col gap-1">
-				<nav className="flex items-center justify-start gap-1">
-					<Link href="/">
+		<div className="flex h-20 w-full items-center justify-between border-b border-gray-200 bg-white p-4 shadow-sm">
+			<div className="flex flex-col">
+				<nav className="flex items-center text-gray-600">
+					<Link href="/" className="flex items-center gap-1 hover:text-tbGreen">
 						<House size={16} />
 					</Link>
 					<Slash size={16} />
-					<span>
+					<span className="capitalize">
 						{thisPage === "main" || thisPage === "" ? "Dashboard" : thisPage}
 					</span>
 				</nav>
-				<h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
+				<h4 className="text-lg font-semibold text-gray-800">
 					{thisPage === "main" || thisPage === "" ? "Dashboard" : thisPage}
 				</h4>
 			</div>
-			<div className="flex w-fit items-center">
-				<div className="flex h-10 w-fit items-center justify-center rounded-2xl border border-gray-600 px-4 focus-within:border-sky-400">
-					<label>
-						<Search color="gray" size={16} />
-					</label>
+			<div className="flex items-center gap-4">
+				<div className="flex h-10 items-center rounded-2xl border border-gray-300 bg-gray-50 px-4 focus-within:border-tbGreen">
+					<Search className="text-gray-400" size={16} />
 					<input
-						className="h-full w-48 border-none bg-transparent pl-3 text-white outline-none valid:placeholder-gray-500"
-						placeholder="Type here..."
+						type="text"
+						className="ml-2 h-full w-48 border-none bg-transparent text-gray-600 placeholder-gray-400 outline-none"
+						placeholder="Search..."
 						value={searchText}
 						onChange={handleInputChange}
 						onKeyPress={handleKeyPress}
 					/>
 				</div>
 				<div
-					className="m-2 flex w-fit items-center gap-1"
+					className="flex cursor-pointer items-center gap-2 text-gray-700 hover:text-tbGreen"
 					onClick={toggleSignInModal}
 				>
-					<CircleUser size={16} />
-					<h4 className="scroll-m-20 text-lg font-semibold tracking-tight">
-						Sign in
-					</h4>
+					<CircleUser size={20} />
+					<span className="text-sm font-medium">Sign In</span>
 				</div>
-				<Settings size={16} className="m-2" />
-				<Bell size={16} className="m-2" />
+				<Settings
+					size={20}
+					className="cursor-pointer text-gray-700 hover:text-tbGreen"
+				/>
+				<Bell
+					size={20}
+					className="cursor-pointer text-gray-700 hover:text-tbGreen"
+				/>
 			</div>
-			{/* SignIn Modal */}
 			<SignInModal
 				isOpen={isSignInModalOpen}
 				setIsOpen={setIsSignInModalOpen}
