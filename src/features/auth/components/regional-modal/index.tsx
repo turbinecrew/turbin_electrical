@@ -17,11 +17,16 @@ import {
 	ModalFooter,
 } from "@/common/components/modal"
 
+type TimeSeriesData = {
+	시간: string
+	"발전량(kW)": number
+}
+
 type RegionalModalPT = {
 	isOpen: boolean
 	setIsOpen: (isOpen: boolean) => void
 	region: string | null
-	timeSeriesData: string
+	timeSeriesData: TimeSeriesData[]
 }
 
 export function RegionalModal({
@@ -30,11 +35,17 @@ export function RegionalModal({
 	region,
 	timeSeriesData,
 }: RegionalModalPT) {
+	const totalGeneration = timeSeriesData.reduce(
+		(sum, entry) => sum + entry["발전량(kW)"],
+		0,
+	)
+	const averageGeneration = (totalGeneration / timeSeriesData.length).toFixed(2)
+
 	return (
 		<Modal isOpen={isOpen} setIsOpen={setIsOpen}>
 			<ModalHeader>{region} 시간별 발전량</ModalHeader>
 			<ModalContext>
-				<div className="flex w-full justify-center">
+				<div className="flex w-full justify-between">
 					<div className="h-[300px] w-[600px]">
 						<ResponsiveContainer width="100%" height="100%">
 							<LineChart
@@ -50,7 +61,7 @@ export function RegionalModal({
 								<YAxis
 									tick={{ fontSize: 12 }}
 									label={{
-										value: "발전량(kW)   ",
+										value: "발전량(kW)",
 										angle: -90,
 										position: "insideLeft",
 									}}
@@ -60,10 +71,24 @@ export function RegionalModal({
 							</LineChart>
 						</ResponsiveContainer>
 					</div>
+					<div className="ml-4 flex flex-col justify-center space-y-4">
+						<div className="rounded-lg border p-4 shadow-md">
+							<h3 className="text-lg font-semibold">평균 발전량</h3>
+							<p className="text-2xl font-bold text-green-600">
+								{averageGeneration} kW
+							</p>
+						</div>
+						<div className="rounded-lg border p-4 shadow-md">
+							<h3 className="text-lg font-semibold">누적 발전량</h3>
+							<p className="text-2xl font-bold text-blue-600">
+								{totalGeneration.toFixed(2)} kW
+							</p>
+						</div>
+					</div>
 				</div>
 			</ModalContext>
 			<ModalFooter>
-				<button className="rounded-lg bg-green-500 px-4 py-2 text-white">
+				<button className="rounded-xl bg-green-600 px-4 py-2 text-white">
 					거래하기
 				</button>
 			</ModalFooter>
