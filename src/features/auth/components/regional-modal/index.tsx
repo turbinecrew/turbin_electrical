@@ -74,13 +74,13 @@ export function RegionalModal({
 					<div className="ml-4 flex flex-col justify-center space-y-4">
 						<div className="rounded-lg border p-4 shadow-md">
 							<h3 className="text-lg font-semibold">평균 발전량</h3>
-							<p className="text-2xl font-bold text-green-600">
+							<p className="text-xl font-bold text-green-600">
 								{averageGeneration} kW
 							</p>
 						</div>
 						<div className="rounded-lg border p-4 shadow-md">
 							<h3 className="text-lg font-semibold">누적 발전량</h3>
-							<p className="text-2xl font-bold text-blue-600">
+							<p className="text-xl font-bold text-blue-600">
 								{totalGeneration.toFixed(2)} kW
 							</p>
 						</div>
