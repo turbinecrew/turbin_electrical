@@ -39,6 +39,7 @@ export default function Sidebar() {
 			>
 				{isSidebarVisible && (
 					<div>
+						{/* Logo Section */}
 						<div className="mb-6 flex justify-center">
 							<Link href="/">
 								<Image
@@ -53,15 +54,12 @@ export default function Sidebar() {
 							</Link>
 						</div>
 						<hr className="mb-6 border-gray-300" />
+
+						{/* Navigation */}
 						<nav>
 							<ul className="space-y-4">
 								{mainNavItems.map((item) => (
-									<SidebarItem
-										key={item.title}
-										href={item.url}
-										label={item.title}
-										icon={item.icon}
-									/>
+									<NavItem key={item.title} item={item} />
 								))}
 							</ul>
 							<hr className="my-6 border-gray-300" />
@@ -71,12 +69,7 @@ export default function Sidebar() {
 								</h3>
 								<ul className="space-y-4">
 									{accountNavItems.map((item) => (
-										<SidebarItem
-											key={item.title}
-											href={item.url}
-											label={item.title}
-											icon={item.icon}
-										/>
+										<NavItem key={item.title} item={item} />
 									))}
 								</ul>
 							</div>
@@ -85,6 +78,7 @@ export default function Sidebar() {
 				)}
 			</aside>
 
+			{/* Toggle Sidebar Button */}
 			<div className="fixed bottom-4 left-4 z-30">
 				{isSidebarVisible ? (
 					<button
@@ -106,25 +100,26 @@ export default function Sidebar() {
 	)
 }
 
-function SidebarItem({
-	href,
-	label,
-	icon: Icon,
+function NavItem({
+	item,
 }: {
-	href: string
-	label: string
-	icon: React.ComponentType<{ className: string }>
+	item: {
+		title: string
+		url: string
+		icon: React.ComponentType<{ className: string }>
+	}
 }) {
+	const Icon = item.icon
 	return (
 		<li>
 			<Link
-				href={href}
+				href={item.url}
 				className="group flex items-center space-x-4 rounded-md p-2 text-gray-700 transition-colors duration-300 hover:bg-tbPastelGreen hover:text-white"
 			>
 				<div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-tbGreen group-hover:bg-white group-hover:text-tbGreen">
 					<Icon className="h-5 w-5" />
 				</div>
-				<span className="text-lg font-medium">{label}</span>
+				<span className="text-lg font-medium">{item.title}</span>
 			</Link>
 		</li>
 	)
