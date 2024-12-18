@@ -7,11 +7,10 @@ import {
 	getPaginationRowModel,
 	useReactTable,
 } from "@tanstack/react-table"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, Table } from "lucide-react"
 
 import Button from "@/common/components/button"
 import {
-	Table,
 	TableBody,
 	TableCell,
 	TableHead,
