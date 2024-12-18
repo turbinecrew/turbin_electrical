@@ -1,4 +1,4 @@
-import CardComponent from "../default-card"
+import { CardComponent } from "@/components/common/card"
 
 type MiniCardPT = {
 	title: string
@@ -6,7 +6,7 @@ type MiniCardPT = {
 	unit: string
 	className?: string
 }
-export default function MiniCard({
+export function MiniCard({
 	title = "",
 	value = 0,
 	unit = "",
