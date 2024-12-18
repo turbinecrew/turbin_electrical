@@ -26,7 +26,6 @@ export function RegionalEnergyChart() {
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [timeSeriesData, setTimeSeriesData] = useState([])
 
-	// 지역별 총 발전량 계산
 	const chartData = useMemo(() => {
 		const regionGenerationMap: Record<string, number> = {}
 
@@ -48,7 +47,6 @@ export function RegionalEnergyChart() {
 		)
 	}, [])
 
-	// 특정 지역 클릭 핸들러
 	const handleRegionClick = (region: string) => {
 		setSelectedRegion(region)
 		const regionData = data.filter((entry) => entry["지역"] === region)
