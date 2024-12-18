@@ -23,7 +23,7 @@ import { chartConfig, chartData } from "./mock"
 
 export function PieComponent() {
 	return (
-		<Card className="flex flex-col">
+		<div className="flex flex-col">
 			<CardHeader className="items-center pb-0">
 				<CardTitle>REC와 SMP의 수익 비율</CardTitle>
 				<CardDescription>January - June 2024</CardDescription>
@@ -37,7 +37,12 @@ export function PieComponent() {
 						<ChartTooltip
 							content={<ChartTooltipContent nameKey="price" hideLabel />}
 						/>
-						<Pie data={chartData} dataKey="price">
+						<Pie
+							data={chartData}
+							dataKey="price"
+							fill="transparent"
+							stroke="none"
+						>
 							<LabelList
 								dataKey="type"
 								className="fill-background"
@@ -60,6 +65,6 @@ export function PieComponent() {
 					(REC: ₩XX, SMP: ₩XX)
 				</div>
 			</CardFooter>
-		</Card>
+		</div>
 	)
 }
