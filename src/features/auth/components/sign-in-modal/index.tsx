@@ -3,7 +3,7 @@ import {
 	ModalHeader,
 	ModalContext,
 	ModalFooter,
-} from "@/components/modal"
+} from "@/common/components/modal"
 
 export default function SignInModal({
 	isOpen,
