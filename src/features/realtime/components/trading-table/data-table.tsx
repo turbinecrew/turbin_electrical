@@ -7,10 +7,11 @@ import {
 	getPaginationRowModel,
 	useReactTable,
 } from "@tanstack/react-table"
-import { ChevronLeft, ChevronRight, Table } from "lucide-react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 import Button from "@/common/components/button"
 import {
+	Table,
 	TableBody,
 	TableCell,
 	TableHead,
@@ -23,7 +24,7 @@ type DataTablePT<TData, TValue> = {
 	data: TData[]
 }
 
-export function DataTable<TData, TValue>({
+export function DataTableSet<TData, TValue>({
 	columns,
 	data,
 }: DataTablePT<TData, TValue>) {

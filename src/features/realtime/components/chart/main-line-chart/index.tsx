@@ -26,7 +26,7 @@ export function LineComponent() {
 	const chartConfig = getChartConfig()
 
 	return (
-		<Card>
+		<div>
 			<CardHeader>
 				<CardTitle>REC 및 SMP 가격</CardTitle>
 				<CardDescription>X축: 최근 7일, Y축: 가격(₩/kWh)</CardDescription>
@@ -105,6 +105,6 @@ export function LineComponent() {
 					</div>
 				</div>
 			</CardFooter>
-		</Card>
+		</div>
 	)
 }
