@@ -16,18 +16,7 @@ import {
 	ModalContext,
 	ModalFooter,
 } from "@/common/components/modal"
-
-type TimeSeriesData = {
-	시간: string
-	"발전량(kW)": number
-}
-
-type RegionalModalPT = {
-	isOpen: boolean
-	setIsOpen: (isOpen: boolean) => void
-	region: string | null
-	timeSeriesData: TimeSeriesData[]
-}
+import type { RegionalModalPT } from "@/features/region/types/regionModal"
 
 export function RegionalModal({
 	isOpen,
