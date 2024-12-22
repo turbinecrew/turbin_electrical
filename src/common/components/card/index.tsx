@@ -1,14 +1,11 @@
 "use client"
 import * as React from "react"
 
-type CardContextType = {
+type CardPT = {
 	children?: React.ReactNode
 	className?: string
 	isColored?: boolean
 }
-type CardPT = CardContextType & React.PropsWithChildren<{}>
-
-const CardContext = React.createContext<CardContextType>({ isColored: false })
 
 const CardComponent = ({
 	children,
@@ -20,13 +17,11 @@ const CardComponent = ({
 		: "bg-[#FAFAFA] bg-opacity-50"
 
 	return (
-		<CardContext.Provider value={{ isColored }}>
-			<div
-				className={`border-1 rounded-2xl border shadow-md ${className} ${colorClass}`}
-			>
-				{children}
-			</div>
-		</CardContext.Provider>
+		<div
+			className={`border-1 rounded-2xl border shadow-md ${className} ${colorClass}`}
+		>
+			{children}
+		</div>
 	)
 }
 
@@ -71,12 +66,13 @@ type MiniCardPT = {
 	value: string | number
 	unit: string
 	isColored?: boolean
+	className?: string
 }
 
-const MiniCard = ({ title, value, unit, isColored }: MiniCardPT) => {
+const MiniCard = ({ title, value, unit, isColored, className }: MiniCardPT) => {
 	return (
 		<div
-			className={`h-[100px] flex-col rounded-xl p-5 shadow-md ${isColored ? "bg-tbPastelGreen" : "bg-white bg-opacity-50"}`}
+			className={`${className} h-[100px] flex-col rounded-xl p-5 shadow-md ${isColored ? "bg-tbPastelGreen" : "bg-white bg-opacity-50"}`}
 		>
 			<span className="text-sm font-light text-teal-950">{title}</span>
 			<div className="flex items-baseline justify-end gap-1">
