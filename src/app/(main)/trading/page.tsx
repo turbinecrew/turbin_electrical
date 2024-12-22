@@ -8,6 +8,8 @@ import {
 	LineComponent,
 	PieComponent,
 } from "@/features/realtime/components/chart"
+import { BidPieChart } from "@/features/realtime/components/chart/bid-pie-chart"
+import { ArrowRightCircle } from "lucide-react"
 
 export default function Trading() {
 	const RECdata = [
@@ -26,7 +28,7 @@ export default function Trading() {
 	]
 
 	return (
-		<div className="page_container m-5 flex h-[full-20px] w-[full-20px] flex-col gap-7 overflow-y-auto">
+		<div className="page_container m-5 flex h-full w-[full-20px] flex-col gap-7 overflow-y-auto">
 			<div className="text-3xl font-extralight">전력 거래</div>
 
 			<div className="page_content flex flex-col gap-8">
@@ -122,9 +124,19 @@ export default function Trading() {
 								</div>
 							</div>
 						</div>
-						<CardComponent>
-							<LineComponent />
-						</CardComponent>
+						<TitleCard
+							className="flex h-full min-h-40"
+							title="입찰/매칭 현황"
+							lowerTitle="2024-12-18 12:34"
+						>
+							<BidPieChart />
+							<div className="flex h-full w-full items-center justify-center">
+								<button className="flex h-[50px] w-fit items-center justify-center gap-1 rounded-2xl border bg-slate-200 p-4 text-center">
+									거래관리
+									<ArrowRightCircle />
+								</button>
+							</div>
+						</TitleCard>
 					</div>
 				</div>
 				{/* ------bottom------ */}
