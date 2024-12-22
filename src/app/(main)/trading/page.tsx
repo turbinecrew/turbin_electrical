@@ -6,18 +6,26 @@ import {
 } from "@/features/realtime/components/chart"
 import { TradingDataTable } from "@/features/realtime/components/trading-table"
 
-import { PieChart } from "lucide-react"
-
 export default function Trading() {
 	return (
-		<div className="container flex h-full w-full flex-col gap-4 overflow-y-auto">
+		<div className="container m-4 flex h-screen w-full flex-col gap-4 overflow-y-auto">
 			<div className="mb-6 text-3xl">Trading</div>
 			{/* ------top------ */}
-			<div className="grid h-[320px] grid-cols-5 gap-4">
+			<div className="grid h-fit grid-cols-5 gap-4">
 				<TitleCard className="col-span-1" title="총 거래량">
 					<TitleContent className="flex flex-col gap-4">
-						<MiniCard title="총 거래량" value="10,000" unit="MWh" />
-						<MiniCard title="총 거래 금액" value="1,000,000" unit="원" />
+						<MiniCard
+							isColored={true}
+							title="총 거래량"
+							value="10,000"
+							unit="MWh"
+						/>
+						<MiniCard
+							isColored={true}
+							title="총 거래 금액"
+							value="1,000,000"
+							unit="원"
+						/>
 					</TitleContent>
 				</TitleCard>
 				<TitleCard
@@ -79,13 +87,13 @@ export default function Trading() {
 				</TitleCard>
 			</div>
 			{/* ------middle------ */}
-			<div className="">
+			<div className="h-fit">
 				<TitleCard title="거래 상세 테이블">
 					<TradingDataTable />
 				</TitleCard>
 			</div>
 			{/* ------bottom------ */}
-			<div className="">
+			<div className="h-fit">
 				<div className="grid h-[400px] grid-cols-2 gap-4">
 					<TitleCard
 						className="col-span-1"
