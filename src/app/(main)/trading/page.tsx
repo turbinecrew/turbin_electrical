@@ -1,8 +1,16 @@
-import { TitleCard, MiniCard, TitleContent } from "@/common/components/card"
+import { ArrowRightCircle } from "lucide-react"
+
+import {
+	TitleCard,
+	MiniCard,
+	TitleContent,
+	CardComponent,
+} from "@/common/components/card"
 import {
 	LineComponent,
 	PieComponent,
 } from "@/features/realtime/components/chart"
+import { BidPieChart } from "@/features/realtime/components/chart/bid-pie-chart"
 import { TradingDataTable } from "@/features/realtime/components/trading-table"
 import { BarChartComponent } from "@/shadcn/components/chart/bar"
 
