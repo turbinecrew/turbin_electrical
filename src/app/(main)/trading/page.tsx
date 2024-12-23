@@ -1,12 +1,10 @@
 import { TitleCard, MiniCard, TitleContent } from "@/common/components/card"
-import { BarChartComponent } from "@/shadcn/components/chart/bar"
 import {
 	LineComponent,
 	PieComponent,
 } from "@/features/realtime/components/chart"
 import { TradingDataTable } from "@/features/realtime/components/trading-table"
-
-import { PieChart } from "lucide-react"
+import { BarChartComponent } from "@/shadcn/components/chart/bar"
 
 export default function Trading() {
 	return (
