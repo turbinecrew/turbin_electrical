@@ -1,56 +1,56 @@
-import { TitleCard, CardComponent } from "@/common/components/card"
+import { TitleCard, CardComponent, MiniCard } from "@/common/components/card"
 import { LineComponent } from "@/features/realtime/components/chart"
 
 export default function Trading() {
+	const miniCardDatas = [
+		{
+			title: "현재 REC 가격",
+			value: 39921,
+			unit: "원/REC",
+			isIncreased: true,
+			amount: 320,
+			color: "bg-[#F6FCF3]",
+		},
+		{
+			title: "현재 SMP 가격",
+			value: 148.32,
+			unit: "원/kWh",
+			isIncreased: false,
+			amount: 0.35,
+			color: "bg-[#EFF6F1]",
+		},
+	]
+	const timeCardDatas = [
+		{
+			title: "어제 총 거래량",
+			value: 1144,
+			unit: "kWh",
+			color: "bg-[#F6FCF3]",
+		},
+		{
+			title: "오늘 총 거래량",
+			value: 456011,
+			unit: "원",
+			color: "bg-[#EFF6F1]",
+		},
+	]
 	return (
 		<div className="page_container m-5 flex h-full w-[full-20px] flex-col gap-7 overflow-y-auto">
-			<div className="text-3xl font-extralight">전력 거래</div>
-
 			<div className="page_content flex flex-col gap-8">
 				{/* ------top------ */}
 				<div className="flex w-full flex-row gap-4">
 					<div className="flex w-1/2 flex-col gap-4">
 						<div className="flex w-full gap-4">
-							<div
-								className={
-									"w-full flex-col gap-2 rounded-xl bg-[#F6FCF3] p-6 shadow-md"
-								}
-							>
-								<div className="text-sm font-semibold">현재 REC 가격</div>
-								<div className="text-xs font-light">2024-12-18 (목)</div>
-
-								<div className="flex items-center justify-between">
-									<div className="flex items-baseline gap-1">
-										<span className="scroll-m-20 text-2xl font-semibold tracking-tight">
-											39,921
-										</span>
-										<span className="scroll-m-20 text-xl font-semibold tracking-tight">
-											원/REC
-										</span>
-									</div>
-									<div className="text-xs text-red-600"> +320</div>
-								</div>
-							</div>
-							<div
-								className={
-									"w-full flex-col gap-2 rounded-xl bg-[#EFF6F1] p-6 shadow-md"
-								}
-							>
-								<div className="text-sm font-semibold">현재 SMP 가격</div>
-								<div className="text-xs font-light">2024-12-18 (목) 12:34</div>
-
-								<div className="flex items-center justify-between gap-1">
-									<div className="flex items-baseline gap-1">
-										<span className="scroll-m-20 text-2xl font-semibold tracking-tight">
-											148.32
-										</span>
-										<span className="scroll-m-20 text-xl font-semibold tracking-tight">
-											원/kWh
-										</span>
-									</div>
-									<div className="text-xs text-blue-700"> -0.35</div>
-								</div>
-							</div>
+							{miniCardDatas.map((items) => (
+								<MiniCard
+									title={items.title}
+									value={items.value}
+									unit={items.unit}
+									isIncreased={items.isIncreased}
+									amount={items.amount}
+									color={items.color}
+								/>
+							))}
 						</div>
 						<CardComponent>
 							<LineComponent />
@@ -58,46 +58,14 @@ export default function Trading() {
 					</div>
 					<div className="flex w-1/2 flex-col gap-4">
 						<div className="flex w-full gap-4">
-							<div
-								className={
-									"w-full flex-col gap-2 rounded-xl bg-[#F6FCF3] p-6 shadow-md"
-								}
-							>
-								<div className="">
-									<div className="text-sm font-semibold">어제 총 거래량</div>
-									<div className="text-xs font-light">2024-12-17 (수)</div>
-								</div>
-
-								<div className="flex items-center justify-between">
-									<div className="flex items-baseline gap-1">
-										<span className="scroll-m-20 text-2xl font-semibold tracking-tight">
-											1,144
-										</span>
-										<span className="scroll-m-20 text-xl font-semibold tracking-tight">
-											kWh
-										</span>
-									</div>
-								</div>
-							</div>
-							<div
-								className={
-									"w-full flex-col gap-2 rounded-xl bg-[#EFF6F1] p-6 shadow-md"
-								}
-							>
-								<div className="text-sm font-semibold">오늘 총 거래량</div>
-								<div className="text-xs font-light">2024-12-18 (목)</div>
-
-								<div className="flex items-center justify-between">
-									<div className="flex items-baseline gap-1">
-										<span className="scroll-m-20 text-2xl font-semibold tracking-tight">
-											456,011
-										</span>
-										<span className="scroll-m-20 text-xl font-semibold tracking-tight">
-											원
-										</span>
-									</div>
-								</div>
-							</div>
+							{timeCardDatas.map((items) => (
+								<MiniCard
+									title={items.title}
+									value={items.value}
+									unit={items.unit}
+									color={items.color}
+								/>
+							))}
 						</div>
 						<TitleCard
 							className="flex h-full min-h-40"
