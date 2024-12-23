@@ -1,32 +1,10 @@
-import {
-	TitleCard,
-	MiniCard,
-	TitleContent,
-	CardComponent,
-} from "@/common/components/card"
-import {
-	LineComponent,
-	PieComponent,
-} from "@/features/realtime/components/chart"
+import { TitleCard, CardComponent } from "@/common/components/card"
+import { LineComponent } from "@/features/realtime/components/chart"
 import { BidPieChart } from "@/features/realtime/components/chart/bid-pie-chart"
 import { ArrowRightCircle } from "lucide-react"
+import { RECdata } from "@/app/(main)/trading/rec-table"
 
 export default function Trading() {
-	const RECdata = [
-		{
-			_id: {
-				$oid: "676523b9c5bfa31e0b05c9be",
-			},
-			거래일: "2024.12.19(목)",
-			거래량: "143846",
-			평균가: "63104",
-			최고가: "65000",
-			최저가: "62000",
-			종가: "63000",
-			date: "2024-12-20 16:58:49",
-		},
-	]
-
 	return (
 		<div className="page_container m-5 flex h-full w-[full-20px] flex-col gap-7 overflow-y-auto">
 			<div className="text-3xl font-extralight">전력 거래</div>
