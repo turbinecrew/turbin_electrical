@@ -12,14 +12,10 @@ const CardComponent = ({
 	className = "",
 	isColored = false,
 }: CardPT) => {
-	const colorClass = isColored
-		? "bg-tbPastelGreen"
-		: "bg-[#FAFAFA] bg-opacity-50"
+	const colorClass = isColored ? "bg-tbPastelGreen" : "bg-[#FAFAFA]"
 
 	return (
-		<div
-			className={`border-1 rounded-2xl border shadow-md ${className} ${colorClass}`}
-		>
+		<div className={`border-1 rounded-2xl border ${className} ${colorClass}`}>
 			{children}
 		</div>
 	)
@@ -46,7 +42,7 @@ const TitleCard = ({
 		>
 			<div className="flex flex-col">
 				{title && (
-					<span className="mb-1 text-start text-xl font-bold text-black">
+					<span className="text-start text-lg font-bold text-black">
 						{title}
 					</span>
 				)}
