@@ -67,24 +67,12 @@ export function LineComponent() {
 							type="monotone"
 							stroke="var(--color-rec)"
 							strokeWidth={2}
-							dot={{
-								fill: "var(--color-rec)",
-							}}
-							activeDot={{
-								r: 1,
-							}}
 						/>
 						<Line
 							dataKey="smp"
 							type="monotone"
 							stroke="var(--color-smp)"
 							strokeWidth={2}
-							dot={{
-								fill: "var(--color-smp)",
-							}}
-							activeDot={{
-								r: 1,
-							}}
 						/>
 						<ChartLegend>
 							<ChartLegendContent />
