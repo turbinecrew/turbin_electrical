@@ -61,7 +61,7 @@ export function RegionalEnergyChart() {
 					<CardTitle>지역별 발전량 차트</CardTitle>
 				</CardHeader>
 				<CardContent>
-					<div className="h-[450px] w-[800px]">
+					<div className="h-[35vh] w-[40vw]">
 						<ResponsiveContainer width="100%" height="100%">
 							<BarChart
 								data={chartData}
