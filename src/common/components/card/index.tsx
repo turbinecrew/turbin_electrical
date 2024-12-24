@@ -12,14 +12,10 @@ const CardComponent = ({
 	className = "",
 	isColored = false,
 }: CardPT) => {
-	const colorClass = isColored
-		? "bg-tbPastelGreen"
-		: "bg-[#FAFAFA] bg-opacity-50"
+	const colorClass = isColored ? "bg-tbPastelGreen" : "bg-[#FAFAFA]"
 
 	return (
-		<div
-			className={`border-1 rounded-2xl border shadow-md ${className} ${colorClass}`}
-		>
+		<div className={`border-1 rounded-2xl border ${className} ${colorClass}`}>
 			{children}
 		</div>
 	)
@@ -46,7 +42,7 @@ const TitleCard = ({
 		>
 			<div className="flex flex-col">
 				{title && (
-					<span className="mb-1 text-start text-xl font-bold text-black">
+					<span className="text-start text-lg font-bold text-black">
 						{title}
 					</span>
 				)}
@@ -64,24 +60,43 @@ const TitleCard = ({
 type MiniCardPT = {
 	title: string
 	value: string | number
-	unit: string
+	unit?: string
 	isColored?: boolean
+	isIncreased?: boolean
+	amount?: number
 	className?: string
+	color?: string
 }
 
-const MiniCard = ({ title, value, unit, isColored, className }: MiniCardPT) => {
+const MiniCard = ({
+	title,
+	value,
+	unit,
+	amount,
+	isIncreased,
+	className,
+	color,
+}: MiniCardPT) => {
 	return (
 		<div
-			className={`${className} h-[100px] flex-col rounded-xl p-5 shadow-md ${isColored ? "bg-tbPastelGreen" : "bg-white bg-opacity-50"}`}
+			className={`w-full flex-col gap-2 rounded-xl p-6 shadow-md ${color} ${className}`}
 		>
-			<span className="text-sm font-light text-teal-950">{title}</span>
-			<div className="flex items-baseline justify-end gap-1">
-				<span className="scroll-m-20 text-xl font-semibold tracking-tight text-emerald-600">
-					{value}
-				</span>
-				<span className="scroll-m-20 text-sm font-semibold tracking-tight text-slate-600">
-					{unit}
-				</span>
+			<div className="text-xs font-semibold">{title}</div>
+
+			<div className="flex items-center justify-between">
+				<div className="flex items-baseline gap-1">
+					<span className="scroll-m-20 text-2xl font-semibold tracking-tight">
+						{value}
+					</span>
+					<span className="scroll-m-20 text-lg font-semibold tracking-tight">
+						{unit}
+					</span>
+				</div>
+				{isIncreased ? (
+					<div className="text-xs font-bold text-red-600">+{amount}</div>
+				) : (
+					<div className="text-xs font-bold text-blue-600">-{amount}</div>
+				)}
 			</div>
 		</div>
 	)
