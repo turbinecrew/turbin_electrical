@@ -1,4 +1,9 @@
-import { TitleCard, CardComponent, MiniCard } from "@/common/components/card"
+import {
+	TitleCard,
+	CardComponent,
+	MiniCard,
+	MiniCardPT,
+} from "@/common/components/card"
 import { LineComponent } from "@/features/realtime/components/chart"
 
 export default function Trading() {
@@ -41,7 +46,7 @@ export default function Trading() {
 				<div className="flex w-full flex-row gap-4">
 					<div className="flex w-1/2 flex-col gap-4">
 						<div className="flex w-full gap-4">
-							{miniCardDatas.map((items, idx) => (
+							{miniCardDatas.map((items: MiniCardPT, idx) => (
 								<MiniCard
 									title={items.title}
 									value={items.value}
@@ -59,7 +64,7 @@ export default function Trading() {
 					</div>
 					<div className="flex w-1/2 flex-col gap-4">
 						<div className="flex w-full gap-4">
-							{timeCardDatas.map((items, idx) => (
+							{timeCardDatas.map((items: MiniCardPT, idx) => (
 								<MiniCard
 									title={items.title}
 									value={items.value}
