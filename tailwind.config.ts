@@ -1,19 +1,15 @@
-import type { Config } from "tailwindcss"
+import { COLORS } from "./src/config/style/colors"
+import { BORDERRADIUS, FontFamily } from "./src/config/style/styles"
 
-export default {
-	content: [
-		"./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-		"./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-		"./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-		"./src/common/**/*.{js,ts,jsx,tsx,mdx}",
-	],
+module.exports = {
+	darkMode: ["class"],
+	content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
 	theme: {
 		extend: {
-			colors: {
-				background: "var(--background)",
-				foreground: "var(--foreground)",
-			},
+			colors: COLORS,
+			borderRadius: BORDERRADIUS,
+			fontFamily: FontFamily,
 		},
 	},
-	plugins: [],
-} satisfies Config
+	plugins: [require("tailwindcss-animate")],
+}
