@@ -41,7 +41,7 @@ export default function Trading() {
 				<div className="flex w-full flex-row gap-4">
 					<div className="flex w-1/2 flex-col gap-4">
 						<div className="flex w-full gap-4">
-							{miniCardDatas.map((items) => (
+							{miniCardDatas.map((items, idx) => (
 								<MiniCard
 									title={items.title}
 									value={items.value}
@@ -49,6 +49,7 @@ export default function Trading() {
 									isIncreased={items.isIncreased}
 									amount={items.amount}
 									color={items.color}
+									key={idx}
 								/>
 							))}
 						</div>
@@ -58,12 +59,13 @@ export default function Trading() {
 					</div>
 					<div className="flex w-1/2 flex-col gap-4">
 						<div className="flex w-full gap-4">
-							{timeCardDatas.map((items) => (
+							{timeCardDatas.map((items, idx) => (
 								<MiniCard
 									title={items.title}
 									value={items.value}
 									unit={items.unit}
 									color={items.color}
+									key={idx}
 								/>
 							))}
 						</div>
