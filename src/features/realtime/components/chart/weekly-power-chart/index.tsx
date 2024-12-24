@@ -1,5 +1,4 @@
 /* eslint-disable import/order */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import type { TooltipItem } from "chart.js"
@@ -16,6 +15,13 @@ import {
 import React from "react"
 import { Line } from "react-chartjs-2"
 
+import {
+	Card,
+	CardHeader,
+	CardContent,
+	CardTitle,
+} from "@/shadcn/components/card"
+
 import { mockData } from "./mock"
 
 ChartJS.register(
@@ -27,6 +33,7 @@ ChartJS.register(
 	Tooltip,
 	Filler,
 )
+
 import type { ProcessedData } from "@/features/realtime/types/weeklyPower"
 
 export default function WeeklyPower() {
@@ -62,6 +69,7 @@ export default function WeeklyPower() {
 
 	const options = {
 		responsive: true,
+		maintainAspectRatio: false,
 		plugins: {
 			legend: {
 				display: true,
@@ -74,7 +82,7 @@ export default function WeeklyPower() {
 			tooltip: {
 				callbacks: {
 					label: function (context: TooltipItem<"line">) {
-						const index = context.dataIndex // Typed correctly
+						const index = context.dataIndex
 						const item = processedData[index]
 						return [
 							`발전량: ${item.발전량} kW`,
@@ -101,8 +109,15 @@ export default function WeeklyPower() {
 	}
 
 	return (
-		<div style={{ width: "100%", height: "400px" }}>
-			<Line data={chartData} options={options} />
-		</div>
+		<Card className="mx-auto mb-[100px] mt-8 h-[50vh] w-[60vw]">
+			<CardHeader>
+				<CardTitle>주간 전력 생산량</CardTitle>
+			</CardHeader>
+			<CardContent className="flex h-full items-center justify-center">
+				<div className="h-full w-full">
+					<Line data={chartData} options={options} />
+				</div>
+			</CardContent>
+		</Card>
 	)
 }
