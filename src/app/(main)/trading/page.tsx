@@ -22,13 +22,13 @@ export default function Trading() {
 	]
 	const timeCardDatas = [
 		{
-			title: "어제 총 거래량",
+			title: "누적 거래량",
 			value: 1144,
 			unit: "kWh",
 			color: "bg-[#F6FCF3]",
 		},
 		{
-			title: "오늘 총 거래량",
+			title: "이번 달 거래량",
 			value: 456011,
 			unit: "원",
 			color: "bg-[#EFF6F1]",
@@ -69,8 +69,7 @@ export default function Trading() {
 						</div>
 						<TitleCard
 							className="flex h-full min-h-40"
-							title="시간대별거래량"
-							lowerTitle="2024-12-18 12:34"
+							title="월별 거래량"
 						></TitleCard>
 					</div>
 				</div>
