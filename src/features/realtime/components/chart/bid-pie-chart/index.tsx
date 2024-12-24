@@ -1,15 +1,13 @@
 "use client"
 
-import { TrendingUp } from "lucide-react"
-import { Label, LabelList, Pie, PieChart } from "recharts"
+import { useMemo } from "react"
+import { Label, Pie, PieChart } from "recharts"
 
 import {
 	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
 	CardHeader,
 	CardTitle,
+	CardContent,
 } from "@/shadcn/components/card"
 import {
 	ChartContainer,
@@ -20,15 +18,18 @@ import {
 } from "@/shadcn/components/chart"
 
 import { chartConfig, chartData } from "./mock"
-import { useMemo } from "react"
 
 export function BidPieChart() {
 	const total = useMemo(() => {
 		return chartData.reduce((acc, curr) => acc + curr.number, 0)
 	}, [])
+
 	return (
-		<div className="flex flex-col">
-			<CardContent className="flex-1 pb-0">
+		<Card className="mx-auto h-[40vh] w-[30vw] max-w-md">
+			<CardHeader>
+				<CardTitle>Bid Pie Chart</CardTitle>
+			</CardHeader>
+			<CardContent>
 				<ChartContainer
 					config={chartConfig}
 					className="mx-auto aspect-square max-h-[250px] [&_.recharts-text]:fill-background"
@@ -86,6 +87,6 @@ export function BidPieChart() {
 					</PieChart>
 				</ChartContainer>
 			</CardContent>
-		</div>
+		</Card>
 	)
 }
