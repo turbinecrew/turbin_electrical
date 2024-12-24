@@ -57,7 +57,7 @@ const TitleCard = ({
 	)
 }
 
-type MiniCardPT = {
+export type MiniCardPT = {
 	title: string
 	value: string | number
 	unit?: string
