@@ -1,5 +1,8 @@
+/* eslint-disable import/order */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
+import type { TooltipItem } from "chart.js"
 import {
 	Chart as ChartJS,
 	CategoryScale,
@@ -24,12 +27,7 @@ ChartJS.register(
 	Tooltip,
 	Filler,
 )
-
-type ProcessedData = {
-	날짜: string
-	발전량: number
-	잔여거래량: number
-}
+import type { ProcessedData } from "@/features/realtime/types/weeklyPower"
 
 export default function WeeklyPower() {
 	const processedData: ProcessedData[] = mockData.reduce(
@@ -39,7 +37,7 @@ export default function WeeklyPower() {
 				acc.push({
 					날짜: item.날짜,
 					발전량: item["발전량(kW)"],
-					잔여거래량: item["누적발전량(kWh)"] - item["누적거래량(kWh)"],
+					잔여거래량: item["누적발전량(kWh)"] - (item["누적거래량(kWh)"] || 0),
 				})
 			}
 			return acc
@@ -67,7 +65,7 @@ export default function WeeklyPower() {
 		plugins: {
 			legend: {
 				display: true,
-				position: "top",
+				position: "top" as const,
 			},
 			title: {
 				display: true,
@@ -75,8 +73,8 @@ export default function WeeklyPower() {
 			},
 			tooltip: {
 				callbacks: {
-					label: function (context) {
-						const index = context.dataIndex
+					label: function (context: TooltipItem<"line">) {
+						const index = context.dataIndex // Typed correctly
 						const item = processedData[index]
 						return [
 							`발전량: ${item.발전량} kW`,
