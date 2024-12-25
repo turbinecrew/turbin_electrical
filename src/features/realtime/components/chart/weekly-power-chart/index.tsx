@@ -101,7 +101,7 @@ export default function WeeklyPower() {
 	}
 
 	return (
-		<div className="mx-auto mr-[50px] mt-8 h-[35vh] w-[40vw] rounded">
+		<div className="mx-auto mr-[50px] h-[35vh] w-full">
 			<div className="flex h-full items-center justify-center">
 				<div className="h-full w-full">
 					<Line data={chartData} options={options} />

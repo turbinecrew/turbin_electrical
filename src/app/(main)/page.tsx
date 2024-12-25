@@ -2,7 +2,6 @@ import { MiniCard } from "@/common/components/card"
 import { BidPieChart } from "@/features/realtime/components/chart/bid-pie-chart"
 import WeeklyPowerChart from "@/features/realtime/components/chart/weekly-power-chart"
 import { RegionalEnergyChart } from "@/features/region/components/RegionalEnergyChart"
-
 import {
 	Card,
 	CardHeader,
@@ -48,7 +47,6 @@ export default function Home() {
 
 	return (
 		<div className="flex flex-col gap-8 p-8">
-			{/* Mini Cards */}
 			<div className="grid grid-cols-4 gap-4">
 				{miniCardDatas.map((item, index) => (
 					<MiniCard
@@ -63,7 +61,6 @@ export default function Home() {
 				))}
 			</div>
 
-			{/* Regional Energy Chart and Map */}
 			<div className="grid grid-cols-5 gap-4">
 				<Card className="col-span-3">
 					<CardHeader>
@@ -74,17 +71,18 @@ export default function Home() {
 					</CardContent>
 				</Card>
 
-				<Card className="col-span-2">
+				<Card className="col-span-2 items-center justify-center">
 					<CardHeader>
 						<CardTitle>지도 영역</CardTitle>
 					</CardHeader>
-					<CardContent className="flex h-[45vh] items-center justify-center bg-green-400">
-						지도영역
+					<CardContent className="flex items-center justify-center p-2">
+						<div className="h-[40vh] w-[80%] bg-green-400 text-center text-lg font-bold text-white">
+							지도지도
+						</div>
 					</CardContent>
 				</Card>
 			</div>
 
-			{/* Bid Pie Chart and Weekly Power Chart */}
 			<div className="grid grid-cols-5 gap-4">
 				<Card className="col-span-2">
 					<CardHeader>

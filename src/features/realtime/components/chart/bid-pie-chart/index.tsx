@@ -1,17 +1,16 @@
 "use client"
 
 import { useMemo } from "react"
-import { Label, Pie, PieChart } from "recharts"
-
 import {
-	ChartContainer,
-	ChartLegend,
-	ChartLegendContent,
-	ChartTooltip,
-	ChartTooltipContent,
-} from "@/shadcn/components/chart"
+	Label,
+	Pie,
+	PieChart,
+	Tooltip,
+	Legend,
+	ResponsiveContainer,
+} from "recharts"
 
-import { chartConfig, chartData } from "./mock"
+import { chartData } from "./mock"
 
 export function BidPieChart() {
 	const total = useMemo(() => {
@@ -19,26 +18,42 @@ export function BidPieChart() {
 	}, [])
 
 	return (
-		<div className="mx-auto h-[40vh] w-[30vw] max-w-md rounded p-4">
-			<div className="mb-4 text-center">
-				<h2 className="text-lg font-bold">Bid Pie Chart</h2>
-			</div>
-			<div className="flex items-center justify-center">
-				<ChartContainer
-					config={chartConfig}
-					className="mx-auto aspect-square max-h-[250px] [&_.recharts-text]:fill-background"
-				>
+		<div className="mx-auto h-[40vh] w-[100%] max-w-lg p-4">
+			<div className="flex h-full items-center justify-center">
+				<ResponsiveContainer width="100%" height="100%">
 					<PieChart>
-						<ChartTooltip
-							content={<ChartTooltipContent nameKey="type" hideLabel />}
+						<Tooltip
+							contentStyle={{
+								backgroundColor: "#f9f9f9",
+								border: "1px solid #ddd",
+							}}
+							itemStyle={{ color: "#333" }}
+							cursor={{ fill: "rgba(0, 0, 0, 0.1)" }}
+						/>
+						<Legend
+							verticalAlign="bottom"
+							height={36}
+							align="center"
+							iconType="circle"
+							wrapperStyle={{ color: "#555", fontSize: "14px" }}
 						/>
 						<Pie
 							data={chartData}
 							dataKey="number"
 							nameKey="type"
-							fill="transparent"
-							innerRadius={60}
-							stroke="none"
+							cx="50%"
+							cy="50%"
+							innerRadius="40%"
+							outerRadius="60%"
+							fill="#8884d8"
+							paddingAngle={5}
+							label={({ name, percent }) =>
+								`${name}: ${(percent * 100).toFixed(0)}%`
+							}
+							labelStyle={{
+								fontSize: "12px",
+								fill: "#444",
+							}}
 						>
 							<Label
 								content={({ viewBox }) => {
@@ -52,22 +67,22 @@ export function BidPieChart() {
 											>
 												<tspan
 													x={viewBox.cx}
-													y={(viewBox.cy || 0) - 28}
-													className="fill-muted-foreground"
+													y={(viewBox.cy || 0) - 20}
+													className="text-sm text-gray-500"
 												>
 													TOTAL
 												</tspan>
 												<tspan
 													x={viewBox.cx}
 													y={viewBox.cy}
-													className="fill-foreground text-3xl font-bold"
+													className="text-lg font-bold text-gray-700"
 												>
 													{total.toLocaleString()}
 												</tspan>
 												<tspan
 													x={viewBox.cx}
-													y={(viewBox.cy || 0) + 24}
-													className="fill-muted-foreground"
+													y={(viewBox.cy || 0) + 20}
+													className="text-sm text-gray-500"
 												>
 													건
 												</tspan>
@@ -77,9 +92,8 @@ export function BidPieChart() {
 								}}
 							/>
 						</Pie>
-						<ChartLegend content={<ChartLegendContent />} />
 					</PieChart>
-				</ChartContainer>
+				</ResponsiveContainer>
 			</div>
 		</div>
 	)
