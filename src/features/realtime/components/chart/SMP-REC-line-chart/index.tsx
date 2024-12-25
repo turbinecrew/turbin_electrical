@@ -84,11 +84,7 @@ export function LineComponent() {
 				<div className="flex w-full items-start gap-2 text-sm">
 					<div className="grid gap-2">
 						<div className="flex items-center gap-2 font-medium leading-none">
-							전력 생산 총량 예측값 카드
-							<TrendingUp className="h-4 w-4" />
-						</div>
-						<div className="flex items-center gap-2 leading-none text-muted-foreground">
-							X축: 최근 7일, Y축: 가격(₩/kWh).
+							이번 달 SMP : 상승
 						</div>
 					</div>
 				</div>
