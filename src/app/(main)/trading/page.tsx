@@ -6,6 +6,7 @@ import {
 } from "@/common/components/card"
 import { LineComponent } from "@/features/realtime/components/chart"
 import { VolumeChart } from "@/features/realtime/components/chart/trading-volume-chart"
+import { TradingTable } from "@/features/realtime/components/realtime-trading-table"
 
 export default function Trading() {
 	const miniCardDatas = [
@@ -81,7 +82,11 @@ export default function Trading() {
 					</div>
 				</div>
 				{/* ------bottom------ */}
-				<div className="flex justify-center"></div>
+				<div className="flex justify-center">
+					<CardComponent>
+						<TradingTable />
+					</CardComponent>
+				</div>
 			</div>
 		</div>
 	)
