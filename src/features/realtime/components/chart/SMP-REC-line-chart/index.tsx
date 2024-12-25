@@ -27,10 +27,6 @@ export function LineComponent() {
 
 	return (
 		<div>
-			<CardHeader>
-				<CardTitle>REC 및 SMP 가격</CardTitle>
-				<CardDescription>X축: 최근 7일, Y축: 가격(₩/kWh)</CardDescription>
-			</CardHeader>
 			<CardContent>
 				<ChartContainer config={chartConfig}>
 					<LineChart

@@ -73,16 +73,20 @@ export default function Trading() {
 						</div>
 					</div>
 					<div className="grid grid-cols-2 gap-4">
-						<CardComponent>
-							<LineComponent />
-						</CardComponent>
+						<TitleCard title="SMP 가격">
+							<div className="pt-10">
+								<LineComponent />
+							</div>
+						</TitleCard>
 						<TitleCard title="월별 거래량">
-							<VolumeChart />
+							<div className="pt-10">
+								<VolumeChart />
+							</div>
 						</TitleCard>
 					</div>
 				</div>
 				{/* ------bottom------ */}
-				<div className="flex justify-center">
+				<div className="flex w-full justify-center">
 					<CardComponent>
 						<TradingTable />
 					</CardComponent>
