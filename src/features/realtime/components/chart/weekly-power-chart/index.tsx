@@ -1,4 +1,3 @@
-/* eslint-disable import/order */
 "use client"
 
 import type { TooltipItem } from "chart.js"
@@ -14,13 +13,6 @@ import {
 } from "chart.js"
 import React from "react"
 import { Line } from "react-chartjs-2"
-
-import {
-	Card,
-	CardHeader,
-	CardContent,
-	CardTitle,
-} from "@/shadcn/components/card"
 
 import { mockData } from "./mock"
 
@@ -109,15 +101,12 @@ export default function WeeklyPower() {
 	}
 
 	return (
-		<Card className="mx-auto mb-[100px] mt-8 h-[50vh] w-[60vw]">
-			<CardHeader>
-				<CardTitle>주간 전력 생산량</CardTitle>
-			</CardHeader>
-			<CardContent className="flex h-full items-center justify-center">
+		<div className="mx-auto mr-[50px] mt-8 h-[35vh] w-[40vw] rounded">
+			<div className="flex h-full items-center justify-center">
 				<div className="h-full w-full">
 					<Line data={chartData} options={options} />
 				</div>
-			</CardContent>
-		</Card>
+			</div>
+		</div>
 	)
 }

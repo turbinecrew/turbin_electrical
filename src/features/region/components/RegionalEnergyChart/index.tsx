@@ -12,12 +12,6 @@ import {
 } from "recharts"
 
 import { RegionalModal } from "@/features/auth/components/regional-modal"
-import {
-	Card,
-	CardContent,
-	CardHeader,
-	CardTitle,
-} from "@/shadcn/components/card"
 
 import { data } from "./mocks"
 
@@ -56,41 +50,35 @@ export function RegionalEnergyChart() {
 
 	return (
 		<div className="p-4">
-			<Card className="shadow-md">
-				<CardHeader>
-					<CardTitle>지역별 발전량 차트</CardTitle>
-				</CardHeader>
-				<CardContent>
-					<div className="h-[35vh] w-[47vw]">
-						<ResponsiveContainer width="100%" height="100%">
-							<BarChart
-								data={chartData}
-								margin={{ top: 20, right: 30, left: 20, bottom: 50 }}
-								onClick={(e) => {
-									if (e?.activeLabel) handleRegionClick(e.activeLabel)
-								}}
-							>
-								<CartesianGrid strokeDasharray="3 3" />
-								<XAxis
-									dataKey="region"
-									tickLine={false}
-									tick={{ fontSize: 12, fontWeight: "bold" }}
-									angle={-45}
-									textAnchor="end"
-								/>
-								<YAxis tick={{ fontSize: 12, fontWeight: "bold" }} />
-								<Tooltip contentStyle={{ fontWeight: "bold" }} />
-								<Bar
-									dataKey="generation"
-									fill="#07A525"
-									radius={[4, 4, 0, 0]}
-									cursor="pointer"
-								/>
-							</BarChart>
-						</ResponsiveContainer>
-					</div>
-				</CardContent>
-			</Card>
+			<h2 className="mb-4 text-lg font-bold">지역별 발전량 차트</h2>
+			<div className="relative h-[40vh]">
+				<ResponsiveContainer width="100%" height="100%">
+					<BarChart
+						data={chartData}
+						margin={{ top: 20, right: 30, left: 20, bottom: 50 }}
+						onClick={(e) => {
+							if (e?.activeLabel) handleRegionClick(e.activeLabel)
+						}}
+					>
+						<CartesianGrid strokeDasharray="3 3" />
+						<XAxis
+							dataKey="region"
+							tickLine={false}
+							tick={{ fontSize: 12, fontWeight: "bold" }}
+							angle={-45}
+							textAnchor="end"
+						/>
+						<YAxis tick={{ fontSize: 12, fontWeight: "bold" }} />
+						<Tooltip contentStyle={{ fontWeight: "bold" }} />
+						<Bar
+							dataKey="generation"
+							fill="#07A525"
+							radius={[4, 4, 0, 0]}
+							cursor="pointer"
+						/>
+					</BarChart>
+				</ResponsiveContainer>
+			</div>
 
 			<RegionalModal
 				isOpen={isModalOpen}

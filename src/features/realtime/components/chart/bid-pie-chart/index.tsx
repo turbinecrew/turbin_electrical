@@ -4,12 +4,6 @@ import { useMemo } from "react"
 import { Label, Pie, PieChart } from "recharts"
 
 import {
-	Card,
-	CardHeader,
-	CardTitle,
-	CardContent,
-} from "@/shadcn/components/card"
-import {
 	ChartContainer,
 	ChartLegend,
 	ChartLegendContent,
@@ -25,11 +19,11 @@ export function BidPieChart() {
 	}, [])
 
 	return (
-		<Card className="mx-auto h-[40vh] w-[30vw] max-w-md">
-			<CardHeader>
-				<CardTitle>Bid Pie Chart</CardTitle>
-			</CardHeader>
-			<CardContent>
+		<div className="mx-auto h-[40vh] w-[30vw] max-w-md rounded p-4">
+			<div className="mb-4 text-center">
+				<h2 className="text-lg font-bold">Bid Pie Chart</h2>
+			</div>
+			<div className="flex items-center justify-center">
 				<ChartContainer
 					config={chartConfig}
 					className="mx-auto aspect-square max-h-[250px] [&_.recharts-text]:fill-background"
@@ -86,7 +80,7 @@ export function BidPieChart() {
 						<ChartLegend content={<ChartLegendContent />} />
 					</PieChart>
 				</ChartContainer>
-			</CardContent>
-		</Card>
+			</div>
+		</div>
 	)
 }
