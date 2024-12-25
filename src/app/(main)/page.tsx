@@ -3,6 +3,13 @@ import { BidPieChart } from "@/features/realtime/components/chart/bid-pie-chart"
 import WeeklyPowerChart from "@/features/realtime/components/chart/weekly-power-chart"
 import { RegionalEnergyChart } from "@/features/region/components/RegionalEnergyChart"
 
+import {
+	Card,
+	CardHeader,
+	CardTitle,
+	CardContent,
+} from "@/shadcn/components/card"
+
 export default function Home() {
 	const miniCardDatas = [
 		{
@@ -41,6 +48,7 @@ export default function Home() {
 
 	return (
 		<div className="flex flex-col gap-8 p-8">
+			{/* Mini Cards */}
 			<div className="grid grid-cols-4 gap-4">
 				{miniCardDatas.map((item, index) => (
 					<MiniCard
@@ -55,16 +63,46 @@ export default function Home() {
 				))}
 			</div>
 
-			<div className="grid grid-cols-2 gap-4">
-				<RegionalEnergyChart />
-				<div className="flex h-[45vh] w-[30vw] items-center justify-center bg-green-400">
-					지도영역
-				</div>
+			{/* Regional Energy Chart and Map */}
+			<div className="grid grid-cols-5 gap-4">
+				<Card className="col-span-3">
+					<CardHeader>
+						<CardTitle>지역별 에너지 차트</CardTitle>
+					</CardHeader>
+					<CardContent>
+						<RegionalEnergyChart />
+					</CardContent>
+				</Card>
+
+				<Card className="col-span-2">
+					<CardHeader>
+						<CardTitle>지도 영역</CardTitle>
+					</CardHeader>
+					<CardContent className="flex h-[45vh] items-center justify-center bg-green-400">
+						지도영역
+					</CardContent>
+				</Card>
 			</div>
 
-			<div className="grid grid-cols-2 gap-4">
-				<BidPieChart />
-				<WeeklyPowerChart />
+			{/* Bid Pie Chart and Weekly Power Chart */}
+			<div className="grid grid-cols-5 gap-4">
+				<Card className="col-span-2">
+					<CardHeader>
+						<CardTitle>Bid Pie Chart</CardTitle>
+					</CardHeader>
+					<CardContent>
+						<BidPieChart />
+					</CardContent>
+				</Card>
+
+				<Card className="col-span-3">
+					<CardHeader>
+						<CardTitle>주간 전력 생산량</CardTitle>
+					</CardHeader>
+					<CardContent>
+						<WeeklyPowerChart />
+					</CardContent>
+				</Card>
 			</div>
 		</div>
 	)
