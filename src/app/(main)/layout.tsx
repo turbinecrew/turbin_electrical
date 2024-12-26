@@ -9,7 +9,7 @@ export default function Layout({
 	return (
 		<div className="flex h-screen overflow-hidden">
 			{/* Sidebar 영역 */}
-			<aside>
+			<aside className="h-full">
 				<Sidebar />
 			</aside>
 
@@ -21,7 +21,7 @@ export default function Layout({
 				</header>
 
 				{/* Main 콘텐츠 */}
-				<main>{children}</main>
+				<main className="flex-1 overflow-auto">{children}</main>
 			</div>
 		</div>
 	)
