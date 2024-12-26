@@ -1,6 +1,7 @@
 export const chartData = [
-	{ type: "pending", number: 8, fill: "var(--color-pending)" },
-	{ type: "matched", number: 4, fill: "var(--color-matched)" },
+	{ type: "pending", number: 18, fill: "var(--color-pending)" },
+	{ type: "approved", number: 7, fill: "var(--color-approved)" },
+	{ type: "denied", number: 3, fill: "var(--color-denied)" },
 ]
 export const chartConfig = {
 	number: {
