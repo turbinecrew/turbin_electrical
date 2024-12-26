@@ -7,7 +7,7 @@ export default function Layout({
 	children: React.ReactNode
 }>) {
 	return (
-		<div className="flex h-screen overflow-hidden">
+		<div className="flex h-screen">
 			{/* Sidebar 영역 */}
 			<aside className="h-full">
 				<Sidebar />

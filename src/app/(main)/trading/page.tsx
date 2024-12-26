@@ -1,9 +1,5 @@
-import {
-	TitleCard,
-	CardComponent,
-	MiniCard,
-	MiniCardPT,
-} from "@/common/components/card"
+import type { MiniCardPT } from "@/common/components/card"
+import { TitleCard, CardComponent, MiniCard } from "@/common/components/card"
 import { LineComponent } from "@/features/realtime/components/chart"
 
 export default function Trading() {
