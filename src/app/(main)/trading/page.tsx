@@ -2,7 +2,9 @@ import type { MiniCardPT } from "@/common/components/card"
 import { TitleCard, CardComponent, MiniCard } from "@/common/components/card"
 import { LineComponent } from "@/features/realtime/components/chart"
 import { VolumeChart } from "@/features/realtime/components/chart/trading-volume-chart"
-import { TradingTable } from "@/features/realtime/components/realtime-trading-table"
+import { TradingDataTable2sss } from "@/features/realtime/components/realtime-trading-table"
+import { TradingTable } from "@/features/realtime/components/realtime-trading-table/data-table"
+import { TradingDataTable } from "@/features/realtime/components/trading-table"
 
 export default function Trading() {
 	const miniCardDatas = [
@@ -84,7 +86,7 @@ export default function Trading() {
 				{/* ------bottom------ */}
 				<div className="flex w-full justify-center">
 					<CardComponent>
-						<TradingTable />
+						<TradingDataTable2sss />
 					</CardComponent>
 				</div>
 			</div>
