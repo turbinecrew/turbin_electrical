@@ -54,10 +54,6 @@ export const columns: ColumnDef<TradingTablePT>[] = [
 	{
 		accessorKey: "matchingButton",
 		header: "matchingButton",
-		cell: (params) => (
-			<strong>
-				<Button>거래하기</Button>
-			</strong>
-		),
+		cell: (params) => <Button>거래하기</Button>,
 	},
 ]

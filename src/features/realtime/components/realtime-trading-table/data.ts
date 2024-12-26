@@ -4,7 +4,7 @@ export function getData(): TradingTablePT[] {
 	return [
 		{
 			id: "id_1",
-			plantName: "Plant_1",
+			plantName: "서울 태양열 발전소",
 			volume: 798,
 			bidNumbers: 45,
 			matchingButton: { label: "Match", action: "match_1" },

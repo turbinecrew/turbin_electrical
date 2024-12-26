@@ -1,6 +1,5 @@
 "use client"
 import {
-	createColumnHelper,
 	SortingState,
 	getCoreRowModel,
 	getSortedRowModel,
@@ -9,19 +8,18 @@ import {
 	flexRender,
 } from "@tanstack/react-table"
 import React, { useState } from "react"
-// Define your row shape
 
 import Button from "@/common/components/button"
 import { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, ListFilter, Search } from "lucide-react"
+import { ChevronDown, ListFilter, TextSearch } from "lucide-react"
 import { TradingTablePT } from "./Tcolumn"
-type props = {
+type TradingTableComponentPT = {
 	columns: ColumnDef<TradingTablePT>[]
 	data: TradingTablePT[]
 }
-export function TradingTable({ columns, data }: props) {
+export function TradingTable({ columns, data }: TradingTableComponentPT) {
 	const [sorting, setSorting] = React.useState<SortingState>([])
-	const [isCheck, setCheck] = useState(false)
+	const [isToggle, setToggle] = useState(false)
 
 	const table = useReactTable({
 		columns,
@@ -37,29 +35,31 @@ export function TradingTable({ columns, data }: props) {
 	})
 
 	return (
-		<div className="w-full">
+		<div className="w-[800px]">
 			<div className="m-1 flex justify-between">
 				<div className="ml-4 flex items-center justify-start">
 					<button
 						onClick={() => {
-							// setCheck로 state값을 변경해주자.
-							// e로 상태값을 받아왔다. 클릭시 상태값은 !상태값이므로 값이 반전된다 false -> true
-							setCheck((e) => !e)
+							setToggle((e) => !e)
 						}}
+						className="transition duration-300"
 					>
-						{isCheck ? (
-							<div className="">
-								<ListFilter color="#6e6e6e" size={16} />
-							</div>
+						{isToggle ? (
+							<ListFilter color="#6e6e6e" size={16} />
 						) : (
 							<ListFilter size={16} />
 						)}
 					</button>
-					{isCheck && <ChevronDown />}
+					{isToggle && (
+						<div className="ransition-opacity flex flex-row gap-1 duration-500">
+							<ChevronDown />
+							필터메뉴
+						</div>
+					)}
 				</div>
 
-				<div className="flex h-10 items-center rounded-2xl border border-gray-300 bg-gray-50 px-4 focus-within:border-tbGreen">
-					<Search className="text-gray-400" size={16} />
+				<div className="flex h-10 items-center rounded-2xl border border-gray-300 bg-white px-4 focus-within:border-tbGreen">
+					<TextSearch className="text-gray-400" size={16} />
 					<input
 						placeholder="Filter Name..."
 						value={

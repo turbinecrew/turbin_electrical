@@ -72,12 +72,12 @@ export default function Trading() {
 					</div>
 					<div className="grid grid-cols-2 gap-4">
 						<TitleCard title="SMP 가격">
-							<div className="pt-10">
+							<div className="pt-2">
 								<LineComponent />
 							</div>
 						</TitleCard>
 						<TitleCard title="월별 거래량">
-							<div className="pt-10">
+							<div className="pt-4">
 								<VolumeChart />
 							</div>
 						</TitleCard>

@@ -21,17 +21,55 @@ import {
 
 import { getChartConfig } from "./data"
 import { chartData } from "./mock"
+import React from "react"
+import Button from "@/common/components/button"
 
 export function LineComponent() {
 	const chartConfig = getChartConfig()
+	const [timeRange, setTimeRange] = React.useState("7d")
+
+	const filteredData = chartData.filter((item) => {
+		const date = new Date(item.date)
+		const referenceDate = new Date("2024-06-30")
+		let daysToSubtract = 90
+		if (timeRange === "30d") {
+			daysToSubtract = 30
+		} else if (timeRange === "7d") {
+			daysToSubtract = 7
+		}
+		const startDate = new Date(referenceDate)
+		startDate.setDate(startDate.getDate() - daysToSubtract)
+		return date >= startDate
+	})
+
+	const timeRangeOptions = [
+		{ value: "7d", label: "7Days" },
+		{ value: "30d", label: "4Weeks" },
+		{ value: "90d", label: "3Months" },
+	]
 
 	return (
 		<div>
+			<div className="flex items-center justify-end gap-3">
+				{timeRangeOptions.map((option) => (
+					<button
+						key={option.value}
+						className={`${
+							timeRange === option.value
+								? "font-bold text-[#0D9172]"
+								: "font-thin text-[#9FA0A0]"
+						}`}
+						onClick={() => setTimeRange(option.value)}
+					>
+						{option.label}
+					</button>
+				))}
+			</div>
 			<CardContent>
 				<ChartContainer config={chartConfig}>
 					<LineChart
 						accessibilityLayer
-						data={chartData}
+						data={filteredData}
 						margin={{
 							left: 0,
 							right: 12,
@@ -51,19 +89,9 @@ export function LineComponent() {
 								})
 							}}
 						/>
-						<YAxis
-							tickLine={true}
-							axisLine={true}
-							tickMargin={8}
-							ticks={[0, 100, 200, 300, 400]}
-						/>
+						<YAxis tickLine={true} axisLine={true} tickMargin={8} />
 						<ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-						<Line
-							dataKey="rec"
-							type="monotone"
-							stroke="var(--color-rec)"
-							strokeWidth={2}
-						/>
+
 						<Line
 							dataKey="smp"
 							type="monotone"
@@ -76,15 +104,13 @@ export function LineComponent() {
 					</LineChart>
 				</ChartContainer>
 			</CardContent>
-			<CardFooter>
+			{/* <CardFooter>
 				<div className="flex w-full items-start gap-2 text-sm">
 					<div className="grid gap-2">
-						<div className="flex items-center gap-2 font-medium leading-none">
-							이번 달 SMP : 상승
-						</div>
+						<div className="flex items-center gap-2 font-medium leading-none"></div>
 					</div>
 				</div>
-			</CardFooter>
+			</CardFooter> */}
 		</div>
 	)
 }
