@@ -1,11 +1,13 @@
-interface RegionSelectProps {
-	regions?: string[] // Optional로 설정
+import React from "react"
+
+type RegionSelectPT = {
+	regions: string[]
 	selectedRegion: string
 	onChange: (region: string) => void
 }
 
-const RegionSelect: React.FC<RegionSelectProps> = ({
-	regions = [], // 기본값 빈 배열
+const RegionSelect: React.FC<RegionSelectPT> = ({
+	regions,
 	selectedRegion,
 	onChange,
 }) => {
@@ -15,8 +17,8 @@ const RegionSelect: React.FC<RegionSelectProps> = ({
 			onChange={(e) => onChange(e.target.value)}
 			className="w-36 rounded border border-gray-300 p-1 text-sm shadow-sm"
 		>
-			{regions.map((region) => (
-				<option key={region} value={region}>
+			{regions.map((region, idx) => (
+				<option key={idx} value={region}>
 					{region}
 				</option>
 			))}
