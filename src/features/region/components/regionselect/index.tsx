@@ -1,13 +1,11 @@
-import React from "react"
-
 interface RegionSelectProps {
-	regions: string[]
+	regions?: string[] // Optional로 설정
 	selectedRegion: string
 	onChange: (region: string) => void
 }
 
 const RegionSelect: React.FC<RegionSelectProps> = ({
-	regions,
+	regions = [], // 기본값 빈 배열
 	selectedRegion,
 	onChange,
 }) => {

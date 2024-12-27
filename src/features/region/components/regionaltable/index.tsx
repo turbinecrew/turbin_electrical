@@ -7,6 +7,7 @@ import {
 } from "@/features/region/hooks/data/useDateUtils"
 import useFilteredData from "@/features/region/hooks/data/useFilteredData"
 import mockData from "@/features/region/components/regionaltable/mock"
+import RegionSelect from "../regionselect"
 
 export default function RegionalTable() {
 	const [selectedRegion, setSelectedRegion] = useState("강원특별자치도")
@@ -21,24 +22,17 @@ export default function RegionalTable() {
 
 	const formattedToday = formatMonthDay(today)
 
+	const regions = Array.from(new Set(mockData?.map((item) => item.지역) || [])) // 기본값 설정
+
 	return (
-		<div className="mx-auto mt-8 w-full max-w-screen-xl">
-			<div className="shadow-md">
+		<div className="mx-auto mt-8 w-full">
+			<div className="w-full">
 				<div className="mb-4">
-					<label className="mr-2 font-bold">지역 선택:</label>
-					<select
-						className="rounded border px-4 py-2"
-						value={selectedRegion}
-						onChange={(e) => setSelectedRegion(e.target.value)}
-					>
-						{Array.from(new Set(mockData.map((item) => item.지역))).map(
-							(region) => (
-								<option key={region} value={region}>
-									{region}
-								</option>
-							),
-						)}
-					</select>
+					<RegionSelect
+						regions={regions}
+						selectedRegion={selectedRegion}
+						onChange={setSelectedRegion}
+					/>
 				</div>
 
 				<table className="w-full table-auto border-collapse border border-gray-300 text-center">
