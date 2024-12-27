@@ -21,16 +21,16 @@ import {
 
 import { getChartConfig } from "./data"
 import { chartData } from "./mock"
-import React from "react"
+import { useState } from "react"
 import Button from "@/common/components/button"
 
 export function LineComponent() {
 	const chartConfig = getChartConfig()
-	const [timeRange, setTimeRange] = React.useState("7d")
+	const [timeRange, setTimeRange] = useState("7d")
 
 	const filteredData = chartData.filter((item) => {
 		const date = new Date(item.date)
-		const referenceDate = new Date("2024-06-30")
+		const referenceDate = new Date()
 		let daysToSubtract = 90
 		if (timeRange === "30d") {
 			daysToSubtract = 30
@@ -50,7 +50,7 @@ export function LineComponent() {
 
 	return (
 		<div>
-			<div className="flex items-center justify-end gap-3">
+			{/* <div className="flex items-center justify-end gap-3">
 				{timeRangeOptions.map((option) => (
 					<button
 						key={option.value}
@@ -63,6 +63,28 @@ export function LineComponent() {
 					>
 						{option.label}
 					</button>
+				))}
+			</div> */}
+			<div className="flex items-center justify-end gap-3">
+				{timeRangeOptions.map((option, idx) => (
+					<label
+						key={idx}
+						className={`${
+							timeRange === option.value
+								? "font-bold text-[#0D9172]"
+								: "font-thin text-[#9FA0A0]"
+						}`}
+					>
+						<input
+							className="hidden"
+							name="range"
+							type="radio"
+							value={option.value}
+							checked={timeRange === option.value}
+							onChange={() => setTimeRange(option.value)}
+						/>
+						<span>{option.label}</span>
+					</label>
 				))}
 			</div>
 			<CardContent>
