@@ -3,7 +3,7 @@
 
 import { useState } from "react"
 
-import DailyChart from "./chart/daily/DailyChart"
+import DailyChart from "./chart/daily"
 import CombinedChart from "./chart/weather"
 
 export default function ChartToggle() {
