@@ -1,13 +1,13 @@
 import React from "react"
 
 interface RegionSelectProps {
-	regions: string[]
+	regions?: string[]
 	selectedRegion: string
 	onChange: (region: string) => void
 }
 
 const RegionSelect: React.FC<RegionSelectProps> = ({
-	regions,
+	regions = [],
 	selectedRegion,
 	onChange,
 }) => {
