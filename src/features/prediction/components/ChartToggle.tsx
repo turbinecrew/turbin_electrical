@@ -11,7 +11,6 @@ export default function ChartToggle() {
 
 	return (
 		<div className="mx-auto w-full">
-			{/* 탭 영역 (왼쪽 정렬) */}
 			<div className="flex items-center gap-6 p-4">
 				<span
 					className={`inline-block cursor-pointer transition-all ${
@@ -35,7 +34,6 @@ export default function ChartToggle() {
 				</span>
 			</div>
 
-			{/* 차트 컨테이너 */}
 			<div className="h-full w-full overflow-x-auto">
 				{chartMode === "region" ? <CombinedChart /> : <DailyChart />}
 			</div>

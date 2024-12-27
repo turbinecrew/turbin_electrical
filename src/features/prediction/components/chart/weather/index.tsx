@@ -49,7 +49,6 @@ export default function WeatherChart() {
 				</div>
 			</div>
 
-			{/* 라벨 선택 */}
 			<div className="flex cursor-pointer justify-around pb-2 text-sm font-semibold">
 				<span
 					className={`px-4 py-1 ${
