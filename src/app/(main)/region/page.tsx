@@ -4,15 +4,14 @@ import RegionalTable from "@/features/region/components/regionaltable"
 // regionalPage.tsx
 export default function RegionalPage() {
 	return (
-		<div className="flex min-h-screen w-full flex-col items-center gap-4 p-4 pb-8">
+		<div className="flex min-h-screen w-full flex-col">
 			{/* 차트 섹션 */}
-			<section className="w-full">
+			<section className="w-full flex-1">
 				<ChartToggle />
 			</section>
 
 			{/* 표 섹션 */}
-			<section className="w-full max-w-6xl">
-				<h1 className="mb-4 text-xl font-bold">지역별 발전량 예측</h1>
+			<section className="w-full flex-1 overflow-x-auto p-4">
 				<RegionalTable />
 			</section>
 		</div>
