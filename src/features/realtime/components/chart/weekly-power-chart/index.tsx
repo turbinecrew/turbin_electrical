@@ -14,6 +14,8 @@ import {
 import React from "react"
 import { Line } from "react-chartjs-2"
 
+import type { ProcessedData } from "@/features/realtime/types/weeklyPower"
+
 import { mockData } from "./mock"
 
 ChartJS.register(
@@ -25,8 +27,6 @@ ChartJS.register(
 	Tooltip,
 	Filler,
 )
-
-import type { ProcessedData } from "@/features/realtime/types/weeklyPower"
 
 export default function WeeklyPower() {
 	const processedData: ProcessedData[] = mockData.reduce(

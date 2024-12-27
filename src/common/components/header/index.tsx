@@ -1,22 +1,31 @@
 "use client"
 
-import { Search, Slash, House, Settings, CircleUser, Bell } from "lucide-react"
+import {
+	Search,
+	Slash,
+	House,
+	Settings,
+	CircleUser,
+	Bell,
+	Columns2,
+} from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
 
-// `SignInModal`의 named export 확인
 import SignInModal from "../../../features/auth/components/sign-in-modal"
 
 export default function Header() {
-	const pathName = usePathname()
-	const thisPage = pathName.split("/").pop()
+	const pathName: string | null = usePathname()
+	const thisPage = pathName
+		? pathName.split("/").pop() || "Dashboard"
+		: "Dashboard"
 	const [searchText, setSearchText] = useState("")
 	const [isSignInModalOpen, setIsSignInModalOpen] = useState(false)
 
 	const handleKeyPress = (event: { key: string }) => {
 		if (event.key === "Enter") {
-			console.log(`검색:${searchText}`)
+			console.log(`검색: ${searchText}`)
 			setSearchText("")
 		}
 	}
@@ -33,6 +42,7 @@ export default function Header() {
 		<div className="flex h-20 w-full items-center justify-between border-b border-gray-200 bg-white p-4 shadow-sm">
 			<div className="flex flex-col">
 				<nav className="flex items-center text-gray-600">
+					<Columns2 />
 					<Link href="/" className="flex items-center gap-1 hover:text-tbGreen">
 						<House size={16} />
 					</Link>

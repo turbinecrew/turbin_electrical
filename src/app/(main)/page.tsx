@@ -46,7 +46,7 @@ export default function Home() {
 	]
 
 	return (
-		<div className="flex flex-col gap-8 p-8">
+		<div className="mx-[5vw] flex flex-col gap-8 p-8">
 			<div className="grid grid-cols-4 gap-4">
 				{miniCardDatas.map((item, idx) => (
 					<MiniCard

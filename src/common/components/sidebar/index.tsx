@@ -30,55 +30,65 @@ export default function Sidebar() {
 
 	return (
 		<div
-			className={`flex ${isSidebarVisible ? "ml-64" : "ml-0"} transition-all duration-300`}
+			className={`flex ${
+				isSidebarVisible ? "ml-64" : "ml-16"
+			} transition-all duration-300`}
 		>
 			<aside
 				className={`${
-					isSidebarVisible ? "w-64 p-6" : "w-0 p-0"
-				} fixed left-0 top-0 z-20 h-full overflow-hidden border-r border-gray-200 bg-white text-tbGreen shadow-sm transition-all duration-300`}
+					isSidebarVisible ? "w-64" : "w-16"
+				} fixed left-0 top-0 z-20 h-full border-r border-gray-200 bg-white shadow-sm transition-all duration-300`}
 			>
-				{isSidebarVisible && (
-					<div>
-						{/* Logo Section */}
-						<div className="mb-6 flex justify-center">
-							<Link href="/">
-								<Image
-									src="/img/turbinecrew.svg"
-									alt="Turbine Crew Logo"
-									width={200}
-									height={70}
-									style={{ width: "auto", height: "auto" }}
-									priority
-									className="cursor-pointer rounded-lg"
+				<div className="flex h-full flex-col items-center">
+					<div className="my-3 flex items-center justify-center">
+						<Link href="/">
+							<Image
+								src={
+									isSidebarVisible
+										? "/img/turbinecrew.svg"
+										: "/img/turbin_2.svg"
+								}
+								alt="Turbine Crew Logo"
+								width={isSidebarVisible ? 200 : 40}
+								height={isSidebarVisible ? 70 : 40}
+								priority
+								className="cursor-pointer rounded-lg"
+							/>
+						</Link>
+					</div>
+					<hr className="mb-6 w-full border-gray-300" />
+					<nav className="flex-1">
+						<ul className="space-y-4">
+							{mainNavItems.map((item) => (
+								<NavItem
+									key={item.title}
+									item={item}
+									isSidebarVisible={isSidebarVisible}
 								/>
-							</Link>
-						</div>
-						<hr className="mb-6 border-gray-300" />
-
-						{/* Navigation */}
-						<nav>
+							))}
+						</ul>
+						<hr className="my-6 w-full border-gray-300" />
+						<div>
+							<h3
+								className={`mb-4 text-sm font-semibold text-gray-600 ${
+									isSidebarVisible ? "block" : "hidden"
+								}`}
+							>
+								Account Pages
+							</h3>
 							<ul className="space-y-4">
-								{mainNavItems.map((item) => (
-									<NavItem key={item.title} item={item} />
+								{accountNavItems.map((item) => (
+									<NavItem
+										key={item.title}
+										item={item}
+										isSidebarVisible={isSidebarVisible}
+									/>
 								))}
 							</ul>
-							<hr className="my-6 border-gray-300" />
-							<div>
-								<h3 className="mb-4 text-sm font-semibold text-gray-600">
-									Account Pages
-								</h3>
-								<ul className="space-y-4">
-									{accountNavItems.map((item) => (
-										<NavItem key={item.title} item={item} />
-									))}
-								</ul>
-							</div>
-						</nav>
-					</div>
-				)}
+						</div>
+					</nav>
+				</div>
 			</aside>
-
-			{/* Toggle Sidebar Button */}
 			<div className="fixed bottom-4 left-4 z-30">
 				{isSidebarVisible ? (
 					<button
@@ -102,12 +112,14 @@ export default function Sidebar() {
 
 function NavItem({
 	item,
+	isSidebarVisible,
 }: {
 	item: {
 		title: string
 		url: string
 		icon: React.ComponentType<{ className: string }>
 	}
+	isSidebarVisible: boolean
 }) {
 	const Icon = item.icon
 	return (
@@ -119,7 +131,9 @@ function NavItem({
 				<div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-tbGreen group-hover:bg-white group-hover:text-tbGreen">
 					<Icon className="h-5 w-5" />
 				</div>
-				<span className="text-lg font-medium">{item.title}</span>
+				{isSidebarVisible && (
+					<span className="text-lg font-medium">{item.title}</span>
+				)}
 			</Link>
 		</li>
 	)
