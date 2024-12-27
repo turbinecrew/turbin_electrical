@@ -11,7 +11,7 @@ export default function RegionalPage() {
 			</section>
 
 			{/* 표 섹션 */}
-			<section className="w-full max-w-6xl">
+			<section className="w-full">
 				<h1 className="mb-4 text-xl font-bold">지역별 발전량 예측</h1>
 				<RegionalTable />
 			</section>
