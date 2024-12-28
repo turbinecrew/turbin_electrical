@@ -13,13 +13,13 @@ import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
 
-const mainNavItems = [
+const mainNavItems: { title: string; url: string; icon: typeof Home }[] = [
 	{ title: "Dashboard", url: "/", icon: Home },
 	{ title: "Trading", url: "/trading", icon: TrendingUp },
 	{ title: "Region", url: "/region", icon: Map },
 ]
 
-const accountNavItems = [
+const accountNavItems: { title: string; url: string; icon: typeof Home }[] = [
 	{ title: "Profile", url: "/profile", icon: User },
 	{ title: "Admin", url: "/manage", icon: LockKeyhole },
 ]
@@ -117,7 +117,7 @@ function NavItem({
 	item: {
 		title: string
 		url: string
-		icon: React.ComponentType<{ className: string }>
+		icon: typeof Home
 	}
 	isSidebarVisible: boolean
 }) {
