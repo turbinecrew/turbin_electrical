@@ -1,5 +1,8 @@
 "use client"
 
+import { TrendingUp } from "lucide-react"
+
+import { AreaChartComponent } from "@/common/components/chart/area-chart"
 import {
 	Card,
 	CardContent,
@@ -8,31 +11,33 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/shadcn/components/card"
-import { AreaChartComponent } from "@/shadcn/components/chart"
+
+import { getChartConfig } from "./data"
+import { chartData } from "./mock"
 
 type MockChartPT = {
 	cardTitle: string
 }
-export function MockChart({ cardTitle }: MockChartPT) {
+export function MockAreaChart({ cardTitle }: MockChartPT) {
+	const chartConfig = getChartConfig()
 	return (
 		<Card>
 			<CardHeader>
 				<CardTitle>{cardTitle}</CardTitle>
-				<CardDescription>
-					Showing total visitors for the last 6 months
-				</CardDescription>
+				<CardDescription>X축: 최근 7일, Y축: 가격(₩/kWh)</CardDescription>
 			</CardHeader>
 			<CardContent>
-				<AreaChartComponent />
+				<AreaChartComponent chartConfig={chartConfig} chartData={chartData} />
 			</CardContent>
 			<CardFooter>
 				<div className="flex w-full items-start gap-2 text-sm">
 					<div className="grid gap-2">
 						<div className="flex items-center gap-2 font-medium leading-none">
-							Trending up by 5.2% this month
+							전력 생산 총량 예측값 카드
+							<TrendingUp className="h-4 w-4" />
 						</div>
 						<div className="flex items-center gap-2 leading-none text-muted-foreground">
-							January - June 2024
+							X축: 최근 7일, Y축: 가격(₩/kWh).
 						</div>
 					</div>
 				</div>
