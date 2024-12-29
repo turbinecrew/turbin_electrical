@@ -1,10 +1,15 @@
 "use client"
 
-import { getColumns } from "./Tcolumns"
-import getData from "./data"
-import { DataTableSet } from "./data-table"
+import { TradingTable } from "./data-table"
+import { columns } from "./Tcolumn"
+import { getData } from "./data"
+import { CardComponent } from "@/common/components/card"
 
 export function TradingDataTable() {
 	const data = getData()
-	return <DataTableSet columns={getColumns()} data={data} />
+	return (
+		<CardComponent>
+			<TradingTable columns={columns} data={data} />
+		</CardComponent>
+	)
 }
