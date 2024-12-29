@@ -1,6 +1,10 @@
 import type { MiniCardPT } from "@/common/components/card"
 import { TitleCard, CardComponent, MiniCard } from "@/common/components/card"
 import { LineComponent } from "@/features/realtime/components/chart"
+import { VolumeChart } from "@/features/realtime/components/chart/trading-volume-chart"
+import { TradingDataTable2sss } from "@/features/realtime/components/realtime-trading-table"
+import { TradingTable } from "@/features/realtime/components/realtime-trading-table/data-table"
+import { TradingDataTable } from "@/features/realtime/components/trading-table"
 
 export default function Trading() {
 	const miniCardDatas = [
@@ -39,8 +43,8 @@ export default function Trading() {
 		<div className="page_container m-5 flex h-full w-[full-20px] flex-col gap-7 overflow-y-auto">
 			<div className="page_content flex flex-col gap-8">
 				{/* ------top------ */}
-				<div className="flex w-full flex-row gap-4">
-					<div className="flex w-1/2 flex-col gap-4">
+				<div className="flex w-full flex-col gap-4">
+					<div className="flex flex-row gap-4">
 						<div className="flex w-full gap-4">
 							{miniCardDatas.map((items: MiniCardPT, idx) => (
 								<MiniCard
@@ -54,11 +58,6 @@ export default function Trading() {
 								/>
 							))}
 						</div>
-						<CardComponent>
-							<LineComponent />
-						</CardComponent>
-					</div>
-					<div className="flex w-1/2 flex-col gap-4">
 						<div className="flex w-full gap-4">
 							{timeCardDatas.map((items: MiniCardPT, idx) => (
 								<MiniCard
@@ -70,14 +69,26 @@ export default function Trading() {
 								/>
 							))}
 						</div>
-						<TitleCard
-							className="flex h-full min-h-40"
-							title="월별 거래량"
-						></TitleCard>
+					</div>
+					<div className="grid grid-cols-2 gap-4">
+						<TitleCard title="SMP 가격">
+							<div className="pt-2">
+								<LineComponent />
+							</div>
+						</TitleCard>
+						<TitleCard title="월별 거래량">
+							<div className="pt-4">
+								<VolumeChart />
+							</div>
+						</TitleCard>
 					</div>
 				</div>
 				{/* ------bottom------ */}
-				<div className="flex w-full flex-row gap-8">table</div>
+				<div className="flex w-full justify-center">
+					<CardComponent>
+						<TradingDataTable2sss />
+					</CardComponent>
+				</div>
 			</div>
 		</div>
 	)

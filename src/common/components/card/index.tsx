@@ -15,7 +15,9 @@ const CardComponent = ({
 	const colorClass = isColored ? "bg-tbPastelGreen" : "bg-[#FAFAFA]"
 
 	return (
-		<div className={`border-1 rounded-2xl border ${className} ${colorClass}`}>
+		<div
+			className={`border-1 rounded-2xl border p-5 ${className} ${colorClass}`}
+		>
 			{children}
 		</div>
 	)

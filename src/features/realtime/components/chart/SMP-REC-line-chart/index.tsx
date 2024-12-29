@@ -21,21 +21,77 @@ import {
 
 import { getChartConfig } from "./data"
 import { chartData } from "./mock"
+import { useState } from "react"
+import Button from "@/common/components/button"
 
 export function LineComponent() {
 	const chartConfig = getChartConfig()
+	const [timeRange, setTimeRange] = useState("7d")
+
+	const filteredData = chartData.filter((item) => {
+		const date = new Date(item.date)
+		const referenceDate = new Date()
+		let daysToSubtract = 90
+		if (timeRange === "30d") {
+			daysToSubtract = 30
+		} else if (timeRange === "7d") {
+			daysToSubtract = 7
+		}
+		const startDate = new Date(referenceDate)
+		startDate.setDate(startDate.getDate() - daysToSubtract)
+		return date >= startDate
+	})
+
+	const timeRangeOptions = [
+		{ value: "7d", label: "7Days" },
+		{ value: "30d", label: "4Weeks" },
+		{ value: "90d", label: "3Months" },
+	]
 
 	return (
 		<div>
-			<CardHeader>
-				<CardTitle>REC 및 SMP 가격</CardTitle>
-				<CardDescription>X축: 최근 7일, Y축: 가격(₩/kWh)</CardDescription>
-			</CardHeader>
+			{/* <div className="flex items-center justify-end gap-3">
+				{timeRangeOptions.map((option) => (
+					<button
+						key={option.value}
+						className={`${
+							timeRange === option.value
+								? "font-bold text-[#0D9172]"
+								: "font-thin text-[#9FA0A0]"
+						}`}
+						onClick={() => setTimeRange(option.value)}
+					>
+						{option.label}
+					</button>
+				))}
+			</div> */}
+			<div className="flex items-center justify-end gap-3">
+				{timeRangeOptions.map((option, idx) => (
+					<label
+						key={idx}
+						className={`${
+							timeRange === option.value
+								? "font-bold text-[#0D9172]"
+								: "font-thin text-[#9FA0A0]"
+						}`}
+					>
+						<input
+							className="hidden"
+							name="range"
+							type="radio"
+							value={option.value}
+							checked={timeRange === option.value}
+							onChange={() => setTimeRange(option.value)}
+						/>
+						<span>{option.label}</span>
+					</label>
+				))}
+			</div>
 			<CardContent>
 				<ChartContainer config={chartConfig}>
 					<LineChart
 						accessibilityLayer
-						data={chartData}
+						data={filteredData}
 						margin={{
 							left: 0,
 							right: 12,
@@ -55,19 +111,9 @@ export function LineComponent() {
 								})
 							}}
 						/>
-						<YAxis
-							tickLine={true}
-							axisLine={true}
-							tickMargin={8}
-							ticks={[0, 100, 200, 300, 400]}
-						/>
+						<YAxis tickLine={true} axisLine={true} tickMargin={8} />
 						<ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-						<Line
-							dataKey="rec"
-							type="monotone"
-							stroke="var(--color-rec)"
-							strokeWidth={2}
-						/>
+
 						<Line
 							dataKey="smp"
 							type="monotone"
@@ -80,19 +126,13 @@ export function LineComponent() {
 					</LineChart>
 				</ChartContainer>
 			</CardContent>
-			<CardFooter>
+			{/* <CardFooter>
 				<div className="flex w-full items-start gap-2 text-sm">
 					<div className="grid gap-2">
-						<div className="flex items-center gap-2 font-medium leading-none">
-							전력 생산 총량 예측값 카드
-							<TrendingUp className="h-4 w-4" />
-						</div>
-						<div className="flex items-center gap-2 leading-none text-muted-foreground">
-							X축: 최근 7일, Y축: 가격(₩/kWh).
-						</div>
+						<div className="flex items-center gap-2 font-medium leading-none"></div>
 					</div>
 				</div>
-			</CardFooter>
+			</CardFooter> */}
 		</div>
 	)
 }
