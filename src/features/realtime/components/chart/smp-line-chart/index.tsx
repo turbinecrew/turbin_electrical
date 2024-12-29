@@ -16,7 +16,7 @@ import { useState } from "react"
 
 export function SmpLineChart() {
 	const chartConfig = getChartConfig()
-	const [timeRange, setTimeRange] = useState("7d")
+	const [timeRange, setTimeRange] = useState("1d")
 
 	const filteredData = chartData.filter((item) => {
 		const date = new Date(item.date)

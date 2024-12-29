@@ -17,7 +17,7 @@ import { chartData } from "./mock"
 
 export function RecLineChart() {
 	const chartConfig = getChartConfig()
-	const [timeRange, setTimeRange] = useState("7d")
+	const [timeRange, setTimeRange] = useState("30d")
 
 	const filteredData = chartData.filter((item) => {
 		const date = new Date(item.date)
