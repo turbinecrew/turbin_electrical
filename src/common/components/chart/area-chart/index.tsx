@@ -1,6 +1,6 @@
 "use client"
 
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
 
 import {
 	ChartContainer,
@@ -8,64 +8,52 @@ import {
 	ChartTooltipContent,
 } from "@/shadcn/components/chart"
 
-// 차트 설정 타입
-const data = [
-	{ month: "January", desktop: 186, mobile: 80 },
-	{ month: "February", desktop: 305, mobile: 200 },
-	{ month: "March", desktop: 237, mobile: 120 },
-	{ month: "April", desktop: 73, mobile: 190 },
-	{ month: "May", desktop: 209, mobile: 130 },
-	{ month: "June", desktop: 214, mobile: 140 },
-]
+import type { AreaChartComponentPT } from "./type"
 
-const config = {
-	desktop: {
-		label: "Desktop",
-		color: "hsl(var(--chart-1))",
-	},
-	mobile: {
-		label: "Mobile",
-		color: "hsl(var(--chart-2))",
-	},
-}
-export function AreaChartComponent() {
+export function AreaChartComponent({
+	chartConfig,
+	chartData,
+}: AreaChartComponentPT) {
 	return (
-		<ChartContainer config={config}>
+		<ChartContainer config={chartConfig}>
 			<AreaChart
 				accessibilityLayer
-				data={data}
+				data={chartData}
 				margin={{
-					left: 12,
+					left: 0,
 					right: 12,
 				}}
 			>
-				<CartesianGrid vertical={false} />
+				<CartesianGrid vertical={false} horizontal={true} />
 				<XAxis
-					dataKey="month"
-					tickLine={false}
-					axisLine={false}
+					dataKey="date"
+					tickLine={true}
+					axisLine={{ stroke: "#000000", strokeWidth: 1 }}
 					tickMargin={8}
-					tickFormatter={(value) => value.slice(0, 3)}
+					tickFormatter={(value) => {
+						const date = new Date(value)
+						return date.toLocaleDateString("en-US", {
+							month: "short",
+							day: "numeric",
+						})
+					}}
+				/>
+				<YAxis
+					tickLine={true}
+					axisLine={true}
+					tickMargin={8}
+					ticks={[0, 100, 200, 300, 400]}
 				/>
 				<ChartTooltip
 					cursor={false}
 					content={<ChartTooltipContent indicator="dot" />}
 				/>
 				<Area
-					dataKey="mobile"
-					type="natural"
-					fill={config.mobile.color}
+					dataKey="smp"
+					type="monotone"
+					fill="var(--color-smp)"
 					fillOpacity={0.4}
-					stroke={config.mobile.color}
-					stackId="a"
-				/>
-				<Area
-					dataKey="desktop"
-					type="natural"
-					fill={config.desktop.color}
-					fillOpacity={0.4}
-					stroke={config.desktop.color}
-					stackId="a"
+					stroke="var(--color-smp)"
 				/>
 			</AreaChart>
 		</ChartContainer>
