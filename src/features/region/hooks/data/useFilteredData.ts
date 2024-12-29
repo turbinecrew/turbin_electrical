@@ -1,5 +1,6 @@
 import { useMemo } from "react"
-import type { DataEntry } from "../../types/regionTable"
+
+import type { DataEntry } from "@/features/region/types/regionTable"
 
 export interface FilterOptions {
 	selectedRegion: string

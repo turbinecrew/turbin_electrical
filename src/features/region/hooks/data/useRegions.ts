@@ -1,5 +1,6 @@
 import { useMemo } from "react"
-import type { DataEntry } from "../../types/regionTable"
+
+import type { DataEntry } from "@/features/region/types/regionTable"
 
 /**
  * 데이터에서 고유한 지역 목록을 추출하는 훅

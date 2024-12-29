@@ -6,11 +6,7 @@ type RegionSelectPT = {
 	onChange: (region: string) => void
 }
 
-const RegionSelect: React.FC<RegionSelectPT> = ({
-	regions,
-	selectedRegion,
-	onChange,
-}) => {
+function RegionSelect({ regions, selectedRegion, onChange }: RegionSelectPT) {
 	return (
 		<select
 			value={selectedRegion}
