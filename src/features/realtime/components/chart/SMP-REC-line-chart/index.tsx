@@ -50,21 +50,6 @@ export function LineComponent() {
 
 	return (
 		<div>
-			{/* <div className="flex items-center justify-end gap-3">
-				{timeRangeOptions.map((option) => (
-					<button
-						key={option.value}
-						className={`${
-							timeRange === option.value
-								? "font-bold text-[#0D9172]"
-								: "font-thin text-[#9FA0A0]"
-						}`}
-						onClick={() => setTimeRange(option.value)}
-					>
-						{option.label}
-					</button>
-				))}
-			</div> */}
 			<div className="flex items-center justify-end gap-3">
 				{timeRangeOptions.map((option, idx) => (
 					<label

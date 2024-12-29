@@ -4,6 +4,7 @@ import { LineComponent } from "@/features/realtime/components/chart"
 import { VolumeChart } from "@/features/realtime/components/chart/trading-volume-chart"
 import { TradingDataTable2sss } from "@/features/realtime/components/realtime-trading-table"
 import { TradingTable } from "@/features/realtime/components/realtime-trading-table/data-table"
+import { TradingVolumeCards } from "@/features/realtime/components/slide-card"
 import { TradingDataTable } from "@/features/realtime/components/trading-table"
 
 export default function Trading() {
@@ -25,70 +26,46 @@ export default function Trading() {
 			color: "bg-[#EFF6F1]",
 		},
 	]
-	const timeCardDatas = [
-		{
-			title: "누적 거래량",
-			value: 1144,
-			unit: "kWh",
-			color: "bg-[#F6FCF3]",
-		},
-		{
-			title: "이번 달 거래량",
-			value: 456011,
-			unit: "원",
-			color: "bg-[#EFF6F1]",
-		},
-	]
+
 	return (
-		<div className="page_container m-5 flex h-full w-[full-20px] flex-col gap-7 overflow-y-auto">
-			<div className="page_content flex flex-col gap-8">
-				{/* ------top------ */}
-				<div className="flex w-full flex-col gap-4">
-					<div className="flex flex-row gap-4">
-						<div className="flex w-full gap-4">
-							{miniCardDatas.map((items: MiniCardPT, idx) => (
-								<MiniCard
-									title={items.title}
-									value={items.value}
-									unit={items.unit}
-									isIncreased={items.isIncreased}
-									amount={items.amount}
-									color={items.color}
-									key={idx}
-								/>
-							))}
-						</div>
-						<div className="flex w-full gap-4">
-							{timeCardDatas.map((items: MiniCardPT, idx) => (
-								<MiniCard
-									title={items.title}
-									value={items.value}
-									unit={items.unit}
-									color={items.color}
-									key={idx}
-								/>
-							))}
-						</div>
-					</div>
-					<div className="grid grid-cols-2 gap-4">
-						<TitleCard title="SMP 가격">
-							<div className="pt-2">
-								<LineComponent />
-							</div>
-						</TitleCard>
-						<TitleCard title="월별 거래량">
-							<div className="pt-4">
-								<VolumeChart />
-							</div>
-						</TitleCard>
+		<div className="flex flex-col gap-8 p-8">
+			<div className="flex w-full flex-col gap-4">
+				<div className="grid w-full grid-cols-4 gap-4">
+					{miniCardDatas.map((items: MiniCardPT, idx) => (
+						<MiniCard
+							title={items.title}
+							value={items.value}
+							unit={items.unit}
+							isIncreased={items.isIncreased}
+							amount={items.amount}
+							color={items.color}
+							key={idx}
+							className="h-full"
+						/>
+					))}
+
+					<div className="col-span-2">
+						<TradingVolumeCards />
 					</div>
 				</div>
-				{/* ------bottom------ */}
-				<div className="flex w-full justify-center">
-					<CardComponent>
-						<TradingDataTable2sss />
-					</CardComponent>
+
+				<div className="grid grid-cols-2 gap-4">
+					<TitleCard title="SMP 가격">
+						<div className="pt-2">
+							<LineComponent />
+						</div>
+					</TitleCard>
+					<TitleCard title="월별 거래량">
+						<div className="pt-4">
+							<VolumeChart />
+						</div>
+					</TitleCard>
 				</div>
+			</div>
+			<div className="flex w-full justify-center">
+				<CardComponent>
+					<TradingDataTable2sss />
+				</CardComponent>
 			</div>
 		</div>
 	)
