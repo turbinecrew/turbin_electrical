@@ -69,7 +69,9 @@ export default function Trading() {
 					{activeChart === 1 && (
 						<div>
 							<TitleCard title="REC 가격">
-								<div className="pt-2"></div>
+								<div className="pt-2">
+									<RecLineChart />
+								</div>
 							</TitleCard>
 						</div>
 					)}
