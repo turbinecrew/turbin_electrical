@@ -18,17 +18,7 @@ export const columns: ColumnDef<TradingTablePT>[] = [
 	},
 	{
 		accessorKey: "volume",
-		header: ({ column }) => {
-			return (
-				<Button
-					className="text- border-none bg-[#F7F9FB] p-2 text-left font-semibold hover:bg-gray-200"
-					onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-				>
-					전력 발전량
-					<ArrowUpDown className="ml-2 h-4 w-4" />
-				</Button>
-			)
-		},
+		header: "전력 발전량",
 
 		cell: ({ row }) => {
 			const volume = parseFloat(row.getValue("volume"))
@@ -39,21 +29,11 @@ export const columns: ColumnDef<TradingTablePT>[] = [
 	},
 	{
 		accessorKey: "bidNumbers",
-		header: ({ column }) => {
-			return (
-				<Button
-					className="border-none bg-[#F7F9FB] p-2 text-left font-semibold hover:bg-gray-200"
-					onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-				>
-					거래량
-					<ArrowUpDown className="ml-2 h-4 w-4" />
-				</Button>
-			)
-		},
+		header: "거래량",
 	},
 	{
 		accessorKey: "matchingButton",
 		header: "matchingButton",
-		cell: (params) => <Button>거래하기</Button>,
+		cell: (params) => <Button className="bg-[#ABCF8A]">거래하기</Button>,
 	},
 ]

@@ -11,7 +11,7 @@ import React, { useState } from "react"
 
 import Button from "@/common/components/button"
 import { ColumnDef } from "@tanstack/react-table"
-import { ChevronDown, ListFilter, TextSearch } from "lucide-react"
+import { ArrowUpDown, ChevronDown, ListFilter, TextSearch } from "lucide-react"
 import { TradingTablePT } from "./Tcolumn"
 type TradingTableComponentPT = {
 	columns: ColumnDef<TradingTablePT>[]
@@ -20,6 +20,7 @@ type TradingTableComponentPT = {
 export function TradingTable({ columns, data }: TradingTableComponentPT) {
 	const [sorting, setSorting] = React.useState<SortingState>([])
 	const [isToggle, setToggle] = useState(false)
+	const [isSortingToggle, setSortingToggle] = useState(false)
 
 	const table = useReactTable({
 		columns,
@@ -34,34 +35,71 @@ export function TradingTable({ columns, data }: TradingTableComponentPT) {
 		},
 	})
 
+	const handleSort = (columnId: string) => {
+		setSorting((prev) => {
+			if (prev[0]?.id === columnId) {
+				return [{ id: columnId, desc: !prev[0].desc }]
+			}
+			return [{ id: columnId, desc: false }]
+		})
+	}
+
 	return (
 		<div className="w-[800px]">
 			<div className="m-1 flex justify-between">
 				<div className="ml-4 flex items-center justify-start">
-					<button
-						onClick={() => {
-							setToggle((e) => !e)
-						}}
-						className="transition duration-300"
-					>
-						{isToggle ? (
-							<ListFilter color="#6e6e6e" size={16} />
-						) : (
-							<ListFilter size={16} />
+					<div className="ml-4 flex items-center justify-start">
+						<button
+							onClick={() => {
+								setToggle((e) => !e)
+							}}
+						>
+							{isToggle ? (
+								<ListFilter color="#6e6e6e" size={16} className="mr-2" />
+							) : (
+								<ListFilter size={16} />
+							)}
+						</button>
+						{isToggle && (
+							<div className="ransition-opacity flex flex-row gap-1 duration-500">
+								<ChevronDown />
+								필터메뉴
+							</div>
 						)}
-					</button>
-					{isToggle && (
-						<div className="ransition-opacity flex flex-row gap-1 duration-500">
-							<ChevronDown />
-							필터메뉴
-						</div>
-					)}
+					</div>
+
+					<div className="ml-4 flex items-center justify-start">
+						<button
+							onClick={() => {
+								setSortingToggle((e) => !e)
+							}}
+						>
+							{isSortingToggle ? (
+								<ArrowUpDown color="#6e6e6e" size={16} className="mr-2" />
+							) : (
+								<ArrowUpDown size={16} />
+							)}
+						</button>
+						{isSortingToggle ? (
+							<div className="flex items-center justify-start">
+								<Button onClick={() => handleSort("plantName")}>
+									발전소명
+								</Button>
+								<Button onClick={() => handleSort("volume")}>
+									전력 발전량
+								</Button>
+								<Button onClick={() => handleSort("bidNumbers")}>거래량</Button>
+							</div>
+						) : (
+							<div></div>
+						)}
+					</div>
 				</div>
 
 				<div className="flex h-10 items-center rounded-2xl border border-gray-300 bg-white px-4 focus-within:border-tbGreen">
 					<TextSearch className="text-gray-400" size={16} />
 					<input
-						placeholder="Filter Name..."
+						placeholder="Enter Name..."
 						value={
 							(table.getColumn("plantName")?.getFilterValue() as string) ?? ""
 						}

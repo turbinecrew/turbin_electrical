@@ -42,7 +42,7 @@ export function TradingVolumeCards() {
 			setData((prevData) =>
 				prevData === timeCardDatas[0] ? timeCardDatas[1] : timeCardDatas[0],
 			)
-		}, 1000)
+		}, 3000)
 	}, [])
 
 	return (

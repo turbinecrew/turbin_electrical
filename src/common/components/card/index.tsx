@@ -94,11 +94,12 @@ const MiniCard = ({
 						{unit}
 					</span>
 				</div>
-				{isIncreased ? (
-					<div className="text-xs font-bold text-red-600">+{amount}</div>
-				) : (
-					<div className="text-xs font-bold text-blue-600">-{amount}</div>
-				)}
+				{(isIncreased != null || "") &&
+					(isIncreased ? (
+						<div className="text-xs font-bold text-red-600">+{amount}</div>
+					) : (
+						<div className="text-xs font-bold text-blue-600">-{amount}</div>
+					))}
 			</div>
 		</div>
 	)
