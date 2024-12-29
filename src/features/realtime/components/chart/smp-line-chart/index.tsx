@@ -1,16 +1,8 @@
 "use client"
 
-import { TrendingUp } from "lucide-react"
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts"
 
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-	CardFooter,
-} from "@/shadcn/components/card"
+import { CardContent } from "@/shadcn/components/card"
 import {
 	ChartContainer,
 	ChartLegend,
@@ -19,33 +11,39 @@ import {
 	ChartTooltipContent,
 } from "@/shadcn/components/chart"
 
-import { getChartConfig } from "./data"
-import { chartData } from "./mock"
+import { chartData, getChartConfig } from "./data"
 import { useState } from "react"
-import Button from "@/common/components/button"
 
-export function LineComponent() {
+export function SmpLineChart() {
 	const chartConfig = getChartConfig()
 	const [timeRange, setTimeRange] = useState("7d")
 
 	const filteredData = chartData.filter((item) => {
 		const date = new Date(item.date)
-		const referenceDate = new Date()
+		const referenceDate = new Date(2024, 11, 28, 22, 0, 0)
+		const startDate = new Date(referenceDate)
+		const endDate = new Date(referenceDate)
+
 		let daysToSubtract = 90
-		if (timeRange === "30d") {
-			daysToSubtract = 30
+		if (timeRange === "1d") {
+			daysToSubtract = 1
 		} else if (timeRange === "7d") {
 			daysToSubtract = 7
+			endDate.setDate(startDate.getDate() - 2)
+		} else if (timeRange === "30d") {
+			daysToSubtract = 30
+			endDate.setDate(startDate.getDate() - 2)
 		}
-		const startDate = new Date(referenceDate)
-		startDate.setDate(startDate.getDate() - daysToSubtract)
-		return date >= startDate
+
+		startDate.setDate(endDate.getDate() - daysToSubtract)
+
+		return endDate >= date && date >= startDate
 	})
 
 	const timeRangeOptions = [
-		{ value: "7d", label: "7Days" },
-		{ value: "30d", label: "4Weeks" },
-		{ value: "90d", label: "3Months" },
+		{ value: "1d", label: "Day" },
+		{ value: "7d", label: "Week" },
+		{ value: "30d", label: "Month" },
 	]
 
 	return (
@@ -90,12 +88,19 @@ export function LineComponent() {
 							tickMargin={8}
 							tickFormatter={(value) => {
 								const date = new Date(value)
-								return date.toLocaleDateString("en-US", {
+								const options: Intl.DateTimeFormatOptions = {
 									month: "short",
 									day: "numeric",
-								})
+								}
+
+								if (date.getHours() !== 0 || date.getMinutes() !== 0) {
+									options.hour = "numeric"
+								}
+
+								return date.toLocaleString("en-US", options)
 							}}
 						/>
+
 						<YAxis tickLine={true} axisLine={true} tickMargin={8} />
 						<ChartTooltip cursor={false} content={<ChartTooltipContent />} />
 
@@ -111,13 +116,6 @@ export function LineComponent() {
 					</LineChart>
 				</ChartContainer>
 			</CardContent>
-			{/* <CardFooter>
-				<div className="flex w-full items-start gap-2 text-sm">
-					<div className="grid gap-2">
-						<div className="flex items-center gap-2 font-medium leading-none"></div>
-					</div>
-				</div>
-			</CardFooter> */}
 		</div>
 	)
 }

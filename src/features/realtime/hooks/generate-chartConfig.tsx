@@ -13,7 +13,7 @@ export function generateChartConfig({ data }: ChartPT): ChartConfig {
 		"hsl(var(--chart-4))",
 	]
 
-	Object.keys(data[0]).forEach((key, index) => {
+	Object?.keys(data[0])?.forEach((key, index) => {
 		if (key !== "date") {
 			config[key] = {
 				label: key,
