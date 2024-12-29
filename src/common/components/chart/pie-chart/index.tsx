@@ -1,5 +1,3 @@
-"use client"
-
 import { Label, Pie, PieChart } from "recharts"
 
 import {
@@ -8,31 +6,14 @@ import {
 	ChartTooltipContent,
 } from "@/shadcn/components/chart"
 
-// 데이터 항목의 타입 정의
-interface ChartDataItem {
-	browser: string
-	visitors: number
-	fill: string
-}
-
-// ChartConfig의 타입 정의
-interface ChartConfig {
-	innerRadius?: number
-	strokeWidth?: number
-	label: string
-	[key: string]: any
-}
+import type { PieChartComponentPT } from "./pieChart"
 
 // PieChart 컴포넌트
 export function PieChartComponent({
 	data,
 	config,
 	totalVisitors,
-}: {
-	data: ChartDataItem[]
-	config: ChartConfig
-	totalVisitors: number
-}) {
+}: PieChartComponentPT) {
 	return (
 		<ChartContainer config={config}>
 			<PieChart width={400} height={400}>
@@ -42,9 +23,9 @@ export function PieChartComponent({
 				/>
 				<Pie
 					data={data}
-					dataKey="visitors"
-					nameKey="browser"
-					innerRadius={config.innerRadius || 60} // config에서 innerRadius 사용
+					dataKey="price"
+					nameKey="type"
+					innerRadius={60} // config에서 innerRadius 사용
 				>
 					<Label
 						content={({ viewBox }) => {
