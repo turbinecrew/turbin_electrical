@@ -5,9 +5,8 @@ import {
 	User,
 	TrendingUp,
 	LockKeyhole,
-	ChevronsLeft,
-	Menu,
 	Map,
+	Columns2,
 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -67,7 +66,7 @@ export default function Sidebar() {
 								/>
 							))}
 						</ul>
-						<hr className="my-6 w-full border-gray-300" />
+						<hr className="my-6 self-stretch border-gray-300" />
 						<div>
 							<h3
 								className={`mb-4 text-sm font-semibold text-gray-600 ${
@@ -87,25 +86,18 @@ export default function Sidebar() {
 							</ul>
 						</div>
 					</nav>
+					<div className="mt-auto w-full">
+						<div className="mb-4 flex justify-start px-4">
+							<button
+								onClick={toggleSidebar}
+								className="flex h-10 w-10 items-center justify-center text-gray-700 shadow-sm hover:bg-gray-100"
+							>
+								<Columns2 size={24} />
+							</button>
+						</div>
+					</div>
 				</div>
 			</aside>
-			<div className="fixed bottom-4 left-4 z-30">
-				{isSidebarVisible ? (
-					<button
-						onClick={toggleSidebar}
-						className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 p-2 text-gray-700 shadow-md hover:bg-gray-300"
-					>
-						<ChevronsLeft size={24} />
-					</button>
-				) : (
-					<button
-						onClick={toggleSidebar}
-						className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 p-2 text-gray-700 shadow-md hover:bg-gray-300"
-					>
-						<Menu size={24} />
-					</button>
-				)}
-			</div>
 		</div>
 	)
 }
@@ -126,13 +118,13 @@ function NavItem({
 		<li>
 			<Link
 				href={item.url}
-				className="group flex items-center space-x-4 rounded-md p-2 text-gray-700 transition-colors duration-300 hover:bg-tbPastelGreen hover:text-white"
+				className="group flex items-center rounded-md px-6 py-2 text-gray-700 transition-colors duration-300 hover:bg-tbPastelGreen hover:text-white"
 			>
 				<div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-tbGreen group-hover:bg-white group-hover:text-tbGreen">
 					<Icon className="h-5 w-5" />
 				</div>
 				{isSidebarVisible && (
-					<span className="text-lg font-medium">{item.title}</span>
+					<span className="ml-2 text-lg font-medium">{item.title}</span>
 				)}
 			</Link>
 		</li>

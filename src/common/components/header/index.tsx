@@ -1,14 +1,6 @@
 "use client"
 
-import {
-	Search,
-	Slash,
-	House,
-	Settings,
-	CircleUser,
-	Bell,
-	Columns2,
-} from "lucide-react"
+import { Search, Slash, House, Settings, CircleUser, Bell } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
@@ -42,7 +34,6 @@ export default function Header() {
 		<div className="flex h-20 w-full items-center justify-between border-b border-gray-200 bg-white p-4 shadow-sm">
 			<div className="flex flex-col">
 				<nav className="flex items-center text-gray-600">
-					<Columns2 />
 					<Link href="/" className="flex items-center gap-1 hover:text-tbGreen">
 						<House size={16} />
 					</Link>
