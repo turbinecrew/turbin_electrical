@@ -47,51 +47,61 @@ export function TradingTable({ columns, data }: TradingTableComponentPT) {
 	return (
 		<div className="w-[800px]">
 			<div className="m-1 flex justify-between">
-				<div className="ml-4 flex items-center justify-start">
-					<div className="ml-4 flex items-center justify-start">
+				<div className="ml-1 flex flex-col">
+					<div className="ml-4 flex items-center justify-start gap-4">
 						<button
 							onClick={() => {
 								setToggle((e) => !e)
 							}}
 						>
 							{isToggle ? (
-								<ListFilter color="#6e6e6e" size={16} className="mr-2" />
+								<ListFilter color="#6e6e6e" size={16} />
 							) : (
 								<ListFilter size={16} />
 							)}
 						</button>
-						{isToggle && (
-							<div className="ransition-opacity flex flex-row gap-1 duration-500">
-								<ChevronDown />
-								필터메뉴
-							</div>
-						)}
-					</div>
-
-					<div className="ml-4 flex items-center justify-start">
 						<button
 							onClick={() => {
 								setSortingToggle((e) => !e)
 							}}
 						>
 							{isSortingToggle ? (
-								<ArrowUpDown color="#6e6e6e" size={16} className="mr-2" />
+								<ArrowUpDown color="#6e6e6e" size={16} />
 							) : (
 								<ArrowUpDown size={16} />
 							)}
 						</button>
-						{isSortingToggle ? (
-							<div className="flex items-center justify-start">
-								<Button onClick={() => handleSort("plantName")}>
+					</div>
+
+					<div className="m-4 flex items-center justify-start gap-2">
+						{isToggle && (
+							<Button className="flex flex-row gap-1 border-none pr-4">
+								<ChevronDown size={12} className="w-fit" />
+								필터메뉴
+							</Button>
+						)}
+
+						{isSortingToggle && (
+							<div className="flex items-center justify-start gap-1">
+								<Button
+									onClick={() => handleSort("plantName")}
+									className="border-none text-slate-700"
+								>
 									발전소명
 								</Button>
-								<Button onClick={() => handleSort("volume")}>
+								<Button
+									onClick={() => handleSort("volume")}
+									className="border-none text-slate-700"
+								>
 									전력 발전량
 								</Button>
-								<Button onClick={() => handleSort("bidNumbers")}>거래량</Button>
+								<Button
+									onClick={() => handleSort("bidNumbers")}
+									className="border-none text-slate-700"
+								>
+									거래량
+								</Button>
 							</div>
-						) : (
-							<div></div>
 						)}
 					</div>
 				</div>
