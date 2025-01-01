@@ -12,6 +12,12 @@ import {
 } from "recharts"
 
 import { RegionalModal } from "@/features/auth/components/regional-modal"
+import {
+	Card,
+	CardHeader,
+	CardTitle,
+	CardContent,
+} from "@/shadcn/components/card"
 
 import { data } from "./mocks"
 
@@ -49,42 +55,49 @@ export function RegionalEnergyChart() {
 	}
 
 	return (
-		<div className="p-4">
-			<div className="relative h-[35vh]">
-				<ResponsiveContainer width="100%" height="100%">
-					<BarChart
-						data={chartData}
-						margin={{ top: 20, right: 30, left: 20, bottom: 50 }}
-						onClick={(e) => {
-							if (e?.activeLabel) handleRegionClick(e.activeLabel)
-						}}
-					>
-						<CartesianGrid strokeDasharray="3 3" />
-						<XAxis
-							dataKey="region"
-							tickLine={false}
-							tick={{ fontSize: 12, fontWeight: "bold" }}
-							angle={-45}
-							textAnchor="end"
-						/>
-						<YAxis tick={{ fontSize: 12, fontWeight: "bold" }} />
-						<Tooltip contentStyle={{ fontWeight: "bold" }} />
-						<Bar
-							dataKey="generation"
-							fill="#07A525"
-							radius={[4, 4, 0, 0]}
-							cursor="pointer"
-						/>
-					</BarChart>
-				</ResponsiveContainer>
-			</div>
+		<Card className="w-full">
+			<CardHeader>
+				<CardTitle>지역별 에너지 차트</CardTitle>
+			</CardHeader>
+			<CardContent>
+				<div className="p-4">
+					<div className="relative h-[35vh]">
+						<ResponsiveContainer width="100%" height="100%">
+							<BarChart
+								data={chartData}
+								margin={{ top: 20, right: 30, left: 20, bottom: 50 }}
+								onClick={(e) => {
+									if (e?.activeLabel) handleRegionClick(e.activeLabel)
+								}}
+							>
+								<CartesianGrid strokeDasharray="3 3" />
+								<XAxis
+									dataKey="region"
+									tickLine={false}
+									tick={{ fontSize: 12, fontWeight: "bold" }}
+									angle={-45}
+									textAnchor="end"
+								/>
+								<YAxis tick={{ fontSize: 12, fontWeight: "bold" }} />
+								<Tooltip contentStyle={{ fontWeight: "bold" }} />
+								<Bar
+									dataKey="generation"
+									fill="#07A525"
+									radius={[4, 4, 0, 0]}
+									cursor="pointer"
+								/>
+							</BarChart>
+						</ResponsiveContainer>
+					</div>
 
-			<RegionalModal
-				isOpen={isModalOpen}
-				setIsOpen={setIsModalOpen}
-				region={selectedRegion}
-				timeSeriesData={timeSeriesData}
-			/>
-		</div>
+					<RegionalModal
+						isOpen={isModalOpen}
+						setIsOpen={setIsModalOpen}
+						region={selectedRegion}
+						timeSeriesData={timeSeriesData}
+					/>
+				</div>
+			</CardContent>
+		</Card>
 	)
 }

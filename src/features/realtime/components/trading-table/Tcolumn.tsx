@@ -1,7 +1,9 @@
 "use client"
+
 import Button from "@/common/components/button"
 import { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, ListFilter, Search } from "lucide-react"
+import { ArrowUpDown } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 export type TradingTablePT = {
 	id: string
