@@ -1,7 +1,9 @@
 "use client"
+
 import Button from "@/common/components/button"
 import { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, ListFilter, Search } from "lucide-react"
+import { ArrowUpDown } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 export type TradingTablePT = {
 	id: string
@@ -29,7 +31,6 @@ export const columns: ColumnDef<TradingTablePT>[] = [
 				</Button>
 			)
 		},
-
 		cell: ({ row }) => {
 			const volume = parseFloat(row.getValue("volume"))
 			const formatted = new Intl.NumberFormat("ko-KR", {}).format(volume)
@@ -54,6 +55,15 @@ export const columns: ColumnDef<TradingTablePT>[] = [
 	{
 		accessorKey: "matchingButton",
 		header: "matchingButton",
-		cell: (params) => <Button>거래하기</Button>,
+		cell: ({ row }) => {
+			const router = useRouter()
+			const { id } = row.original
+
+			const handleClick = () => {
+				router.push(`/trading/${id}`)
+			}
+
+			return <Button onClick={handleClick}>거래하기</Button>
+		},
 	},
 ]
