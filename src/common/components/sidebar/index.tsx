@@ -147,7 +147,7 @@ function NavItem({
 				<div
 					className={`flex h-10 w-10 items-center justify-center rounded-full duration-300 ${
 						isActive
-							? "bg-tbPastelGreen text-tbGreen"
+							? "bg-tbPastelGreen text-white"
 							: isSidebarVisible
 								? "bg-white text-tbGreen group-hover:bg-white group-hover:text-tbGreen"
 								: "bg-white text-tbGreen group-hover:bg-tbGreen group-hover:text-white"
