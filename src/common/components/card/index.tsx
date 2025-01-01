@@ -25,6 +25,7 @@ const CardComponent = ({
 
 type TitlePT = {
 	title?: string
+	rightArea?: React.ReactNode
 	lowerTitle?: string
 	children?: React.ReactNode
 	className?: string
@@ -32,6 +33,7 @@ type TitlePT = {
 }
 const TitleCard = ({
 	title,
+	rightArea,
 	lowerTitle,
 	children,
 	className,
@@ -44,9 +46,12 @@ const TitleCard = ({
 		>
 			<div className="flex flex-col">
 				{title && (
-					<span className="text-start text-lg font-bold text-black">
-						{title}
-					</span>
+					<div className="flex h-fit justify-between">
+						<span className="text-start text-lg font-bold text-black">
+							{title}
+						</span>
+						{rightArea || <div></div>}
+					</div>
 				)}
 				{lowerTitle && (
 					<span className="mb-1 text-start text-sm font-normal text-black/75">

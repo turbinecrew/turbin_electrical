@@ -26,27 +26,9 @@ export default function Trading() {
 				</div>
 
 				<div className="grid grid-cols-2 gap-4">
-					{activeChart === 0 && (
-						<TitleCard title="SMP 가격">
-							<div className="pt-2">
-								<SmpLineChart />
-							</div>
-						</TitleCard>
-					)}
-					{activeChart === 1 && (
-						<div>
-							<TitleCard title="REC 가격">
-								<div className="pt-2">
-									<RecLineChart />
-								</div>
-							</TitleCard>
-						</div>
-					)}
-					<TitleCard title="월별 거래량">
-						<div className="pt-4">
-							<VolumeChart />
-						</div>
-					</TitleCard>
+					{activeChart === 0 && <SmpLineChart />}
+					{activeChart === 1 && <RecLineChart />}
+					<VolumeChart />
 				</div>
 			</div>
 			<div className="flex w-full justify-center">
