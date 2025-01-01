@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo } from "react"
 
 import {
 	Modal,
@@ -9,98 +9,110 @@ import {
 	ModalHeader,
 } from "@/common/components/modal"
 
-interface TradeModalProps {
+interface TradeModalPT {
 	isOpen: boolean
-	onClose: () => void
-	tradeType: "buy" | "sell"
+	setIsOpen: (state: boolean) => void
+	currentSMP: number
+	currentREC: number
 }
 
 export default function TradeModal({
 	isOpen,
-	onClose,
-	tradeType,
-}: TradeModalProps) {
-	const [smpPrice, setSmpPrice] = useState<number>(0)
-	const [recPrice, setRecPrice] = useState<number>(0)
-	const [quantity, setQuantity] = useState<number>(0)
+	setIsOpen,
+	currentSMP = 110,
+	currentREC = 20,
+}: TradeModalPT) {
+	const [power, setPower] = useState<number>(0)
+	const [bidPrice, setBidPrice] = useState<number>(0)
 
-	const handleTrade = () => {
+	const finalPrice = useMemo(() => power * (bidPrice + currentREC), [power, bidPrice, currentREC])
+
+	const handleReset = () => {
+		setPower(0)
+		setBidPrice(0)
+	}
+
+	const handleBidSubmit = () => {
 		console.log({
-			action: tradeType === "buy" ? "매수" : "매도",
-			smpPrice,
-			recPrice,
-			quantity,
+			power,
+			bidPrice,
+			finalPrice,
 		})
-		onClose()
+		alert("입찰 요청이 제출되었습니다!")
+		setIsOpen(false)
 	}
 
 	return (
-		<Modal isOpen={isOpen} onClose={onClose}>
+		<Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
 			<ModalHeader>
-				<h2 className="text-xl font-bold">
-					{tradeType === "buy" ? "매수" : "매도"} 거래
-				</h2>
+				<h2 className="text-xl font-bold">전력 거래 입찰</h2>
 			</ModalHeader>
 			<ModalContext>
+				<p className="mb-4 text-sm text-gray-700">
+					원하는 전력량(kWh)과 입찰 가격(₩/kWh)을 입력하세요.
+					<br />
+					REC 금액이 포함된 최종 금액이 자동으로 계산됩니다.
+				</p>
 				<div className="space-y-4">
-					{/* SMP Price Input */}
 					<div>
 						<label className="block text-sm font-medium text-gray-700">
-							SMP 현재가 (원)
+							전력량 (kWh)
 						</label>
 						<input
 							type="number"
-							value={smpPrice}
-							onChange={(e) => setSmpPrice(Math.max(0, Number(e.target.value)))}
-							placeholder="SMP 가격 입력"
-							className="mt-1 w-full rounded border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
+							value={power}
+							onChange={(e) => setPower(Math.max(0, Number(e.target.value)))}
+							placeholder="전력량 입력"
+							className="mt-1 w-full rounded border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
 						/>
 					</div>
-
-					{/* REC Price Input */}
 					<div>
 						<label className="block text-sm font-medium text-gray-700">
-							REC 현재가 (원)
+							입찰 가격 (₩/kWh)
 						</label>
 						<input
 							type="number"
-							value={recPrice}
-							onChange={(e) => setRecPrice(Math.max(0, Number(e.target.value)))}
-							placeholder="REC 가격 입력"
-							className="mt-1 w-full rounded border-gray-300 px-3 py-2 focus:border-green-500 focus:ring focus:ring-green-200"
-						/>
-					</div>
-
-					{/* Quantity Input */}
-					<div>
-						<label className="block text-sm font-medium text-gray-700">
-							거래 수량 (MWh)
-						</label>
-						<input
-							type="number"
-							value={quantity}
-							onChange={(e) => setQuantity(Math.max(0, Number(e.target.value)))}
-							placeholder="거래 수량 입력"
-							className="mt-1 w-full rounded border-gray-300 px-3 py-2 focus:border-purple-500 focus:ring focus:ring-purple-200"
+							value={bidPrice}
+							onChange={(e) => setBidPrice(Math.max(0, Number(e.target.value)))}
+							placeholder="입찰 가격 입력"
+							className="mt-1 w-full rounded border border-gray-300 px-3 py-2 focus:border-green-500 focus:ring focus:ring-green-200"
 						/>
 					</div>
 				</div>
+				<div className="border-t border-gray-300 pt-4">
+					<p className="text-sm font-medium text-gray-700">
+						현재 SMP:{" "}
+						<span className="font-bold text-blue-500">
+							₩{currentSMP.toLocaleString()}/kWh
+						</span>
+					</p>
+					<p className="text-sm font-medium text-gray-700">
+						REC 금액:{" "}
+						<span className="font-bold text-green-500">
+							₩{currentREC.toLocaleString()}/kWh
+						</span>
+					</p>
+					<p className="text-sm font-medium text-gray-700">
+						최종 금액:{" "}
+						<span className="font-bold text-purple-500">
+							₩{finalPrice.toLocaleString()}
+						</span>
+					</p>
+				</div>
 			</ModalContext>
 			<ModalFooter>
-				<div className="flex justify-end space-x-4">
-					{/* Cancel Button */}
+				<div className="flex justify-between space-x-4">
 					<button
-						onClick={onClose}
+						onClick={handleReset}
 						className="rounded bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
 					>
-						취소
+						초기화
 					</button>
-					{/* Confirm Button */}
 					<button
-						onClick={handleTrade}
+						onClick={handleBidSubmit}
 						className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
 					>
-						{tradeType === "buy" ? "매수" : "매도"} 확인
+						입찰 제출하기
 					</button>
 				</div>
 			</ModalFooter>
