@@ -14,6 +14,7 @@ import {
 import { chartData, getChartConfig, smpTimeRange } from "./data"
 import { useState } from "react"
 import { dateFilteredData } from "@/features/realtime/hooks/date-range-filter"
+import { LineChartComponent } from "@/common/components/chart/line-chart"
 
 export function SmpLineChart() {
 	const chartConfig = getChartConfig()
@@ -46,52 +47,16 @@ export function SmpLineChart() {
 					</label>
 				))}
 			</div>
-			<CardContent>
-				<ChartContainer config={chartConfig}>
-					<LineChart
-						accessibilityLayer
-						data={filteredData}
-						margin={{
-							left: 0,
-							right: 12,
-						}}
-					>
-						<CartesianGrid vertical={true} horizontal={true} />
-						<XAxis
-							dataKey="date"
-							tickLine={true}
-							axisLine={{ stroke: "#000000", strokeWidth: 1 }}
-							tickMargin={8}
-							tickFormatter={(value) => {
-								const date = new Date(value)
-								const options: Intl.DateTimeFormatOptions = {
-									month: "short",
-									day: "numeric",
-								}
-
-								if (date.getHours() !== 0 || date.getMinutes() !== 0) {
-									options.hour = "numeric"
-								}
-
-								return date.toLocaleString("en-US", options)
-							}}
-						/>
-
-						<YAxis tickLine={true} axisLine={true} tickMargin={8} />
-						<ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-
-						<Line
-							dataKey="smp"
-							type="monotone"
-							stroke="var(--color-smp)"
-							strokeWidth={2}
-						/>
-						<ChartLegend>
-							<ChartLegendContent />
-						</ChartLegend>
-					</LineChart>
-				</ChartContainer>
-			</CardContent>
+			<LineChartComponent
+				chartConfig={chartConfig}
+				chartData={filteredData}
+				LineDataKey={"smp"}
+				XAixsDataKey={"date"}
+				type={"monotone"}
+				dot={true}
+				Ymin={100}
+				Ymax={250}
+			/>
 		</div>
 	)
 }

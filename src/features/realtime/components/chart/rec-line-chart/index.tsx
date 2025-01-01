@@ -15,6 +15,7 @@ import { useState } from "react"
 import { getChartConfig, recTimeRange } from "./data"
 import { chartData } from "./mock"
 import { dateFilteredData } from "@/features/realtime/hooks/date-range-filter"
+import { LineChartComponent } from "@/common/components/chart/line-chart"
 
 export function RecLineChart() {
 	const chartConfig = getChartConfig()
@@ -47,52 +48,16 @@ export function RecLineChart() {
 					</label>
 				))}
 			</div>
-			<CardContent>
-				<ChartContainer config={chartConfig}>
-					<LineChart
-						accessibilityLayer
-						data={filteredData}
-						margin={{
-							left: 0,
-							right: 12,
-						}}
-					>
-						<CartesianGrid vertical={true} horizontal={true} />
-						<XAxis
-							dataKey="date"
-							tickLine={true}
-							axisLine={{ stroke: "#000000", strokeWidth: 1 }}
-							tickMargin={8}
-							tickFormatter={(value) => {
-								const date = new Date(value)
-								const options: Intl.DateTimeFormatOptions = {
-									month: "short",
-									day: "numeric",
-								}
-
-								if (date.getHours() !== 0 || date.getMinutes() !== 0) {
-									options.hour = "numeric"
-								}
-
-								return date.toLocaleString("en-US", options)
-							}}
-						/>
-
-						<YAxis tickLine={true} axisLine={true} tickMargin={8} />
-						<ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-
-						<Line
-							dataKey="smp"
-							type="monotone"
-							stroke="var(--color-smp)"
-							strokeWidth={2}
-						/>
-						<ChartLegend>
-							<ChartLegendContent />
-						</ChartLegend>
-					</LineChart>
-				</ChartContainer>
-			</CardContent>
+			<LineChartComponent
+				chartConfig={chartConfig}
+				chartData={filteredData}
+				LineDataKey={"rec"}
+				XAixsDataKey={"date"}
+				type={"linear"}
+				dot={false}
+				Ymin={0}
+				Ymax={600}
+			/>
 		</div>
 	)
 }

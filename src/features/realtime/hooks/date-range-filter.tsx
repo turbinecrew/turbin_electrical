@@ -11,6 +11,8 @@ export function dateFilteredData({
 		if (type == "rec") {
 			if (timeRange === "30d") {
 				daysToSubtract = 30
+			} else if (timeRange === "90d") {
+				daysToSubtract = 90
 			} else if (timeRange === "180d") {
 				daysToSubtract = 180
 			}
