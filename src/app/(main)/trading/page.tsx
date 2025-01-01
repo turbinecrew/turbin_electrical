@@ -3,11 +3,11 @@ import type { MiniCardPT } from "@/common/components/card"
 import { TitleCard, CardComponent, MiniCard } from "@/common/components/card"
 import { VolumeChart } from "@/features/realtime/components/chart/trading-volume-chart"
 import { TradingDataTable } from "@/features/realtime/components/trading-table"
-import { TradingVolumeCards } from "@/features/realtime/components/trading-dashboard/slide-card"
+import { TradingVolumeCards } from "@/features/realtime/components/slide-card"
 import { useState } from "react"
 import { SmpLineChart } from "@/features/realtime/components/chart/smp-line-chart"
 import { RecLineChart } from "@/features/realtime/components/chart/rec-line-chart"
-import { PriceCard } from "@/features/realtime/components/trading-dashboard/price-card"
+import { PriceCard } from "@/features/realtime/components/price-card"
 
 export default function Trading() {
 	const [activeChart, setActiveChart] = useState<number | null>(0)

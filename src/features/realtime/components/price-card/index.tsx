@@ -2,7 +2,7 @@
 import type { MiniCardPT } from "@/common/components/card"
 import { TitleCard, CardComponent, MiniCard } from "@/common/components/card"
 
-import { priceCardDatas } from "@/features/realtime/components/trading-dashboard/price-card/data"
+import { priceCardDatas } from "@/features/realtime/components/price-card/data"
 interface PriceCardPT {
 	activeChart: number | null
 	setActiveChart: (index: number) => void

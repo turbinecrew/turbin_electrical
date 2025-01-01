@@ -12,32 +12,16 @@ import {
 } from "@/shadcn/components/chart"
 
 import { useState } from "react"
-import { getChartConfig } from "./data"
+import { getChartConfig, recTimeRange } from "./data"
 import { chartData } from "./mock"
+import { dateFilteredData } from "@/features/realtime/hooks/date-range-filter"
 
 export function RecLineChart() {
 	const chartConfig = getChartConfig()
 	const [timeRange, setTimeRange] = useState("30d")
 
-	const filteredData = chartData.filter((item) => {
-		const date = new Date(item.date)
-		const referenceDate = new Date()
-		let daysToSubtract = 90
-		if (timeRange === "30d") {
-			daysToSubtract = 30
-		} else if (timeRange === "180d") {
-			daysToSubtract = 180
-		}
-		const startDate = new Date(referenceDate)
-		startDate.setDate(startDate.getDate() - daysToSubtract)
-		return date >= startDate
-	})
-
-	const timeRangeOptions = [
-		{ value: "30d", label: "Month" },
-		{ value: "90d", label: "Quarter" },
-		{ value: "180d", label: "Half" },
-	]
+	const filteredData = dateFilteredData({ chartData, timeRange, type: "rec" })
+	const timeRangeOptions = recTimeRange
 
 	return (
 		<div>

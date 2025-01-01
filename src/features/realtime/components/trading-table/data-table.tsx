@@ -7,18 +7,18 @@ import {
 	useReactTable,
 	flexRender,
 } from "@tanstack/react-table"
-import React, { useState } from "react"
-
+import { useState } from "react"
 import Button from "@/common/components/button"
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown, ChevronDown, ListFilter, TextSearch } from "lucide-react"
 import { TradingTablePT } from "./Tcolumn"
+
 type TradingTableComponentPT = {
 	columns: ColumnDef<TradingTablePT>[]
 	data: TradingTablePT[]
 }
 export function TradingTable({ columns, data }: TradingTableComponentPT) {
-	const [sorting, setSorting] = React.useState<SortingState>([])
+	const [sorting, setSorting] = useState<SortingState>([])
 	const [isToggle, setToggle] = useState(false)
 	const [isSortingToggle, setSortingToggle] = useState(false)
 
@@ -46,8 +46,8 @@ export function TradingTable({ columns, data }: TradingTableComponentPT) {
 
 	return (
 		<div className="w-[800px]">
-			<div className="m-1 flex justify-between">
-				<div className="ml-1 flex flex-col">
+			<div className="ml-1 flex w-full flex-col">
+				<div className="w- full flex justify-between">
 					<div className="ml-4 flex items-center justify-start gap-4">
 						<button
 							onClick={() => {
@@ -72,54 +72,52 @@ export function TradingTable({ columns, data }: TradingTableComponentPT) {
 							)}
 						</button>
 					</div>
-
-					<div className="m-4 flex items-center justify-start gap-2">
-						{isToggle && (
-							<Button className="flex flex-row gap-1 border-none pr-4">
-								<ChevronDown size={12} className="w-fit" />
-								필터메뉴
-							</Button>
-						)}
-
-						{isSortingToggle && (
-							<div className="flex items-center justify-start gap-1">
-								<Button
-									onClick={() => handleSort("plantName")}
-									className="border-none text-slate-700"
-								>
-									발전소명
-								</Button>
-								<Button
-									onClick={() => handleSort("volume")}
-									className="border-none text-slate-700"
-								>
-									전력 발전량
-								</Button>
-								<Button
-									onClick={() => handleSort("bidNumbers")}
-									className="border-none text-slate-700"
-								>
-									거래량
-								</Button>
-							</div>
-						)}
+					<div className="flex h-8 items-center rounded-xl border border-gray-300 bg-white px-4 focus-within:border-tbGreen">
+						<TextSearch className="text-gray-400" size={16} />
+						<input
+							placeholder="Enter Name..."
+							value={
+								(table.getColumn("plantName")?.getFilterValue() as string) ?? ""
+							}
+							onChange={(event) =>
+								table.getColumn("plantName")?.setFilterValue(event.target.value)
+							}
+							className="ml-2 h-full w-48 border-none bg-transparent text-gray-600 placeholder-gray-400 outline-none"
+						/>
 					</div>
 				</div>
+				<div className="m-4 flex items-center justify-start gap-2">
+					{isToggle && (
+						<Button className="flex flex-row gap-1 border-none pr-4">
+							<ChevronDown size={12} className="w-fit" />
+						</Button>
+					)}
 
-				<div className="flex h-10 items-center rounded-2xl border border-gray-300 bg-white px-4 focus-within:border-tbGreen">
-					<TextSearch className="text-gray-400" size={16} />
-					<input
-						placeholder="Enter Name..."
-						value={
-							(table.getColumn("plantName")?.getFilterValue() as string) ?? ""
-						}
-						onChange={(event) =>
-							table.getColumn("plantName")?.setFilterValue(event.target.value)
-						}
-						className="ml-2 h-full w-48 border-none bg-transparent text-gray-600 placeholder-gray-400 outline-none"
-					/>
+					{isSortingToggle && (
+						<div className="flex items-center justify-start gap-1">
+							<Button
+								onClick={() => handleSort("plantName")}
+								className="border-none text-slate-700"
+							>
+								발전소명
+							</Button>
+							<Button
+								onClick={() => handleSort("volume")}
+								className="border-none text-slate-700"
+							>
+								전력 발전량
+							</Button>
+							<Button
+								onClick={() => handleSort("bidNumbers")}
+								className="border-none text-slate-700"
+							>
+								거래량
+							</Button>
+						</div>
+					)}
 				</div>
 			</div>
+
 			<table className="w-full">
 				<thead className="bg-[#F7F9FB]">
 					{table.getHeaderGroups().map((headerGroup) => (

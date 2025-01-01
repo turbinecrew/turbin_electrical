@@ -1,6 +1,6 @@
 "use client"
 import { MiniCard, MiniCardPT } from "@/common/components/card"
-import { timeCardDatas } from "@/features/realtime/components/trading-dashboard/slide-card/data"
+import { timeCardDatas } from "@/features/realtime/components/slide-card/data"
 import { useEffect, useState } from "react"
 
 export function TradingVolumeCards() {

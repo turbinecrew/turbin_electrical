@@ -2,6 +2,12 @@ import { generateChartConfig } from "@/features/realtime/hooks/generate-chartCon
 import type { ChartConfig } from "@/shadcn/components/chart"
 import { rawData } from "@/features/realtime/components/chart/smp-line-chart/mock"
 
+export const smpTimeRange = [
+	{ value: "1d", label: "Day" },
+	{ value: "7d", label: "Week" },
+	{ value: "30d", label: "Month" },
+]
+
 function getDailyData() {
 	let ProcessedData: typeof rawData = []
 	const today = new Date(2024, 11, 28, 22, 0, 0)
