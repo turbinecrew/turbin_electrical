@@ -1,3 +1,15 @@
+export const smpTimeRange = [
+	{ value: "1d", label: "Day" },
+	{ value: "7d", label: "Week" },
+	{ value: "30d", label: "Month" },
+]
+
+export const recTimeRange = [
+	{ value: "30d", label: "Month" },
+	{ value: "90d", label: "Quarter" },
+	{ value: "180d", label: "Half" },
+]
+
 export function dateFilteredData({
 	type,
 	chartData,

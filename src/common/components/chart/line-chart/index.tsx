@@ -7,7 +7,7 @@ import {
 	ChartTooltip,
 	ChartTooltipContent,
 } from "@/shadcn/components/chart"
-import { LineChartComponentPT } from "@/common/components/chart/line-chart/type"
+import type { LineChartComponentPT } from "@/common/components/chart/line-chart/type"
 import { AxisDomainItem } from "recharts/types/util/types"
 
 export function LineChartComponent({

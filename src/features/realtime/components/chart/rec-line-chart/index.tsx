@@ -1,12 +1,15 @@
 "use client"
 
 import { useState } from "react"
-import { getChartConfig, recTimeRange } from "./data"
+import { getChartConfig } from "./data"
 import { chartData } from "./mock"
-import { dateFilteredData } from "@/features/realtime/hooks/date-range-filter"
+import {
+	dateFilteredData,
+	recTimeRange,
+} from "@/features/realtime/hooks/date-range-filter"
 import { LineChartComponent } from "@/common/components/chart/line-chart"
 import { TitleCard } from "@/common/components/card"
-import { TimeRangeOptions } from "@/common/components/chart/line-chart/time-rage-options"
+import { TimeRangeOptions } from "@/common/components/chart/time-range-options"
 
 export function RecLineChart() {
 	const chartConfig = getChartConfig()

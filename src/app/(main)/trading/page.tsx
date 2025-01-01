@@ -1,6 +1,5 @@
 "use client"
-import type { MiniCardPT } from "@/common/components/card"
-import { TitleCard, CardComponent, MiniCard } from "@/common/components/card"
+
 import { VolumeChart } from "@/features/realtime/components/chart/trading-volume-chart"
 import { TradingDataTable } from "@/features/realtime/components/trading-table"
 import { TradingVolumeCards } from "@/features/realtime/components/slide-card"
