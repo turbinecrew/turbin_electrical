@@ -3,7 +3,7 @@ import { Search, Slash, House, Settings, CircleUser, Bell } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
-import { HiOutlineSlash } from "react-icons/hi2"
+
 import SignInModal from "../../../features/auth/components/sign-in-modal"
 
 export default function Header() {
@@ -36,9 +36,15 @@ export default function Header() {
 					<Link href="/" className="flex items-center hover:text-tbGreen">
 						<House size={16} />
 					</Link>
-					{prevPage != "" && (
+					{prevPage && prevPage != "" && (
 						<div className="flex items-center gap-2 capitalize">
-							<Slash size={16} /> {prevPage}
+							<Slash size={16} />{" "}
+							<a
+								href={`/${prevPage}`}
+								className="flex items-center hover:text-tbGreen"
+							>
+								{prevPage}
+							</a>
 						</div>
 					)}
 				</nav>
