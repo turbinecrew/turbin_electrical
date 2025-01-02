@@ -1,7 +1,5 @@
 "use client"
 
-import { useState, useEffect } from "react"
-
 import { MiniCard } from "@/common/components/card"
 import { LoadingComponent } from "@/common/components/loading"
 import { BidPieChart } from "@/features/realtime/components/chart/bid-pie-chart"
@@ -25,6 +23,7 @@ export default function Home() {
 
 	return (
 		<div className="mx-[5vw] flex flex-col gap-8 p-8">
+			{/* Mini Cards Section */}
 			<div className="grid grid-cols-4 gap-4">
 				{miniCardData.map((item, idx) => (
 					<MiniCard
@@ -40,27 +39,18 @@ export default function Home() {
 			</div>
 
 			<div className="grid grid-cols-5 gap-4">
-				<Card className="col-span-3">
-					<CardHeader>
-						<CardTitle>지역별 에너지 차트</CardTitle>
-					</CardHeader>
-					<CardContent>
-						<RegionalEnergyChart />
-					</CardContent>
-				</Card>
+				<div className="col-span-3">
+					<RegionalEnergyChart />
+				</div>
 
-				<Card className="col-span-2 items-center justify-center">
+				<Card className="col-span-2">
 					<CardHeader>
 						<CardTitle>지도 영역</CardTitle>
 					</CardHeader>
 					<CardContent className="flex items-center justify-center p-2">
-						{isMapLoading ? (
-							<LoadingComponent />
-						) : (
-							<div className="h-[40vh] w-[80%] bg-green-400 text-center text-lg font-bold text-white">
-								지도지도
-							</div>
-						)}
+						<div className="h-[40vh] w-[90%] bg-green-400 text-center text-lg font-bold text-white">
+							지도지도
+						</div>
 					</CardContent>
 				</Card>
 			</div>
@@ -75,14 +65,9 @@ export default function Home() {
 					</CardContent>
 				</Card>
 
-				<Card className="col-span-3">
-					<CardHeader>
-						<CardTitle>주간 전력 생산량</CardTitle>
-					</CardHeader>
-					<CardContent>
-						<WeeklyPowerChart />
-					</CardContent>
-				</Card>
+				<div className="col-span-3">
+					<WeeklyPowerChart />
+				</div>
 			</div>
 		</div>
 	)

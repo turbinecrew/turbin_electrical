@@ -15,6 +15,12 @@ import React from "react"
 import { Line } from "react-chartjs-2"
 
 import type { ProcessedData } from "@/features/realtime/types/weeklyPower"
+import {
+	Card,
+	CardHeader,
+	CardTitle,
+	CardContent,
+} from "@/shadcn/components/card"
 
 import { mockData } from "./mock"
 
@@ -101,12 +107,19 @@ export default function WeeklyPower() {
 	}
 
 	return (
-		<div className="mx-auto mr-[50px] h-[35vh] w-full">
-			<div className="flex h-full items-center justify-center">
-				<div className="h-full w-full">
-					<Line data={chartData} options={options} />
+		<Card className="w-full">
+			<CardHeader>
+				<CardTitle>주간 전력 생산량</CardTitle>
+			</CardHeader>
+			<CardContent>
+				<div className="mx-auto h-[35vh] w-full">
+					<div className="flex h-full items-center justify-center">
+						<div className="h-full w-full">
+							<Line data={chartData} options={options} />
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
+			</CardContent>
+		</Card>
 	)
 }
