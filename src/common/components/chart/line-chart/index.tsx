@@ -1,14 +1,14 @@
 "use client"
 
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts"
+import type { AxisDomainItem } from "recharts/types/util/types"
 
+import type { LineChartComponentPT } from "@/common/components/chart/line-chart/type"
 import {
 	ChartContainer,
 	ChartTooltip,
 	ChartTooltipContent,
 } from "@/shadcn/components/chart"
-import type { LineChartComponentPT } from "@/common/components/chart/line-chart/type"
-import { AxisDomainItem } from "recharts/types/util/types"
 
 export function LineChartComponent({
 	chartConfig,

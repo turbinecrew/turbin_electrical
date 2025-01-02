@@ -1,6 +1,7 @@
+import type { CurveType } from "recharts/types/shape/Curve"
+import type { AxisDomainItem } from "recharts/types/util/types"
+
 import type { ChartConfig } from "@/shadcn/components/chart"
-import { CurveType } from "recharts/types/shape/Curve"
-import { AxisDomainItem } from "recharts/types/util/types"
 
 type TChartData = {
 	date: string

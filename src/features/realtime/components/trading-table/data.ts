@@ -1,6 +1,4 @@
-import { TradingTablePT } from "./Tcolumn"
-
-export function getData(): TradingTablePT[] {
+export function getData() {
 	return [
 		{
 			id: "id_1",
