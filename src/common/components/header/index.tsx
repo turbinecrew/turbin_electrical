@@ -1,23 +1,22 @@
 "use client"
-
 import { Search, Slash, House, Settings, CircleUser, Bell } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
-
+import { HiOutlineSlash } from "react-icons/hi2"
 import SignInModal from "../../../features/auth/components/sign-in-modal"
 
 export default function Header() {
-	const pathName: string | null = usePathname()
-	const thisPage = pathName
-		? pathName.split("/").pop() || "Dashboard"
-		: "Dashboard"
+	const path: string | null = usePathname()
+	const pathName = path ? path.split("/") : [""]
+	const thisPage = pathName.pop()
+	const prevPage = pathName ? pathName.pop() : null
+
 	const [searchText, setSearchText] = useState("")
 	const [isSignInModalOpen, setIsSignInModalOpen] = useState(false)
 
-	const handleKeyPress = (event: { key: string }) => {
+	const handleKeyDown = (event: { key: string }) => {
 		if (event.key === "Enter") {
-			console.log(`검색: ${searchText}`)
 			setSearchText("")
 		}
 	}
@@ -32,21 +31,25 @@ export default function Header() {
 
 	return (
 		<div className="flex h-20 w-full items-center justify-between border-b border-gray-200 bg-white p-4 shadow-sm">
-			<div className="flex flex-col">
-				<nav className="flex items-center text-gray-600">
-					<Link href="/" className="flex items-center gap-1 hover:text-tbGreen">
+			<div className="flex items-center gap-2">
+				<nav className="flex items-center gap-2 opacity-40">
+					<Link href="/" className="flex items-center hover:text-tbGreen">
 						<House size={16} />
 					</Link>
+					{prevPage != "" && (
+						<div className="flex items-center gap-2 capitalize">
+							<Slash size={16} /> {prevPage}
+						</div>
+					)}
+				</nav>
+				<div className="flex items-center gap-2 text-lg font-semibold text-gray-800">
 					<Slash size={16} />
 					<span className="capitalize">
 						{thisPage === "main" || thisPage === "" ? "Dashboard" : thisPage}
 					</span>
-				</nav>
-				<h4 className="text-lg font-semibold text-gray-800">
-					{thisPage === "main" || thisPage === "" ? "Dashboard" : thisPage}
-				</h4>
+				</div>
 			</div>
-			<div className="flex items-center gap-4">
+			<div className="flex items-center gap-2">
 				<div className="flex h-10 items-center rounded-2xl border border-gray-300 bg-gray-50 px-4 focus-within:border-tbGreen">
 					<Search className="text-gray-400" size={16} />
 					<input
@@ -55,7 +58,7 @@ export default function Header() {
 						placeholder="Search..."
 						value={searchText}
 						onChange={handleInputChange}
-						onKeyPress={handleKeyPress}
+						onKeyDown={handleKeyDown}
 					/>
 				</div>
 				<div
