@@ -1,14 +1,12 @@
-import { generateChartConfig } from "@/features/realtime/hooks/generate-chartConfig"
 import type { ChartConfig } from "@/shadcn/components/chart"
+
 import { RECData, SmpRawData } from "./mock"
 
 function getDailyData() {
-	let ProcessedData: typeof SmpRawData = []
+	const ProcessedData: typeof SmpRawData = []
 
 	const dailyAverageData: { [key: string]: number[] } = {}
-	SmpRawData.map((item, idx) => {
-		const itemDate = new Date(item.date)
-
+	SmpRawData.map((item) => {
 		const dateKey = item.date.split(" ")[0]
 		if (!dailyAverageData[dateKey]) {
 			dailyAverageData[dateKey] = []

@@ -1,9 +1,8 @@
 "use client"
 import type { MiniCardPT } from "@/common/components/card"
-import { TitleCard, CardComponent, MiniCard } from "@/common/components/card"
-
+import { MiniCard } from "@/common/components/card"
 import { priceCardDatas } from "@/features/realtime/components/price-card/data"
-interface PriceCardPT {
+type PriceCardPT = {
 	activeChart: number | null
 	setActiveChart: (index: number) => void
 }

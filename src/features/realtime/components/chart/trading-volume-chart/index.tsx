@@ -2,6 +2,8 @@
 
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts"
 
+import { TitleCard } from "@/common/components/card"
+import { LineChartComponent } from "@/common/components/chart/line-chart"
 import {
 	ChartContainer,
 	ChartLegend,
@@ -12,8 +14,6 @@ import {
 
 import { getChartConfig } from "./data"
 import { chartData } from "./mock"
-import { TitleCard } from "@/common/components/card"
-import { LineChartComponent } from "@/common/components/chart/line-chart"
 
 export function VolumeChart() {
 	const chartConfig = getChartConfig()

@@ -1,25 +1,22 @@
 "use client"
 
-import { TrendingUp } from "lucide-react"
+import { useState } from "react"
 
 import { AreaChartComponent } from "@/common/components/chart/area-chart"
+import { TimeRangeOptions } from "@/common/components/chart/time-range-options"
+import {
+	dateFilteredData,
+	recTimeRange,
+} from "@/features/realtime/hooks/date-range-filter"
 import {
 	Card,
 	CardContent,
 	CardDescription,
-	CardFooter,
 	CardHeader,
 	CardTitle,
 } from "@/shadcn/components/card"
-import { chartData, getChartConfig } from "./data"
 
-import { useState } from "react"
-import {
-	dateFilteredData,
-	recTimeRange,
-	smpTimeRange,
-} from "@/features/realtime/hooks/date-range-filter"
-import { TimeRangeOptions } from "@/common/components/chart/time-range-options"
+import { chartData, getChartConfig } from "./data"
 
 type MockChartPT = {
 	cardTitle: string
