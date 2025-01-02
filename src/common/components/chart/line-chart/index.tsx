@@ -1,24 +1,25 @@
 "use client"
 
-import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
+import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts"
 
 import {
 	ChartContainer,
 	ChartTooltip,
 	ChartTooltipContent,
 } from "@/shadcn/components/chart"
-import type { AreaChartComponentPT } from "./type"
+import type { LineChartComponentPT } from "@/common/components/chart/line-chart/type"
 import { AxisDomainItem } from "recharts/types/util/types"
 
-export function AreaChartComponent({
+export function LineChartComponent({
 	chartConfig,
 	chartData,
-	AreaDataKeyOne,
-	AreaDataKeyTwo,
+	LineDataKey,
 	XAixsDataKey,
 	Ymin,
 	Ymax = "auto",
-}: AreaChartComponentPT) {
+	type,
+	dot,
+}: LineChartComponentPT) {
 	function generateTicks(
 		Ymin: AxisDomainItem,
 		Ymax: AxisDomainItem,
@@ -32,9 +33,10 @@ export function AreaChartComponent({
 			return ticks
 		}
 	}
+
 	return (
 		<ChartContainer config={chartConfig}>
-			<AreaChart
+			<LineChart
 				accessibilityLayer
 				data={chartData}
 				margin={{
@@ -42,7 +44,7 @@ export function AreaChartComponent({
 					right: 12,
 				}}
 			>
-				<CartesianGrid vertical={false} horizontal={true} />
+				<CartesianGrid vertical={false} />
 				<XAxis
 					dataKey={XAixsDataKey}
 					tickLine={true}
@@ -50,10 +52,16 @@ export function AreaChartComponent({
 					tickMargin={8}
 					tickFormatter={(value) => {
 						const date = new Date(value)
-						return date.toLocaleDateString("en-US", {
+						const options: Intl.DateTimeFormatOptions = {
 							month: "short",
 							day: "numeric",
-						})
+						}
+
+						if (date.getHours() !== 0 || date.getMinutes() !== 0) {
+							options.hour = "numeric"
+						}
+
+						return date.toLocaleString("en-US", options)
 					}}
 				/>
 				<YAxis
@@ -61,27 +69,20 @@ export function AreaChartComponent({
 					axisLine={true}
 					tickMargin={8}
 					ticks={generateTicks(Ymin, Ymax, 50)}
-					domain={["dataMin", "dataMax"]}
+					domain={[Ymin, Ymax]}
 				/>
 				<ChartTooltip
 					cursor={false}
-					content={<ChartTooltipContent indicator="dot" />}
+					content={<ChartTooltipContent hideLabel />}
 				/>
-				<Area
-					dataKey={AreaDataKeyOne}
-					type="linear"
-					fill={`var(--color-${AreaDataKeyOne})`}
-					fillOpacity={0.4}
-					stroke={`var(--color-${AreaDataKeyOne})`}
+				<Line
+					dataKey={LineDataKey}
+					type={type}
+					stroke={`var(--color-${LineDataKey})`}
+					strokeWidth={2}
+					dot={dot}
 				/>
-				<Area
-					dataKey={AreaDataKeyTwo}
-					type="natural"
-					fill={`var(--color-${AreaDataKeyTwo})`}
-					fillOpacity={0.4}
-					stroke={`var(--color-${AreaDataKeyTwo})`}
-				/>
-			</AreaChart>
+			</LineChart>
 		</ChartContainer>
 	)
 }
