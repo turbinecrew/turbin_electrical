@@ -30,14 +30,9 @@ export default function Home() {
 			</div>
 
 			<div className="grid grid-cols-5 gap-4">
-				<Card className="col-span-3">
-					<CardHeader>
-						<CardTitle>지역별 에너지 차트</CardTitle>
-					</CardHeader>
-					<CardContent>
-						<RegionalEnergyChart />
-					</CardContent>
-				</Card>
+				<div className="col-span-3">
+					<RegionalEnergyChart />
+				</div>
 
 				<Card className="col-span-2 items-center justify-center">
 					<CardHeader>
@@ -61,14 +56,9 @@ export default function Home() {
 					</CardContent>
 				</Card>
 
-				<Card className="col-span-3">
-					<CardHeader>
-						<CardTitle>주간 전력 생산량</CardTitle>
-					</CardHeader>
-					<CardContent>
-						<WeeklyPowerChart />
-					</CardContent>
-				</Card>
+				<div className="col-span-3">
+					<WeeklyPowerChart />
+				</div>
 			</div>
 		</div>
 	)
