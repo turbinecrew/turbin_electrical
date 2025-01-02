@@ -52,7 +52,12 @@ export default function TradePage() {
 					onBid={() => setIsTradeModalOpen(true)}
 				/>
 			)}
-			<TradeModal isOpen={isTradeModalOpen} setIsOpen={setIsTradeModalOpen} />
+			<TradeModal
+				isOpen={isTradeModalOpen}
+				setIsOpen={setIsTradeModalOpen}
+				currentSMP={0}
+				currentREC={0}
+			/>
 		</div>
 	)
 }
