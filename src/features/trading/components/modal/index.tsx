@@ -25,7 +25,10 @@ export default function TradeModal({
 	const [power, setPower] = useState<number>(0)
 	const [bidPrice, setBidPrice] = useState<number>(0)
 
-	const finalPrice = useMemo(() => power * (bidPrice + currentREC), [power, bidPrice, currentREC])
+	const finalPrice = useMemo(
+		() => power * (bidPrice + currentREC),
+		[power, bidPrice, currentREC],
+	)
 
 	const handleReset = () => {
 		setPower(0)
@@ -43,7 +46,7 @@ export default function TradeModal({
 	}
 
 	return (
-		<Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+		<Modal isOpen={isOpen} setIsOpen={setIsOpen}>
 			<ModalHeader>
 				<h2 className="text-xl font-bold">전력 거래 입찰</h2>
 			</ModalHeader>

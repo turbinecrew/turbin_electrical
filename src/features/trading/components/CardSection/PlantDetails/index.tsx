@@ -19,14 +19,17 @@ import {
 	CardTitle,
 } from "@/shadcn/components/card"
 
-interface PlantDetailsProps {
+type PlantDetailsPT = {
 	plant: {
 		발전소: string
-		SMP: Array<{ month: string; SMP: number; REC: number }>
+		누적발전량: number
+		거래가능: number
+		SMP: { month: string; SMP: number; REC: number }[]
 	}
+	onBid: () => void
 }
 
-export default function PlantDetails({ plant }: PlantDetailsProps) {
+export default function PlantDetails({ plant, onBid }: PlantDetailsPT) {
 	const [isModalOpen, setIsModalOpen] = useState(false)
 
 	return (
@@ -38,7 +41,6 @@ export default function PlantDetails({ plant }: PlantDetailsProps) {
 					</CardTitle>
 				</CardHeader>
 				<CardContent className="flex flex-col gap-8 md:flex-row md:items-center">
-					{/* 그래프 */}
 					<div className="flex-1">
 						<AreaChart
 							width={500}
@@ -69,8 +71,6 @@ export default function PlantDetails({ plant }: PlantDetailsProps) {
 							/>
 						</AreaChart>
 					</div>
-
-					{/* 현재 SMP 및 REC 가격 */}
 					<div className="flex w-full flex-col justify-between rounded-lg p-4 md:w-1/3">
 						<div>
 							<h2 className="mb-4 text-center text-lg font-semibold">
@@ -96,7 +96,10 @@ export default function PlantDetails({ plant }: PlantDetailsProps) {
 						<div className="mt-8">
 							<button
 								className="w-full rounded border bg-gray-200 px-4 py-2 font-medium text-black hover:bg-blue-50"
-								onClick={() => setIsModalOpen(true)}
+								onClick={() => {
+									onBid()
+									setIsModalOpen(true)
+								}}
 							>
 								입찰
 							</button>
@@ -105,10 +108,9 @@ export default function PlantDetails({ plant }: PlantDetailsProps) {
 				</CardContent>
 			</Card>
 
-			{/* 모달 */}
 			<TradeModal
 				isOpen={isModalOpen}
-				setIsOpen={setIsModalOpen}
+				setIsOpen={() => setIsModalOpen(false)}
 				currentSMP={plant.SMP[plant.SMP.length - 1].SMP}
 				currentREC={plant.SMP[plant.SMP.length - 1].REC}
 			/>
