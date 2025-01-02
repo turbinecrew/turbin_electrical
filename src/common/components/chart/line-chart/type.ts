@@ -7,13 +7,13 @@ type TChartData = {
 	smp?: number
 	rec?: number
 }
-export type AreaChartComponentPT = {
+export type LineChartComponentPT = {
 	chartConfig: ChartConfig
 	chartData: TChartData[]
-	AreaDataKeyOne: string
-	AreaDataKeyTwo: string
+	LineDataKey: string
 	XAixsDataKey: string
-
+	type: CurveType
+	dot: boolean
 	Ymin: AxisDomainItem
 	Ymax: AxisDomainItem
 	// AxisDomainItem : string | number | Function | 'auto' | 'dataMin' | 'dataMax'
