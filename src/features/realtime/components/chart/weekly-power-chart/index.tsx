@@ -43,6 +43,9 @@ export default function WeeklyPower() {
 					날짜: item.날짜,
 					발전량: item["발전량(kW)"],
 					잔여거래량: item["누적발전량(kWh)"] - (item["누적거래량(kWh)"] || 0),
+					date: "",
+					PowerGeneration: 0,
+					TradeableQuantity: 0,
 				})
 			}
 			return acc
