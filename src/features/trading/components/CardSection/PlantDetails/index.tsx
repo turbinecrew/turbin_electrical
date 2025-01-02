@@ -26,10 +26,10 @@ type PlantDetailsPT = {
 		거래가능: number
 		SMP: { month: string; SMP: number; REC: number }[]
 	}
-	onBid: () => void
+	handleBidOpen: () => void
 }
 
-export default function PlantDetails({ plant, onBid }: PlantDetailsPT) {
+export default function PlantDetails({ plant, handleBidOpen }: PlantDetailsPT) {
 	const [isModalOpen, setIsModalOpen] = useState(false)
 
 	return (
@@ -97,7 +97,7 @@ export default function PlantDetails({ plant, onBid }: PlantDetailsPT) {
 							<button
 								className="w-full rounded border bg-gray-200 px-4 py-2 font-medium text-black hover:bg-blue-50"
 								onClick={() => {
-									onBid()
+									handleBidOpen()
 									setIsModalOpen(true)
 								}}
 							>

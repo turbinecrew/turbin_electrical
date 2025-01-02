@@ -49,10 +49,9 @@ export default function TradePage() {
 			{selectedPlant && (
 				<PlantDetails
 					plant={selectedPlant}
-					onBid={() => setIsTradeModalOpen(true)} // 모달 열기
+					handleBidOpen={() => setIsTradeModalOpen(true)} // 모달 열기
 				/>
 			)}
-			{/* 모달 표시 여부에 따라 렌더링 */}
 			{isTradeModalOpen && (
 				<TradeModal
 					isOpen={isTradeModalOpen}
