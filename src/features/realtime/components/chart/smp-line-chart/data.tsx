@@ -1,15 +1,15 @@
+import { rawData } from "@/features/realtime/components/chart/smp-line-chart/mock"
 import { generateChartConfig } from "@/features/realtime/hooks/generate-chartConfig"
 import type { ChartConfig } from "@/shadcn/components/chart"
-import { rawData } from "@/features/realtime/components/chart/smp-line-chart/mock"
 
 function getDailyData() {
-	let ProcessedData: typeof rawData = []
+	const ProcessedData: typeof rawData = []
 	const today = new Date(2024, 11, 28, 22, 0, 0)
 
 	const dailyAverageData: { [key: string]: number[] } = {}
 
 	const twentyFourHoursAgo = new Date(today.getTime() - 24 * 60 * 60 * 1000)
-	rawData.map((item, idx) => {
+	rawData.map((item) => {
 		const itemDate = new Date(item.date)
 
 		if (itemDate >= twentyFourHoursAgo) {

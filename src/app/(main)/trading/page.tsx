@@ -1,12 +1,13 @@
 "use client"
 
-import { VolumeChart } from "@/features/realtime/components/chart/trading-volume-chart"
-import { TradingDataTable } from "@/features/realtime/components/trading-table"
-import { TradingVolumeCards } from "@/features/realtime/components/slide-card"
 import { useState } from "react"
-import { SmpLineChart } from "@/features/realtime/components/chart/smp-line-chart"
+
 import { RecLineChart } from "@/features/realtime/components/chart/rec-line-chart"
+import { SmpLineChart } from "@/features/realtime/components/chart/smp-line-chart"
+import { VolumeChart } from "@/features/realtime/components/chart/trading-volume-chart"
 import { PriceCard } from "@/features/realtime/components/price-card"
+import { TradingVolumeCards } from "@/features/realtime/components/slide-card"
+import { TradingDataTable } from "@/features/realtime/components/trading-table"
 
 export default function Trading() {
 	const [activeChart, setActiveChart] = useState<number | null>(0)

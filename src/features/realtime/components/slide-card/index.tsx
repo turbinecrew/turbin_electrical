@@ -1,7 +1,9 @@
 "use client"
-import { MiniCard, MiniCardPT } from "@/common/components/card"
-import { timeCardDatas } from "@/features/realtime/components/slide-card/data"
 import { useEffect, useState } from "react"
+
+import type { MiniCardPT } from "@/common/components/card"
+import { MiniCard } from "@/common/components/card"
+import { timeCardDatas } from "@/features/realtime/components/slide-card/data"
 
 export function TradingVolumeCards() {
 	const [data, setData] = useState(timeCardDatas[0])

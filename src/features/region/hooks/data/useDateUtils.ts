@@ -18,6 +18,6 @@ export function formatMonthDay(dateString: string): string {
 	if (parts.length < 3) {
 		throw new Error("Invalid date format. Expected 'YYYY-MM-DD'")
 	}
-	const [_, month, day] = parts.map(Number)
+	const [month, day] = parts.map(Number)
 	return `${month}월 ${day}일`
 }

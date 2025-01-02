@@ -1,14 +1,16 @@
 "use client"
 
-import { chartData, getChartConfig } from "./data"
 import { useState } from "react"
+
+import { TitleCard } from "@/common/components/card"
+import { LineChartComponent } from "@/common/components/chart/line-chart"
+import { TimeRangeOptions } from "@/common/components/chart/time-range-options"
 import {
 	dateFilteredData,
 	smpTimeRange,
 } from "@/features/realtime/hooks/date-range-filter"
-import { LineChartComponent } from "@/common/components/chart/line-chart"
-import { TitleCard } from "@/common/components/card"
-import { TimeRangeOptions } from "@/common/components/chart/time-range-options"
+
+import { chartData, getChartConfig } from "./data"
 
 export function SmpLineChart() {
 	const chartConfig = getChartConfig()
