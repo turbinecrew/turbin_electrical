@@ -1,9 +1,10 @@
 "use client"
 
-import { TradingTable } from "./data-table"
+import { CardComponent } from "@/common/components/card"
+
 import { columns } from "./Tcolumn"
 import { getData } from "./data"
-import { CardComponent } from "@/common/components/card"
+import { TradingTable } from "./data-table"
 
 export function TradingDataTable() {
 	const data = getData()

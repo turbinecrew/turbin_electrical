@@ -1,9 +1,9 @@
 "use client"
 
-import Button from "@/common/components/button"
-import { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown } from "lucide-react"
+import type { ColumnDef } from "@tanstack/react-table"
 import { useRouter } from "next/navigation"
+
+import Button from "@/common/components/button"
 
 export type TradingTablePT = {
 	id: string
@@ -36,6 +36,15 @@ export const columns: ColumnDef<TradingTablePT>[] = [
 	{
 		accessorKey: "matchingButton",
 		header: "matchingButton",
-		cell: (params) => <Button className="bg-[#ABCF8A]">거래하기</Button>,
+		cell: function Cell({ row }) {
+			const router = useRouter()
+			const { id } = row.original
+
+			const handleClick = () => {
+				router.push(`/trading/${id}`)
+			}
+
+			return <Button onClick={handleClick}>거래하기</Button>
+		},
 	},
 ]

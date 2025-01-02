@@ -1,17 +1,18 @@
 "use client"
+import type { SortingState, ColumnDef } from "@tanstack/react-table"
 import {
-	SortingState,
 	getCoreRowModel,
 	getSortedRowModel,
 	getFilteredRowModel,
 	useReactTable,
 	flexRender,
 } from "@tanstack/react-table"
-import { useState } from "react"
-import Button from "@/common/components/button"
-import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown, ChevronDown, ListFilter, TextSearch } from "lucide-react"
-import { TradingTablePT } from "./Tcolumn"
+import { useState } from "react"
+
+import Button from "@/common/components/button"
+
+import type { TradingTablePT } from "./Tcolumn"
 
 type TradingTableComponentPT = {
 	columns: ColumnDef<TradingTablePT>[]
