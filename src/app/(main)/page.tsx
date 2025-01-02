@@ -1,3 +1,5 @@
+"use client"
+
 import { MiniCard } from "@/common/components/card"
 import { BidPieChart } from "@/features/realtime/components/chart/bid-pie-chart"
 import WeeklyPowerChart from "@/features/realtime/components/chart/weekly-power-chart"
@@ -46,7 +48,8 @@ export default function Home() {
 	]
 
 	return (
-		<div className="flex flex-col gap-8 p-8">
+		<div className="mx-[5vw] flex flex-col gap-8 p-8">
+			{/* Mini Cards Section */}
 			<div className="grid grid-cols-4 gap-4">
 				{miniCardDatas.map((item, idx) => (
 					<MiniCard
@@ -62,21 +65,16 @@ export default function Home() {
 			</div>
 
 			<div className="grid grid-cols-5 gap-4">
-				<Card className="col-span-3">
-					<CardHeader>
-						<CardTitle>지역별 에너지 차트</CardTitle>
-					</CardHeader>
-					<CardContent>
-						<RegionalEnergyChart />
-					</CardContent>
-				</Card>
+				<div className="col-span-3">
+					<RegionalEnergyChart />
+				</div>
 
-				<Card className="col-span-2 items-center justify-center">
+				<Card className="col-span-2">
 					<CardHeader>
 						<CardTitle>지도 영역</CardTitle>
 					</CardHeader>
 					<CardContent className="flex items-center justify-center p-2">
-						<div className="h-[40vh] w-[80%] bg-green-400 text-center text-lg font-bold text-white">
+						<div className="h-[40vh] w-[90%] bg-green-400 text-center text-lg font-bold text-white">
 							지도지도
 						</div>
 					</CardContent>
@@ -93,14 +91,9 @@ export default function Home() {
 					</CardContent>
 				</Card>
 
-				<Card className="col-span-3">
-					<CardHeader>
-						<CardTitle>주간 전력 생산량</CardTitle>
-					</CardHeader>
-					<CardContent>
-						<WeeklyPowerChart />
-					</CardContent>
-				</Card>
+				<div className="col-span-3">
+					<WeeklyPowerChart />
+				</div>
 			</div>
 		</div>
 	)
