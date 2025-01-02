@@ -12,7 +12,12 @@ import {
 } from "recharts"
 
 import { RegionalModal } from "@/features/auth/components/regional-modal"
-import { Card, CardHeader, CardTitle, CardContent } from "@/shadcn/components/card"
+import {
+	Card,
+	CardHeader,
+	CardTitle,
+	CardContent,
+} from "@/shadcn/components/card"
 
 import { data } from "./mocks"
 
