@@ -1,16 +1,14 @@
-export type LinearLineChartData = Record<string, string | number>
-
-export type LinearLineChartConfig = {
-	[key: string]: {
-		label: string
-		color?: string
-	}
+export type LinearLineChartData = {
+	날짜: string
+	발전량: number
 }
-
+export type LinearLineConfig = {
+	label: string
+	color?: string
+}
 export type LinearLineChartComponentPT = {
-	data: LinearLineChartData[]
-	config: LinearLineChartConfig
+	data: any[]
 	dataKey: string
 	xAxisKey: string
-	title?: string
+	color: string
 }

@@ -1,48 +1,69 @@
-import { CartesianGrid, Line, LineChart, XAxis } from "recharts"
-
+"use client"
 import {
-	ChartContainer,
-	ChartTooltip,
-	ChartTooltipContent,
-} from "@/shadcn/components/chart"
+	LineChart,
+	Line,
+	CartesianGrid,
+	XAxis,
+	YAxis,
+	Legend,
+	ResponsiveContainer,
+	Tooltip,
+} from "recharts"
+
+// import { Skeleton } from "@/common/components/skeleton"
+import { useMockData } from "@/features/region/hooks/data/useMockData"
 
 import type { LinearLineChartComponentPT } from "./LinearLineChart"
 
-// LinearLineChart 컴포넌트
 export function LinearLineChartComponent({
 	data,
-	config,
+	dataKey,
+	xAxisKey,
+	color,
 }: LinearLineChartComponentPT) {
+	const { data: chartData, isLoading } = useMockData(data)
+
+	// if (isLoading) {
+	// 	return (
+	// 		<div className="h-96 w-full p-4">
+	// 			<Skeleton className="h-[300px] w-full rounded-lg" />
+	// 		</div>
+	// 	)
+	// }
+
 	return (
-		<ChartContainer config={config}>
-			<LineChart
-				accessibilityLayer
-				data={data}
-				margin={{
-					left: 12,
-					right: 12,
-				}}
-			>
-				<CartesianGrid vertical={false} />
-				<XAxis
-					dataKey="day"
-					tickLine={false}
-					axisLine={false}
-					tickMargin={8}
-					tickFormatter={(value) => value.slice(0, 3)}
-				/>
-				<ChartTooltip
-					cursor={false}
-					content={<ChartTooltipContent hideLabel />}
-				/>
-				<Line
-					dataKey="day"
-					type="linear"
-					stroke="var(--color-desktop)"
-					strokeWidth={2}
-					dot={false}
-				/>
-			</LineChart>
-		</ChartContainer>
+		<div className="h-96 w-full p-4">
+			<ResponsiveContainer width="100%" height={300}>
+				<LineChart
+					data={chartData}
+					margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+				>
+					<CartesianGrid vertical={false} />
+					<XAxis dataKey={xAxisKey} />
+					<YAxis />
+					<Tooltip
+						cursor={false}
+						contentStyle={{
+							backgroundColor: "#fff",
+							border: "1px solid #ccc",
+							borderRadius: "4px",
+						}}
+					/>
+					<Legend />
+					<Line
+						type="linear"
+						dataKey={dataKey}
+						stroke={color}
+						strokeWidth={2}
+						dot={{
+							fill: "#FFFFFF",
+						}}
+						activeDot={{
+							r: 6,
+						}}
+					/>
+				</LineChart>
+			</ResponsiveContainer>
+		</div>
 	)
 }
