@@ -47,7 +47,7 @@ export function FilterDataByRange({
 
 	return (
 		<div>
-			<div className="mt-1 flex h-fit items-center gap-3 rounded-xl border border-none bg-background p-2 text-sm font-medium transition-colors focus-visible:outline-none">
+			<div className="mt-1 flex h-fit items-center gap-3 rounded-xl border border-none bg-background p-2 text-sm font-medium transition-colors focus-within:border-tbGreen">
 				<div className="text-sm">{label}</div>
 				<DebouncedInput
 					type="number"

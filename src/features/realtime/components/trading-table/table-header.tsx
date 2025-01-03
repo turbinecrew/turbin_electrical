@@ -33,15 +33,26 @@ export function TradingTableHeader({
 	const [isDesc3, setIsDesc3] = useState(false)
 
 	const handleSort = (columnId: string) => {
+		let isDesc = false
+
 		switch (columnId) {
 			case "plantName":
-				setIsDesc1(!isDesc1)
+				setIsDesc1((prev) => {
+					isDesc = !prev
+					return isDesc
+				})
 				break
 			case "volume":
-				setIsDesc2(!isDesc2)
+				setIsDesc2((prev) => {
+					isDesc = !prev
+					return isDesc
+				})
 				break
 			case "bidNumbers":
-				setIsDesc3(!isDesc3)
+				setIsDesc3((prev) => {
+					isDesc = !prev
+					return isDesc
+				})
 				break
 		}
 
@@ -51,10 +62,15 @@ export function TradingTableHeader({
 			}
 			return [{ id: columnId, desc: false }]
 		})
+
+		table
+			.getColumn(columnId)
+			?.setFilterValue(table.getColumn(columnId)?.getFilterValue())
 	}
-	const resetTable = () => {
+	const resetTableFilter = () => {
 		table.getColumn("volume")?.setFilterValue(null)
 		table.getColumn("bidNumbers")?.setFilterValue(null)
+		table.getColumn("plantName")?.setFilterValue(null)
 	}
 
 	return (
@@ -84,16 +100,23 @@ export function TradingTableHeader({
 						)}
 					</button>
 				</div>
-				<div className="flex h-8 items-center rounded-xl border border-gray-300 bg-white px-4 focus-within:border-tbGreen">
+				<div className="flex h-8 items-center rounded-xl border border-gray-300 bg-white px-4">
 					<TextSearch className="text-gray-400" size={16} />
 					<input
 						placeholder="Enter Name..."
 						value={
 							(table.getColumn("plantName")?.getFilterValue() as string) ?? ""
 						}
-						onChange={(event) =>
-							table.getColumn("plantName")?.setFilterValue(event.target.value)
-						}
+						onChange={(event) => {
+							const filterValue = event.target.value
+							table.getColumn("plantName")?.setFilterValue(filterValue)
+
+							const currentSorting = table.getState().sorting
+							if (currentSorting && currentSorting.length > 0) {
+								const [currentSort] = currentSorting
+								setSorting([{ id: currentSort.id, desc: currentSort.desc }])
+							}
+						}}
 						className="ml-2 h-full w-48 border-none bg-transparent text-sm text-gray-600 placeholder-gray-400 outline-none"
 					/>
 				</div>
@@ -143,7 +166,7 @@ export function TradingTableHeader({
 						)}
 						<button
 							onClick={() => {
-								resetTable()
+								resetTableFilter()
 							}}
 							className="flex flex-row items-center gap-1 text-gray-400"
 						>
