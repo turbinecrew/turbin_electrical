@@ -38,7 +38,7 @@ export default function Sidebar() {
 			<aside
 				className={`${
 					isSidebarVisible ? "w-64" : "w-16"
-				} fixed left-0 top-0 z-20 h-full border-r border-gray-200 bg-white shadow-sm transition-all duration-300`}
+				} border-b-1 fixed left-0 top-0 z-20 h-full border-r border-gray-200 bg-white transition-all duration-300`}
 			>
 				<div className="flex h-full flex-col items-center">
 					<div className="my-3 flex items-center justify-center">
