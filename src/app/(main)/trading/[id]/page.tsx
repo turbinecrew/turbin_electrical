@@ -54,7 +54,6 @@ export default function TradePage() {
 
 	return (
 		<div className="mx-auto flex flex-col gap-8 p-8">
-			{/* 발전소 선택 리스트 */}
 			<PlantList
 				plants={mockData}
 				selectedPlant={selectedPlantName}
@@ -62,7 +61,7 @@ export default function TradePage() {
 			/>
 
 			<div className="flex flex-row gap-4">
-				<div className="flex-1">
+				<div className="flex-[2]">
 					{selectedPlant && (
 						<PlantDetails
 							plant={selectedPlant}
@@ -73,7 +72,6 @@ export default function TradePage() {
 					)}
 				</div>
 
-				{/* RealTimeTradeCard */}
 				<div className="flex-1">
 					<RealTimeTradeCard />
 				</div>

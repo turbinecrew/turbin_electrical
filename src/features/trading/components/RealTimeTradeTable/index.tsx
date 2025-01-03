@@ -17,7 +17,6 @@ import {
 	TableRow,
 } from "@/shadcn/components/table"
 
-// 데이터 타입 정의
 type TradeData = {
 	time: string
 	price: number
@@ -41,7 +40,7 @@ export default function RealTimeTradeCard() {
 	}, [])
 
 	return (
-		<div className="mx-auto max-w-4xl p-4">
+		<div className="mx-auto max-w-xl">
 			<Card>
 				<CardHeader>
 					<CardTitle className="text-center text-xl font-semibold">
@@ -49,7 +48,7 @@ export default function RealTimeTradeCard() {
 					</CardTitle>
 				</CardHeader>
 				<CardContent>
-					<div className="max-h-[30vh] overflow-auto">
+					<div className="h-[35vh] overflow-auto">
 						<Table>
 							<TableHeader>
 								<TableRow>
