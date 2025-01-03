@@ -1,5 +1,4 @@
 "use client"
-
 import {
 	LineChart,
 	Line,
@@ -8,27 +7,49 @@ import {
 	YAxis,
 	Legend,
 	ResponsiveContainer,
+	Tooltip,
 } from "recharts"
+
+// import { Skeleton } from "@/common/components/skeleton"
+import { useMockData } from "@/features/region/hooks/data/useMockData"
+
 import type { DotsLineChartComponentPT } from "./DotsLineChart"
 
 export function DotsLineChartComponent({
 	data,
 	dataKey,
 	xAxisKey,
-	title,
 	color,
+	yAxisConfig,
 }: DotsLineChartComponentPT) {
+	const { data: chartData, isLoading } = useMockData(data)
+
+	// if (isLoading) {
+	// 	return (
+	// 		<div className="h-96 w-full p-4">
+	// 			<Skeleton className="h-[300px] w-full rounded-lg" />
+	// 		</div>
+	// 	)
+	// }
+
 	return (
 		<div className="h-96 w-full p-4">
-			<h2 className="mb-4 text-xl font-bold">{title}</h2>
 			<ResponsiveContainer width="100%" height={300}>
 				<LineChart
-					data={data}
+					data={chartData}
 					margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
 				>
 					<CartesianGrid vertical={false} />
 					<XAxis dataKey={xAxisKey} />
-					<YAxis />
+					<YAxis {...yAxisConfig} />
+					<Tooltip
+						cursor={false}
+						contentStyle={{
+							backgroundColor: "#fff",
+							border: "1px solid #ccc",
+							borderRadius: "4px",
+						}}
+					/>
 					<Legend />
 					<Line
 						type="natural"
@@ -36,7 +57,7 @@ export function DotsLineChartComponent({
 						stroke={color}
 						strokeWidth={2}
 						dot={{
-							fill: "#000000",
+							fill: "#FFFFFF",
 						}}
 						activeDot={{
 							r: 6,

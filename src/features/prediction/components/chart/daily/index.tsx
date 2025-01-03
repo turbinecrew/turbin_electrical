@@ -1,5 +1,6 @@
 "use client"
 
+<<<<<<< Updated upstream
 import {
 	LineChart,
 	Line,
@@ -10,6 +11,9 @@ import {
 	Legend,
 	ResponsiveContainer,
 } from "recharts"
+=======
+import { LinearLineChartComponent } from "@/common/components/chart/line-chart/Dots/linear"
+>>>>>>> Stashed changes
 
 const lineChartData = [
 	{ 날짜: "17일", 발전량: 500 },
@@ -21,6 +25,7 @@ const lineChartData = [
 
 export default function DailyChart() {
 	return (
+<<<<<<< Updated upstream
 		<div className="h-96 w-full p-4">
 			<h2 className="mb-4 text-xl font-bold">날짜별 발전량</h2>
 			<div className="h-full w-full">
@@ -44,5 +49,13 @@ export default function DailyChart() {
 				</ResponsiveContainer>
 			</div>
 		</div>
+=======
+		<LinearLineChartComponent
+			data={WeeklyWeatherData}
+			dataKey="발전량"
+			xAxisKey="날짜"
+			color="#82ca9d"
+		/>
+>>>>>>> Stashed changes
 	)
 }
