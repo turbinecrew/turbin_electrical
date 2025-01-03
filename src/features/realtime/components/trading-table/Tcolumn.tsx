@@ -46,6 +46,9 @@ export const columns: ColumnDef<TradingTablePT>[] = [
 
 			return <div className="text-wrap text-end font-medium">{formatted}</div>
 		},
+		meta: {
+			filterVariant: "range",
+		},
 	},
 	{
 		accessorKey: "matchingButton",
