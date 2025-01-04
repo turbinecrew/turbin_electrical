@@ -21,7 +21,7 @@ export function LinearLineChartComponent({
 	xAxisKey,
 	color,
 }: LinearLineChartComponentPT) {
-	const { data: chartData, isLoading } = useMockData(data)
+	const { data: chartData } = useMockData(data)
 
 	// if (isLoading) {
 	// 	return (

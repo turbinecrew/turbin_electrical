@@ -22,7 +22,7 @@ export function DotsLineChartComponent({
 	color,
 	yAxisConfig,
 }: DotsLineChartComponentPT) {
-	const { data: chartData, isLoading } = useMockData(data)
+	const { data: chartData } = useMockData(data)
 
 	// if (isLoading) {
 	// 	return (
