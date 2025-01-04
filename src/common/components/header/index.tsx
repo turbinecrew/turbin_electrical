@@ -5,18 +5,19 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
 
-// `SignInModal`의 named export 확인
 import SignInModal from "../../../features/auth/components/sign-in-modal"
 
 export default function Header() {
-	const pathName = usePathname()
-	const thisPage = pathName.split("/").pop()
+	const pathName: string | null = usePathname()
+	const thisPage = pathName
+		? pathName.split("/").pop() || "Dashboard"
+		: "Dashboard"
 	const [searchText, setSearchText] = useState("")
 	const [isSignInModalOpen, setIsSignInModalOpen] = useState(false)
 
 	const handleKeyPress = (event: { key: string }) => {
 		if (event.key === "Enter") {
-			console.log(`검색:${searchText}`)
+			console.log(`검색: ${searchText}`)
 			setSearchText("")
 		}
 	}
