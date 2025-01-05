@@ -61,7 +61,7 @@ export default function Header() {
 					<input
 						type="text"
 						className={`ml-2 h-full border-none bg-transparent text-xs text-gray-600 placeholder-gray-400 outline-none transition-all duration-300 md:text-sm ${
-							searchText.length > 8 ? "w-20 md:w-64" : "w-14 md:w-36"
+							searchText.length > 8 ? "w-36 md:w-64" : "w-20 md:w-36"
 						}`}
 						placeholder="Search..."
 						value={searchText}
