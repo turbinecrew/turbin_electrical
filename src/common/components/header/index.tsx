@@ -43,11 +43,11 @@ export default function Header() {
 				<nav className="flex items-center gap-2">
 					<div className="flex items-center gap-2 opacity-40">
 						<Link href="/" className="flex items-center hover:text-tbGreen">
-							<House size={16} />
+							<House className="h-4 w-4 cursor-pointer md:h-5 md:w-5" />
 						</Link>
 						{prevPage && prevPage != "" && (
 							<div className="flex items-center gap-2">
-								<Slash size={14} className="mt-[1px] rotate-[-15deg]" />
+								<Slash className="mt-[1px] h-3 w-3 rotate-[-15deg] md:h-4 md:w-4" />
 								<a
 									href={`/${prevPage}`}
 									className="text-sm capitalize hover:text-tbGreen md:text-lg"
@@ -81,32 +81,26 @@ export default function Header() {
 							onClick={() => {
 								setSearchText("")
 							}}
-							className="flex flex-row items-center gap-1 text-gray-400"
+							className="text-gray-400"
 						>
-							<X size={16} className="gray-400" />
+							<X size={16} />
 						</button>
 					) : (
 						<></>
 					)}
 				</div>
-				<div className="flex gap-2">
+				<div className="flex items-center gap-1 md:gap-2">
 					<div
-						className="flex cursor-pointer items-center gap-2 text-gray-700 hover:text-tbGreen"
+						className="items-centergap-[1px] border-1 flex h-6 cursor-pointer items-center rounded-full border px-1 text-gray-700 hover:text-tbGreen md:h-8 md:gap-1"
 						onClick={toggleSignInModal}
 					>
-						<CircleUser size={12} className="md:h-4 md:w-4" />
+						<CircleUser size={12} className="h-4 w-4 md:h-5 md:w-5" />
 						<span className="text-nowrap text-center text-xs font-medium md:text-sm">
 							Sign In
 						</span>
 					</div>
-					<Settings
-						size={16}
-						className="cursor-pointer text-gray-700 hover:text-tbGreen md:h-5 md:w-5"
-					/>
-					<Bell
-						size={16}
-						className="cursor-pointer text-gray-700 hover:text-tbGreen md:h-5 md:w-5"
-					/>
+					<Settings className="h-4 w-4 cursor-pointer text-gray-700 hover:text-tbGreen md:h-5 md:w-5" />
+					<Bell className="h-4 w-4 cursor-pointer text-gray-700 hover:text-tbGreen md:h-5 md:w-5" />
 				</div>
 			</div>
 			<SignInModal
