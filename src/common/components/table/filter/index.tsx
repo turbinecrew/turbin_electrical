@@ -1,6 +1,9 @@
 import type { Column } from "@tanstack/react-table"
+import { Minus } from "lucide-react"
 import { useEffect, useState } from "react"
 import type { InputHTMLAttributes } from "react"
+
+import Button from "@/common/components/button"
 
 function DebouncedInput({
 	value: initialValue,
@@ -42,33 +45,49 @@ export function FilterDataByRange({
 }: {
 	column: Column<unknown, unknown>
 	label: string
+	key?: number | string
 }) {
 	const columnFilterValue = column.getFilterValue()
+	const [isInputVisible, setInputVisible] = useState(false)
 
 	return (
-		<div>
-			<div className="mt-1 flex h-fit items-center gap-3 rounded-xl border border-none bg-background p-2 text-sm font-medium transition-colors focus-within:border-tbGreen">
-				<div className="text-sm">{label}</div>
-				<DebouncedInput
-					type="number"
-					value={(columnFilterValue as [number, number])?.[0] ?? ""}
-					onChange={(value) =>
-						column.setFilterValue((old: [number, number]) => [value, old?.[1]])
-					}
-					placeholder={`Min`}
-					className="w-20 rounded border text-center"
-				/>
-				-
-				<DebouncedInput
-					type="number"
-					value={(columnFilterValue as [number, number])?.[1] ?? ""}
-					onChange={(value) =>
-						column.setFilterValue((old: [number, number]) => [old?.[0], value])
-					}
-					placeholder={`Max`}
-					className="w-20 rounded border text-center"
-				/>
-			</div>
+		<div className="flex h-fit w-fit items-center rounded-xl border text-sm font-medium">
+			<Button
+				className="cursor-pointer border border-none text-sm font-medium"
+				onClick={() => setInputVisible((prev) => !prev)}
+			>
+				{label}
+			</Button>
+
+			{isInputVisible && (
+				<div className="flex h-fit w-fit flex-row items-center gap-1 px-3">
+					<DebouncedInput
+						type="number"
+						value={(columnFilterValue as [number, number])?.[0] ?? ""}
+						onChange={(value) =>
+							column.setFilterValue((old: [number, number]) => [
+								value,
+								old?.[1],
+							])
+						}
+						placeholder={`Min`}
+						className="w-20 rounded border text-center"
+					/>
+					<Minus size={10} />
+					<DebouncedInput
+						type="number"
+						value={(columnFilterValue as [number, number])?.[1] ?? ""}
+						onChange={(value) =>
+							column.setFilterValue((old: [number, number]) => [
+								old?.[0],
+								value,
+							])
+						}
+						placeholder={`Max`}
+						className="w-20 rounded border text-center"
+					/>
+				</div>
+			)}
 		</div>
 	)
 }

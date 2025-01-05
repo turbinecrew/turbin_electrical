@@ -1,14 +1,13 @@
 "use client"
 import type { SortingState, Column, Table } from "@tanstack/react-table"
 import {
-	AArrowDown,
-	AArrowUp,
-	ArrowUpDown,
 	ChevronsDown,
 	ChevronsUp,
+	ArrowUpDown,
+	ChevronDown,
 	ListFilter,
-	RotateCcw,
 	TextSearch,
+	X,
 } from "lucide-react"
 import { useState } from "react"
 
@@ -28,54 +27,58 @@ export function TradingTableHeader({
 }: TradingTableHeaderPT) {
 	const [isToggle, setToggle] = useState(false)
 	const [isSortingToggle, setSortingToggle] = useState(false)
-	const [isDesc1, setIsDesc1] = useState(false)
-	const [isDesc2, setIsDesc2] = useState(false)
-	const [isDesc3, setIsDesc3] = useState(false)
 
-	const handleSort = (columnId: string) => {
-		let isDesc = false
+	const [sortingState, setSortingState] = useState<Record<string, boolean>>({
+		plantName: false,
+		volume: false,
+		bidNumbers: false,
+	})
 
-		switch (columnId) {
-			case "plantName":
-				setIsDesc1((prev) => {
-					isDesc = !prev
-					return isDesc
-				})
-				break
-			case "volume":
-				setIsDesc2((prev) => {
-					isDesc = !prev
-					return isDesc
-				})
-				break
-			case "bidNumbers":
-				setIsDesc3((prev) => {
-					isDesc = !prev
-					return isDesc
-				})
-				break
+	const [currentSortColumn, setCurrentSortColumn] = useState("")
+	const [dropdownOpen, setDropdownOpen] = useState(false)
+
+	const handleSort = () => {
+		if (currentSortColumn) {
+			setSorting(() => {
+				const desc = sortingState[currentSortColumn]
+				return [{ id: currentSortColumn, desc }]
+			})
+
+			table
+				.getColumn(currentSortColumn)
+				?.setFilterValue(table.getColumn(currentSortColumn)?.getFilterValue())
 		}
-
-		setSorting((prev) => {
-			if (prev[0]?.id === columnId) {
-				return [{ id: columnId, desc: !prev[0].desc }]
-			}
-			return [{ id: columnId, desc: false }]
-		})
-
-		table
-			.getColumn(columnId)
-			?.setFilterValue(table.getColumn(columnId)?.getFilterValue())
 	}
+
+	const toggleSortOrder = () => {
+		if (currentSortColumn) {
+			setSortingState((prev) => ({
+				...prev,
+				[currentSortColumn]: !prev[currentSortColumn],
+			}))
+			handleSort()
+		}
+	}
+
 	const resetTableFilter = () => {
 		table.getColumn("volume")?.setFilterValue(null)
 		table.getColumn("bidNumbers")?.setFilterValue(null)
 		table.getColumn("plantName")?.setFilterValue(null)
+		setToggle(false)
 	}
 
+	const resetSorting = () => {
+		setSortingState({
+			plantName: false,
+			volume: false,
+			bidNumbers: false,
+		})
+		setCurrentSortColumn("")
+		setSorting([])
+	}
 	return (
 		<div className="ml-1 flex w-full flex-col">
-			<div className="w- full flex justify-between">
+			<div className="flex w-full justify-between">
 				<div className="ml-4 flex items-center justify-start gap-4">
 					<button
 						onClick={() => {
@@ -110,7 +113,6 @@ export function TradingTableHeader({
 						onChange={(event) => {
 							const filterValue = event.target.value
 							table.getColumn("plantName")?.setFilterValue(filterValue)
-
 							const currentSorting = table.getState().sorting
 							if (currentSorting && currentSorting.length > 0) {
 								const [currentSort] = currentSorting
@@ -123,28 +125,83 @@ export function TradingTableHeader({
 			</div>
 			<div className="flex w-full flex-col gap-2 border-none p-2">
 				{isSortingToggle && (
-					<div className="flex items-center justify-start gap-2">
+					<div className="relative flex items-center gap-2">
+						<div className="relative">
+							<Button
+								onClick={() => setDropdownOpen((e) => !e)}
+								className="flex w-36 justify-between gap-1 rounded-2xl border border-gray-300 bg-white text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200"
+							>
+								<div className="flex w-full justify-center">
+									{currentSortColumn === "plantName"
+										? "발전소명"
+										: currentSortColumn === "volume"
+											? "전력 발전량"
+											: currentSortColumn === "bidNumbers"
+												? "거래량"
+												: "정렬 기준 선택"}
+								</div>
+								<ChevronDown
+									className={`transform ${
+										dropdownOpen ? "rotate-180" : "rotate-0"
+									}`}
+									size={16}
+								/>
+							</Button>
+							{dropdownOpen && (
+								<div className="absolute z-10 mt-2 flex w-full flex-col gap-1 rounded-2xl border border-gray-300 bg-white text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200">
+									{["plantName", "volume", "bidNumbers"].map((columnId) => (
+										<button
+											key={columnId}
+											onClick={() => {
+												setCurrentSortColumn(columnId)
+												setDropdownOpen(false)
+												handleSort()
+											}}
+											className={`block w-full px-4 py-2 text-center text-sm text-gray-700 hover:bg-gray-100 ${
+												currentSortColumn === columnId
+													? "bg-gray-100 font-bold"
+													: ""
+											}`}
+										>
+											{columnId === "plantName" && "발전소명"}
+											{columnId === "volume" && "전력 발전량"}
+											{columnId === "bidNumbers" && "거래량"}
+										</button>
+									))}
+								</div>
+							)}
+						</div>
+
 						<Button
-							onClick={() => handleSort("plantName")}
+							onClick={toggleSortOrder}
 							className="flex items-center gap-1 border-none text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200"
 						>
-							발전소명
-							{isDesc1 ? <AArrowUp size={16} /> : <AArrowDown size={16} />}
+							{currentSortColumn === "" ? (
+								"정렬하기"
+							) : sortingState[currentSortColumn] ? (
+								<>
+									<ChevronsUp size={16} />
+									오름차순
+								</>
+							) : (
+								<>
+									<ChevronsDown size={16} />
+									내림차순
+								</>
+							)}
 						</Button>
-						<Button
-							onClick={() => handleSort("volume")}
-							className="flex items-center gap-1 border-none text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200"
-						>
-							전력 발전량
-							{isDesc2 ? <ChevronsUp size={16} /> : <ChevronsDown size={16} />}
-						</Button>
-						<Button
-							onClick={() => handleSort("bidNumbers")}
-							className="flex items-center gap-1 border-none text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200"
-						>
-							거래량
-							{isDesc3 ? <ChevronsUp size={16} /> : <ChevronsDown size={16} />}
-						</Button>
+						{currentSortColumn === "" ? (
+							<></>
+						) : (
+							<>
+								<button
+									onClick={resetSorting}
+									className="flex items-center gap-1 text-gray-400"
+								>
+									<X size={16} />
+								</button>
+							</>
+						)}
 					</div>
 				)}
 
@@ -170,7 +227,7 @@ export function TradingTableHeader({
 							}}
 							className="flex flex-row items-center gap-1 text-gray-400"
 						>
-							<RotateCcw size={16} className="gray-400" />
+							<X size={16} className="gray-400" />
 						</button>
 					</div>
 				)}
