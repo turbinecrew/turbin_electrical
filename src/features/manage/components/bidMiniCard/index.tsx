@@ -15,9 +15,9 @@ export default function BidMiniCard() {
 
 	return (
 		<div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-			{cardData.map((item, index) => (
+			{cardData.map((item, idx) => (
 				<Card
-					key={index}
+					key={idx}
 					className="shadow-md transition-transform hover:scale-105 hover:shadow-lg"
 				>
 					<CardHeader className="rounded-t-md border-b bg-gray-50 px-4 py-3">

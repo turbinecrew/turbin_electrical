@@ -2,6 +2,7 @@
 
 import { ArrowDown, ArrowUp } from "lucide-react"
 
+import type { Bid, TablePT } from "@/features/types/bidTable/type"
 import {
 	Table,
 	TableBody,
@@ -10,27 +11,6 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/shadcn/components/table"
-
-type Bid = {
-	id: number
-	consumer: string
-	requestedPower: number
-	bidPrice: number
-	totalPrice: number
-	status: string
-}
-
-type TablePT = {
-	bids: Bid[]
-	filterText: string
-	setFilterText: (text: string) => void
-	selectedBids: number[]
-	setSelectedBids: (ids: number[]) => void
-	updateBidStatus: (status: string) => void
-	handleSort: (column: keyof Bid) => void
-	sortColumn: keyof Bid
-	sortOrder: "asc" | "desc"
-}
 
 export default function BidTable({
 	bids,
