@@ -11,7 +11,7 @@ import {
 import { useCallback, useEffect, useRef, useState } from "react"
 
 import Button from "@/common/components/button"
-import { FilterDataByRange } from "@/common/components/table/filter"
+import { FilterDataByRange } from "@/features/realtime/components/trading-table/filter"
 import { FileterPicker } from "@/features/realtime/components/trading-table/filter-picker"
 import { SortPicker } from "@/features/realtime/components/trading-table/sort-picker"
 

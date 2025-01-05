@@ -4,7 +4,7 @@ import { ChevronDown, Plus } from "lucide-react"
 import { useState } from "react"
 
 import Button from "@/common/components/button"
-import type { FilterPickerPT } from "@/features/realtime/components/types/types"
+import type { FilterPickerPT } from "@/features/realtime/components/types/table/types"
 
 export const FilterColumnList = [
 	{ id: "volume", name: "전력 발전량" },

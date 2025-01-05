@@ -4,7 +4,7 @@ import { Check, ChevronDown, ChevronsDown, ChevronsUp } from "lucide-react"
 import { useState } from "react"
 
 import Button from "@/common/components/button"
-import type { SortPickerPT } from "@/features/realtime/components/types/types"
+import type { SortPickerPT } from "@/features/realtime/components/types/table/types"
 
 export function SortPicker({
 	sortingState,

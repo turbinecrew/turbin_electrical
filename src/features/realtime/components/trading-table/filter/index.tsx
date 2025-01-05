@@ -1,20 +1,18 @@
-import type { Column } from "@tanstack/react-table"
 import { Minus, X } from "lucide-react"
 import { useEffect, useState } from "react"
-import type { InputHTMLAttributes } from "react"
 
 import { FilterColumnList } from "@/features/realtime/components/trading-table/filter-picker"
+import type {
+	DebouncedInputPT,
+	FilterDataByRangePT,
+} from "@/features/realtime/components/types/table/types"
 
 function DebouncedInput({
 	value: initialValue,
 	onChange,
 	debounce = 500,
 	...props
-}: {
-	value: string | number
-	onChange: (value: string | number) => void
-	debounce?: number
-} & Omit<InputHTMLAttributes<HTMLInputElement>, "onChange">) {
+}: DebouncedInputPT) {
 	//사용자가 입력을 멈춘 후 일정 시간이 지나면 onChange 콜백을 호출한다.
 	const [value, setValue] = useState(initialValue)
 
@@ -44,12 +42,7 @@ export function FilterDataByRange({
 	id,
 	isInputVisible = true,
 	resetTableFilter,
-}: {
-	column: Column<unknown, unknown>
-	id: string
-	isInputVisible?: boolean
-	resetTableFilter: (column: string) => void
-}) {
+}: FilterDataByRangePT) {
 	const columnFilterValue = column.getFilterValue()
 
 	return (
