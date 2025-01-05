@@ -15,7 +15,7 @@ import { FilterDataByRange } from "@/common/components/table/filter"
 import { FileterPicker } from "@/features/realtime/components/trading-table/filter-picker"
 import { SortPicker } from "@/features/realtime/components/trading-table/sort-picker"
 
-import type { TradingTablePT } from "./Tcolumn"
+import type { TradingTablePT } from "../Tcolumn"
 
 type TradingTableHeaderPT = {
 	table: Table<TradingTablePT>
