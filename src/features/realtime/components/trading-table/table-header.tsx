@@ -1,18 +1,19 @@
 "use client"
 import type { SortingState, Column, Table } from "@tanstack/react-table"
 import {
-	ChevronsDown,
-	ChevronsUp,
 	ArrowUpDown,
-	ChevronDown,
 	ListFilter,
 	TextSearch,
 	X,
+	MoveDown,
+	MoveUp,
 } from "lucide-react"
-import { useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 import Button from "@/common/components/button"
 import { FilterDataByRange } from "@/common/components/table/filter"
+import { FileterPicker } from "@/features/realtime/components/trading-table/filter-picker"
+import { SortPicker } from "@/features/realtime/components/trading-table/sort-picker"
 
 import type { TradingTablePT } from "./Tcolumn"
 
@@ -25,8 +26,19 @@ export function TradingTableHeader({
 	table,
 	setSorting,
 }: TradingTableHeaderPT) {
-	const [isToggle, setToggle] = useState(false)
-	const [isSortingToggle, setSortingToggle] = useState(false)
+	const dropdownRef1 = useRef<HTMLDivElement>(null)
+	const dropdownRef2 = useRef<HTMLDivElement>(null)
+	const [toggleState, setToggleState] = useState({
+		filtering: false,
+		ordering: false,
+	})
+
+	const [activeFilter, setActiveFilter] = useState<Record<string, boolean>>({
+		plantName: false,
+		volume: false,
+		bidNumbers: false,
+	})
+	const [currentSortColumn, setCurrentSortColumn] = useState("")
 
 	const [sortingState, setSortingState] = useState<Record<string, boolean>>({
 		plantName: false,
@@ -34,9 +46,15 @@ export function TradingTableHeader({
 		bidNumbers: false,
 	})
 
-	const [currentSortColumn, setCurrentSortColumn] = useState("")
-	const [dropdownOpen, setDropdownOpen] = useState(false)
-
+	const updateState = useCallback(
+		(newState: { filtering?: boolean; ordering?: boolean }) => {
+			setToggleState((prevState) => ({
+				...prevState,
+				...newState,
+			}))
+		},
+		[],
+	)
 	const handleSort = () => {
 		if (currentSortColumn) {
 			setSorting(() => {
@@ -50,21 +68,12 @@ export function TradingTableHeader({
 		}
 	}
 
-	const toggleSortOrder = () => {
-		if (currentSortColumn) {
-			setSortingState((prev) => ({
-				...prev,
-				[currentSortColumn]: !prev[currentSortColumn],
-			}))
-			handleSort()
-		}
-	}
-
-	const resetTableFilter = () => {
-		table.getColumn("volume")?.setFilterValue(null)
-		table.getColumn("bidNumbers")?.setFilterValue(null)
-		table.getColumn("plantName")?.setFilterValue(null)
-		setToggle(false)
+	const resetTableFilter = (column: string) => {
+		table.getColumn(column)?.setFilterValue(null)
+		setActiveFilter((prevState: Record<string, boolean>) => ({
+			...prevState,
+			[column]: false,
+		}))
 	}
 
 	const resetSorting = () => {
@@ -76,16 +85,39 @@ export function TradingTableHeader({
 		setCurrentSortColumn("")
 		setSorting([])
 	}
+
+	useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (
+				dropdownRef1.current &&
+				!dropdownRef1.current.contains(event.target as Node)
+			) {
+				updateState({ filtering: false })
+			} else if (
+				dropdownRef2.current &&
+				!dropdownRef2.current.contains(event.target as Node)
+			) {
+				updateState({ ordering: false })
+			}
+		}
+
+		document.addEventListener("mousedown", handleClickOutside)
+
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside)
+		}
+	}, [toggleState.ordering, updateState])
+
 	return (
 		<div className="ml-1 flex w-full flex-col">
 			<div className="flex w-full justify-between">
 				<div className="ml-4 flex items-center justify-start gap-4">
 					<button
 						onClick={() => {
-							setToggle((e) => !e)
+							updateState({ filtering: !toggleState.filtering })
 						}}
 					>
-						{isToggle ? (
+						{toggleState.filtering ? (
 							<ListFilter color="#6e6e6e" size={16} />
 						) : (
 							<ListFilter size={16} />
@@ -93,10 +125,10 @@ export function TradingTableHeader({
 					</button>
 					<button
 						onClick={() => {
-							setSortingToggle((e) => !e)
+							updateState({ ordering: !toggleState.ordering })
 						}}
 					>
-						{isSortingToggle ? (
+						{toggleState.ordering ? (
 							<ArrowUpDown color="#6e6e6e" size={16} />
 						) : (
 							<ArrowUpDown size={16} />
@@ -123,114 +155,74 @@ export function TradingTableHeader({
 					/>
 				</div>
 			</div>
+			<div className="relative">
+				{toggleState.filtering && (
+					<div ref={dropdownRef1}>
+						<FileterPicker
+							activeFilter={activeFilter}
+							setActiveFilter={setActiveFilter}
+							updateState={updateState}
+							toggleState={toggleState}
+						/>
+					</div>
+				)}
+				{toggleState.ordering && (
+					<div ref={dropdownRef2}>
+						<SortPicker
+							sortingState={sortingState}
+							setSortingState={setSortingState}
+							currentSortColumn={currentSortColumn}
+							setCurrentSortColumn={setCurrentSortColumn}
+							handleSort={handleSort}
+							toggleState={toggleState}
+							updateState={updateState}
+						/>
+					</div>
+				)}
+			</div>
 			<div className="flex w-full flex-col gap-2 border-none p-2">
-				{isSortingToggle && (
-					<div className="relative flex items-center gap-2">
-						<div className="relative">
-							<Button
-								onClick={() => setDropdownOpen((e) => !e)}
-								className="flex w-36 justify-between gap-1 rounded-2xl border border-gray-300 bg-white text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200"
-							>
-								<div className="flex w-full justify-center">
-									{currentSortColumn === "plantName"
-										? "발전소명"
-										: currentSortColumn === "volume"
-											? "전력 발전량"
-											: currentSortColumn === "bidNumbers"
-												? "거래량"
-												: "정렬 기준 선택"}
-								</div>
-								<ChevronDown
-									className={`transform ${
-										dropdownOpen ? "rotate-180" : "rotate-0"
-									}`}
-									size={16}
-								/>
-							</Button>
-							{dropdownOpen && (
-								<div className="absolute z-10 mt-2 flex w-full flex-col gap-1 rounded-2xl border border-gray-300 bg-white text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200">
-									{["plantName", "volume", "bidNumbers"].map((columnId) => (
-										<button
-											key={columnId}
-											onClick={() => {
-												setCurrentSortColumn(columnId)
-												setDropdownOpen(false)
-												handleSort()
-											}}
-											className={`block w-full px-4 py-2 text-center text-sm text-gray-700 hover:bg-gray-100 ${
-												currentSortColumn === columnId
-													? "bg-gray-100 font-bold"
-													: ""
-											}`}
-										>
-											{columnId === "plantName" && "발전소명"}
-											{columnId === "volume" && "전력 발전량"}
-											{columnId === "bidNumbers" && "거래량"}
-										</button>
-									))}
-								</div>
-							)}
+				{currentSortColumn != "" && (
+					<Button
+						onClick={resetSorting}
+						className="flex w-fit gap-1 rounded-2xl border border-gray-300 bg-white text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200"
+					>
+						{sortingState[currentSortColumn] ? (
+							<MoveDown size={16} />
+						) : (
+							<MoveUp size={16} />
+						)}
+						<div className="flex w-full justify-center">
+							{currentSortColumn === "plantName"
+								? "발전소명"
+								: currentSortColumn === "volume"
+									? "전력 발전량"
+									: currentSortColumn === "bidNumbers"
+										? "거래량"
+										: "정렬 기준 선택"}
 						</div>
 
-						<Button
-							onClick={toggleSortOrder}
-							className="flex items-center gap-1 border-none text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200"
-						>
-							{currentSortColumn === "" ? (
-								"정렬하기"
-							) : sortingState[currentSortColumn] ? (
-								<>
-									<ChevronsUp size={16} />
-									오름차순
-								</>
-							) : (
-								<>
-									<ChevronsDown size={16} />
-									내림차순
-								</>
-							)}
-						</Button>
-						{currentSortColumn === "" ? (
-							<></>
-						) : (
-							<>
-								<button
-									onClick={resetSorting}
-									className="flex items-center gap-1 text-gray-400"
-								>
-									<X size={16} />
-								</button>
-							</>
-						)}
-					</div>
+						<div className="flex items-center gap-1 text-gray-400">
+							<X size={16} />
+						</div>
+					</Button>
 				)}
 
-				{isToggle && (
-					<div className="flex w-full flex-row items-center gap-2">
-						{table.getColumn("volume") && (
-							<FilterDataByRange
-								label={"전력 발전량"}
-								column={table.getColumn("volume") as Column<unknown, unknown>}
-							/>
-						)}
-						{table.getColumn("bidNumbers") && (
-							<FilterDataByRange
-								label={"거래량"}
-								column={
-									table.getColumn("bidNumbers") as Column<unknown, unknown>
-								}
-							/>
-						)}
-						<button
-							onClick={() => {
-								resetTableFilter()
-							}}
-							className="flex flex-row items-center gap-1 text-gray-400"
-						>
-							<X size={16} className="gray-400" />
-						</button>
-					</div>
-				)}
+				<div className="flex w-full flex-row items-center gap-2">
+					{activeFilter["volume"] && table.getColumn("volume") && (
+						<FilterDataByRange
+							id={"volume"}
+							resetTableFilter={resetTableFilter}
+							column={table.getColumn("volume") as Column<unknown, unknown>}
+						/>
+					)}
+					{activeFilter["bidNumbers"] && table.getColumn("bidNumbers") && (
+						<FilterDataByRange
+							id={"bidNumbers"}
+							resetTableFilter={resetTableFilter}
+							column={table.getColumn("bidNumbers") as Column<unknown, unknown>}
+						/>
+					)}
+				</div>
 			</div>
 		</div>
 	)
