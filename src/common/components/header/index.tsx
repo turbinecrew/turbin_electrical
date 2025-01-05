@@ -1,5 +1,13 @@
 "use client"
-import { Search, Slash, House, Settings, CircleUser, Bell } from "lucide-react"
+import {
+	Search,
+	Slash,
+	House,
+	Settings,
+	CircleUser,
+	Bell,
+	X,
+} from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
@@ -68,6 +76,18 @@ export default function Header() {
 						onChange={handleInputChange}
 						onKeyDown={handleKeyDown}
 					/>
+					{searchText.length > 0 ? (
+						<button
+							onClick={() => {
+								setSearchText("")
+							}}
+							className="flex flex-row items-center gap-1 text-gray-400"
+						>
+							<X size={16} className="gray-400" />
+						</button>
+					) : (
+						<></>
+					)}
 				</div>
 				<div className="flex gap-2">
 					<div
