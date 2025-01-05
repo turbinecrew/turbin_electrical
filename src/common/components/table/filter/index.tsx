@@ -3,7 +3,6 @@ import { Minus, X } from "lucide-react"
 import { useEffect, useState } from "react"
 import type { InputHTMLAttributes } from "react"
 
-import Button from "@/common/components/button"
 import { FilterColumnList } from "@/features/realtime/components/trading-table/filter-picker"
 
 function DebouncedInput({
