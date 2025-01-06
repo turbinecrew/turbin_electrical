@@ -1,9 +1,8 @@
 import type { Metadata } from "next"
 
 import "../config/globals.css"
-
-import QueryProvider from "@/common/provider/queryProvider"
-import NextAuthProvider from "@/features/auth/provider/nextAuthProvider"
+import NextAuthProvider from "@/config/provider/next-auth"
+import QueryProvider from "@/config/provider/react-query"
 
 export const metadata: Metadata = {
 	title: "Create Next App",
