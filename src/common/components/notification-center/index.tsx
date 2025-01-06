@@ -180,11 +180,9 @@ export function NotificationPopup() {
 									<div
 										className={`absolute left-2 top-2 z-10 h-2 w-2 rounded-full bg-red-400 ${noti.read && "opacity-0"}`}
 									></div>
-									<div
-										className={`flex h-full w-full flex-row gap-2 px-2 ${noti.read && "opacity-50"}`}
-									>
+									<div className={`flex h-full w-full flex-row gap-2 px-2`}>
 										<div
-											className={`${styles.icon} relative col-span-1 flex h-full w-fit items-center justify-center`}
+											className={`${styles.icon} relative col-span-1 flex h-full w-fit items-center justify-center ${noti.read && "opacity-50"}`}
 										>
 											<IconFormatter type={noti.type} size={16} />
 											<button
@@ -203,7 +201,7 @@ export function NotificationPopup() {
 												setRead(noti.id)
 												handleLink(noti.link)
 											}}
-											className="flex h-full w-full flex-col space-y-1"
+											className={`flex h-full w-full flex-col space-y-1 ${noti.read && "opacity-50"}`}
 										>
 											<div className="flex w-full justify-between">
 												<div className="alert-title text-start text-sm font-semibold">
