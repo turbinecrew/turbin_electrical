@@ -13,7 +13,7 @@ import {
 // import { Skeleton } from "@/common/components/skeleton"
 import { useMockData } from "@/features/region/hooks/data/useMockData"
 
-import type { DotsLineChartComponentPT } from "./DotsLineChart"
+import type { DotsLineChartComponentPT } from "./type"
 
 export function DotsLineChartComponent({
 	data,
