@@ -1,8 +1,12 @@
 "use client"
 
-import { IconFormatter } from "@/common/components/notification-center/icon"
 import { Bell } from "lucide-react"
-import React, { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef } from "react"
+
+import { IconFormatter } from "@/common/components/notification-center/icon"
+
+import styles from "./style/notification.module.css"
+import Button from "@/common/components/button"
 
 const notificationData = [
 	{
@@ -42,8 +46,16 @@ const notificationData = [
 		type: "notice",
 		title: "이벤트 안내",
 		message: "신년 맞이 특별 이벤트 시작",
-		read: true,
+		read: false,
 		date: "2025-01-07 10:00",
+	},
+	{
+		id: "34526",
+		type: "alram",
+		title: "업데이트 안내",
+		message: "새로운 기능이 추가되었습니다",
+		read: false,
+		date: "2025-01-07 15:45",
 	},
 ]
 
@@ -59,9 +71,7 @@ export function NotificationPopup() {
 	const setRead = (id: string) => {
 		setNotifications((prevNotifications) =>
 			prevNotifications.map((notification) =>
-				notification.id === id
-					? { ...notification, read: !notification.read }
-					: notification,
+				notification.id === id ? { ...notification, read: true } : notification,
 			),
 		)
 	}
@@ -83,52 +93,65 @@ export function NotificationPopup() {
 
 	return (
 		<div className="relative w-fit" ref={popupRef}>
-			<button onClick={toggleNotification}>
-				{unreadCount > 0 ? (
-					<>
-						<Bell
-							size={20}
-							className="cursor-pointer text-gray-700 hover:text-tbGreen"
-						/>
-						<span className="absolute -right-1 -top-1 flex h-3 w-3 items-center justify-center rounded-full bg-red-500 text-xs text-white">
-							{unreadCount}
-						</span>
-					</>
-				) : (
-					<Bell
-						size={20}
-						className="cursor-pointer text-gray-700 hover:text-tbGreen"
-					/>
+			<button onClick={toggleNotification} className="flex items-center">
+				<Bell
+					size={20}
+					className={`cursor-pointer text-gray-700 hover:text-tbGreen ${
+						unreadCount > 0 && styles.blinkAnimation
+					}`}
+				/>
+				{unreadCount > 0 && (
+					<span className="absolute -right-1 -top-1 flex h-3 w-3 items-center justify-center rounded-full bg-red-500 text-xs text-white">
+						{unreadCount}
+					</span>
 				)}
 			</button>
 
 			{isOpen && (
 				<div
 					className={
-						"absolute z-10 mt-2 flex w-72 flex-col gap-1 rounded-2xl bg-white p-5 text-slate-700 shadow-md transition duration-200 ease-in"
+						"absolute right-2 top-14 z-10 mt-2 flex h-96 w-64 flex-col gap-1 rounded-2xl bg-white p-3 text-slate-700 shadow-md transition duration-200 ease-in"
 					}
 				>
-					<div className="text-bold flex border-b text-xl">Notifications</div>
-					{notifications.map((noti) => (
-						<button
-							key={noti.id}
-							onClick={() => setRead(noti.id)}
-							className={`alert-item grid grid-cols-5 gap-1 rounded-xl border border-gray-300 p-1 ${noti.read && "opacity-30"}`}
-						>
-							<div className="alert-icon col-span-1 flex h-full w-full items-center justify-center">
-								<IconFormatter type={noti.type} size={20} color={"black"} />
-							</div>
-							<div className="col-span-4 m-2 grid grid-rows-3 space-y-1">
-								<div className="alert-title text-start text-sm">
-									{noti.title}
-								</div>
-								<div className="alert-message text-start text-xs">
-									{noti.message}
-								</div>
-								<div className="alert-date text-end text-xs">{noti.date}</div>
-							</div>
-						</button>
-					))}
+					<div className="flex h-10 overflow-hidden border-b bg-transparent bg-gradient-to-r from-tbGreen to-transparent bg-clip-text px-1 text-4xl font-extrabold text-transparent">
+						Notifications
+					</div>
+					<div className="flex flex-col gap-1 overflow-y-auto [&::-webkit-scrollbar]:hidden">
+						{notifications.map((noti) => {
+							const formattedDate = new Date(noti.date)
+							return (
+								<Button
+									key={noti.id}
+									onClick={() => setRead(noti.id)}
+									className={`alert-item translate group grid h-fit w-full grid-cols-7 rounded-lg border-none p-1 p-[1px] duration-300 hover:border ${noti.read && "opacity-30"}`}
+								>
+									<div className="alert-icon col-span-1 flex h-full w-full items-center justify-center">
+										<IconFormatter type={noti.type} size={16} color={"black"} />
+									</div>
+									<div className="col-span-6 m-2 flex flex-col space-y-1 group-hover:text-tbGreen">
+										<div className="flex justify-between">
+											<div className="alert-title text-start text-sm font-semibold group-hover:font-bold">
+												{noti.title}
+											</div>
+											<div className="alert-date text-end text-xs text-gray-400">
+												{formattedDate.getMonth() +
+													1 +
+													"/" +
+													formattedDate.getDate() +
+													" " +
+													formattedDate.getHours() +
+													":" +
+													formattedDate.getMinutes()}
+											</div>
+										</div>
+										<div className="alert-message text-start text-xs">
+											{noti.message}
+										</div>
+									</div>
+								</Button>
+							)
+						})}
+					</div>
 				</div>
 			)}
 		</div>

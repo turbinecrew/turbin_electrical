@@ -36,7 +36,7 @@ type IconFormatterPT = {
 
 export function IconFormatter({
 	type,
-	size = 24,
+	size = 20,
 	color = "black",
 }: IconFormatterPT) {
 	let IconComponent = alertIconFormat.find((item) => item.type === type)?.icon
@@ -44,8 +44,16 @@ export function IconFormatter({
 		IconComponent = Bell
 	}
 	return (
-		<div className={"h-fit w-fit rounded-3xl bg-tbPastelGreen p-3 py-4"}>
-			<IconComponent size={size} color={color} />
+		<div
+			className={
+				"translate h-fit w-fit rounded-3xl bg-tbPastelGreen px-2 py-3 duration-300 group-hover:bg-white"
+			}
+		>
+			<IconComponent
+				size={size}
+				color={color}
+				className="transition-colors duration-300 ease-in-out group-hover:text-tbGreen"
+			/>
 		</div>
 	)
 }
