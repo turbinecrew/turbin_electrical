@@ -14,9 +14,9 @@ import {
 import { RegionalModal } from "@/features/auth/components/regional-modal"
 import {
 	Card,
-	CardContent,
 	CardHeader,
 	CardTitle,
+	CardContent,
 } from "@/shadcn/components/card"
 
 import { data } from "./mocks"
@@ -55,13 +55,13 @@ export function RegionalEnergyChart() {
 	}
 
 	return (
-		<div className="p-4">
-			<Card className="shadow-md">
-				<CardHeader>
-					<CardTitle>지역별 발전량 차트</CardTitle>
-				</CardHeader>
-				<CardContent>
-					<div className="h-[450px] w-[800px]">
+		<Card className="w-full">
+			<CardHeader>
+				<CardTitle>지역별 에너지 차트</CardTitle>
+			</CardHeader>
+			<CardContent>
+				<div className="p-4">
+					<div className="relative h-[35vh]">
 						<ResponsiveContainer width="100%" height="100%">
 							<BarChart
 								data={chartData}
@@ -89,15 +89,15 @@ export function RegionalEnergyChart() {
 							</BarChart>
 						</ResponsiveContainer>
 					</div>
-				</CardContent>
-			</Card>
 
-			<RegionalModal
-				isOpen={isModalOpen}
-				setIsOpen={setIsModalOpen}
-				region={selectedRegion}
-				timeSeriesData={timeSeriesData}
-			/>
-		</div>
+					<RegionalModal
+						isOpen={isModalOpen}
+						setIsOpen={setIsModalOpen}
+						region={selectedRegion}
+						timeSeriesData={timeSeriesData}
+					/>
+				</div>
+			</CardContent>
+		</Card>
 	)
 }
