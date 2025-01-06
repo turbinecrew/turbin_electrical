@@ -31,14 +31,10 @@ const alertIconFormat = [
 type IconFormatterPT = {
 	type: string
 	size?: number
-	color?: string
+	children?: React.ReactNode
 }
 
-export function IconFormatter({
-	type,
-	size = 20,
-	color = "black",
-}: IconFormatterPT) {
+export function IconFormatter({ type, size = 20, children }: IconFormatterPT) {
 	let IconComponent = alertIconFormat.find((item) => item.type === type)?.icon
 	if (IconComponent == null) {
 		IconComponent = Bell
@@ -46,14 +42,14 @@ export function IconFormatter({
 	return (
 		<div
 			className={
-				"translate h-fit w-fit rounded-3xl bg-tbPastelGreen px-2 py-3 duration-300 group-hover:bg-white"
+				"translate h-fit w-fit rounded-3xl bg-tbPastelGreen px-2 py-3 group-hover:bg-white"
 			}
 		>
 			<IconComponent
 				size={size}
-				color={color}
-				className="transition-colors duration-300 ease-in-out group-hover:text-tbGreen"
+				className="transition-colors group-hover:text-tbGreen"
 			/>
+			{children}
 		</div>
 	)
 }
