@@ -5,7 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
 
-import SignInModal from "../../../features/auth/components/sign-in-modal"
+import AuthModal from "@/features/auth/components/modal/auth"
 
 export default function Header() {
 	const pathName: string | null = usePathname()
@@ -74,10 +74,7 @@ export default function Header() {
 					className="cursor-pointer text-gray-700 hover:text-tbGreen"
 				/>
 			</div>
-			<SignInModal
-				isOpen={isSignInModalOpen}
-				setIsOpen={setIsSignInModalOpen}
-			/>
+			<AuthModal isOpen={isSignInModalOpen} setIsOpen={setIsSignInModalOpen} />
 		</div>
 	)
 }
