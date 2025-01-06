@@ -10,10 +10,10 @@ import {
 	Tooltip,
 } from "recharts"
 
-// import { Skeleton } from "@/common/components/skeleton"
+import { Skeleton } from "@/common/components/skeleton"
 import { useMockData } from "@/features/region/hooks/data/useMockData"
 
-import type { BarChartComponentPT } from "./BarChart"
+import type { BarChartComponentPT } from "./type"
 
 export function BarChartComponent({
 	data,
@@ -21,15 +21,15 @@ export function BarChartComponent({
 	dataKeys,
 	config,
 }: BarChartComponentPT) {
-	const { data: chartData } = useMockData(data)
+	const { data: chartData, isLoading } = useMockData(data)
 
-	// if (isLoading) {
-	// 	return (
-	// 		<div className="h-96 w-full p-4">
-	// 			<Skeleton className="h-[300px] w-full rounded-lg" />
-	// 		</div>
-	// 	)
-	// }
+	if (isLoading) {
+		return (
+			<div className="h-96 w-full p-4">
+				<Skeleton className="h-[300px] w-full rounded-lg" />
+			</div>
+		)
+	}
 
 	return (
 		<div className="h-96 w-full p-4">

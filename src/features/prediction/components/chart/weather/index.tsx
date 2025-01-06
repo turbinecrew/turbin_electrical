@@ -11,35 +11,35 @@ import {
 	Tooltip,
 	ResponsiveContainer,
 } from "recharts"
+import { Skeleton } from "@/common/components/skeleton"
 
 import mockData from "@/features/region/components/regionaltable/mock"
 import RegionSelect from "@/features/region/components/regionselect"
 import { getTodayString } from "@/features/region/hooks/data/useDateUtils"
 import useFilteredData from "@/features/region/hooks/data/useFilteredData"
+import { useMockData } from "@/features/region/hooks/data/useMockData"
 
 export default function WeatherChart() {
 	const [selectedRegion, setSelectedRegion] = useState("강원특별자치도")
 	const [activeKey, setActiveKey] = useState("일사량(W/㎡)")
 
-	// 오늘 날짜 계산
 	const today = getTodayString()
 
-	// 필터링된 데이터
-	const filteredData = useFilteredData(mockData, {
+	const { data: weatherData, isLoading } = useMockData(mockData)
+
+	const filteredData = useFilteredData(weatherData, {
 		selectedRegion,
 		today,
 		startHour: 9,
 		endHour: 17,
 	})
 
-	// 지역 목록 생성
 	const regions = Array.from(new Set(mockData?.map((item) => item.지역) || []))
 
-	return (
-		<div className="w-full space-y-4 p-4">
-			<h2 className="text-xl font-bold text-gray-700">지역별 기상 데이터</h2>
-
-			<div>
+	if (isLoading) {
+		return (
+			<div className="w-full space-y-4 p-4">
+				<h2 className="text-xl font-bold text-gray-700">지역별 기상 데이터</h2>
 				<div className="mb-4">
 					<RegionSelect
 						regions={regions}
@@ -47,6 +47,22 @@ export default function WeatherChart() {
 						onChange={setSelectedRegion}
 					/>
 				</div>
+				<div className="h-80 w-full">
+					<Skeleton className="h-full w-full rounded-lg" />
+				</div>
+			</div>
+		)
+	}
+
+	return (
+		<div className="w-full space-y-4 p-4">
+			<h2 className="text-xl font-bold text-gray-700">지역별 기상 데이터</h2>
+			<div className="mb-4">
+				<RegionSelect
+					regions={regions}
+					selectedRegion={selectedRegion}
+					onChange={setSelectedRegion}
+				/>
 			</div>
 
 			<div className="flex cursor-pointer justify-around pb-2 text-sm font-semibold">
