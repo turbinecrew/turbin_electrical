@@ -48,7 +48,7 @@ export function FilterDataByRange({
 		<>
 			{isInputVisible && (
 				<div className="flex h-fit w-fit items-center gap-3 rounded-xl border p-1 pr-2 text-sm font-medium">
-					<div className="border border-none px-1 text-sm font-medium">
+					<div className="w-14 border border-none px-1 text-center text-xs font-medium md:text-sm">
 						{FilterColumnList.find((item) => item.id === id)?.name || "Unknown"}
 					</div>
 					<div className="flex h-fit w-fit flex-row items-center gap-1">
@@ -62,7 +62,7 @@ export function FilterDataByRange({
 								])
 							}
 							placeholder={`Min`}
-							className="w-20 rounded border text-center"
+							className="w-20 rounded border text-center text-xs md:text-sm"
 						/>
 						<Minus size={10} />
 						<DebouncedInput
@@ -75,7 +75,7 @@ export function FilterDataByRange({
 								])
 							}
 							placeholder={`Max`}
-							className="w-20 rounded border text-center"
+							className="w-20 rounded border text-center text-xs md:text-sm"
 						/>
 					</div>
 					<button
@@ -84,7 +84,7 @@ export function FilterDataByRange({
 						}}
 						className="flex flex-row items-center gap-1 text-gray-400"
 					>
-						<X size={16} className="gray-400" />
+						<X className="gray-400 w-3 md:w-4" />
 					</button>
 				</div>
 			)}

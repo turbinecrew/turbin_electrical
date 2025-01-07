@@ -5,10 +5,10 @@ import {
 	ListFilter,
 	TextSearch,
 	X,
-	MoveDown,
-	MoveUp,
+	ArrowDown,
+	ArrowUp,
 } from "lucide-react"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react"
 
 import Button from "@/common/components/button"
 import { FilterDataByRange } from "@/features/realtime/components/trading-table/filter"
@@ -95,6 +95,16 @@ export function TradingTableHeader({
 		setSorting([])
 	}
 
+	const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
+		const filterValue = event.target.value
+		table.getColumn("plantName")?.setFilterValue(filterValue)
+		const currentSorting = table.getState().sorting
+		if (currentSorting && currentSorting.length > 0) {
+			const [currentSort] = currentSorting
+			setSorting([{ id: currentSort.id, desc: currentSort.desc }])
+		}
+	}
+
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
 			if (
@@ -127,9 +137,9 @@ export function TradingTableHeader({
 						}}
 					>
 						{toggleState.filtering ? (
-							<ListFilter color="#6e6e6e" size={16} />
+							<ListFilter color="#6e6e6e" className="h-3 w-3 md:h-4 md:w-4" />
 						) : (
-							<ListFilter size={16} />
+							<ListFilter className="h-3 w-3 md:h-4 md:w-4" />
 						)}
 					</button>
 					<button
@@ -138,29 +148,21 @@ export function TradingTableHeader({
 						}}
 					>
 						{toggleState.ordering ? (
-							<ArrowUpDown color="#6e6e6e" size={16} />
+							<ArrowUpDown color="#6e6e6e" className="h-3 w-3 md:h-4 md:w-4" />
 						) : (
-							<ArrowUpDown size={16} />
+							<ArrowUpDown className="h-3 w-3 md:h-4 md:w-4" />
 						)}
 					</button>
 				</div>
-				<div className="flex h-8 items-center rounded-xl border border-gray-300 bg-white px-4">
-					<TextSearch className="text-gray-400" size={16} />
+				<div className="flex h-8 items-center rounded-xl border border-gray-300 bg-white px-2 md:px-3">
+					<TextSearch className="h-3 w-3 text-gray-400 md:h-4 md:w-4" />
 					<input
 						placeholder="Enter Name..."
 						value={
 							(table.getColumn("plantName")?.getFilterValue() as string) ?? ""
 						}
-						onChange={(event) => {
-							const filterValue = event.target.value
-							table.getColumn("plantName")?.setFilterValue(filterValue)
-							const currentSorting = table.getState().sorting
-							if (currentSorting && currentSorting.length > 0) {
-								const [currentSort] = currentSorting
-								setSorting([{ id: currentSort.id, desc: currentSort.desc }])
-							}
-						}}
-						className="ml-2 h-full w-48 border-none bg-transparent text-sm text-gray-600 placeholder-gray-400 outline-none"
+						onChange={handleSearch}
+						className="ml-2 h-full w-36 border-none bg-transparent text-xs text-gray-600 placeholder-gray-400 outline-none md:w-48 md:text-sm"
 					/>
 				</div>
 			</div>
@@ -196,11 +198,11 @@ export function TradingTableHeader({
 						className="flex w-fit gap-1 rounded-2xl border border-gray-300 bg-white text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200"
 					>
 						{sortingState[currentSortColumn] ? (
-							<MoveDown size={16} />
+							<ArrowDown className="h-4 w-4 md:h-5 md:w-5" />
 						) : (
-							<MoveUp size={16} />
+							<ArrowUp className="h-4 w-4 md:h-5 md:w-5" />
 						)}
-						<div className="flex w-full justify-center">
+						<div className="flex w-full justify-center text-xs md:text-sm">
 							{currentSortColumn === "plantName"
 								? "발전소명"
 								: currentSortColumn === "volume"
@@ -211,7 +213,7 @@ export function TradingTableHeader({
 						</div>
 
 						<div className="flex items-center gap-1 text-gray-400">
-							<X size={16} />
+							<X className="h-3 w-3 md:h-4 md:w-4" />
 						</div>
 					</Button>
 				)}

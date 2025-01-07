@@ -48,7 +48,7 @@ export function TradingTable({ columns, data }: TradingTableComponentPT) {
 						<tr key={headerGroup.id} className="">
 							{headerGroup.headers.map((header) => (
 								<th key={header.id} style={{ width: header.getSize() }}>
-									<div className="text-center text-sm font-light text-gray-400">
+									<div className="text-center text-xs font-light text-gray-400 md:text-sm">
 										{flexRender(
 											header.column.columnDef.header,
 											header.getContext(),
@@ -62,9 +62,15 @@ export function TradingTable({ columns, data }: TradingTableComponentPT) {
 
 				<tbody className="divide-y divide-gray-200">
 					{table.getRowModel().rows.map((row) => (
-						<tr key={row.id} className="hover:bg-gray-80">
+						<tr
+							key={row.id}
+							className="!important bg-transparent hover:bg-gray-50"
+						>
 							{row.getVisibleCells().map((cell) => (
-								<td key={cell.id} className="pb-1 pl-4 pr-4 pt-1">
+								<td
+									key={cell.id}
+									className="px-2 py-1 text-sm md:px-4 md:text-base"
+								>
 									{flexRender(cell.column.columnDef.cell, cell.getContext())}
 								</td>
 							))}

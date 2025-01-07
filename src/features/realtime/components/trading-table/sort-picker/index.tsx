@@ -33,9 +33,9 @@ export function SortPicker({
 				<div className="relative w-fit">
 					<Button
 						onClick={() => setDropdownOpen((e) => !e)}
-						className="flex w-36 justify-between gap-1 rounded-2xl border border-gray-300 bg-white text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200"
+						className="flex w-32 justify-between gap-1 rounded-2xl border border-gray-300 bg-white text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200 md:w-36"
 					>
-						<div className="flex w-full justify-center text-sm">
+						<div className="flex w-full justify-center text-xs md:text-sm">
 							{currentSortColumn === "plantName"
 								? "발전소명"
 								: currentSortColumn === "volume"
@@ -59,7 +59,7 @@ export function SortPicker({
 										setDropdownOpen(false)
 										handleSortState(currentSortColumn)
 									}}
-									className={`block w-full px-4 py-2 text-center text-sm text-gray-700 hover:bg-gray-100 ${
+									className={`block w-full px-4 py-2 text-center text-xs text-gray-700 hover:bg-gray-100 md:text-sm ${
 										currentSortColumn === id ? "bg-gray-100 font-bold" : ""
 									}`}
 								>
@@ -73,7 +73,7 @@ export function SortPicker({
 					onClick={() => {
 						handleSortState(currentSortColumn)
 					}}
-					className="flex w-24 items-center gap-1 text-nowrap text-sm text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200"
+					className="flex w-24 items-center gap-1 text-nowrap text-xs text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200 md:text-sm"
 				>
 					{currentSortColumn === "" ? (
 						"정렬하기"
@@ -94,7 +94,7 @@ export function SortPicker({
 						handleSort()
 						updateState({ ordering: !toggleState.ordering })
 					}}
-					className="flex h-7 items-center gap-1 text-nowrap bg-gray-200 text-sm text-slate-700 ease-in focus:ring-2 focus:ring-gray-200"
+					className="flex h-7 items-center gap-1 text-nowrap bg-gray-200 text-xs text-slate-700 ease-in focus:ring-2 focus:ring-gray-200 md:text-sm"
 				>
 					<Check size={14} />
 					확인

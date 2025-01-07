@@ -37,7 +37,7 @@ export function FileterPicker({
 						onClick={() => setDropdownOpen((e) => !e)}
 						className="flex w-36 justify-between gap-1 rounded-2xl border border-gray-300 bg-white text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200"
 					>
-						<div className="flex w-full justify-center text-sm">
+						<div className="flex w-full justify-center text-xs md:text-sm">
 							{text ? text.name : "필터 선택"}
 						</div>
 						<ChevronDown
@@ -47,20 +47,23 @@ export function FileterPicker({
 					</Button>
 					{dropdownOpen && (
 						<div className="absolute z-10 mt-2 flex w-full flex-col gap-1 overflow-hidden rounded-2xl border border-gray-300 bg-white text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200">
-							{columnList.map(({ id, name }) => (
-								<button
-									key={id}
-									onClick={() => {
-										setSelected(id)
-										setDropdownOpen(false)
-									}}
-									className={
-										"block w-full px-4 py-2 text-center text-sm text-gray-700 hover:bg-gray-100"
-									}
-								>
-									{!activeFilter[id] && name}
-								</button>
-							))}
+							{columnList.map(
+								({ id, name }) =>
+									!activeFilter[id] && (
+										<button
+											key={id}
+											onClick={() => {
+												setSelected(id)
+												setDropdownOpen(false)
+											}}
+											className={
+												"block w-full px-4 py-2 text-center text-xs text-gray-700 hover:bg-gray-100 md:text-sm"
+											}
+										>
+											{name}
+										</button>
+									),
+							)}
 						</div>
 					)}
 				</div>
@@ -70,9 +73,9 @@ export function FileterPicker({
 						handleFilter()
 						updateState({ filtering: !toggleState.filtering })
 					}}
-					className="flex h-7 items-center gap-1 text-nowrap bg-gray-200 text-sm text-slate-700 ease-in focus:ring-2 focus:ring-gray-200"
+					className="flex h-7 items-center gap-1 text-nowrap bg-gray-200 text-xs text-slate-700 ease-in focus:ring-2 focus:ring-gray-200 md:text-sm"
 				>
-					<Plus size={14} />
+					<Plus size={12} />
 					추가
 				</Button>
 			</div>

@@ -1,6 +1,7 @@
 "use client"
 
 import type { ColumnDef } from "@tanstack/react-table"
+import { Plug2, Ticket, Zap } from "lucide-react"
 import { useRouter } from "next/navigation"
 
 import Button from "@/common/components/button"
@@ -34,7 +35,12 @@ export const columns: ColumnDef<TradingTablePT>[] = [
 			const volume = parseFloat(row.getValue("volume"))
 			const formatted = new Intl.NumberFormat("ko-KR", {}).format(volume)
 
-			return <div className="text-end font-medium">{formatted}</div>
+			return (
+				<div className="flex flex-wrap items-center justify-between">
+					<Zap className="h-3 w-3 text-gray-400 md:h-4 md:w-4" />
+					<div className="text-end font-medium">{formatted}</div>
+				</div>
+			)
 		},
 	},
 	{
@@ -45,7 +51,12 @@ export const columns: ColumnDef<TradingTablePT>[] = [
 			const volume = parseFloat(row.getValue("bidVolume"))
 			const formatted = new Intl.NumberFormat("ko-KR", {}).format(volume)
 
-			return <div className="text-end font-medium">{formatted}</div>
+			return (
+				<div className="flex flex-wrap items-center justify-between">
+					<Plug2 className="h-3 w-3 text-gray-400 md:h-4 md:w-4" />
+					<div className="text-end font-medium">{formatted}</div>
+				</div>
+			)
 		},
 	},
 	{
@@ -56,10 +67,14 @@ export const columns: ColumnDef<TradingTablePT>[] = [
 			const volume = parseFloat(row.getValue("bidNumbers"))
 			const formatted = new Intl.NumberFormat("ko-KR", {}).format(volume)
 
-			return <div className="text-wrap text-end font-medium">{formatted}</div>
+			return (
+				<div className="flex items-center justify-between">
+					<Ticket className="h-3 w-3 text-gray-400 md:h-4 md:w-4" />
+					<div className="text-wrap text-end font-medium">{formatted}</div>
+				</div>
+			)
 		},
 	},
-
 	{
 		accessorKey: "matchingButton",
 		header: "-",
@@ -73,7 +88,10 @@ export const columns: ColumnDef<TradingTablePT>[] = [
 
 			return (
 				<div className="flex justify-center">
-					<Button className="bg-tbPastelGreen text-xs" onClick={handleClick}>
+					<Button
+						className="text-xs hover:bg-tbPastelGreen"
+						onClick={handleClick}
+					>
 						거래
 					</Button>
 				</div>
