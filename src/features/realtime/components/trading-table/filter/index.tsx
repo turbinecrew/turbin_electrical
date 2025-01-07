@@ -1,10 +1,10 @@
 import { Minus, X } from "lucide-react"
 import { useEffect, useState } from "react"
 
-import { FilterColumnList } from "@/features/realtime/components/trading-table/filter-picker"
-import type {
-	DebouncedInputPT,
-	FilterDataByRangePT,
+import {
+	FilterColumnList,
+	type DebouncedInputPT,
+	type FilterDataByRangePT,
 } from "@/features/realtime/components/types/table/types"
 
 function DebouncedInput({
@@ -13,7 +13,6 @@ function DebouncedInput({
 	debounce = 500,
 	...props
 }: DebouncedInputPT) {
-	//사용자가 입력을 멈춘 후 일정 시간이 지나면 onChange 콜백을 호출한다.
 	const [value, setValue] = useState(initialValue)
 
 	useEffect(() => {

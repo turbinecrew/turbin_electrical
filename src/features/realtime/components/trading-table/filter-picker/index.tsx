@@ -4,12 +4,10 @@ import { ChevronDown, Plus } from "lucide-react"
 import { useState } from "react"
 
 import Button from "@/common/components/button"
-import type { FilterPickerPT } from "@/features/realtime/components/types/table/types"
-
-export const FilterColumnList = [
-	{ id: "volume", name: "전력 발전량" },
-	{ id: "bidNumbers", name: "거래량" },
-]
+import {
+	FilterColumnList,
+	type FilterPickerPT,
+} from "@/features/realtime/components/types/table/types"
 
 export function FileterPicker({
 	activeFilter,
@@ -28,6 +26,9 @@ export function FileterPicker({
 			}))
 		}
 	}
+
+	const columnList = FilterColumnList
+	const text = columnList.find((column) => column.id === selected)
 	return (
 		<div className="absolute z-10 mt-2 flex w-fit flex-col gap-1 rounded-2xl bg-white p-5 text-slate-700 shadow-md transition duration-200 ease-in">
 			<div className="flex items-center gap-2">
@@ -37,11 +38,7 @@ export function FileterPicker({
 						className="flex w-36 justify-between gap-1 rounded-2xl border border-gray-300 bg-white text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200"
 					>
 						<div className="flex w-full justify-center text-sm">
-							{selected === "volume"
-								? "전력 발전량"
-								: selected === "bidNumbers"
-									? "거래량"
-									: "필터 선택"}
+							{text ? text.name : "필터 선택"}
 						</div>
 						<ChevronDown
 							className={`transform ${dropdownOpen ? "rotate-180" : "rotate-0"}`}
@@ -50,7 +47,7 @@ export function FileterPicker({
 					</Button>
 					{dropdownOpen && (
 						<div className="absolute z-10 mt-2 flex w-full flex-col gap-1 overflow-hidden rounded-2xl border border-gray-300 bg-white text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200">
-							{FilterColumnList.map(({ id, name }) => (
+							{columnList.map(({ id, name }) => (
 								<button
 									key={id}
 									onClick={() => {

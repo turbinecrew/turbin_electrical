@@ -14,6 +14,7 @@ import Button from "@/common/components/button"
 import { FilterDataByRange } from "@/features/realtime/components/trading-table/filter"
 import { FileterPicker } from "@/features/realtime/components/trading-table/filter-picker"
 import { SortPicker } from "@/features/realtime/components/trading-table/sort-picker"
+import { FilterColumnList } from "@/features/realtime/components/types/table/types"
 
 import type { TradingTablePT } from "../Tcolumn"
 
@@ -28,6 +29,7 @@ export function TradingTableHeader({
 }: TradingTableHeaderPT) {
 	const dropdownRef1 = useRef<HTMLDivElement>(null)
 	const dropdownRef2 = useRef<HTMLDivElement>(null)
+
 	const [toggleState, setToggleState] = useState({
 		filtering: false,
 		ordering: false,
@@ -38,8 +40,15 @@ export function TradingTableHeader({
 		volume: false,
 		bidNumbers: false,
 	})
-	const [currentSortColumn, setCurrentSortColumn] = useState("")
 
+	function getActiveKeys(): string[] {
+		const activeKeys = Object.entries(activeFilter)
+			.filter(([_, value]) => value)
+			.map(([key]) => key)
+		return activeKeys
+	}
+
+	const [currentSortColumn, setCurrentSortColumn] = useState("")
 	const [sortingState, setSortingState] = useState<Record<string, boolean>>({
 		plantName: false,
 		volume: false,
@@ -207,21 +216,26 @@ export function TradingTableHeader({
 					</Button>
 				)}
 
-				<div className="flex w-full flex-row items-center gap-2">
-					{activeFilter["volume"] && table.getColumn("volume") && (
-						<FilterDataByRange
-							id={"volume"}
-							resetTableFilter={resetTableFilter}
-							column={table.getColumn("volume") as Column<unknown, unknown>}
-						/>
-					)}
-					{activeFilter["bidNumbers"] && table.getColumn("bidNumbers") && (
-						<FilterDataByRange
-							id={"bidNumbers"}
-							resetTableFilter={resetTableFilter}
-							column={table.getColumn("bidNumbers") as Column<unknown, unknown>}
-						/>
-					)}
+				<div className="flex w-full flex-wrap items-center gap-2">
+					{getActiveKeys().map((item) => {
+						const columnData = FilterColumnList.find(
+							(column) => column.id === item,
+						)
+						const tableColumn = table.getColumn(item)
+
+						if (columnData && tableColumn) {
+							return (
+								<FilterDataByRange
+									key={item}
+									id={item}
+									resetTableFilter={resetTableFilter}
+									column={tableColumn as Column<unknown, unknown>}
+								/>
+							)
+						}
+
+						return null
+					})}
 				</div>
 			</div>
 		</div>

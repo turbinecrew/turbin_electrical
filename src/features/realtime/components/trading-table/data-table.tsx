@@ -40,15 +40,15 @@ export function TradingTable({ columns, data }: TradingTableComponentPT) {
 	})
 
 	return (
-		<div className="min-h-96 w-[700px]">
+		<div>
 			<TradingTableHeader table={table} setSorting={setSorting} />
 			<table className="w-full bg-[#F7F9FB]">
-				<thead className="h-10 w-full border-b-4 pt-2">
+				<thead className="h-10 w-full border-b-2 border-gray-300 pt-2">
 					{table.getHeaderGroups().map((headerGroup) => (
 						<tr key={headerGroup.id} className="">
 							{headerGroup.headers.map((header) => (
 								<th key={header.id} style={{ width: header.getSize() }}>
-									<div className="text-center font-bold">
+									<div className="text-center text-sm font-light text-gray-400">
 										{flexRender(
 											header.column.columnDef.header,
 											header.getContext(),

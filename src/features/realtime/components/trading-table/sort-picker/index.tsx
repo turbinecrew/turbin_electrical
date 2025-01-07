@@ -4,7 +4,10 @@ import { Check, ChevronDown, ChevronsDown, ChevronsUp } from "lucide-react"
 import { useState } from "react"
 
 import Button from "@/common/components/button"
-import type { SortPickerPT } from "@/features/realtime/components/types/table/types"
+import {
+	SortColumnList,
+	type SortPickerPT,
+} from "@/features/realtime/components/types/table/types"
 
 export function SortPicker({
 	sortingState,
@@ -16,12 +19,6 @@ export function SortPicker({
 	updateState,
 }: SortPickerPT) {
 	const [dropdownOpen, setDropdownOpen] = useState(false)
-
-	const columnList = [
-		{ id: "plantName", name: "발전소명" },
-		{ id: "volume", name: "전력 발전량" },
-		{ id: "bidNumbers", name: "거래량" },
-	]
 
 	const handleSortState = (column: string) => {
 		setSortingState((prev: Record<string, boolean>) => ({
@@ -54,7 +51,7 @@ export function SortPicker({
 					</Button>
 					{dropdownOpen && (
 						<div className="absolute z-10 mt-2 flex w-full flex-col gap-1 overflow-hidden rounded-2xl border border-gray-300 bg-white text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200">
-							{columnList.map(({ id, name }) => (
+							{SortColumnList.map(({ id, name }) => (
 								<button
 									key={id}
 									onClick={() => {
