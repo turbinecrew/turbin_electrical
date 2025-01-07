@@ -191,7 +191,7 @@ export function TradingTableHeader({
 					</div>
 				)}
 			</div>
-			<div className="flex w-full flex-col gap-2 border-none p-2">
+			<div className="flex w-full flex-col gap-2 border-none p-1 md:p-2">
 				{currentSortColumn != "" && (
 					<Button
 						onClick={resetSorting}

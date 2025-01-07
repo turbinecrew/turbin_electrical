@@ -31,6 +31,7 @@ function DebouncedInput({
 		<input
 			{...props}
 			value={value}
+			className="h-fit w-20 rounded border text-center text-xs md:text-sm"
 			onChange={(e) => setValue(e.target.value)}
 		/>
 	)
@@ -47,7 +48,7 @@ export function FilterDataByRange({
 	return (
 		<>
 			{isInputVisible && (
-				<div className="flex h-fit w-fit items-center gap-3 rounded-xl border p-1 pr-2 text-sm font-medium">
+				<div className="flex h-fit w-fit items-center gap-3 rounded-xl border pr-2 text-sm font-medium md:p-1">
 					<div className="w-14 border border-none px-1 text-center text-xs font-medium md:text-sm">
 						{FilterColumnList.find((item) => item.id === id)?.name || "Unknown"}
 					</div>
@@ -62,7 +63,6 @@ export function FilterDataByRange({
 								])
 							}
 							placeholder={`Min`}
-							className="w-20 rounded border text-center text-xs md:text-sm"
 						/>
 						<Minus size={10} />
 						<DebouncedInput
@@ -75,7 +75,6 @@ export function FilterDataByRange({
 								])
 							}
 							placeholder={`Max`}
-							className="w-20 rounded border text-center text-xs md:text-sm"
 						/>
 					</div>
 					<button

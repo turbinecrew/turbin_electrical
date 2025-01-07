@@ -43,7 +43,7 @@ export function TradingTable({ columns, data }: TradingTableComponentPT) {
 		<div>
 			<TradingTableHeader table={table} setSorting={setSorting} />
 			<table className="w-full bg-[#F7F9FB]">
-				<thead className="h-10 w-full border-b-2 border-gray-300 pt-2">
+				<thead className="h-10 w-full border-b-2 border-gray-300 pt-1 md:pt-2">
 					{table.getHeaderGroups().map((headerGroup) => (
 						<tr key={headerGroup.id} className="">
 							{headerGroup.headers.map((header) => (
