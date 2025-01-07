@@ -9,7 +9,7 @@ import { TradingTable } from "./data-table"
 export function TradingDataTable() {
 	const data = getData()
 	return (
-		<CardComponent>
+		<CardComponent className="w-full">
 			<TradingTable columns={columns} data={data} />
 		</CardComponent>
 	)
