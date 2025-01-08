@@ -1,5 +1,5 @@
 export enum QUERY_KEYS {
 	REC_DATA = "recData",
-	SMP_DATA = "smpData",
+	TodaySMPData = "smpData",
 	AMGO_DATA = "amgoData",
 }
