@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 import { useState } from "react"
 
 import SignInModal from "../../../features/auth/components/sign-in-modal"
+import { NotificationPopup } from "@/common/components/notification-center"
 
 export default function Header() {
 	const pathName: string | null = usePathname()
@@ -65,11 +66,8 @@ export default function Header() {
 					<CircleUser size={20} />
 					<span className="text-sm font-medium">Sign In</span>
 				</div>
+				<NotificationPopup />
 				<Settings
-					size={20}
-					className="cursor-pointer text-gray-700 hover:text-tbGreen"
-				/>
-				<Bell
 					size={20}
 					className="cursor-pointer text-gray-700 hover:text-tbGreen"
 				/>
