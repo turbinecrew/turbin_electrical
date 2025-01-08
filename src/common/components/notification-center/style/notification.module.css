@@ -1,0 +1,38 @@
+@keyframes blink {
+	0% {
+		color: red;
+	}
+	50% {
+		color: black;
+		opacity: 0.1;
+	}
+	100% {
+		color: red;
+	}
+}
+
+@keyframes scroll {
+	0% {
+		transform: translateX(100%);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
+}
+
+.autoScroll {
+	animation: scroll 10s linear infinite;
+}
+
+.blinkAnimation {
+	animation: blink 1s infinite;
+}
+
+.icon:hover .check {
+	opacity: 0.8;
+}
+
+.bar:hover .trash {
+	right: -0.5rem;
+	opacity: 1;
+}
