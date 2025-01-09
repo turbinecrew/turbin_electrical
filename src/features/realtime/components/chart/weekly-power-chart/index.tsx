@@ -1,6 +1,5 @@
 "use client"
 
-import type { TooltipItem } from "chart.js"
 import {
 	Chart as ChartJS,
 	CategoryScale,
@@ -14,15 +13,14 @@ import {
 import React from "react"
 import { Line } from "react-chartjs-2"
 
-import type { ProcessedData } from "@/features/realtime/types/weeklyPower"
+import { LoadingComponent } from "@/common/components/loading"
+import { useWeeklyPowerData } from "@/features/realtime/hooks/weekly-power-chart/useWeeklyPowerData"
 import {
 	Card,
 	CardHeader,
 	CardTitle,
 	CardContent,
 } from "@/shadcn/components/card"
-
-import { mockData } from "./mock"
 
 ChartJS.register(
 	CategoryScale,
@@ -34,31 +32,16 @@ ChartJS.register(
 	Filler,
 )
 
-export default function WeeklyPower() {
-	const processedData: ProcessedData[] = mockData.reduce(
-		(acc: ProcessedData[], item) => {
-			const existingItem = acc.find((data) => data.날짜 === item.날짜)
-			if (!existingItem) {
-				acc.push({
-					날짜: item.날짜,
-					발전량: item["발전량(kW)"],
-					잔여거래량: item["누적발전량(kWh)"] - (item["누적거래량(kWh)"] || 0),
-					date: "",
-					PowerGeneration: 0,
-					TradeableQuantity: 0,
-				})
-			}
-			return acc
-		},
-		[],
-	)
-
+export default function WeeklyPowerChart() {
+	const { data, isLoading, isError } = useWeeklyPowerData()
+	console.log(data)
+	// 차트를 위한 데이터 및 옵션 정의
 	const chartData = {
-		labels: [...new Set(processedData.map((item) => item.날짜))],
+		labels: data.map((item) => item.날짜),
 		datasets: [
 			{
 				label: "발전량 (kW)",
-				data: processedData.map((item) => item.발전량),
+				data: data.map((item) => item.발전량),
 				fill: true,
 				backgroundColor: "rgba(135, 206, 250, 0.2)",
 				borderColor: "rgba(70, 130, 180, 1)",
@@ -79,18 +62,6 @@ export default function WeeklyPower() {
 			title: {
 				display: true,
 				text: "주간 전력 생산량",
-			},
-			tooltip: {
-				callbacks: {
-					label: function (context: TooltipItem<"line">) {
-						const index = context.dataIndex
-						const item = processedData[index]
-						return [
-							`발전량: ${item.발전량} kW`,
-							`잔여 거래량: ${item.잔여거래량.toLocaleString()} kWh`,
-						]
-					},
-				},
 			},
 		},
 		scales: {
@@ -115,12 +86,19 @@ export default function WeeklyPower() {
 				<CardTitle>주간 전력 생산량</CardTitle>
 			</CardHeader>
 			<CardContent>
-				<div className="mx-auto h-[35vh] w-full">
-					<div className="flex h-full items-center justify-center">
-						<div className="h-full w-full">
-							<Line data={chartData} options={options} />
+				<div className="h-[50vh] w-full">
+					{isLoading ? (
+						<div className="flex h-full items-center justify-center">
+							<span>
+								Loading...
+								<LoadingComponent />
+							</span>
 						</div>
-					</div>
+					) : isError ? (
+						<div className="flex h-full items-center justify-center">Error</div>
+					) : (
+						<Line data={chartData} options={options} />
+					)}
 				</div>
 			</CardContent>
 		</Card>

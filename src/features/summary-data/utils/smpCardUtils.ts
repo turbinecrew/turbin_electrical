@@ -28,7 +28,7 @@ export function getMiniCardData(todaySMPData: TSMPData[] | null) {
 			color: "bg-[#F6FCF3]",
 		},
 		{
-			title: "일일",
+			title: "일일전력판매량",
 			value: 433,
 			unit: "Mwh",
 			isIncreased: false,
