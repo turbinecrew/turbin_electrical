@@ -1,6 +1,6 @@
 "use client"
 
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts"
+import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 
 import {
 	ChartContainer,
@@ -8,42 +8,49 @@ import {
 	ChartTooltipContent,
 } from "@/shadcn/components/chart"
 
-import type { BarChartComponentPT } from "./type"
+// 차트 설정 타입
+type TChartConfig = {
+	desktop: {
+		label: string
+		color: string
+	}
+	mobile: {
+		label: string
+		color: string
+	}
+}
 
-export function BarChartComponent({
-	chartConfig,
-	chartData,
-	BarDataKey,
-	XAxisDataKey,
-	Ymin,
-	Ymax,
-}: BarChartComponentPT) {
+// 차트 데이터 타입
+type TChartDataItem = {
+	month: string
+	desktop: number
+	mobile: number
+}
+
+// 공용 BarChart 컴포넌트
+type BarChartComponentProps = {
+	data: TChartDataItem[] // 차트 데이터
+	config: TChartConfig // 차트 설정
+}
+
+export function BarChartComponent({ data, config }: BarChartComponentProps) {
 	return (
-		<ChartContainer config={chartConfig}>
-			<BarChart data={chartData}>
+		<ChartContainer config={config}>
+			<BarChart accessibilityLayer data={data}>
 				<CartesianGrid vertical={false} />
 				<XAxis
-					dataKey={XAxisDataKey}
+					dataKey="month"
 					tickLine={false}
 					tickMargin={10}
 					axisLine={false}
-					tickFormatter={(value) => value.slice(0, 3)}
-				/>
-				<YAxis
-					domain={[Ymin, Ymax]}
-					axisLine={false}
-					tickLine={false}
-					tickMargin={10}
+					tickFormatter={(value) => value.slice(0, 3)} // 월을 3글자 축소
 				/>
 				<ChartTooltip
 					cursor={false}
 					content={<ChartTooltipContent indicator="dashed" />}
 				/>
-				<Bar
-					dataKey={BarDataKey}
-					fill={`var(--color-${BarDataKey})`}
-					radius={4}
-				/>
+				<Bar dataKey="desktop" fill={config.desktop.color} radius={4} />
+				<Bar dataKey="mobile" fill={config.mobile.color} radius={4} />
 			</BarChart>
 		</ChartContainer>
 	)

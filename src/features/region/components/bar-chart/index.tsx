@@ -1,6 +1,6 @@
 "use client"
 
-import { BarChartComponent } from "@/common/components/chart/bar"
+import { BarChartComponent } from "@/common/components/chart/bar-chart/index"
 import {
 	Card,
 	CardContent,
