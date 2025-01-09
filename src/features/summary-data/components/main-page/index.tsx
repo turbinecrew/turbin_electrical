@@ -1,14 +1,30 @@
 import { MiniCard } from "@/common/components/card"
-import { useTodaySMPData } from "@/features/summary-data/hook/useTodaySMPData"
-import { getMiniCardData } from "@/features/summary-data/utils/smpCardUtils"
+import { LoadingComponent } from "@/common/components/loading"
+import { useTodayRECData } from "@/features/summary-data/hooks/useTodayRECData"
+import { useTodaySMPData } from "@/features/summary-data/hooks/useTodaySMPData"
+import { getMiniCardData } from "@/features/summary-data/utils/mainMiniCardUtils"
 
 export function MainPageSummaryCard() {
-	const { data: TODAY_SMP, isLoading, isError } = useTodaySMPData()
+	const {
+		data: TODAY_SMP,
+		isLoading: isSMPDataLoading,
+		isError: isSMPDataError,
+	} = useTodaySMPData()
 
-	if (isLoading) return <div>Loading...</div>
-	if (isError) return <div>Error loading data</div>
+	const {
+		data: TODAY_REC,
+		isLoading: isRECDataLoading,
+		isError: isRECDataError,
+	} = useTodayRECData()
 
-	const miniCardData = getMiniCardData(TODAY_SMP)
+	if (isSMPDataLoading || isRECDataLoading) {
+		return <LoadingComponent />
+	}
+
+	if (isSMPDataError || isRECDataError) {
+		return <div>Error loading data.</div>
+	}
+	const miniCardData = getMiniCardData(TODAY_SMP, TODAY_REC)
 
 	return (
 		<div className="grid grid-cols-4 gap-4">
