@@ -5,6 +5,7 @@ import { BidPieChart } from "@/features/realtime/components/chart/bid-pie-chart"
 import WeeklyPowerChart from "@/features/realtime/components/chart/weekly-power-chart"
 import { miniCardData } from "@/features/realtime/types/miniCard"
 import { RegionalEnergyChart } from "@/features/region/components/RegionalEnergyChart"
+import GoogleMap from "@/features/region/components/google-map"
 import {
 	Card,
 	CardHeader,
@@ -39,9 +40,7 @@ export default function Home() {
 						<CardTitle>지도 영역</CardTitle>
 					</CardHeader>
 					<CardContent className="flex items-center justify-center p-2">
-						<div className="h-[40vh] w-[80%] bg-green-400 text-center text-lg font-bold text-white">
-							지도지도
-						</div>
+						<GoogleMap />
 					</CardContent>
 				</Card>
 			</div>

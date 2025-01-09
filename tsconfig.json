@@ -4,7 +4,7 @@
 		"paths": {
 			"@/*": ["./src/*"]
 		},
-		"types": ["next-auth"],
+		"types": ["next-auth", "google.maps"],
 		"target": "ES2017",
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,
