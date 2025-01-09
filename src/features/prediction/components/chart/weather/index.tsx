@@ -21,10 +21,8 @@ export default function WeatherChart() {
 	const [selectedRegion, setSelectedRegion] = useState("강원특별자치도")
 	const [activeKey, setActiveKey] = useState("일사량(W/㎡)")
 
-	// 오늘 날짜 계산
 	const today = getTodayString()
 
-	// 필터링된 데이터
 	const filteredData = useFilteredData(mockData, {
 		selectedRegion,
 		today,
@@ -32,7 +30,6 @@ export default function WeatherChart() {
 		endHour: 17,
 	})
 
-	// 지역 목록 생성
 	const regions = Array.from(new Set(mockData?.map((item) => item.지역) || []))
 
 	return (
