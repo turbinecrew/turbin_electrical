@@ -3,7 +3,7 @@
 import { BidPieChart } from "@/features/realtime/components/chart/bid-pie-chart"
 import WeeklyPowerChart from "@/features/realtime/components/chart/weekly-power-chart"
 import { RegionalEnergyChart } from "@/features/region/components/RegionalEnergyChart"
-import { MainPageSummaryCard } from "@/features/summary-data/components/main-page"
+import { MainPageSummaryCard } from "@/features/summary-data/components/main-page-mini-card"
 import {
 	Card,
 	CardHeader,

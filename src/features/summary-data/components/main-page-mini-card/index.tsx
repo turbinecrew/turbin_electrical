@@ -1,7 +1,7 @@
 import { MiniCard } from "@/common/components/card"
+import { useTodayElcGen } from "@/features/summary-data/hooks/uesTodayElcGen"
 import { useTodayRECData } from "@/features/summary-data/hooks/useTodayRECData"
 import { useTodaySMPData } from "@/features/summary-data/hooks/useTodaySMPData"
-import { useTodayElcGen } from "@/features/summary-data/hooks/uesTodayElcGen"
 import { getMiniCardData } from "@/features/summary-data/utils/mainMiniCardUtils"
 
 export function MainPageSummaryCard() {
