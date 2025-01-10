@@ -1,7 +1,7 @@
 import { MiniCard } from "@/common/components/card"
-import { LoadingComponent } from "@/common/components/loading"
 import { useTodayRECData } from "@/features/summary-data/hooks/useTodayRECData"
 import { useTodaySMPData } from "@/features/summary-data/hooks/useTodaySMPData"
+import { useTodayElcGen } from "@/features/summary-data/hooks/uesTodayElcGen"
 import { getMiniCardData } from "@/features/summary-data/utils/mainMiniCardUtils"
 
 export function MainPageSummaryCard() {
@@ -17,27 +17,73 @@ export function MainPageSummaryCard() {
 		isError: isRECDataError,
 	} = useTodayRECData()
 
-	if (isSMPDataLoading || isRECDataLoading) {
-		return <LoadingComponent />
-	}
+	const {
+		data: TIME_BASED_GENERATION,
+		isLoading: isElcGenDataLoading,
+		isError: isElcGenDataError,
+	} = useTodayElcGen()
 
-	if (isSMPDataError || isRECDataError) {
-		return <div>Error loading data.</div>
-	}
-	const miniCardData = getMiniCardData(TODAY_SMP, TODAY_REC)
+	const miniCardData = getMiniCardData(
+		TODAY_SMP,
+		TODAY_REC,
+		TIME_BASED_GENERATION,
+	)
 
 	return (
 		<div className="grid grid-cols-4 gap-4">
-			{miniCardData.map((item, idx) => (
-				<MiniCard
-					key={idx}
-					title={item.title}
-					value={item.value}
-					unit={item.unit}
-					isIncreased={item.isIncreased}
-					amount={item.amount}
-				/>
-			))}
+			{miniCardData.map((item, idx) => {
+				let value = item.value
+				let unit = item.unit
+				let amount = item.amount ?? 0
+				let isIncreased = item.isIncreased ?? false
+
+				// 로딩 상태 처리
+				if (idx === 0 && isElcGenDataLoading) {
+					value = "Loading..."
+					unit = ""
+					amount = 0
+					isIncreased = false
+				} else if (idx === 1 && isRECDataLoading) {
+					value = "Loading..."
+					unit = ""
+					amount = 0
+					isIncreased = false
+				} else if (idx === 2 && isSMPDataLoading) {
+					value = "Loading..."
+					unit = ""
+					amount = 0
+					isIncreased = false
+				}
+
+				// 에러 상태 처리
+				if (idx === 0 && isElcGenDataError) {
+					value = "Error"
+					unit = ""
+					amount = 0
+					isIncreased = false
+				} else if (idx === 1 && isRECDataError) {
+					value = "Error"
+					unit = ""
+					amount = 0
+					isIncreased = false
+				} else if (idx === 2 && isSMPDataError) {
+					value = "Error"
+					unit = ""
+					amount = 0
+					isIncreased = false
+				}
+
+				return (
+					<MiniCard
+						key={idx}
+						title={item.title}
+						value={value}
+						unit={unit}
+						isIncreased={isIncreased}
+						amount={amount}
+					/>
+				)
+			})}
 		</div>
 	)
 }
