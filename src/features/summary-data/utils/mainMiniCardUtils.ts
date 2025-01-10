@@ -1,15 +1,15 @@
-import type { TElcGen } from "@/features/summary-data/types/TodayElcGen"
 import type { TRECData } from "@/features/summary-data/types/TodayREC"
 import type { TSMPData } from "@/features/summary-data/types/TodaySmp"
+import type { TElcGen } from "@/features/summary-data/types/TodayElcGen"
 
 export function getMiniCardData(
-	todaySMPData: TSMPData[],
-	todayRECData: TRECData[],
-	todayElcGenData: TElcGen[],
+	todaySMPData: TSMPData[] = [],
+	todayRECData: TRECData[] = [],
+	todayElcGenData: TElcGen[] = [],
 ) {
 	// 최신 및 이전 SMP 데이터 처리
-	const recentSMPData = todaySMPData[todaySMPData.length - 1]
-	const previousSMPData = todaySMPData[todaySMPData.length - 2]
+	const recentSMPData = todaySMPData.at(-1)
+	const previousSMPData = todaySMPData.at(-2)
 
 	const smpDifference =
 		recentSMPData && previousSMPData
@@ -19,8 +19,8 @@ export function getMiniCardData(
 	const smpAmount = Math.round(Math.abs(smpDifference) * 100) / 100
 
 	// 최신 및 이전 REC 데이터 처리
-	const recentRECData = todayRECData[todayRECData.length - 1]
-	const previousRECData = todayRECData[todayRECData.length - 2]
+	const recentRECData = todayRECData.at(-1)
+	const previousRECData = todayRECData.at(-2)
 
 	const recDifference =
 		recentRECData && previousRECData
@@ -30,8 +30,8 @@ export function getMiniCardData(
 	const recAmount = Math.round(Math.abs(recDifference) * 100) / 100
 
 	// 최신 및 이전 전력생산량 데이터 처리
-	const recentElcGenData = todayElcGenData[todayElcGenData.length - 1]
-	const previousElcGenData = todayElcGenData[todayElcGenData.length - 2]
+	const recentElcGenData = todayElcGenData.at(-1)
+	const previousElcGenData = todayElcGenData.at(-2)
 
 	const elcGenDifference =
 		recentElcGenData && previousElcGenData
