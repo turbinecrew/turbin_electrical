@@ -4,7 +4,10 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
 
+
 import { NotificationPopup } from "@/common/components/notification-center"
+
+
 import AuthModal from "@/features/auth/components/modal/auth"
 
 export default function Header() {
