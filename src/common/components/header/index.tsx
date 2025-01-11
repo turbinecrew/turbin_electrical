@@ -1,17 +1,10 @@
 "use client"
-import {
-	Search,
-	Slash,
-	House,
-	Settings,
-	CircleUser,
-	Bell,
-	X,
-} from "lucide-react"
+import { Search, Slash, House, Settings, CircleUser, X } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
 
+import { NotificationPopup } from "@/common/components/notification-center"
 import AuthModal from "@/features/auth/components/modal/auth"
 
 export default function Header() {
@@ -99,8 +92,8 @@ export default function Header() {
 							Sign In
 						</span>
 					</div>
+					<NotificationPopup />
 					<Settings className="h-4 w-4 cursor-pointer text-gray-700 hover:text-tbGreen md:h-5 md:w-5" />
-					<Bell className="h-4 w-4 cursor-pointer text-gray-700 hover:text-tbGreen md:h-5 md:w-5" />
 				</div>
 			</div>
 			<AuthModal isOpen={isSignInModalOpen} setIsOpen={setIsSignInModalOpen} />
