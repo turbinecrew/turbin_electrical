@@ -9,19 +9,13 @@ import {
 	Title,
 	Tooltip,
 	Filler,
+	ChartOptions,
 } from "chart.js"
-import React from "react"
 import { Line } from "react-chartjs-2"
 
-import { LoadingComponent } from "@/common/components/loading"
 import { useWeeklyPowerData } from "@/features/realtime/hooks/weekly-power-chart/useWeeklyPowerData"
-import {
-	Card,
-	CardHeader,
-	CardTitle,
-	CardContent,
-} from "@/shadcn/components/card"
 
+// Chart.js에 필요한 스케일 및 요소 등록
 ChartJS.register(
 	CategoryScale,
 	LinearScale,
@@ -33,9 +27,11 @@ ChartJS.register(
 )
 
 export default function WeeklyPowerChart() {
-	const { data, isLoading, isError } = useWeeklyPowerData()
-	console.log(data)
-	// 차트를 위한 데이터 및 옵션 정의
+	const { data = [], isLoading, isError } = useWeeklyPowerData()
+
+	if (isLoading) return <p>Loading...</p>
+	if (isError) return <p>Error loading data.</p>
+
 	const chartData = {
 		labels: data.map((item) => item.날짜),
 		datasets: [
@@ -51,13 +47,14 @@ export default function WeeklyPowerChart() {
 		],
 	}
 
-	const options = {
+	// Chart.js 옵션 정의
+	const options: ChartOptions<"line"> = {
 		responsive: true,
 		maintainAspectRatio: false,
 		plugins: {
 			legend: {
 				display: true,
-				position: "top" as const,
+				position: "top",
 			},
 			title: {
 				display: true,
@@ -66,6 +63,7 @@ export default function WeeklyPowerChart() {
 		},
 		scales: {
 			x: {
+				type: "category", // 명시적으로 'category' 타입 지정
 				title: {
 					display: true,
 					text: "날짜",
@@ -81,26 +79,8 @@ export default function WeeklyPowerChart() {
 	}
 
 	return (
-		<Card className="w-full">
-			<CardHeader>
-				<CardTitle>주간 전력 생산량</CardTitle>
-			</CardHeader>
-			<CardContent>
-				<div className="h-[50vh] w-full">
-					{isLoading ? (
-						<div className="flex h-full items-center justify-center">
-							<span>
-								Loading...
-								<LoadingComponent />
-							</span>
-						</div>
-					) : isError ? (
-						<div className="flex h-full items-center justify-center">Error</div>
-					) : (
-						<Line data={chartData} options={options} />
-					)}
-				</div>
-			</CardContent>
-		</Card>
+		<div className="h-[50vh] w-full">
+			<Line data={chartData} options={options} />
+		</div>
 	)
 }
