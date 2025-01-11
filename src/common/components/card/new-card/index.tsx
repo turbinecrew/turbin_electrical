@@ -1,4 +1,6 @@
 "use client"
+import clsx from "clsx"
+
 import { cn } from "@/util/utils"
 
 type CardPT = {
@@ -73,20 +75,35 @@ TbCardHeader.displayName = "TbCardHeader"
 TbCardContent.displayName = "TbCardContent"
 
 export type MiniCardPT = {
-	title: string
+	title?: string
 	value?: string | number
 	unit?: string
 	amount?: number
-	isIncreased?: boolean
+	isIncreased?: boolean | null // true: 증가, false: 감소, null: 변화 없음
+	variant?: string | number
 	children?: React.ReactNode
 	className?: string
 }
-export function MiniCard({ title, children, className }: MiniCardPT) {
+
+export function MiniCard({
+	title,
+	children,
+	className,
+	variant = "default",
+}: MiniCardPT) {
+	const cardClasses = clsx(
+		"w-full flex-col gap-2 rounded-xl p-5 shadow-md",
+		{
+			"bg-[#FAFAFA]": variant === "default",
+			"bg-[#F6FCF3]": variant === "light" || variant === 0,
+			"bg-[#EFF6F1]": variant === "deep" || variant === 1,
+		},
+		className,
+	)
+
 	return (
-		<div
-			className={`bg-[#EFF6F1], w-full flex-col gap-2 rounded-xl p-6 shadow-md ${className}`}
-		>
-			<div className="text-xs font-semibold">{title}</div>
+		<div className={cardClasses}>
+			{title && <div className="text-xs font-semibold">{title}</div>}
 			{children}
 		</div>
 	)
@@ -99,20 +116,16 @@ export function MiniCardContent({
 	isIncreased,
 }: MiniCardPT) {
 	return (
-		<div className="flex items-center justify-between">
-			<div className="flex items-baseline gap-1">
-				<span className="scroll-m-20 text-2xl font-semibold tracking-tight">
-					{value}
-				</span>
-				<span className="scroll-m-20 text-lg font-semibold tracking-tight">
-					{unit}
-				</span>
+		<div className="flex max-w-full flex-wrap items-center justify-between break-words">
+			<div className="flex items-center gap-1 font-semibold tracking-tight">
+				<span className="text-xl md:text-xl">{value}</span>
+				<span className="text-xs md:text-sm">{unit}</span>
 			</div>
 			{(isIncreased != null || "") &&
 				(isIncreased ? (
-					<div className="text-xs font-bold text-red-600">+{amount}</div>
+					<div className="text-xs font-medium text-red-600">(▲{amount})</div>
 				) : (
-					<div className="text-xs font-bold text-blue-600">-{amount}</div>
+					<div className="text-xs font-medium text-blue-600">(▼{amount})</div>
 				))}
 		</div>
 	)
