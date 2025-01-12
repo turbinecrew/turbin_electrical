@@ -6,10 +6,9 @@ import { TitleCard } from "@/common/components/card"
 import { LineChartComponent } from "@/common/components/chart/line-chart"
 import { TimeRangeOptions } from "@/common/components/chart/time-range-options"
 import {
-	DateConverter,
 	TodaySMPDateConverter,
 	WeeklySMPDateConverter,
-} from "@/features/trading-dashboard/hook/date-converter"
+} from "@/features/trading-dashboard/hook/smp-date-converter"
 import {
 	dateFilteredData,
 	smpTimeRange,
@@ -17,6 +16,7 @@ import {
 import { useSMPChartData } from "@/features/trading-dashboard/hook/useSMPChartData"
 
 import { getChartConfig } from "./data"
+import { TSMPChartData } from "@/features/trading-dashboard/types/smp-rec-linechart"
 
 export function SmpLineChart() {
 	const chartConfig = getChartConfig()
@@ -33,7 +33,7 @@ export function SmpLineChart() {
 		return <div>Error loading data</div>
 	}
 
-	const chartData: TChartData[] =
+	const chartData: TSMPChartData =
 		data?.map((item) => ({
 			date:
 				timeRange == "1d"

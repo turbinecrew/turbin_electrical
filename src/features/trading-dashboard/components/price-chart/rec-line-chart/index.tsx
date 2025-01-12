@@ -11,13 +11,27 @@ import {
 } from "@/features/trading-dashboard/hook/date-range-filter"
 
 import { getChartConfig } from "./data"
-import { chartData } from "./mock"
+import { useRECChartData } from "@/features/trading-dashboard/hook/useRECChartData"
 
 export function RecLineChart() {
 	const chartConfig = getChartConfig()
 	const [timeRange, setTimeRange] = useState("30d")
 
-	const filteredData = dateFilteredData({ chartData, timeRange, type: "rec" })
+	const { data, isLoading, isError } = useRECChartData()
+
+	if (isLoading) {
+		return <div>Loading...</div>
+	}
+
+	if (isError) {
+		return <div>Error loading data</div>
+	}
+
+	const filteredData = dateFilteredData({
+		chartData: data,
+		timeRange: timeRange,
+		type: "rec",
+	})
 	const timeRangeOptions = recTimeRange
 
 	return (
@@ -35,7 +49,7 @@ export function RecLineChart() {
 					type={"linear"}
 					dot={false}
 					Ymin={0}
-					Ymax={600}
+					Ymax={400000}
 				/>
 			</div>
 		</TitleCard>

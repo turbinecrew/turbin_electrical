@@ -16,31 +16,24 @@ export function dateFilteredData({
 	timeRange,
 }: dateFilteredDataPT) {
 	if (type === "rec") {
-		const filteredData = chartData.filter((item) => {
-			// item.date를 Date 객체로 변환 후, 시간은 0으로 설정
-			const date = new Date(item.date)
-			date.setHours(0, 0, 0, 0) // 시간, 분, 초, 밀리초를 0으로 설정
+		let daysToSubtract = 30 // 기본값 설정
 
-			// 기준 날짜를 설정 (현재 날짜 기준으로 수정)
-			const referenceDate = new Date(2025, 0, 2) // 2025년 1월 2일을 기준으로 설정
-			referenceDate.setHours(0, 0, 0, 0) // 기준 날짜의 시간도 0으로 설정
-			let daysToSubtract = 30
+		if (timeRange === "30d") {
+			daysToSubtract = Math.max(1, Math.floor((30 / 7) * 2)) // 최소 1로 설정
+		} else if (timeRange === "90d") {
+			daysToSubtract = Math.max(1, Math.floor((90 / 7) * 2)) // 최소 1로 설정
+		} else if (timeRange === "180d") {
+			daysToSubtract = Math.max(1, Math.floor((180 / 7) * 2)) // 최소 1로 설정
+		}
 
-			// recTimeRange에 따라 daysToSubtract 값 설정
-			if (timeRange === "30d") {
-				daysToSubtract = 30
-			} else if (timeRange === "90d") {
-				daysToSubtract = 90
-			} else if (timeRange === "180d") {
-				daysToSubtract = 180
-			}
+		if (!Array.isArray(chartData) || chartData.length === 0) {
+			console.log("No data available")
+			return []
+		}
 
-			const startDate = new Date(referenceDate)
-			startDate.setDate(referenceDate.getDate() - daysToSubtract)
-			startDate.setHours(0, 0, 0, 0) // startDate의 시간은 0으로 설정
+		// 데이터를 daysToSubtract만큼 잘라서 리턴
+		const filteredData = chartData.slice(0, daysToSubtract)
 
-			return date >= startDate // 날짜 비교
-		})
 		return filteredData
 	}
 	if (type === "smp") {
