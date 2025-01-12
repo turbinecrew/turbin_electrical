@@ -5,7 +5,7 @@ import { QUERY_KEYS } from "@/constants/queryKeys"
 
 import { fetchWeeklySMPData } from "../api/fetchWeeklySMPData"
 
-export const useTodaySMPData = () => {
+export const useWeeklySMPData = () => {
 	return useQuery({
 		queryKey: [QUERY_KEYS.WEEKLY_SMP], // 고유한 키
 		queryFn: fetchWeeklySMPData, // 데이터를 가져오는 함수

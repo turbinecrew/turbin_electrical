@@ -1,5 +1,5 @@
 type dateFilteredDataPT = {
-	chartData: { date: string; smp?: number; rec?: number }[]
+	chartData: { date: Date; smp?: number; rec?: number }[]
 	timeRange: string
 	type: string
 }

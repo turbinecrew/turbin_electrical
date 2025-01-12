@@ -15,12 +15,18 @@ export function dateFilteredData({
 	chartData,
 	timeRange,
 }: dateFilteredDataPT) {
-	const filteredData = chartData.filter((item) => {
-		const date = new Date(item.date)
-		const referenceDate = new Date(2024, 11, 28, 22, 0, 0)
-		let daysToSubtract = 30
+	if (type === "rec") {
+		const filteredData = chartData.filter((item) => {
+			// item.date를 Date 객체로 변환 후, 시간은 0으로 설정
+			const date = new Date(item.date)
+			date.setHours(0, 0, 0, 0) // 시간, 분, 초, 밀리초를 0으로 설정
 
-		if (type == "rec") {
+			// 기준 날짜를 설정 (현재 날짜 기준으로 수정)
+			const referenceDate = new Date(2025, 0, 2) // 2025년 1월 2일을 기준으로 설정
+			referenceDate.setHours(0, 0, 0, 0) // 기준 날짜의 시간도 0으로 설정
+			let daysToSubtract = 30
+
+			// recTimeRange에 따라 daysToSubtract 값 설정
 			if (timeRange === "30d") {
 				daysToSubtract = 30
 			} else if (timeRange === "90d") {
@@ -30,29 +36,25 @@ export function dateFilteredData({
 			}
 
 			const startDate = new Date(referenceDate)
+			startDate.setDate(referenceDate.getDate() - daysToSubtract)
+			startDate.setHours(0, 0, 0, 0) // startDate의 시간은 0으로 설정
 
-			startDate.setDate(startDate.getDate() - daysToSubtract)
-
-			return date >= startDate
-		} else if (type == "smp") {
-			const startDate = new Date(referenceDate)
-			const endDate = new Date(referenceDate)
-
-			if (timeRange === "1d") {
-				daysToSubtract = 1
-			} else if (timeRange === "7d") {
-				daysToSubtract = 7
-				endDate.setDate(startDate.getDate() - 2)
-			} else if (timeRange === "30d") {
-				daysToSubtract = 30
-				endDate.setDate(startDate.getDate() - 2)
-			}
-
-			startDate.setDate(endDate.getDate() - daysToSubtract)
-
-			return endDate >= date && date >= startDate
+			return date >= startDate // 날짜 비교
+		})
+		return filteredData
+	}
+	if (type === "smp") {
+		let daysToSubtract = 0
+		// smpTimeRange에 따라 daysToSubtract 값 설정
+		if (timeRange === "1d") {
+			daysToSubtract = 0
+		} else if (timeRange === "7d") {
+			daysToSubtract = 7
+		} else if (timeRange === "30d") {
+			daysToSubtract = 30
 		}
-	})
-
-	return filteredData
+		const filteredData = chartData.slice(-daysToSubtract)
+		return filteredData
+	}
+	return chartData
 }
