@@ -7,7 +7,7 @@ import { TimeRangeOptions } from "@/common/components/chart/time-range-options"
 import {
 	dateFilteredData,
 	recTimeRange,
-} from "@/features/realtime/hooks/date-range-filter"
+} from "@/features/summary-data/hook/date-range-filter"
 import {
 	Card,
 	CardContent,

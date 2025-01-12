@@ -1,5 +1,5 @@
-import { rawData } from "@/features/realtime/components/chart/smp-line-chart/mock"
-import { generateChartConfig } from "@/features/realtime/hooks/generate-chartConfig"
+import { generateChartConfig } from "@/features/hooks/generate-chartConfig"
+import { rawData } from "@/features/summary-data/components/trading-page/price-chart/smp-line-chart/mock"
 import type { ChartConfig } from "@/shadcn/components/chart"
 
 function getDailyData() {
