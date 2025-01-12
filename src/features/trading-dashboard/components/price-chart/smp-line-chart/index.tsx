@@ -8,7 +8,7 @@ import { TimeRangeOptions } from "@/common/components/chart/time-range-options"
 import {
 	dateFilteredData,
 	smpTimeRange,
-} from "@/features/summary-data/hook/date-range-filter"
+} from "@/features/trading-dashboard/hook/date-range-filter"
 
 import { chartData, getChartConfig } from "./data"
 
