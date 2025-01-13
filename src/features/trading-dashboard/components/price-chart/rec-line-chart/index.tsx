@@ -8,9 +8,9 @@ import { TimeRangeOptions } from "@/common/components/chart/time-range-options"
 import {
 	dateFilteredData,
 	recTimeRange,
-} from "@/features/trading-dashboard/hook/date-range-filter"
-import { generateChartConfig } from "@/features/trading-dashboard/hook/generate-chartConfig"
-import { useRECChartData } from "@/features/trading-dashboard/hook/useRECChartData"
+} from "@/features/trading-dashboard/utils/dateFilteredData"
+import { generateChartConfig } from "@/features/trading-dashboard/utils/generateChartConfig"
+import { useRECChartData } from "@/features/trading-dashboard/hooks/useRECChartData"
 
 export function RecLineChart() {
 	const [timeRange, setTimeRange] = useState("30d")

@@ -5,17 +5,17 @@ import { useState } from "react"
 import { TitleCard } from "@/common/components/card"
 import { LineChartComponent } from "@/common/components/chart/line-chart"
 import { TimeRangeOptions } from "@/common/components/chart/time-range-options"
-import {
-	dateFilteredData,
-	smpTimeRange,
-} from "@/features/trading-dashboard/hook/date-range-filter"
-import { generateChartConfig } from "@/features/trading-dashboard/hook/generate-chartConfig"
+import { useSMPChartData } from "@/features/trading-dashboard/hooks/useSMPChartData"
+import type { TSMPData } from "@/features/trading-dashboard/types/TSMPData"
 import {
 	TodaySMPDateConverter,
 	WeeklySMPDateConverter,
-} from "@/features/trading-dashboard/hook/smp-date-converter"
-import { useSMPChartData } from "@/features/trading-dashboard/hook/useSMPChartData"
-import type { TSMPData } from "@/features/trading-dashboard/types/TSMPData"
+} from "@/features/trading-dashboard/utils/SMPDateConverter"
+import {
+	dateFilteredData,
+	smpTimeRange,
+} from "@/features/trading-dashboard/utils/dateFilteredData"
+import { generateChartConfig } from "@/features/trading-dashboard/utils/generateChartConfig"
 
 export function SmpLineChart() {
 	const [timeRange, setTimeRange] = useState("1d")

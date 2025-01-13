@@ -1,7 +1,7 @@
 "use client"
 import type { MiniCardPT } from "@/common/components/card"
 import { MiniCard } from "@/common/components/card"
-import { usePriceCardData } from "@/features/trading-dashboard/hook/usePriceCardData"
+import { usePriceCardData } from "@/features/trading-dashboard/hooks/usePriceCardData"
 
 type PriceCardPT = {
 	activeChart: number | null

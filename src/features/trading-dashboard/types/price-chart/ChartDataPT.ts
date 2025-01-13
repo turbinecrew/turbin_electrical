@@ -1,4 +1,4 @@
 export type ChartDataPT = {
-	date: Date
-	[key: string]: number | Date | undefined
+	date: Date | string
+	[key: string]: number | Date | string | undefined
 }

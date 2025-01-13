@@ -1,5 +1,5 @@
-import { useTodayRECData } from "@/features/trading-dashboard/hook/useTodayRECData"
-import { useTodaySMPData } from "@/features/trading-dashboard/hook/useTodaySMPData"
+import { useTodayRECData } from "@/features/trading-dashboard/hooks/useTodayRECData"
+import { useTodaySMPData } from "@/features/trading-dashboard/hooks/useTodaySMPData"
 
 export const usePriceCardData = () => {
 	const {

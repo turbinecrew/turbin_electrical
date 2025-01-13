@@ -2,12 +2,12 @@
 
 import { TitleCard } from "@/common/components/card"
 import { LineChartComponent } from "@/common/components/chart/line-chart"
+import { generateChartConfig } from "@/features/trading-dashboard/utils/generateChartConfig"
 
-import { getChartConfig } from "./data"
 import { chartData } from "./mock"
 
 export function VolumeChart() {
-	const chartConfig = getChartConfig()
+	const chartConfig = generateChartConfig(chartData)
 
 	return (
 		<TitleCard title="월별 거래량">
