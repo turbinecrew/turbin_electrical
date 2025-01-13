@@ -5,7 +5,7 @@ import {
 	FilterColumnList,
 	type DebouncedInputPT,
 	type FilterDataByRangePT,
-} from "@/features/realtime/components/types/table/types"
+} from "@/features/trading-data/types/table/types"
 
 function DebouncedInput({
 	value: initialValue,

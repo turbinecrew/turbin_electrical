@@ -7,7 +7,7 @@ import { SmpLineChart } from "@/features/realtime/components/chart/smp-line-char
 import { VolumeChart } from "@/features/realtime/components/chart/trading-volume-chart"
 import { PriceCard } from "@/features/realtime/components/price-card"
 import { TradingVolumeCards } from "@/features/realtime/components/slide-card"
-import { TradingDataTable } from "@/features/realtime/components/trading-table"
+import { TradingDataTable } from "@/features/trading-data/components/trading-table"
 
 export default function Trading() {
 	const [activeChart, setActiveChart] = useState<number | null>(0)
