@@ -19,7 +19,7 @@ export const TodaySMPDateConverter = (dateString: string): Date => {
 	return new Date(dateString)
 }
 
-export function WeeklySMPDateConverter(dateString: string): Date {
+export const WeeklySMPDateConverter = (dateString: string): Date => {
 	// "20250103" 형식의 문자열을 "2025-01-03" 형식으로 변환
 	const formattedDate = new Date(
 		dateString.replace(/^(\d{4})(\d{2})(\d{2})$/, "$1-$2-$3"),

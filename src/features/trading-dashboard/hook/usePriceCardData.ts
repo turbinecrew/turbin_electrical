@@ -1,7 +1,7 @@
 import { useTodayRECData } from "@/features/trading-dashboard/hook/useTodayRECData"
 import { useTodaySMPData } from "@/features/trading-dashboard/hook/useTodaySMPData"
 
-export function usePriceCardData() {
+export const usePriceCardData = () => {
 	const {
 		data: todaySMPData,
 		isLoading: isSMPLoading,

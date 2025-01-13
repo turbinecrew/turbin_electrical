@@ -9,45 +9,48 @@ import {
 	dateFilteredData,
 	recTimeRange,
 } from "@/features/trading-dashboard/hook/date-range-filter"
+import { generateChartConfig } from "@/features/trading-dashboard/hook/generate-chartConfig"
 import { useRECChartData } from "@/features/trading-dashboard/hook/useRECChartData"
 
-import { getChartConfig } from "./data"
-
 export function RecLineChart() {
-	const chartConfig = getChartConfig()
 	const [timeRange, setTimeRange] = useState("30d")
-
 	const { data, isLoading, isError } = useRECChartData()
-
-	const filteredData = dateFilteredData({
-		chartData: data || [], //data가 undefined인 경우 []
-		timeRange: timeRange,
-		type: "rec",
-	})
 	const timeRangeOptions = recTimeRange
 
-	if (isLoading) {
-		return (
-			<TitleCard
-				title="REC 가격"
-				className="h-full"
-				rightArea={TimeRangeOptions(timeRange, setTimeRange, timeRangeOptions)}
-			>
-				<div className="pt-2">Loading...</div>
-			</TitleCard>
-		)
-	}
+	const contents = () => {
+		if (isLoading) {
+			return <div className="pt-2">Loading...</div>
+		}
 
-	if (isError) {
-		return (
-			<TitleCard
-				title="REC 가격"
-				className="h-full"
-				rightArea={TimeRangeOptions(timeRange, setTimeRange, timeRangeOptions)}
-			>
-				<div className="pt-2">Error loading data</div>
-			</TitleCard>
-		)
+		if (isError) {
+			return <div className="pt-2">Error loading data</div>
+		}
+
+		if (data) {
+			const chartConfig = generateChartConfig(data)
+			const filteredData = dateFilteredData({
+				chartData: data,
+				timeRange: timeRange,
+				type: "rec",
+			})
+
+			return (
+				<div className="pt-2">
+					<LineChartComponent
+						chartConfig={chartConfig}
+						chartData={filteredData}
+						LineDataKey={"rec"}
+						XAixsDataKey={"date"}
+						type={"linear"}
+						dot={false}
+						Ymin={0}
+						Ymax={"auto"}
+					/>
+				</div>
+			)
+		}
+
+		return null
 	}
 
 	return (
@@ -56,18 +59,7 @@ export function RecLineChart() {
 			className="h-full"
 			rightArea={TimeRangeOptions(timeRange, setTimeRange, timeRangeOptions)}
 		>
-			<div className="pt-2">
-				<LineChartComponent
-					chartConfig={chartConfig}
-					chartData={filteredData}
-					LineDataKey={"rec"}
-					XAixsDataKey={"date"}
-					type={"linear"}
-					dot={false}
-					Ymin={0}
-					Ymax={"auto"}
-				/>
-			</div>
+			{contents()}
 		</TitleCard>
 	)
 }

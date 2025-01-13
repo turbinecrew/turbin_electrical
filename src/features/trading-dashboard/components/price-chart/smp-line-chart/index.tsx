@@ -9,6 +9,7 @@ import {
 	dateFilteredData,
 	smpTimeRange,
 } from "@/features/trading-dashboard/hook/date-range-filter"
+import { generateChartConfig } from "@/features/trading-dashboard/hook/generate-chartConfig"
 import {
 	TodaySMPDateConverter,
 	WeeklySMPDateConverter,
@@ -16,13 +17,8 @@ import {
 import { useSMPChartData } from "@/features/trading-dashboard/hook/useSMPChartData"
 import type { TSMPData } from "@/features/trading-dashboard/types/TSMPData"
 
-import { getChartConfig } from "./data"
-
 export function SmpLineChart() {
-	const chartConfig = getChartConfig()
 	const [timeRange, setTimeRange] = useState("1d")
-
-	// timeRange에 맞는 데이터를 가져옵니다.
 	const { data, isLoading, isError } = useSMPChartData(timeRange)
 
 	const chartData: { date: Date; smp: number }[] =
@@ -41,38 +37,17 @@ export function SmpLineChart() {
 	})
 
 	const timeRangeOptions = smpTimeRange
+	const contents = () => {
+		if (isLoading) {
+			return <div className="pt-2">Loading...</div>
+		}
 
-	if (isLoading) {
-		return (
-			<TitleCard
-				title="SMP 가격"
-				className="h-full"
-				rightArea={TimeRangeOptions(timeRange, setTimeRange, timeRangeOptions)}
-			>
-				<div className="pt-2">Loading...</div>
-			</TitleCard>
-		)
-	}
-
-	if (isError) {
-		return (
-			<TitleCard
-				title="SMP 가격"
-				className="h-full"
-				rightArea={TimeRangeOptions(timeRange, setTimeRange, timeRangeOptions)}
-			>
-				<div className="pt-2">Error loading data</div>
-			</TitleCard>
-		)
-	}
-
-	return (
-		<div>
-			<TitleCard
-				title="SMP 가격"
-				className="h-full"
-				rightArea={TimeRangeOptions(timeRange, setTimeRange, timeRangeOptions)}
-			>
+		if (isError) {
+			return <div className="pt-2">Error loading data</div>
+		}
+		if (data) {
+			const chartConfig = generateChartConfig(chartData)
+			return (
 				<div className="pt-2">
 					<LineChartComponent
 						chartConfig={chartConfig}
@@ -85,6 +60,18 @@ export function SmpLineChart() {
 						Ymax={200}
 					/>
 				</div>
+			)
+		}
+	}
+
+	return (
+		<div>
+			<TitleCard
+				title="SMP 가격"
+				className="h-full"
+				rightArea={TimeRangeOptions(timeRange, setTimeRange, timeRangeOptions)}
+			>
+				{contents()}
 			</TitleCard>
 		</div>
 	)
