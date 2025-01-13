@@ -13,7 +13,7 @@ export async function GET() {
 				{ status: 500 },
 			)
 		}
-		const collection = db.collection("주간SMP") // 컬렉션 선택
+		const collection = db.collection("WeeklySMP") // 컬렉션 선택
 		const data = await collection.find({}).toArray() // 모든 문서 조회
 
 		// 성공적으로 데이터를 JSON으로 반환
