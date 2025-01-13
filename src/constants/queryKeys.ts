@@ -1,4 +1,5 @@
 export enum QUERY_KEYS {
+	TRADE = "get-trade",
 	PAST_REC = "get-past-REC",
 	PAST_SMP = "get-past-SMP",
 	TODAY_SMP = "get-today-SMP",
