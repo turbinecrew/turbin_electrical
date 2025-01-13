@@ -1,13 +1,6 @@
 "use client"
 
-import {
-	CartesianGrid,
-	Line,
-	LineChart,
-	ReferenceLine,
-	XAxis,
-	YAxis,
-} from "recharts"
+import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts"
 import type { AxisDomainItem } from "recharts/types/util/types"
 
 import type { LineChartComponentPT } from "@/common/components/chart/line-chart/type"
@@ -59,18 +52,17 @@ export function LineChartComponent({
 					tickMargin={8}
 					tickFormatter={(value) => {
 						const date = new Date(value)
-						const options: Intl.DateTimeFormatOptions = {
-							month: "short",
-							day: "numeric",
-						}
+						const isOnTime = date.getMinutes() !== 0 //협정 세계시 0시가 한국 시간 9시로 기본설정 되므로 9시로 했다
 
-						if (date.getHours() !== 0 || date.getMinutes() !== 0) {
-							options.hour = "numeric"
-						}
+						const options: Intl.DateTimeFormatOptions = isOnTime
+							? { month: "numeric", day: "numeric", weekday: "short" } // 00일 형식
+							: { hour: "numeric", weekday: "short" } // 시간 포함 형식
 
-						return date.toLocaleString("en-US", options)
+						// 한국어 날짜 및 시간 포맷
+						return new Intl.DateTimeFormat("ko-KR", options).format(date)
 					}}
 				/>
+
 				<YAxis
 					tickLine={true}
 					axisLine={true}

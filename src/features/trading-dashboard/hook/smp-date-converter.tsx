@@ -1,4 +1,4 @@
-export function TodaySMPDateConverter(dateString: string): Date | string {
+export const TodaySMPDateConverter = (dateString: string): Date => {
 	const today = new Date() // 현재 날짜를 기준으로
 	const dayPattern = /(\d{1,2})일 (\d{1,2})시/ // "10일 01시" 포맷을 찾는 정규 표현식
 	const matches = dateString.match(dayPattern)
@@ -14,27 +14,17 @@ export function TodaySMPDateConverter(dateString: string): Date | string {
 		today.setSeconds(0)
 		today.setMilliseconds(0)
 
-		const options: Intl.DateTimeFormatOptions = {
-			year: "numeric",
-			month: "short",
-			day: "numeric",
-			hour: "numeric",
-			minute: "numeric",
-			hour12: false, // 24시간 포맷
-		}
-
-		return today.toLocaleString("en-US", options)
+		return today
 	}
-	return dateString
+	return new Date(dateString)
 }
 
 export function WeeklySMPDateConverter(dateString: string): Date {
 	// "20250103" 형식의 문자열을 "2025-01-03" 형식으로 변환
-	const formattedDate = dateString.replace(
-		/^(\d{4})(\d{2})(\d{2})$/,
-		"$1-$2-$3",
+	const formattedDate = new Date(
+		dateString.replace(/^(\d{4})(\d{2})(\d{2})$/, "$1-$2-$3"),
 	)
 
 	// 변환된 문자열을 Date 객체로 생성
-	return new Date(formattedDate)
+	return new Date(formattedDate.setHours(0, 1, 0, 0))
 }

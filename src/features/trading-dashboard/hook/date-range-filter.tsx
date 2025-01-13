@@ -1,3 +1,5 @@
+import type { DateFilteredDataPT } from "@/features/trading-dashboard/types/price-chart/DateFilteredDataPT"
+
 export const smpTimeRange = [
 	{ value: "1d", label: "Day" },
 	{ value: "7d", label: "Week" },
@@ -10,20 +12,20 @@ export const recTimeRange = [
 	{ value: "180d", label: "Half" },
 ]
 
-export function dateFilteredData({
+export const dateFilteredData = ({
 	type,
 	chartData,
 	timeRange,
-}: dateFilteredDataPT) {
+}: DateFilteredDataPT) => {
 	if (type === "rec") {
 		let daysToSubtract = 30 // 기본값 설정
 
 		if (timeRange === "30d") {
-			daysToSubtract = Math.max(1, Math.floor((30 / 7) * 2)) // 최소 1로 설정
+			daysToSubtract = 9 // (30 / 7) * 2
 		} else if (timeRange === "90d") {
-			daysToSubtract = Math.max(1, Math.floor((90 / 7) * 2)) // 최소 1로 설정
+			daysToSubtract = 26 // (90 / 7) * 2)
 		} else if (timeRange === "180d") {
-			daysToSubtract = Math.max(1, Math.floor((180 / 7) * 2)) // 최소 1로 설정
+			daysToSubtract = 53 // (180 / 7) * 2)
 		}
 
 		if (!Array.isArray(chartData) || chartData.length === 0) {
