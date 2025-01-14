@@ -5,5 +5,6 @@ import { chartData } from "./mock"
 
 export function getChartConfig() {
 	const chartConfig: ChartConfig = generateChartConfig({ data: chartData })
+
 	return chartConfig
 }
