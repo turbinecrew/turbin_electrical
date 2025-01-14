@@ -19,6 +19,7 @@ export function LineChartComponent({
 	Ymax = "auto",
 	type,
 	dot,
+	yFormat,
 }: LineChartComponentPT) {
 	function generateTicks(
 		Ymin: AxisDomainItem,
@@ -51,15 +52,40 @@ export function LineChartComponent({
 					axisLine={{ stroke: "#000000", strokeWidth: 1 }}
 					tickMargin={8}
 					tickFormatter={(value) => {
-						const date = new Date(value)
-						const isOnTime = date.getMinutes() !== 0 //협정 세계시 0시가 한국 시간 9시로 기본설정 되므로 9시로 했다
+						if (yFormat == "MD") {
+							const date = new Date(value)
 
-						const options: Intl.DateTimeFormatOptions = isOnTime
-							? { month: "numeric", day: "numeric", weekday: "short" } // 00일 형식
-							: { hour: "numeric", weekday: "short" } // 시간 포함 형식
+							const options: Intl.DateTimeFormatOptions = {
+								month: "numeric",
+								day: "numeric",
+								weekday: "short",
+							} // 1일 (월) 10시
 
-						// 한국어 날짜 및 시간 포맷
-						return new Intl.DateTimeFormat("ko-KR", options).format(date)
+							return new Intl.DateTimeFormat("ko-KR", options).format(date)
+						}
+
+						if (yFormat == "DT") {
+							const date = new Date(value)
+
+							const options: Intl.DateTimeFormatOptions = {
+								day: "numeric",
+								hour: "numeric",
+								weekday: "short",
+							} // 1. 1. (월)
+
+							return new Intl.DateTimeFormat("ko-KR", options).format(date)
+						}
+
+						if (yFormat === "YM") {
+							const date = new Date(value)
+							const options: Intl.DateTimeFormatOptions = {
+								year: "numeric",
+								month: "numeric",
+							} // 2025.10.
+							return new Intl.DateTimeFormat("ko-KR", options).format(date)
+						}
+
+						return value
 					}}
 				/>
 

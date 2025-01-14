@@ -58,6 +58,7 @@ export function SmpLineChart() {
 						dot={false}
 						Ymin={0}
 						Ymax={200}
+						yFormat={timeRange == "1d" ? "DT" : "MD"}
 					/>
 				</div>
 			)
