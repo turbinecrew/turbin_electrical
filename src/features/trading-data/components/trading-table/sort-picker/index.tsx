@@ -3,11 +3,11 @@
 import { Check, ChevronDown, ChevronsDown, ChevronsUp } from "lucide-react"
 import { useState } from "react"
 
-import Button from "@/common/components/button"
+import { Button } from "@/common/components/button"
 import {
 	SortColumnList,
 	type SortPickerPT,
-} from "@/features/realtime/components/types/table/types"
+} from "@/features/trading-data/types/table/SortPickerPT"
 
 export function SortPicker({
 	sortingState,
@@ -33,7 +33,7 @@ export function SortPicker({
 				<div className="relative w-fit">
 					<Button
 						onClick={() => setDropdownOpen((e) => !e)}
-						className="flex w-32 justify-between gap-1 rounded-2xl border border-gray-300 bg-white text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200 md:w-36"
+						className="flex h-7 w-32 justify-between gap-1 rounded-2xl border border-gray-300 bg-white text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200 md:w-36"
 					>
 						<div className="flex w-full justify-center text-xs md:text-sm">
 							{currentSortColumn === "plantName"
@@ -73,7 +73,7 @@ export function SortPicker({
 					onClick={() => {
 						handleSortState(currentSortColumn)
 					}}
-					className="flex w-24 items-center gap-1 text-nowrap text-xs text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200 md:text-sm"
+					className="flex h-7 w-24 items-center gap-1 text-nowrap text-xs text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200 md:text-sm"
 				>
 					{currentSortColumn === "" ? (
 						"정렬하기"

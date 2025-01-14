@@ -9,7 +9,7 @@ import {
 } from "@tanstack/react-table"
 import { useState } from "react"
 
-import { TradingTableHeader } from "@/features/realtime/components/trading-table/table-header"
+import { TradingTableHeader } from "@/features/trading-data/components/trading-table/table-header"
 
 import type { TradingTablePT } from "./Tcolumn"
 

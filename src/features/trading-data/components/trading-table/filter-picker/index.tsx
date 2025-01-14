@@ -3,11 +3,13 @@
 import { ChevronDown, Plus } from "lucide-react"
 import { useState } from "react"
 
-import Button from "@/common/components/button"
+import { Button } from "@/common/components/button"
 import {
 	FilterColumnList,
 	type FilterPickerPT,
-} from "@/features/realtime/components/types/table/types"
+} from "@/features/trading-data/types/table/FilterPickerPT"
+import { setSourceMapsEnabled } from "process"
+import { smpTimeRange } from "@/features/realtime/hooks/date-range-filter"
 
 export function FileterPicker({
 	activeFilter,
@@ -35,7 +37,7 @@ export function FileterPicker({
 				<div className="relative w-fit">
 					<Button
 						onClick={() => setDropdownOpen((e) => !e)}
-						className="flex w-36 justify-between gap-1 rounded-2xl border border-gray-300 bg-white text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200"
+						className="flex h-7 w-36 justify-between gap-1 rounded-2xl border border-gray-300 bg-white text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200"
 					>
 						<div className="flex w-full justify-center text-xs md:text-sm">
 							{text ? text.name : "필터 선택"}

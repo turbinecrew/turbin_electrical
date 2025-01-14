@@ -4,7 +4,7 @@ import type { ColumnDef } from "@tanstack/react-table"
 import { Plug2, Ticket, Zap } from "lucide-react"
 import { useRouter } from "next/navigation"
 
-import Button from "@/common/components/button"
+import { Button } from "@/common/components/button"
 
 export type TradingTablePT = {
 	id: string
@@ -88,10 +88,7 @@ export const columns: ColumnDef<TradingTablePT>[] = [
 
 			return (
 				<div className="flex justify-center">
-					<Button
-						className="text-xs hover:bg-tbPastelGreen"
-						onClick={handleClick}
-					>
+					<Button className="text-xs" color={"tbGreen"} onClick={handleClick}>
 						거래
 					</Button>
 				</div>

@@ -8,13 +8,14 @@ import {
 	ArrowDown,
 	ArrowUp,
 } from "lucide-react"
-import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react"
+import type { ChangeEvent } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
-import Button from "@/common/components/button"
-import { FilterDataByRange } from "@/features/realtime/components/trading-table/filter"
-import { FileterPicker } from "@/features/realtime/components/trading-table/filter-picker"
-import { SortPicker } from "@/features/realtime/components/trading-table/sort-picker"
-import { FilterColumnList } from "@/features/realtime/components/types/table/types"
+import { Button } from "@/common/components/button"
+import { FilterDataByRange } from "@/features/trading-data/components/trading-table/filter"
+import { FileterPicker } from "@/features/trading-data/components/trading-table/filter-picker"
+import { SortPicker } from "@/features/trading-data/components/trading-table/sort-picker"
+import { FilterColumnList } from "@/features/trading-data/types/table/FilterPickerPT"
 
 import type { TradingTablePT } from "../Tcolumn"
 
@@ -195,7 +196,7 @@ export function TradingTableHeader({
 				{currentSortColumn != "" && (
 					<Button
 						onClick={resetSorting}
-						className="flex w-fit gap-1 rounded-2xl border border-gray-300 bg-white text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200"
+						className="flex h-7 w-fit gap-1 rounded-2xl border border-gray-300 bg-white text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200"
 					>
 						{sortingState[currentSortColumn] ? (
 							<ArrowDown className="h-4 w-4 md:h-5 md:w-5" />
@@ -218,7 +219,7 @@ export function TradingTableHeader({
 					</Button>
 				)}
 
-				<div className="flex w-full flex-wrap items-center gap-2">
+				<div className="flex h-7 w-full flex-wrap items-center gap-2">
 					{getActiveKeys().map((item) => {
 						const columnData = FilterColumnList.find(
 							(column) => column.id === item,

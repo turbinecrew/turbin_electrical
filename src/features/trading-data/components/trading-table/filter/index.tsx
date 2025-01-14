@@ -2,10 +2,10 @@ import { Minus, X } from "lucide-react"
 import { useEffect, useState } from "react"
 
 import {
-	FilterColumnList,
 	type DebouncedInputPT,
 	type FilterDataByRangePT,
-} from "@/features/trading-data/types/table/types"
+} from "@/features/trading-data/types/table/FilterDataByRangePT"
+import { FilterColumnList } from "@/features/trading-data/types/table/FilterPickerPT"
 
 function DebouncedInput({
 	value: initialValue,
@@ -48,7 +48,7 @@ export function FilterDataByRange({
 	return (
 		<>
 			{isInputVisible && (
-				<div className="flex h-fit w-fit items-center gap-3 rounded-xl border pr-2 text-sm font-medium md:p-1">
+				<div className="flex h-7 w-fit items-center gap-3 rounded-xl border pr-2 text-sm font-medium md:p-1">
 					<div className="w-14 border border-none px-1 text-center text-xs font-medium md:text-sm">
 						{FilterColumnList.find((item) => item.id === id)?.name || "Unknown"}
 					</div>

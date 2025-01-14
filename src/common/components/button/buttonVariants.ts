@@ -23,10 +23,10 @@ export const buttonVariants = cva(
 				black: "bg-black text-white hover:bg-gray-800",
 			},
 		},
-		defaultVariants: {
-			variant: "default",
-			size: "md",
-			color: "tbGreen",
-		},
+		// defaultVariants: {
+		// 	variant: "default",
+		// 	size: "md",
+		// 	color: "tbGreen",
+		// },
 	},
 )
