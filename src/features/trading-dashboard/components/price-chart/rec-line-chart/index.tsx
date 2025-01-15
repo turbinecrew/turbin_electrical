@@ -45,7 +45,7 @@ export function RecLineChart() {
 						dot={false}
 						Ymin={0}
 						Ymax={"auto"}
-						yFormat={"MD"}
+						xFormat={"MD"}
 					/>
 				</div>
 			)

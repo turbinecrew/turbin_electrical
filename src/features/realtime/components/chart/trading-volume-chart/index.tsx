@@ -2,12 +2,12 @@
 
 import { TitleCard } from "@/common/components/card"
 import { LineChartComponent } from "@/common/components/chart/line-chart"
-import { groupByPendingDate } from "@/features/realtime/components/chart/trading-volume-chart/detaildata/groupByPendingDate"
+import { groupByApprovedDate } from "@/features/realtime/components/chart/trading-volume-chart/detaildata/groupByApprovedDate"
 import { mockdata } from "@/features/realtime/components/chart/trading-volume-chart/detaildata/mockdata"
 import { generateChartConfig } from "@/features/trading-dashboard/utils/generateChartConfig"
 
 export function VolumeChart() {
-	const data = groupByPendingDate(mockdata)
+	const data = groupByApprovedDate(mockdata)
 	const chartConfig = generateChartConfig(data)
 
 	console.log(data)
@@ -23,7 +23,7 @@ export function VolumeChart() {
 					dot={false}
 					Ymin={0}
 					Ymax={"auto"}
-					yFormat={"YM"}
+					xAxisFormat={"YM"}
 				/>
 			</div>
 		</TitleCard>

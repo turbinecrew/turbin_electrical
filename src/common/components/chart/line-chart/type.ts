@@ -15,7 +15,7 @@ export type LineChartComponentPT = {
 	XAixsDataKey: string
 	type: CurveType
 	dot: boolean
-	yFormat: string
+	xAxisFormat: string
 	Ymin: AxisDomainItem
 	Ymax: AxisDomainItem
 	// AxisDomainItem : string | number | Function | 'auto' | 'dataMin' | 'dataMax'

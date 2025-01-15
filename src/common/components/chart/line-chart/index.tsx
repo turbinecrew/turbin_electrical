@@ -19,7 +19,7 @@ export function LineChartComponent({
 	Ymax = "auto",
 	type,
 	dot,
-	yFormat,
+	xAxisFormat,
 }: LineChartComponentPT) {
 	function generateTicks(
 		Ymin: AxisDomainItem,
@@ -52,7 +52,7 @@ export function LineChartComponent({
 					axisLine={{ stroke: "#000000", strokeWidth: 1 }}
 					tickMargin={8}
 					tickFormatter={(value) => {
-						if (yFormat == "MD") {
+						if (xAxisFormat == "MD") {
 							const date = new Date(value)
 
 							const options: Intl.DateTimeFormatOptions = {
@@ -64,7 +64,7 @@ export function LineChartComponent({
 							return new Intl.DateTimeFormat("ko-KR", options).format(date)
 						}
 
-						if (yFormat == "DT") {
+						if (xAxisFormat == "DT") {
 							const date = new Date(value)
 
 							const options: Intl.DateTimeFormatOptions = {
@@ -76,7 +76,7 @@ export function LineChartComponent({
 							return new Intl.DateTimeFormat("ko-KR", options).format(date)
 						}
 
-						if (yFormat === "YM") {
+						if (xAxisFormat === "YM") {
 							const date = new Date(value)
 							const options: Intl.DateTimeFormatOptions = {
 								year: "numeric",
