@@ -46,7 +46,11 @@ export default function AuthModal({
 							or
 						</span>
 					</div>
-					{active === "IN" ? <SignInContent /> : <SignUpContent />}
+					{active === "IN" ? (
+						<SignInContent />
+					) : (
+						<SignUpContent setIsOpen={setIsOpen} />
+					)}
 				</div>
 			</ModalContext>
 			<ModalFooter>

@@ -1,15 +1,21 @@
 import { useState } from "react"
 
 export function useSignUp() {
-	const [formData, setFormData] = useState({
+	const [authData, setAuthData] = useState({
 		email: "",
 		confirmEmail: "",
 		password: "",
 	})
+	const [additionalData, setAdditionalData] = useState({
+		businessName: "",
+		businessNumber: "",
+		businessOwner: "",
+		businessAddress: "",
+	})
 
 	// 이메일 재입력 검증
 	const validateEmailsMatch = () => {
-		if (formData.email !== formData.confirmEmail) {
+		if (authData.email !== authData.confirmEmail) {
 			return {
 				isValid: false,
 				message: "이메일이 일치하지 않습니다.",
@@ -29,14 +35,17 @@ export function useSignUp() {
 		}
 
 		console.log("회원가입 데이터:", {
-			email: formData.email,
-			password: formData.password,
+			email: authData.email,
+			password: authData.password,
 		})
 	}
 
 	return {
-		formData,
-		setFormData,
+		authData,
+		setAuthData,
+		additionalData,
+		setAdditionalData,
 		handleSubmit,
+		validateEmailsMatch,
 	}
 }
