@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react"
 
+import TbButton from "@/common/components/button/TbButton"
 import {
 	Modal,
 	ModalContext,
@@ -105,18 +106,17 @@ export default function TradeModal({
 			</ModalContext>
 			<ModalFooter>
 				<div className="flex justify-between space-x-4">
-					<button
+					<TbButton
 						onClick={handleReset}
-						className="rounded bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
+						color="gray"
+						size="md"
+						className="bg-gray-200 hover:bg-gray-300"
 					>
 						초기화
-					</button>
-					<button
-						onClick={handleBidSubmit}
-						className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-					>
+					</TbButton>
+					<TbButton onClick={handleBidSubmit} color="green" size="md">
 						입찰 제출하기
-					</button>
+					</TbButton>
 				</div>
 			</ModalFooter>
 		</Modal>

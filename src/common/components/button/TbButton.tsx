@@ -7,10 +7,9 @@ import React from "react"
 
 import { buttonVariants } from "./buttonVariants"
 
-type ButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "type"> & {
+type ButtonPT = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "type"> & {
 	className?: string
 	children: ReactNode
-	variant?: VariantProps<typeof buttonVariants>["variant"]
 	size?: VariantProps<typeof buttonVariants>["size"]
 	color?: VariantProps<typeof buttonVariants>["color"]
 	type?: "button" | "submit"
@@ -18,25 +17,23 @@ type ButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "type"> & {
 
 export default function Button({
 	className,
-	variant,
 	size,
 	color,
 	children,
 	...rest
-}: ButtonProps) {
+}: ButtonPT) {
 	return (
 		<button
 			{...rest}
 			type={rest.type || "button"}
-			className={cn(buttonVariants({ variant, size, color }), className)}
+			className={cn(buttonVariants({ size, color }), className)}
 		>
 			{children}
 		</button>
 	)
 }
 
-Button.defaultProps = {
-	variant: "default",
+Button.defaultPT = {
 	size: "md",
 	color: "tbGreen",
 }

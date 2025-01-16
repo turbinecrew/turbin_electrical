@@ -2,6 +2,7 @@
 
 import { ArrowDown, ArrowUp } from "lucide-react"
 
+import TbButton from "@/common/components/button/TbButton"
 import type { Bid, TablePT } from "@/features/types/bidTable/type"
 import {
 	Table,
@@ -54,20 +55,23 @@ export default function BidTable({
 					className="rounded-md border border-gray-300 px-4 py-2 text-sm focus:border-blue-500 focus:outline-none"
 				/>
 				<div>
-					<button
+					<TbButton
 						onClick={() => updateBidStatus("Approved")}
 						disabled={selectedBids.length === 0}
-						className="mr-2 rounded-md bg-green-500 px-4 py-2 text-sm text-white transition hover:bg-green-600 disabled:bg-gray-300"
+						color="green"
+						size="md"
+						className="mr-2"
 					>
 						승인
-					</button>
-					<button
+					</TbButton>
+					<TbButton
 						onClick={() => updateBidStatus("Rejected")}
 						disabled={selectedBids.length === 0}
-						className="rounded-md bg-red-500 px-4 py-2 text-sm text-white transition hover:bg-red-600 disabled:bg-gray-300"
+						color="gray"
+						size="md"
 					>
 						거부
-					</button>
+					</TbButton>
 				</div>
 			</div>
 			<div className="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">

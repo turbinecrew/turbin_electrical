@@ -3,7 +3,7 @@
 import { ChevronDown, Plus } from "lucide-react"
 import { useState } from "react"
 
-import Button from "@/common/components/button"
+import TbButton from "@/common/components/button/TbButton"
 import {
 	FilterColumnList,
 	type FilterPickerPT,
@@ -29,13 +29,16 @@ export function FileterPicker({
 
 	const columnList = FilterColumnList
 	const text = columnList.find((column) => column.id === selected)
+
 	return (
 		<div className="absolute z-10 mt-2 flex w-fit flex-col gap-1 rounded-2xl bg-white p-5 text-slate-700 shadow-md transition duration-200 ease-in">
 			<div className="flex items-center gap-2">
 				<div className="relative w-fit">
-					<Button
+					<TbButton
 						onClick={() => setDropdownOpen((e) => !e)}
-						className="flex w-36 justify-between gap-1 rounded-2xl border border-gray-300 bg-white text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200"
+						color="gray"
+						size="md"
+						className="flex w-36 justify-between gap-1 border border-gray-300 text-slate-700"
 					>
 						<div className="flex w-full justify-center text-xs md:text-sm">
 							{text ? text.name : "필터 선택"}
@@ -44,40 +47,42 @@ export function FileterPicker({
 							className={`transform ${dropdownOpen ? "rotate-180" : "rotate-0"}`}
 							size={16}
 						/>
-					</Button>
+					</TbButton>
 					{dropdownOpen && (
 						<div className="absolute z-10 mt-2 flex w-full flex-col gap-1 overflow-hidden rounded-2xl border border-gray-300 bg-white text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200">
 							{columnList.map(
 								({ id, name }) =>
 									!activeFilter[id] && (
-										<button
+										<TbButton
 											key={id}
 											onClick={() => {
 												setSelected(id)
 												setDropdownOpen(false)
 											}}
-											className={
-												"block w-full px-4 py-2 text-center text-xs text-gray-700 hover:bg-gray-100 md:text-sm"
-											}
+											color="gray"
+											size="sm"
+											className="w-full px-4 py-2 text-center text-xs text-gray-700 hover:bg-gray-100 md:text-sm"
 										>
 											{name}
-										</button>
+										</TbButton>
 									),
 							)}
 						</div>
 					)}
 				</div>
 
-				<Button
+				<TbButton
 					onClick={() => {
 						handleFilter()
 						updateState({ filtering: !toggleState.filtering })
 					}}
-					className="flex h-7 items-center gap-1 text-nowrap bg-gray-200 text-xs text-slate-700 ease-in focus:ring-2 focus:ring-gray-200 md:text-sm"
+					color="gray"
+					size="sm"
+					className="flex h-7 items-center gap-1 bg-gray-200 text-xs text-slate-700"
 				>
 					<Plus size={12} />
 					추가
-				</Button>
+				</TbButton>
 			</div>
 		</div>
 	)
