@@ -2,20 +2,29 @@
 
 import { useState } from "react"
 
-import mockData from "@/features/region/components/regionaltable/mock"
+import { useRegionalWeatherData } from "@/features/predict/hooks/useRegionalWeatherData"
 import {
 	getTodayString,
 	formatMonthDay,
 } from "@/features/region/hooks/data/useDateUtils"
 import useFilteredData from "@/features/region/hooks/data/useFilteredData"
+import { Table, TableBody } from "@/shadcn/components/table"
 
 import RegionSelect from "../regionselect"
 
+import RegionalTableBody from "./RegionalTableBody"
+
 export default function RegionalTable() {
 	const [selectedRegion, setSelectedRegion] = useState("강원특별자치도")
+	const {
+		data: weatherData,
+		isLoading,
+		isError,
+		error,
+	} = useRegionalWeatherData()
 
 	const today = getTodayString()
-	const currentDayData = useFilteredData(mockData, {
+	const currentDayData = useFilteredData(weatherData, {
 		selectedRegion,
 		today,
 		startHour: 9,
@@ -24,70 +33,27 @@ export default function RegionalTable() {
 
 	const formattedToday = formatMonthDay(today)
 
-	const regions = Array.from(new Set(mockData?.map((item) => item.지역) || [])) // 기본값 설정
+	if (isLoading) return <p>로딩중...</p>
+	if (isError) return <p>에러 발생: {error?.message}</p>
 
 	return (
-		<div className="mx-auto mt-8 w-full">
+		<div className="mx-auto w-full">
+			<div className="mb-2 mt-2 text-xl font-bold">지역별 발전량 예측</div>
 			<div className="w-full">
 				<div className="mb-4">
 					<RegionSelect
-						regions={regions}
 						selectedRegion={selectedRegion}
 						onChange={setSelectedRegion}
 					/>
 				</div>
-
-				<table className="w-full table-auto border-collapse border border-gray-300 text-center">
-					<thead className="bg-gray-100">
-						<tr>
-							<th colSpan={6} className="border border-gray-300 px-4 py-2">
-								오늘({formattedToday})
-							</th>
-						</tr>
-						<tr>
-							<th className="border border-gray-300 px-4 py-2">시간</th>
-							<th className="border border-gray-300 px-4 py-2">발전량(kW)</th>
-							<th className="border border-gray-300 px-4 py-2">
-								누적발전량(kWh)
-							</th>
-							<th className="border border-gray-300 px-4 py-2">일사량(W/㎡)</th>
-							<th className="border border-gray-300 px-4 py-2">기온(℃)</th>
-							<th className="border border-gray-300 px-4 py-2">풍속(㎧)</th>
-						</tr>
-					</thead>
-					<tbody>
-						{currentDayData.length > 0 ? (
-							currentDayData.map((item, index) => (
-								<tr key={index}>
-									<td className="border border-gray-300 px-4 py-2">
-										{item.시간}
-									</td>
-									<td className="border border-gray-300 px-4 py-2">
-										{item["발전량(kW)"]}
-									</td>
-									<td className="border border-gray-300 px-4 py-2">
-										{item["누적발전량(kWh)"]}
-									</td>
-									<td className="border border-gray-300 px-4 py-2">
-										{item["일사량(W/㎡)"]}
-									</td>
-									<td className="border border-gray-300 px-4 py-2">
-										{item["기온(℃)"]}
-									</td>
-									<td className="border border-gray-300 px-4 py-2">
-										{item["풍속(㎧)"]}
-									</td>
-								</tr>
-							))
-						) : (
-							<tr>
-								<td colSpan={6} className="border border-gray-300 px-4 py-2">
-									데이터 없음
-								</td>
-							</tr>
-						)}
-					</tbody>
-				</table>
+				<Table className="w-full">
+					<TableBody>
+						<RegionalTableBody
+							data={currentDayData}
+							formattedToday={formattedToday}
+						/>
+					</TableBody>
+				</Table>
 			</div>
 		</div>
 	)
