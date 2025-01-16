@@ -1,13 +1,6 @@
 "use client"
 
-import {
-	CartesianGrid,
-	Line,
-	LineChart,
-	ReferenceLine,
-	XAxis,
-	YAxis,
-} from "recharts"
+import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts"
 import type { AxisDomainItem } from "recharts/types/util/types"
 
 import type { LineChartComponentPT } from "@/common/components/chart/line-chart/type"
@@ -26,6 +19,7 @@ export function LineChartComponent({
 	Ymax = "auto",
 	type,
 	dot,
+	xAxisFormat,
 }: LineChartComponentPT) {
 	function generateTicks(
 		Ymin: AxisDomainItem,
@@ -58,19 +52,43 @@ export function LineChartComponent({
 					axisLine={{ stroke: "#000000", strokeWidth: 1 }}
 					tickMargin={8}
 					tickFormatter={(value) => {
-						const date = new Date(value)
-						const options: Intl.DateTimeFormatOptions = {
-							month: "short",
-							day: "numeric",
+						if (xAxisFormat == "MD") {
+							const date = new Date(value)
+
+							const options: Intl.DateTimeFormatOptions = {
+								month: "numeric",
+								day: "numeric",
+								weekday: "short",
+							} // 1일 (월) 10시
+
+							return new Intl.DateTimeFormat("ko-KR", options).format(date)
 						}
 
-						if (date.getHours() !== 0 || date.getMinutes() !== 0) {
-							options.hour = "numeric"
+						if (xAxisFormat == "DT") {
+							const date = new Date(value)
+
+							const options: Intl.DateTimeFormatOptions = {
+								day: "numeric",
+								hour: "numeric",
+								weekday: "short",
+							} // 1. 1. (월)
+
+							return new Intl.DateTimeFormat("ko-KR", options).format(date)
 						}
 
-						return date.toLocaleString("en-US", options)
+						if (xAxisFormat === "YM") {
+							const date = new Date(value)
+							const options: Intl.DateTimeFormatOptions = {
+								year: "numeric",
+								month: "numeric",
+							} // 2025.10.
+							return new Intl.DateTimeFormat("ko-KR", options).format(date)
+						}
+
+						return value
 					}}
 				/>
+
 				<YAxis
 					tickLine={true}
 					axisLine={true}

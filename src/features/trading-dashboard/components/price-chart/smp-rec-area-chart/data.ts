@@ -13,10 +13,10 @@ function getDailyData() {
 		}
 		dailyAverageData[dateKey].push(item.smp)
 	})
-	Object.entries(dailyAverageData).forEach(([dateKey, values]) => {
-		const avgSmp = values.reduce((sum, value) => sum + value, 0) / values.length
+	Object.entries(dailyAverageData).forEach(([key, value]) => {
+		const avgSmp = value.reduce((sum, value) => sum + value, 0) / value.length
 
-		ProcessedData.push({ date: dateKey, smp: Math.round(avgSmp) })
+		ProcessedData.push({ date: key, smp: Math.round(avgSmp) })
 	})
 
 	ProcessedData.sort(

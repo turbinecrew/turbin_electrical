@@ -7,7 +7,7 @@ export const useSMPChartData = (timeRange: string) => {
 	const fetchData = timeRange === "1d" ? fetchTodaySMPData : fetchWeeklySMPData
 
 	return useQuery({
-		queryKey: ["smpData", timeRange],
+		queryKey: ["SMP_CHART_DATA", timeRange],
 		queryFn: fetchData,
 		staleTime: 1000 * 60 * 5,
 		retry: 3,
