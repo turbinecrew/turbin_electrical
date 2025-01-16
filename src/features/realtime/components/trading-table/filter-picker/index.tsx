@@ -36,8 +36,8 @@ export function FileterPicker({
 				<div className="relative w-fit">
 					<TbButton
 						onClick={() => setDropdownOpen((e) => !e)}
-						color="white"
-						size="sm"
+						color="gray"
+						size="md"
 						className="flex w-36 justify-between gap-1 border border-gray-300 text-slate-700"
 					>
 						<div className="flex w-full justify-center text-xs md:text-sm">
@@ -59,7 +59,7 @@ export function FileterPicker({
 												setSelected(id)
 												setDropdownOpen(false)
 											}}
-											color="white"
+											color="gray"
 											size="sm"
 											className="w-full px-4 py-2 text-center text-xs text-gray-700 hover:bg-gray-100 md:text-sm"
 										>

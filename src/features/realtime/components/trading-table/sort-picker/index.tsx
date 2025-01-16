@@ -33,9 +33,8 @@ export function SortPicker({
 				<div className="relative w-fit">
 					<TbButton
 						onClick={() => setDropdownOpen((e) => !e)}
-						color="white"
-						size="sm"
-						className="flex w-32 justify-between gap-1 rounded-2xl border border-gray-300 text-slate-700 md:w-36"
+						color="gray"
+						className="flex w-32 justify-between gap-1 rounded-2xl border border-white text-slate-700 md:w-40"
 					>
 						<div className="flex w-full justify-center text-xs md:text-sm">
 							{currentSortColumn === "plantName"
@@ -52,7 +51,7 @@ export function SortPicker({
 						/>
 					</TbButton>
 					{dropdownOpen && (
-						<div className="absolute z-10 mt-2 flex w-full flex-col gap-1 overflow-hidden rounded-2xl border border-gray-300 bg-white text-slate-700 transition duration-200 ease-in focus:ring-2 focus:ring-gray-200">
+						<div className="absolute z-10 mt-2 flex w-full flex-col gap-1 overflow-hidden rounded-2xl border border-gray-300 bg-white text-black transition duration-200 ease-in focus:ring-2 focus:ring-gray-200">
 							{SortColumnList.map(({ id, name }) => (
 								<TbButton
 									key={id}
@@ -61,8 +60,7 @@ export function SortPicker({
 										setDropdownOpen(false)
 										handleSortState(currentSortColumn)
 									}}
-									color="white"
-									size="sm"
+									color="gray"
 									className={`w-full px-4 py-2 text-center text-xs text-gray-700 hover:bg-gray-100 md:text-sm ${
 										currentSortColumn === id ? "bg-gray-100 font-bold" : ""
 									}`}

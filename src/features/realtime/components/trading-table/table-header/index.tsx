@@ -197,7 +197,8 @@ export function TradingTableHeader({
 				{currentSortColumn != "" && (
 					<TbButton
 						onClick={resetSorting}
-						className="flex w-fit gap-1 rounded-2xl border border-gray-300 bg-white text-slate-700"
+						color="gray"
+						className="flex w-fit gap-1"
 					>
 						{sortingState[currentSortColumn] ? (
 							<ArrowDown className="h-4 w-4 md:h-5 md:w-5" />
