@@ -13,3 +13,26 @@ export const postLogin = async (formData: {
 	console.log("Axios 응답 데이터:", response.data)
 	return response.data
 }
+// // 로그아웃 요청
+// export const logout = async () => {
+// 	const response = await axiosInstance.post("/auth/logout")
+// 	return response.data
+// }
+
+// 회원가입 요청
+// export const signUp = async (formData: {
+// 	email: string
+// 	password: string
+// }) => {
+// 	const response = await axiosInstance.post("/auth/signup", formData)
+// 	return response.data
+// }
+
+// // 사용자 정보 수정 요청 (PATCH)
+// export const updateUser = async (updatedData: {
+// 	name?: string
+// 	password?: string
+// }) => {
+// 	const response = await axiosInstance.patch("/auth/update", updatedData)
+// 	return response.data
+// }
