@@ -1,6 +1,13 @@
 "use client"
 
-import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts"
+import {
+	CartesianGrid,
+	Line,
+	LineChart,
+	ReferenceLine,
+	XAxis,
+	YAxis,
+} from "recharts"
 import type { AxisDomainItem } from "recharts/types/util/types"
 
 import type { LineChartComponentPT } from "@/common/components/chart/line-chart/type"
@@ -68,7 +75,7 @@ export function LineChartComponent({
 					tickLine={true}
 					axisLine={true}
 					tickMargin={8}
-					ticks={generateTicks(Ymin, Ymax, 50)}
+					ticks={generateTicks(Ymin, Ymax, 10)}
 					domain={[Ymin, Ymax]}
 				/>
 				<ChartTooltip

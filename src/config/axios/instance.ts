@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export const axiosInstance = axios.create({
-	baseURL: "http://localhost:3000/api", // 서버에서 데이터에 접근할 경로
+	baseURL: process.env.NEXT_PUBLIC_NEXTAUTH_URL, // 서버에서 데이터에 접근할 경로
 	timeout: 5000, // 요청 시간 초과 설정
 	headers: { "Content-Type": "application/json" },
 })
