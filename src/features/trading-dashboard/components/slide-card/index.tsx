@@ -1,8 +1,10 @@
-"use client"
+import type { MiniCardPT } from "@/common/components/card/new-card/types"
+import {
+	MiniCardContent,
+	MiniCardHeader,
+	TbCard,
+} from "@/common/components/card/new-card"
 import { useEffect, useState } from "react"
-
-import type { MiniCardPT } from "@/common/components/card"
-import { MiniCard } from "@/common/components/card"
 import { timeCardDatas } from "@/features/trading-dashboard/components/slide-card/data"
 
 export function TradingVolumeCards() {
@@ -19,14 +21,10 @@ export function TradingVolumeCards() {
 	return (
 		<div className="grid w-full grid-cols-2 gap-4">
 			{data.map((items: MiniCardPT, idx) => (
-				<MiniCard
-					title={items.title}
-					value={items.value}
-					unit={items.unit}
-					color={items.color}
-					key={idx}
-					className="h-full"
-				/>
+				<TbCard size="mini" color={idx ? "deep" : "light"} className="h-full">
+					<MiniCardHeader title={items.title} />
+					<MiniCardContent value={items.value} unit={items.unit} />
+				</TbCard>
 			))}
 		</div>
 	)

@@ -1,32 +1,23 @@
-"use client"
-import clsx from "clsx"
-
+import {
+	cardVariants,
+	MiniCardPT,
+	TbCardHeaderPT,
+	TbCardPT,
+} from "@/common/components/card/new-card/types"
 import { cn } from "@/util/utils"
 
-type CardPT = {
-	className?: string
-	children?: ReactNode
-	isColored?: boolean
-}
-export function TbCard({ className, children, isColored = false }: CardPT) {
+export function TbCard({
+	className,
+	children,
+	size,
+	color,
+	...rest
+}: TbCardPT) {
 	return (
-		<div
-			className={cn("rounded-2xl shadow-md", className, {
-				"bg-tbPastelGreen": isColored,
-				"bg-[#FAFAFA]": !isColored,
-			})}
-		>
+		<div {...rest} className={cn(cardVariants({ size, color }), className)}>
 			{children}
 		</div>
 	)
-}
-
-type TitlePT = {
-	className?: string
-	children?: React.ReactNode
-	title?: string
-	rightArea?: React.ReactNode
-	lowerTitle?: string
 }
 
 export function TbCardHeader({
@@ -34,8 +25,8 @@ export function TbCardHeader({
 	children,
 	title,
 	rightArea,
-	lowerTitle,
-}: TitlePT) {
+	sideTitle,
+}: TbCardHeaderPT) {
 	return (
 		<div
 			className={cn(
@@ -52,9 +43,9 @@ export function TbCardHeader({
 						{rightArea}
 					</div>
 				)}
-				{lowerTitle && (
+				{sideTitle && (
 					<span className="mb-1 text-start text-sm font-normal text-black/75">
-						{lowerTitle}
+						{sideTitle}
 					</span>
 				)}
 			</div>
@@ -63,7 +54,7 @@ export function TbCardHeader({
 	)
 }
 
-export function TbCardContent({ className, children }: CardPT) {
+export function TbCardContent({ className, children }: TbCardPT) {
 	return (
 		<div className={cn(className, "p-3 pt-0 text-left text-sm md:p-5 md:pt-0")}>
 			{children}
@@ -71,39 +62,12 @@ export function TbCardContent({ className, children }: CardPT) {
 	)
 }
 
-TbCardHeader.displayName = "TbCardHeader"
-TbCardContent.displayName = "TbCardContent"
-
-export type MiniCardPT = {
-	title?: string
-	value?: string | number
-	unit?: string
-	amount?: number
-	isIncreased?: boolean | null // true: 증가, false: 감소, null: 변화 없음
-	variant?: string | number
-	children?: React.ReactNode
-	className?: string
-}
-
-export function MiniCard({
-	title,
-	children,
-	className,
-	variant = "default",
-}: MiniCardPT) {
-	const cardClasses = clsx(
-		"w-full flex-col gap-2 rounded-xl p-5 shadow-md",
-		{
-			"bg-[#FAFAFA]": variant === "default",
-			"bg-[#F6FCF3]": variant === "light" || variant === 0,
-			"bg-[#EFF6F1]": variant === "deep" || variant === 1,
-		},
-		className,
-	)
-
+export function MiniCardHeader({ title, children, className }: MiniCardPT) {
 	return (
-		<div className={cardClasses}>
-			{title && <div className="text-xs font-semibold">{title}</div>}
+		<div>
+			{title && (
+				<div className={cn(className, "text-xs font-semibold")}>{title}</div>
+			)}
 			{children}
 		</div>
 	)
@@ -116,17 +80,25 @@ export function MiniCardContent({
 	isIncreased,
 }: MiniCardPT) {
 	return (
-		<div className="flex max-w-full flex-wrap items-center justify-between break-words">
-			<div className="flex items-center gap-1 font-semibold tracking-tight">
-				<span className="text-xl md:text-xl">{value}</span>
-				<span className="text-xs md:text-sm">{unit}</span>
+		<div className="flex flex-wrap items-center justify-between gap-1 break-words">
+			<div className="flex items-baseline gap-1 font-semibold tracking-tight">
+				<span className="text-lg md:text-2xl">{value}</span>
+				<span className="text-xs md:text-lg">{unit}</span>
 			</div>
-			{(isIncreased != null || "") &&
-				(isIncreased ? (
+			{isIncreased != null &&
+				(isIncreased === true ? (
 					<div className="text-xs font-medium text-red-600">(▲{amount})</div>
-				) : (
+				) : isIncreased === false ? (
 					<div className="text-xs font-medium text-blue-600">(▼{amount})</div>
-				))}
+				) : isIncreased === "noChange" ? (
+					<div className="text-xs font-medium text-green-600">( - )</div>
+				) : null)}
 		</div>
 	)
 }
+
+TbCard.displayName = "TbCard"
+TbCardHeader.displayName = "TbCardHeader"
+TbCardContent.displayName = "TbCardContent"
+MiniCardHeader.displayName = "MiniCardHeader"
+MiniCardContent.displayName = "MiniCardContent"
