@@ -17,7 +17,7 @@ export function TradingVolumeCards() {
 	}, [])
 
 	return (
-		<div className="grid w-full transform grid-cols-2 gap-4">
+		<div className="grid w-full grid-cols-2 gap-4">
 			{data.map((items: MiniCardPT, idx) => (
 				<MiniCard
 					title={items.title}
@@ -25,7 +25,7 @@ export function TradingVolumeCards() {
 					unit={items.unit}
 					color={items.color}
 					key={idx}
-					className="h-fit"
+					className="h-full"
 				/>
 			))}
 		</div>

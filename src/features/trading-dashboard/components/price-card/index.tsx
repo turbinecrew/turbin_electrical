@@ -12,7 +12,7 @@ export function PriceCard({ setActiveChart }: PriceCardPT) {
 	const priceCardData = usePriceCardData()
 
 	return (
-		<>
+		<div className="grid w-full grid-cols-2 gap-4">
 			{priceCardData.map((items: MiniCardPT, idx: number) => (
 				<button
 					key={idx}
@@ -32,6 +32,6 @@ export function PriceCard({ setActiveChart }: PriceCardPT) {
 					/>
 				</button>
 			))}
-		</>
+		</div>
 	)
 }
