@@ -1,5 +1,6 @@
 export enum QUERY_KEYS {
 	TRADE = "get-trade",
+	TRADE_AMGO = "get-trade-amgo",
 	COMPLETED_TRADES = "get-completed-trades",
 	PAST_REC = "get-past-REC",
 	PAST_SMP = "get-past-SMP",
