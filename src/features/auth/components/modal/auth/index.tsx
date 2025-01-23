@@ -7,8 +7,8 @@ import {
 	ModalFooter,
 } from "@/common/components/modal"
 
-import { SignInContent } from "./modal-content/sign-in"
-import { SignUpContent } from "./modal-content/sign-up"
+import { SignInContent } from "./modal-content/signIn"
+import { SignUpContent } from "./modal-content/signUp"
 import { SocialLoginButton } from "./social-button"
 import { ToggleButton } from "./toggle-button"
 
@@ -46,7 +46,11 @@ export default function AuthModal({
 							or
 						</span>
 					</div>
-					{active === "IN" ? <SignInContent /> : <SignUpContent />}
+					{active === "IN" ? (
+						<SignInContent />
+					) : (
+						<SignUpContent setIsOpen={setIsOpen} />
+					)}
 				</div>
 			</ModalContext>
 			<ModalFooter>

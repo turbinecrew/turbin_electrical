@@ -3,7 +3,7 @@
 import { useState } from "react"
 
 import PlantDetails from "@/features/trading/components/CardSection/PlantDetails"
-import PlantList from "@/features/trading/components/CardSection/PlantList"
+import PlantSelected from "@/features/trading/components/CardSection/PlantSelected"
 import RealTimeTradeCard from "@/features/trading/components/RealTimeTradeTable"
 import TradeModal from "@/features/trading/components/modal"
 
@@ -54,7 +54,7 @@ export default function TradePage() {
 
 	return (
 		<div className="mx-auto flex flex-col gap-8 p-8">
-			<PlantList
+			<PlantSelected
 				plants={mockData}
 				selectedPlant={selectedPlantName}
 				onSelect={setSelectedPlantName}
