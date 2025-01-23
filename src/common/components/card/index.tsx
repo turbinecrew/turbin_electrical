@@ -69,8 +69,8 @@ export type MiniCardPT = {
 	value: string | number
 	unit?: string
 	isColored?: boolean
-	isIncreased?: boolean
-	amount?: number
+	isIncreased?: boolean | null
+	amount?: number | null
 	className?: string
 	color?: string
 }
