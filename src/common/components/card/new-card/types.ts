@@ -1,34 +1,34 @@
-import { cva, VariantProps } from "class-variance-authority"
-import { ReactNode } from "react"
+import type { VariantProps } from "class-variance-authority"
+import { cva } from "class-variance-authority"
+import type { ReactNode } from "react"
 
 export const cardVariants = cva("shadow-md", {
 	variants: {
+		variant: {
+			default: "rounded-2xl",
+			mini: "flex-col gap-2 rounded-xl p-6",
+		},
 		color: {
 			default: "bg-[#FAFAFA]",
 			light: "bg-[#F6FCF3]",
 			deep: "bg-[#EFF6F1]",
 			pastelGreen: "bg-tbPastelGreen",
 		},
-		size: {
-			default: "rounded-2xl",
-			mini: "flex-col gap-2 rounded-xl p-6",
-		},
 	},
 	defaultVariants: {
+		variant: "default",
 		color: "default",
-		size: "default",
 	},
 })
 
 export type TbCardPT = {
 	className?: string
 	children?: ReactNode
-	size?: VariantProps<typeof cardVariants>["size"]
+	variant?: VariantProps<typeof cardVariants>["variant"]
 	color?: VariantProps<typeof cardVariants>["color"]
 }
 
 export type TbCardHeaderPT = {
-	className?: string
 	children?: ReactNode
 	title?: string
 	rightArea?: ReactNode

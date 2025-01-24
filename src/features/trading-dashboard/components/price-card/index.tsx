@@ -1,9 +1,9 @@
-import type { MiniCardPT } from "@/common/components/card/new-card/types"
 import {
 	MiniCardContent,
 	MiniCardHeader,
 	TbCard,
 } from "@/common/components/card/new-card"
+import type { MiniCardPT } from "@/common/components/card/new-card/types"
 import { usePriceCardData } from "@/features/trading-dashboard/hook/usePriceCardData"
 
 type PriceCardPT = {
@@ -24,7 +24,11 @@ export function PriceCard({ setActiveChart }: PriceCardPT) {
 					}}
 					className="text-left"
 				>
-					<TbCard size="mini" color={idx ? "deep" : "light"} className="h-full">
+					<TbCard
+						variant="mini"
+						color={idx ? "deep" : "light"}
+						className="h-full"
+					>
 						<MiniCardHeader title={items.title} />
 						<MiniCardContent
 							value={items.value}

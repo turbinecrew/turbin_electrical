@@ -1,39 +1,33 @@
-import {
-	cardVariants,
+import type {
 	MiniCardPT,
 	TbCardHeaderPT,
 	TbCardPT,
 } from "@/common/components/card/new-card/types"
+import { cardVariants } from "@/common/components/card/new-card/types"
 import { cn } from "@/util/utils"
 
 export function TbCard({
 	className,
 	children,
-	size,
+	variant,
 	color,
 	...rest
 }: TbCardPT) {
 	return (
-		<div {...rest} className={cn(cardVariants({ size, color }), className)}>
+		<div {...rest} className={cn(cardVariants({ variant, color }), className)}>
 			{children}
 		</div>
 	)
 }
 
 export function TbCardHeader({
-	className,
 	children,
 	title,
 	rightArea,
 	sideTitle,
 }: TbCardHeaderPT) {
 	return (
-		<div
-			className={cn(
-				className,
-				"flex flex-col gap-3 space-y-1.5 p-3 md:gap-5 md:p-5",
-			)}
-		>
+		<div className="flex flex-col gap-3 space-y-1.5 p-3 md:gap-5 md:p-5">
 			<div className="flex flex-col">
 				{title && (
 					<div className="flex h-fit justify-between">
