@@ -4,7 +4,7 @@ import type { ColumnDef } from "@tanstack/react-table"
 import { Plug2, Ticket, Zap } from "lucide-react"
 import { useRouter } from "next/navigation"
 
-import Button from "@/common/components/button"
+import TbButton from "@/common/components/button/TbButton"
 
 export type TradingTablePT = {
 	id: string
@@ -30,7 +30,6 @@ export const columns: ColumnDef<TradingTablePT>[] = [
 	{
 		accessorKey: "volume",
 		header: "발전량 (MWh)",
-
 		cell: ({ row }) => {
 			const volume = parseFloat(row.getValue("volume"))
 			const formatted = new Intl.NumberFormat("ko-KR", {}).format(volume)
@@ -46,7 +45,6 @@ export const columns: ColumnDef<TradingTablePT>[] = [
 	{
 		accessorKey: "bidVolume",
 		header: "거래량 (MWh)",
-
 		cell: ({ row }) => {
 			const volume = parseFloat(row.getValue("bidVolume"))
 			const formatted = new Intl.NumberFormat("ko-KR", {}).format(volume)
@@ -62,7 +60,6 @@ export const columns: ColumnDef<TradingTablePT>[] = [
 	{
 		accessorKey: "bidNumbers",
 		header: "거래 (건)",
-
 		cell: ({ row }) => {
 			const volume = parseFloat(row.getValue("bidNumbers"))
 			const formatted = new Intl.NumberFormat("ko-KR", {}).format(volume)
@@ -88,12 +85,14 @@ export const columns: ColumnDef<TradingTablePT>[] = [
 
 			return (
 				<div className="flex justify-center">
-					<Button
-						className="text-xs hover:bg-tbPastelGreen"
+					<TbButton
 						onClick={handleClick}
+						color="gray"
+						size="sm"
+						className="text-xs hover:bg-tbPastelGreen"
 					>
 						거래
-					</Button>
+					</TbButton>
 				</div>
 			)
 		},
