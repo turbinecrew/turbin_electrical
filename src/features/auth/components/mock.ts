@@ -1,7 +1,8 @@
 export const profileMock = {
-	사업자명: "터빈크루",
-	사업자대표: "이영록",
-	사업자번호: "01033422242",
-	사업자주소: "서울특별시 강남구 강남로 123-22",
-	이메일: "test@naver.com",
+	email: "qkdgudrl@naver.com",
+	businessName: "방형기",
+	businessNumber: "1118194369",
+	businessOwner: "방형기",
+	businessAddress: "광주광역시",
+	role: "member",
 }
