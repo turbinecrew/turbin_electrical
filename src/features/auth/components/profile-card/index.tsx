@@ -1,10 +1,7 @@
 "use client"
 
-import { useMutation } from "@tanstack/react-query"
 import { Columns2 } from "lucide-react"
 import { useState } from "react"
-
-import { axiosInstance } from "@/config/axios"
 
 import { CardLabel } from "./card-label"
 
