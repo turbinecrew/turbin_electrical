@@ -1,4 +1,3 @@
-/** 오늘 날짜를 지정된 형식으로 반환 */
 export function getTodayString(
 	format: "YYYY-MM-DD" | "MM/DD/YYYY" = "YYYY-MM-DD",
 ): string {
@@ -12,12 +11,11 @@ export function getTodayString(
 	return `${month}/${day}/${year}`
 }
 
-/** "YYYY-MM-DD" -> "12월 26일" */
 export function formatMonthDay(dateString: string): string {
 	const parts = dateString.split("-")
 	if (parts.length < 3) {
 		throw new Error("Invalid date format. Expected 'YYYY-MM-DD'")
 	}
-	const [month, day] = parts.map(Number)
-	return `${month}월 ${day}일`
+	const [year, month, day] = parts.map(Number)
+	return `${year}년 ${month}월 ${day}일`
 }

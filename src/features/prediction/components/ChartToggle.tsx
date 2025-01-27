@@ -8,14 +8,14 @@ import CombinedChart from "./chart/weather"
 export default function ChartToggle() {
 	const [chartMode, setChartMode] = useState<"region" | "date">("region")
 
-	const baseStyle = "inline-block cursor-pointer transition-all border-b-4"
+	const baseStyle = "inline-block text-l cursor-pointer transition-all"
 	const activeStyle = "border-tbGreen font-semibold text-tbGreen"
 	const inactiveStyle =
 		"border-transparent font-thin text-gray-500 hover:text-tbGreen"
 
 	return (
 		<div className="mx-auto w-full">
-			<div className="flex items-center gap-6 p-4">
+			<div className="flex items-center gap-6 pb-2 pt-2">
 				<span
 					className={`${baseStyle} ${
 						chartMode === "region" ? activeStyle : inactiveStyle
@@ -34,7 +34,7 @@ export default function ChartToggle() {
 				</span>
 			</div>
 
-			<div className="h-full w-full overflow-x-auto">
+			<div className="flex w-full flex-col">
 				{chartMode === "region" ? <CombinedChart /> : <DailyChart />}
 			</div>
 		</div>

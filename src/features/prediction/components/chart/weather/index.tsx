@@ -12,7 +12,7 @@ import {
 	ResponsiveContainer,
 } from "recharts"
 
-import mockData from "@/features/region/components/regionaltable/mock"
+import { useRegionalWeatherData } from "@/features/predict/hooks/useRegionalWeatherData"
 import RegionSelect from "@/features/region/components/regionselect"
 import { getTodayString } from "@/features/region/hooks/data/useDateUtils"
 import useFilteredData from "@/features/region/hooks/data/useFilteredData"
@@ -20,24 +20,29 @@ import useFilteredData from "@/features/region/hooks/data/useFilteredData"
 export default function WeatherChart() {
 	const [selectedRegion, setSelectedRegion] = useState("강원특별자치도")
 	const [activeKey, setActiveKey] = useState("일사량(W/㎡)")
+	const { data: weatherData, isLoading, isError } = useRegionalWeatherData() // 에러 핸들링 추가
 
-	// 오늘 날짜 계산
 	const today = getTodayString()
 
-	// 필터링된 데이터
-	const filteredData = useFilteredData(mockData, {
+	const filteredData = useFilteredData(weatherData, {
 		selectedRegion,
 		today,
 		startHour: 9,
 		endHour: 17,
 	})
 
-	// 지역 목록 생성
-	const regions = Array.from(new Set(mockData?.map((item) => item.지역) || []))
+	const regions = Array.from(
+		new Set(weatherData?.map((item) => item.region) || []),
+	)
+
+	if (isLoading) return <p>로딩중...</p>
+	if (isError) return <p>데이터 로드 실패</p>
 
 	return (
-		<div className="w-full space-y-4 p-4">
-			<h2 className="text-xl font-bold text-gray-700">지역별 기상 데이터</h2>
+		<div className="w-full">
+			<div className="mb-2 mt-2 text-xl font-bold text-gray-700">
+				지역별 기상 데이터
+			</div>
 
 			<div>
 				<div className="mb-4">
@@ -86,7 +91,13 @@ export default function WeatherChart() {
 				<ResponsiveContainer w-full h-full>
 					<ComposedChart data={filteredData}>
 						<CartesianGrid strokeDasharray="3 3" />
-						<XAxis dataKey="시간" className="text-sm" />
+						<XAxis
+							dataKey="time"
+							className="text-sm"
+							tickFormatter={(timeString) => {
+								return timeString
+							}}
+						/>
 						<YAxis
 							label={{
 								value: activeKey,
@@ -94,6 +105,7 @@ export default function WeatherChart() {
 								position: "insideLeft",
 								style: { fontSize: "14px", fontWeight: "bold" },
 							}}
+							domain={["auto", "auto"]}
 						/>
 						<Tooltip />
 
