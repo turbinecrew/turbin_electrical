@@ -47,7 +47,7 @@ export function ProfileCard() {
 			{/* Main Card */}
 			<div
 				className={`z-10 h-fit w-[54rem] min-w-[48rem] flex-col gap-4 rounded-2xl border-2 bg-white p-4 shadow-md transition-transform duration-300 ease-in-out ${
-					isSideCardVisible ? "-translate-x-[12rem]" : "translate-x-0"
+					isSideCardVisible ? "translate-x-0" : "-translate-x-[12rem]"
 				}`}
 			>
 				<div className="flex justify-between">
@@ -85,7 +85,7 @@ export function ProfileCard() {
 
 			<div
 				className={`absolute bottom-0 right-0 z-0 h-[15rem] w-[24rem] transform transition-transform duration-300 ease-in-out ${
-					isSideCardVisible ? "translate-x-0" : "-translate-x-[25vw]"
+					isSideCardVisible ? "-translate-x-[25vw]" : "translate-x-0"
 				}`}
 			>
 				<div className="h-[14.8rem] w-full min-w-[24rem] rounded-2xl border-r-2 border-t-2 py-7 shadow-md">
