@@ -1,7 +1,8 @@
+import { MiniCardPT } from "@/common/components/card/new-card/types"
 import { useTodayRECData } from "@/features/trading-dashboard/hook/useTodayRECData"
 import { useTodaySMPData } from "@/features/trading-dashboard/hook/useTodaySMPData"
 
-export function usePriceCardData() {
+export function usePriceCardData(): MiniCardPT[] {
 	const {
 		data: todaySMPData,
 		isLoading: isSMPLoading,
@@ -43,26 +44,24 @@ export function usePriceCardData() {
 
 	const mathSymbol = (number: number | null) => {
 		if (number === null) return null
-		return number > 0 ? true : number === 0 ? false : null
+		return number > 0 ? true : number === 0 ? false : "noChange"
 	}
 
 	if (isSMPError || isRECError) {
 		return [
 			{
-				title: "현재 SMP 가격",
+				title: "SMP 현재가",
 				value: "error",
 				unit: "원/kWh",
 				isIncreased: null,
 				amount: null,
-				color: "bg-[#F6FCF3]",
 			},
 			{
-				title: "현재 REC 가격",
+				title: "REC 현재가",
 				value: "error",
 				unit: "원/REC",
 				isIncreased: null,
 				amount: null,
-				color: "bg-[#EFF6F1]",
 			},
 		]
 	}
@@ -70,40 +69,36 @@ export function usePriceCardData() {
 	if (isSMPLoading || isRECLoading) {
 		return [
 			{
-				title: "현재 SMP 가격",
+				title: "SMP 현재가",
 				value: "-",
 				unit: "원/kWh",
 				isIncreased: null,
 				amount: null,
-				color: "bg-[#F6FCF3]",
 			},
 			{
-				title: "현재 REC 가격",
+				title: "REC 현재가",
 				value: "-",
 				unit: "원/REC",
 				isIncreased: null,
 				amount: null,
-				color: "bg-[#EFF6F1]",
 			},
 		]
 	}
 
 	return [
 		{
-			title: "현재 SMP 가격",
+			title: "SMP 현재가",
 			value: recentSMPData ? recentSMPData.Land : "-",
 			unit: "원/kWh",
 			isIncreased: mathSymbol(SMPDataGap),
 			amount: SMPDataGap,
-			color: "bg-[#F6FCF3]",
 		},
 		{
-			title: "현재 REC 가격",
+			title: "REC 현재가",
 			value: recentRECData ? recentRECData.closing_price : "-",
 			unit: "원/REC",
 			isIncreased: mathSymbol(RECDataGap),
 			amount: RECDataGap,
-			color: "bg-[#EFF6F1]",
 		},
 	]
 }

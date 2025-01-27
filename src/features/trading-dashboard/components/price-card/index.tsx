@@ -1,6 +1,9 @@
-"use client"
-import type { MiniCardPT } from "@/common/components/card"
-import { MiniCard } from "@/common/components/card"
+import {
+	MiniCardContent,
+	MiniCardHeader,
+	TbCard,
+} from "@/common/components/card/new-card"
+import type { MiniCardPT } from "@/common/components/card/new-card/types"
 import { usePriceCardData } from "@/features/trading-dashboard/hook/usePriceCardData"
 
 type PriceCardPT = {
@@ -12,7 +15,7 @@ export function PriceCard({ setActiveChart }: PriceCardPT) {
 	const priceCardData = usePriceCardData()
 
 	return (
-		<>
+		<div className="grid w-full grid-cols-2 gap-4">
 			{priceCardData.map((items: MiniCardPT, idx: number) => (
 				<button
 					key={idx}
@@ -21,17 +24,21 @@ export function PriceCard({ setActiveChart }: PriceCardPT) {
 					}}
 					className="text-left"
 				>
-					<MiniCard
-						title={items.title}
-						value={items.value}
-						unit={items.unit}
-						isIncreased={items.isIncreased}
-						amount={items.amount}
-						color={items.color}
+					<TbCard
+						variant="mini"
+						color={idx ? "deep" : "light"}
 						className="h-full"
-					/>
+					>
+						<MiniCardHeader title={items.title} />
+						<MiniCardContent
+							value={items.value}
+							unit={items.unit}
+							isIncreased={items.isIncreased}
+							amount={items.amount}
+						/>
+					</TbCard>
 				</button>
 			))}
-		</>
+		</div>
 	)
 }
