@@ -3,6 +3,8 @@
 import { Columns2 } from "lucide-react"
 import { useState } from "react"
 
+import { useUserData } from "../../hook/useAuth"
+
 import { CardLabel } from "./card-label"
 
 export type ProfileMockKeys =
@@ -39,7 +41,12 @@ export function ProfileCard() {
 		{ key: "businessName", title: "사업자명" },
 		{ key: "businessOwner", title: "사업자 대표" },
 	]
+	const { data, isLoading, isError } = useUserData()
 
+	if (isLoading) return <div>스켈레톤 예정</div>
+	// 에러 처리
+	if (isError) return <div>데이터를 불러오는 중 문제가 발생했습니다.</div>
+	console.log(data)
 	const toggleSideCard = () => setIsSideCardVisible((prev) => !prev)
 
 	return (

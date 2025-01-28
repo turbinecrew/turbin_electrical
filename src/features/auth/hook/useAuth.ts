@@ -1,7 +1,10 @@
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQuery } from "@tanstack/react-query"
+
+import { QUERY_KEYS } from "@/constants/queryKeys"
 
 import type { LoginResponse } from "../api/authApi"
 import { postLogin } from "../api/authApi"
+import { fetchUserData } from "../api/getUserApi"
 
 export const useAuth = () => {
 	// 로그인 Mutation
@@ -47,10 +50,19 @@ export const useAuth = () => {
 	// 		console.error("사용자 정보 업데이트 실패:", error)
 	// 	},
 	// })
+
 	return {
 		loginMutation,
 		// logoutMutation,
 		// signUpMutation,
 		// updateUserMutation,
 	}
+}
+export const useUserData = () => {
+	return useQuery({
+		queryKey: [QUERY_KEYS.AUTH_USER_DATA],
+		queryFn: fetchUserData,
+		staleTime: 1000 * 60 * 5, // 5분 동안 캐시 유지
+		retry: 1, // 실패 시 한 번 재시도})
+	})
 }
