@@ -7,4 +7,5 @@ export enum QUERY_KEYS {
 	MONTHLY_SMP = "get-monthly-SMP",
 	AMGO = "get-amgo",
 	TIME_BASED_GENERATION = "get-time-based-generation",
+	AUTH_USER_DATA = "userData",
 }
