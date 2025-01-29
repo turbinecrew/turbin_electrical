@@ -5,6 +5,7 @@ import { useState } from "react"
 import { TitleCard } from "@/common/components/card"
 import { LineChartComponent } from "@/common/components/chart/line-chart"
 import { TimeRangeOptions } from "@/common/components/chart/time-range-options"
+import { LoadingComponent } from "@/common/components/loading"
 import { useSMPChartData } from "@/features/trading-dashboard/hooks/useSMPChartData"
 import type { TSMPData } from "@/features/trading-dashboard/types/TSMPData"
 import {
@@ -39,7 +40,11 @@ export function SmpLineChart() {
 	const timeRangeOptions = smpTimeRange
 	const contents = () => {
 		if (isLoading) {
-			return <div className="pt-2">Loading...</div>
+			return (
+				<div className="flex h-full items-center justify-center pt-2">
+					<LoadingComponent />
+				</div>
+			)
 		}
 
 		if (isError) {
