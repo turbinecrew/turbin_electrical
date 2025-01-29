@@ -2,11 +2,20 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"paths": {
-			"@/*": ["./src/*"]
+			"@/*": [
+				"./src/*"
+			]
 		},
-		"types": ["next-auth"],
+		"types": [
+			"next-auth",
+			"kakao.maps.d.ts"
+		],
 		"target": "ES2017",
-		"lib": ["dom", "dom.iterable", "esnext"],
+		"lib": [
+			"dom",
+			"dom.iterable",
+			"esnext"
+		],
 		"allowJs": true,
 		"skipLibCheck": true,
 		"strict": true,
@@ -32,5 +41,7 @@
 		".next/types/**/*.ts",
 		"src/types/**/*.d.ts"
 	],
-	"exclude": ["node_modules"]
+	"exclude": [
+		"node_modules"
+	]
 }
