@@ -32,7 +32,7 @@ export default function Trading() {
 				</div>
 			</div>
 			<div className="flex w-full justify-center">
-				<TradingDataTable />
+				{/* <TradingDataTable /> */}
 			</div>
 		</div>
 	)

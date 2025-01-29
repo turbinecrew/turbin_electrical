@@ -1,6 +1,4 @@
 import { rawData } from "@/features/trading-dashboard/components/price-chart/smp-line-chart/mock"
-import { generateChartConfig } from "@/features/trading-dashboard/hook/generate-chartConfig"
-import type { ChartConfig } from "@/shadcn/components/chart"
 
 function getDailyData() {
 	const ProcessedData: typeof rawData = []
@@ -44,9 +42,3 @@ function getDailyData() {
 }
 
 export const chartData: typeof rawData = getDailyData()
-
-export function getChartConfig() {
-	const chartConfig: ChartConfig = generateChartConfig({ data: chartData })
-
-	return chartConfig
-}

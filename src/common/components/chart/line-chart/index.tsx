@@ -1,13 +1,6 @@
 "use client"
 
-import {
-	CartesianGrid,
-	Line,
-	LineChart,
-	ReferenceLine,
-	XAxis,
-	YAxis,
-} from "recharts"
+import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts"
 import type { AxisDomainItem } from "recharts/types/util/types"
 
 import type { LineChartComponentPT } from "@/common/components/chart/line-chart/type"
@@ -20,12 +13,13 @@ import {
 export function LineChartComponent({
 	chartConfig,
 	chartData,
-	LineDataKey,
-	XAixsDataKey,
-	Ymin,
-	Ymax = "auto",
+	lineDataKey,
+	xAixsDataKey,
+	yMin,
+	yMax = "auto",
 	type,
 	dot,
+	xAxisFormat,
 }: LineChartComponentPT) {
 	function generateTicks(
 		Ymin: AxisDomainItem,
@@ -41,6 +35,24 @@ export function LineChartComponent({
 		}
 	}
 
+	const dateFormatter = (value: string | Date) => {
+		if (!value) return "-"
+
+		const date = new Date(value)
+		if (isNaN(date.getTime())) return "-"
+
+		const option: Record<"MD" | "DT" | "YM", Intl.DateTimeFormatOptions> = {
+			MD: { month: "long", day: "numeric", weekday: "short" },
+			DT: { day: "numeric", hour: "numeric", weekday: "short" },
+			YM: { year: "numeric", month: "long" },
+		}
+
+		const options = option[xAxisFormat]
+		return options
+			? new Intl.DateTimeFormat("ko-KR", options).format(date)
+			: value.toLocaleString()
+	}
+
 	return (
 		<ChartContainer config={chartConfig}>
 			<LineChart
@@ -53,39 +65,33 @@ export function LineChartComponent({
 			>
 				<CartesianGrid vertical={false} />
 				<XAxis
-					dataKey={XAixsDataKey}
+					dataKey={xAixsDataKey}
 					tickLine={true}
 					axisLine={{ stroke: "#000000", strokeWidth: 1 }}
 					tickMargin={8}
-					tickFormatter={(value) => {
-						const date = new Date(value)
-						const options: Intl.DateTimeFormatOptions = {
-							month: "short",
-							day: "numeric",
-						}
-
-						if (date.getHours() !== 0 || date.getMinutes() !== 0) {
-							options.hour = "numeric"
-						}
-
-						return date.toLocaleString("en-US", options)
-					}}
+					tickFormatter={dateFormatter}
 				/>
+
 				<YAxis
 					tickLine={true}
 					axisLine={true}
 					tickMargin={8}
-					ticks={generateTicks(Ymin, Ymax, 10)}
-					domain={[Ymin, Ymax]}
+					ticks={generateTicks(yMin, yMax, 10)}
+					domain={[yMin, yMax]}
 				/>
 				<ChartTooltip
 					cursor={false}
-					content={<ChartTooltipContent hideLabel />}
+					labelFormatter={(_, payload) => {
+						if (!payload || payload.length === 0) return "날짜 정보 없음"
+						const xAxisValue = dateFormatter(payload[0].payload[xAixsDataKey])
+						return xAxisValue
+					}}
+					content={<ChartTooltipContent indicator="dashed" />}
 				/>
 				<Line
-					dataKey={LineDataKey}
+					dataKey={lineDataKey}
 					type={type}
-					stroke={`var(--color-${LineDataKey})`}
+					stroke={`var(--color-${lineDataKey})`}
 					strokeWidth={2}
 					dot={dot}
 				/>
