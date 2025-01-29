@@ -10,19 +10,18 @@ export function VolumeChart() {
 	const data = groupByApprovedDate(mockdata)
 	const chartConfig = generateChartConfig(data)
 
-	console.log(data)
 	return (
 		<TitleCard title="월별 거래량">
 			<div className="pt-4">
 				<LineChartComponent
 					chartConfig={chartConfig}
 					chartData={data}
-					LineDataKey={"volume"}
-					XAixsDataKey={"date"}
+					lineDataKey={"volume"}
+					xAixsDataKey={"date"}
 					type={"monotone"}
 					dot={false}
-					Ymin={0}
-					Ymax={"auto"}
+					yMin={0}
+					yMax={"auto"}
 					xAxisFormat={"YM"}
 				/>
 			</div>

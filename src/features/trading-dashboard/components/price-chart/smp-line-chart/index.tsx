@@ -52,12 +52,12 @@ export function SmpLineChart() {
 					<LineChartComponent
 						chartConfig={chartConfig}
 						chartData={filteredData}
-						LineDataKey={"smp"}
-						XAixsDataKey={"date"}
+						lineDataKey={"smp"}
+						xAixsDataKey={"date"}
 						type={"monotone"}
 						dot={false}
-						Ymin={0}
-						Ymax={200}
+						yMin={0}
+						yMax={200}
 						xAxisFormat={timeRange == "1d" ? "DT" : "MD"}
 					/>
 				</div>

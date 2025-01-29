@@ -5,12 +5,12 @@ import { useState } from "react"
 import { TitleCard } from "@/common/components/card"
 import { LineChartComponent } from "@/common/components/chart/line-chart"
 import { TimeRangeOptions } from "@/common/components/chart/time-range-options"
+import { useRECChartData } from "@/features/trading-dashboard/hooks/useRECChartData"
 import {
 	dateFilteredData,
 	recTimeRange,
 } from "@/features/trading-dashboard/utils/dateFilteredData"
 import { generateChartConfig } from "@/features/trading-dashboard/utils/generateChartConfig"
-import { useRECChartData } from "@/features/trading-dashboard/hooks/useRECChartData"
 
 export function RecLineChart() {
 	const [timeRange, setTimeRange] = useState("30d")
@@ -39,13 +39,13 @@ export function RecLineChart() {
 					<LineChartComponent
 						chartConfig={chartConfig}
 						chartData={filteredData}
-						LineDataKey={"rec"}
-						XAixsDataKey={"date"}
+						lineDataKey={"rec"}
+						xAixsDataKey={"date"}
 						type={"linear"}
 						dot={false}
-						Ymin={0}
-						Ymax={"auto"}
-						xFormat={"MD"}
+						yMin={0}
+						yMax={"auto"}
+						xAxisFormat={"MD"}
 					/>
 				</div>
 			)
