@@ -1,6 +1,6 @@
 "use client"
 
-import { Bell, Trash2, SquareCheckBig, Square } from "lucide-react"
+import { Bell, Trash2, MailOpen, Mail } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 
 import { notificationData } from "@/common/components/notification-center/data"
@@ -74,7 +74,7 @@ export function NotificationPopup() {
 			{isOpen && (
 				<div
 					className={
-						"absolute -right-8 top-14 z-10 mt-2 flex h-96 w-72 flex-col gap-1 overflow-y-auto rounded-2xl bg-white p-3 text-slate-700 shadow-md transition duration-200 ease-in [&::-webkit-scrollbar]:hidden"
+						"absolute -right-8 top-14 z-20 mt-2 flex h-96 w-72 flex-col gap-1 overflow-y-auto rounded-2xl bg-white p-3 text-slate-700 shadow-md transition duration-200 ease-in [&::-webkit-scrollbar]:hidden"
 					}
 				>
 					<div className="flex flex-col gap-1">
@@ -98,9 +98,9 @@ export function NotificationPopup() {
 												className={`absolute left-1/2 top-1/2 flex h-fit w-fit -translate-x-1/2 -translate-y-1/2 transform items-center justify-center bg-white text-black opacity-0 transition-all duration-300 ${styles.check}`}
 											>
 												{noti.read ? (
-													<SquareCheckBig size={18} />
+													<MailOpen className="h-4 w-4" />
 												) : (
-													<Square size={18} />
+													<Mail className="h-4 w-4" />
 												)}
 											</button>
 										</div>
