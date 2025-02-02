@@ -31,7 +31,7 @@ function DebouncedInput({
 		<input
 			{...props}
 			value={value}
-			className="h-fit w-20 rounded border text-center text-xs md:text-sm"
+			className="h-4 w-20 rounded border text-center text-xs md:h-5 md:text-sm"
 			onChange={(e) => setValue(e.target.value)}
 		/>
 	)
@@ -48,7 +48,7 @@ export function FilterDataByRange({
 	return (
 		<>
 			{isInputVisible && (
-				<div className="flex h-fit w-fit items-center gap-3 rounded-xl border pr-2 text-sm font-medium md:p-1">
+				<div className="flex items-center gap-1 rounded-xl border px-2 py-1 text-sm font-medium">
 					<div className="w-14 border border-none px-1 text-center text-xs font-medium md:text-sm">
 						{FilterColumnList.find((item) => item.id === id)?.name || "Unknown"}
 					</div>
@@ -81,9 +81,9 @@ export function FilterDataByRange({
 						onClick={() => {
 							resetTableFilter(id)
 						}}
-						className="flex flex-row items-center gap-1 text-gray-400"
+						className="flex flex-row items-center px-1 text-gray-400"
 					>
-						<X className="gray-400 w-3 md:w-4" />
+						<X className="h-3 w-3 md:h-4 md:w-4" />
 					</button>
 				</div>
 			)}

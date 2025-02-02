@@ -16,7 +16,10 @@ import TbButton from "@/common/components/button/TbButton"
 import { FilterDataByRange } from "@/features/realtime/components/trading-table/filter"
 import { FileterPicker } from "@/features/realtime/components/trading-table/filter-picker"
 import { SortPicker } from "@/features/realtime/components/trading-table/sort-picker"
-import { FilterColumnList } from "@/features/realtime/components/types/table/types"
+import {
+	FilterColumnList,
+	SortColumnList,
+} from "@/features/realtime/components/types/table/types"
 
 import type { TradingTablePT } from "../Tcolumn"
 
@@ -53,6 +56,7 @@ export function TradingTableHeader({
 	const [sortingState, setSortingState] = useState<Record<string, boolean>>({
 		plantName: false,
 		volume: false,
+		bidVolume: false,
 		bidNumbers: false,
 	})
 
@@ -91,6 +95,7 @@ export function TradingTableHeader({
 		setSortingState({
 			plantName: false,
 			volume: false,
+			bidVolume: false,
 			bidNumbers: false,
 		})
 		setCurrentSortColumn("")
@@ -129,11 +134,17 @@ export function TradingTableHeader({
 		}
 	}, [toggleState.ordering, updateState])
 
+	const sortingText = SortColumnList.find(
+		(column) => column.id === currentSortColumn,
+	)
+
 	return (
 		<div className="ml-1 flex w-full flex-col">
 			<div className="flex w-full justify-between">
 				<div className="ml-4 flex items-center justify-start gap-4">
 					<TbButton
+						color="transparent"
+						size="fit"
 						onClick={() => {
 							updateState({ filtering: !toggleState.filtering })
 						}}
@@ -145,6 +156,8 @@ export function TradingTableHeader({
 						/>
 					</TbButton>
 					<TbButton
+						color="transparent"
+						size="fit"
 						onClick={() => {
 							updateState({ ordering: !toggleState.ordering })
 						}}
@@ -156,7 +169,7 @@ export function TradingTableHeader({
 						/>
 					</TbButton>
 				</div>
-				<div className="flex h-8 items-center rounded-xl border border-gray-300 bg-white px-2 md:px-3">
+				<div className="flex h-fit items-center rounded-xl border border-gray-300 bg-white p-1 px-2 md:px-3">
 					<TextSearch className="h-3 w-3 text-gray-400 md:h-4 md:w-4" />
 					<input
 						placeholder="Enter Name..."
@@ -164,7 +177,7 @@ export function TradingTableHeader({
 							(table.getColumn("plantName")?.getFilterValue() as string) ?? ""
 						}
 						onChange={handleSearch}
-						className="ml-2 h-full w-36 border-none bg-transparent text-xs text-gray-600 placeholder-gray-400 outline-none md:w-48 md:text-sm"
+						className="ml-2 w-32 border-none bg-transparent text-xs text-gray-600 placeholder-gray-400 outline-none md:w-48 md:text-sm"
 					/>
 				</div>
 			</div>
@@ -196,8 +209,9 @@ export function TradingTableHeader({
 			<div className="flex w-full flex-col gap-2 border-none p-1 md:p-2">
 				{currentSortColumn != "" && (
 					<TbButton
+						color="tableWhite"
+						size="table"
 						onClick={resetSorting}
-						color="gray"
 						className="flex w-fit gap-1"
 					>
 						{sortingState[currentSortColumn] ? (
@@ -206,15 +220,9 @@ export function TradingTableHeader({
 							<ArrowUp className="h-4 w-4 md:h-5 md:w-5" />
 						)}
 						<div className="flex w-full justify-center text-xs md:text-sm">
-							{currentSortColumn === "plantName"
-								? "발전소명"
-								: currentSortColumn === "volume"
-									? "전력 발전량"
-									: currentSortColumn === "bidNumbers"
-										? "거래량"
-										: "정렬 기준 선택"}
+							{sortingText ? sortingText.name : "필터 선택"}
 						</div>
-						<X className="h-3 w-3 text-gray-400 md:h-4 md:w-4" />
+						<X className="h-4 w-4 text-gray-400 md:h-5 md:w-5" />
 					</TbButton>
 				)}
 
