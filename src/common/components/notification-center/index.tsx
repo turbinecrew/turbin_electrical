@@ -17,15 +17,17 @@ export function NotificationPopup() {
 		setIsOpen((prev) => !prev)
 	}
 
-	const setRead = (id: string | number) => {
-		setNotifications((prev) =>
-			prev.map((noti) => (noti.id === id ? { ...noti, read: true } : noti)),
-		)
-	}
-	const toggleRead = (id: string | number) => {
+	const setIsRead = (id: string | number) => {
 		setNotifications((prev) =>
 			prev.map((noti) =>
-				noti.id === id ? { ...noti, read: !noti.read } : noti,
+				noti._id.$oid === id ? { ...noti, is_read: true } : noti,
+			),
+		)
+	}
+	const toggleIsReadState = (id: string | number) => {
+		setNotifications((prev) =>
+			prev.map((noti) =>
+				noti._id.$oid === id ? { ...noti, is_read: !noti.is_read } : noti,
 			),
 		)
 	}
@@ -37,7 +39,7 @@ export function NotificationPopup() {
 	}
 
 	const deleteNotification = (id: string) => {
-		setNotifications((prev) => prev.filter((noti) => noti.id !== id))
+		setNotifications((prev) => prev.filter((noti) => noti._id.$oid !== id))
 	}
 
 	const handleClickOutside = (event: MouseEvent) => {
@@ -53,7 +55,7 @@ export function NotificationPopup() {
 		}
 	}, [])
 
-	const unreadCount = notifications.filter((noti) => !noti.read).length
+	const unreadCount = notifications.filter((noti) => !noti.is_read).length
 
 	return (
 		<div className="relative w-fit" ref={popupRef}>
@@ -79,25 +81,25 @@ export function NotificationPopup() {
 				>
 					<div className="flex flex-col gap-1">
 						{notifications.map((noti) => {
-							const formattedDate = new Date(noti.date)
+							const formattedDate = new Date(noti.created_at.$date)
 							return (
 								<div
-									key={noti.id}
+									key={noti._id.$oid}
 									className="alert-item translate group relative h-fit w-full overflow-hidden rounded-xl border-none bg-background py-1 duration-100 hover:border hover:bg-gray-100 hover:text-tbGreen"
 								>
 									<div
-										className={`absolute left-2 top-2 z-10 h-2 w-2 rounded-full bg-red-400 ${noti.read && "opacity-0"}`}
+										className={`absolute left-2 top-2 z-10 h-2 w-2 rounded-full bg-red-400 ${noti.is_read && "opacity-0"}`}
 									></div>
 									<div className={`flex h-full w-full flex-row gap-2 px-2`}>
 										<div
-											className={`${styles.icon} relative col-span-1 flex h-full w-fit items-center justify-center ${noti.read && "opacity-50"}`}
+											className={`${styles.icon} relative col-span-1 flex h-full w-fit items-center justify-center ${noti.is_read && "opacity-50"}`}
 										>
 											<IconFormatter type={noti.type} size={16} />
 											<button
-												onClick={() => toggleRead(noti.id)}
+												onClick={() => toggleIsReadState(noti._id.$oid)}
 												className={`absolute left-1/2 top-1/2 flex h-fit w-fit -translate-x-1/2 -translate-y-1/2 transform items-center justify-center bg-white text-black opacity-0 transition-all duration-300 ${styles.check}`}
 											>
-												{noti.read ? (
+												{noti.is_read ? (
 													<MailOpen className="h-4 w-4" />
 												) : (
 													<Mail className="h-4 w-4" />
@@ -106,10 +108,10 @@ export function NotificationPopup() {
 										</div>
 										<button
 											onClick={() => {
-												setRead(noti.id)
-												handleLink(noti.link)
+												setIsRead(noti._id.$oid)
+												handleLink(noti.data.content_link)
 											}}
-											className={`flex h-full w-full flex-col space-y-1 ${noti.read && "opacity-50"}`}
+											className={`flex h-full w-full flex-col space-y-1 ${noti.is_read && "opacity-50"}`}
 										>
 											<div className="flex w-full justify-between">
 												<div className="alert-title text-start text-sm font-semibold">
@@ -132,7 +134,7 @@ export function NotificationPopup() {
 										</button>
 										<div className={`${styles.bar} h-full w-2`}>
 											<button
-												onClick={() => deleteNotification(noti.id)}
+												onClick={() => deleteNotification(noti._id.$oid)}
 												className={`${styles.trash} transiion-all absolute -right-10 top-1/2 flex h-24 w-8 -translate-y-1/2 transform items-center justify-center bg-white text-red-500 opacity-0 duration-200`}
 											>
 												<Trash2 size={14} />
