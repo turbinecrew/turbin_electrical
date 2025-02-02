@@ -3,14 +3,27 @@
 import { Bell, Trash2, MailOpen, Mail } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 
-import { notificationData } from "@/common/components/notification-center/data"
 import { IconFormatter } from "@/common/components/notification-center/icon"
+import type { TNotificationData } from "@/common/components/notification-center/types"
+import { useNotificationsData } from "@/common/hooks/useNotificationsData"
 
 import styles from "./style/notification.module.css"
 
 export function NotificationPopup() {
-	const [notifications, setNotifications] = useState(notificationData)
+	const [notifications, setNotifications] = useState<TNotificationData[]>([])
 	const popupRef = useRef<HTMLDivElement>(null)
+
+	const { data, error, isError } = useNotificationsData()
+	useEffect(() => {
+		if (data && !error) {
+			setNotifications(data)
+		}
+	}, [data, error])
+
+	console.log(data)
+	if (isError) {
+		setNotifications([])
+	}
 
 	const [isOpen, setIsOpen] = useState<boolean>(false)
 	const toggleNotification = () => {
@@ -18,17 +31,20 @@ export function NotificationPopup() {
 	}
 
 	const setIsRead = (id: string | number) => {
-		setNotifications((prev) =>
+		setNotifications((prev: TNotificationData[]) =>
 			prev.map((noti) =>
 				noti._id.$oid === id ? { ...noti, is_read: true } : noti,
 			),
 		)
 	}
-	const toggleIsReadState = (id: string | number) => {
+	const toggleIsReadState = (id: string) => {
 		setNotifications((prev) =>
-			prev.map((noti) =>
-				noti._id.$oid === id ? { ...noti, is_read: !noti.is_read } : noti,
-			),
+			prev.map((noti) => {
+				if (noti._id.$oid === id) {
+					return { ...noti, is_read: !noti.is_read }
+				}
+				return noti
+			}),
 		)
 	}
 
@@ -39,7 +55,9 @@ export function NotificationPopup() {
 	}
 
 	const deleteNotification = (id: string) => {
-		setNotifications((prev) => prev.filter((noti) => noti._id.$oid !== id))
+		setNotifications((prev: TNotificationData[]) =>
+			prev.filter((noti) => noti._id.$oid !== id),
+		)
 	}
 
 	const handleClickOutside = (event: MouseEvent) => {
@@ -55,7 +73,9 @@ export function NotificationPopup() {
 		}
 	}, [])
 
-	const unreadCount = notifications.filter((noti) => !noti.is_read).length
+	const unreadCount = notifications.filter(
+		(noti: TNotificationData) => !noti.is_read,
+	).length
 
 	return (
 		<div className="relative w-fit" ref={popupRef}>
@@ -80,7 +100,7 @@ export function NotificationPopup() {
 					}
 				>
 					<div className="flex flex-col gap-1">
-						{notifications.map((noti) => {
+						{notifications.map((noti: TNotificationData) => {
 							const formattedDate = new Date(noti.created_at.$date)
 							return (
 								<div
