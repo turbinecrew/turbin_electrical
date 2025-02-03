@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from "react"
 import { IconFormatter } from "@/common/components/notification-center/icon"
 import type { TNotificationData } from "@/common/components/notification-center/types"
 import { useNotificationsData } from "@/common/hooks/useNotificationsData"
+import { axiosInstance } from "@/config/axios"
 
 import styles from "./style/notification.module.css"
 
@@ -13,14 +14,13 @@ export function NotificationPopup() {
 	const [notifications, setNotifications] = useState<TNotificationData[]>([])
 	const popupRef = useRef<HTMLDivElement>(null)
 
-	const { data, error, isError } = useNotificationsData()
+	const { data, error, isError, refetch } = useNotificationsData()
 	useEffect(() => {
 		if (data && !error) {
 			setNotifications(data)
 		}
 	}, [data, error])
 
-	console.log(data)
 	if (isError) {
 		setNotifications([])
 	}
@@ -32,20 +32,25 @@ export function NotificationPopup() {
 
 	const setIsRead = (id: string | number) => {
 		setNotifications((prev: TNotificationData[]) =>
-			prev.map((noti) =>
-				noti._id.$oid === id ? { ...noti, is_read: true } : noti,
-			),
+			prev.map((noti) => (noti._id === id ? { ...noti, is_read: true } : noti)),
 		)
 	}
-	const toggleIsReadState = (id: string) => {
-		setNotifications((prev) =>
-			prev.map((noti) => {
-				if (noti._id.$oid === id) {
-					return { ...noti, is_read: !noti.is_read }
-				}
-				return noti
-			}),
-		)
+
+	const toggleIsReadState = async (id: string) => {
+		if (!id) {
+			console.error("오류: 잘못된 ID:", id)
+			return
+		}
+
+		try {
+			const response = await axiosInstance.patch(
+				`/Notifications/toggleIsReadState?id=${id}`,
+			)
+
+			refetch()
+		} catch (error) {
+			console.error("오류: is_read 상태 업데이트 실패:", error)
+		}
 	}
 
 	const handleLink = (link: string | undefined) => {
@@ -56,7 +61,7 @@ export function NotificationPopup() {
 
 	const deleteNotification = (id: string) => {
 		setNotifications((prev: TNotificationData[]) =>
-			prev.filter((noti) => noti._id.$oid !== id),
+			prev.filter((noti) => noti._id !== id),
 		)
 	}
 
@@ -104,7 +109,7 @@ export function NotificationPopup() {
 							const formattedDate = new Date(noti.created_at.$date)
 							return (
 								<div
-									key={noti._id.$oid}
+									key={noti._id}
 									className="alert-item translate group relative h-fit w-full overflow-hidden rounded-xl border-none bg-background py-1 duration-100 hover:border hover:bg-gray-100 hover:text-tbGreen"
 								>
 									<div
@@ -116,7 +121,7 @@ export function NotificationPopup() {
 										>
 											<IconFormatter type={noti.type} size={16} />
 											<button
-												onClick={() => toggleIsReadState(noti._id.$oid)}
+												onClick={() => toggleIsReadState(noti._id)}
 												className={`absolute left-1/2 top-1/2 flex h-fit w-fit -translate-x-1/2 -translate-y-1/2 transform items-center justify-center bg-white text-black opacity-0 transition-all duration-300 ${styles.check}`}
 											>
 												{noti.is_read ? (
@@ -128,7 +133,7 @@ export function NotificationPopup() {
 										</div>
 										<button
 											onClick={() => {
-												setIsRead(noti._id.$oid)
+												setIsRead(noti._id)
 												handleLink(noti.data.content_link)
 											}}
 											className={`flex h-full w-full flex-col space-y-1 ${noti.is_read && "opacity-50"}`}
@@ -154,7 +159,7 @@ export function NotificationPopup() {
 										</button>
 										<div className={`${styles.bar} h-full w-2`}>
 											<button
-												onClick={() => deleteNotification(noti._id.$oid)}
+												onClick={() => deleteNotification(noti._id)}
 												className={`${styles.trash} transiion-all absolute -right-10 top-1/2 flex h-24 w-8 -translate-y-1/2 transform items-center justify-center bg-white text-red-500 opacity-0 duration-200`}
 											>
 												<Trash2 size={14} />
