@@ -3,6 +3,7 @@
 import { Bell, Trash2, MailOpen, Mail } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 
+import Button from "@/common/components/button/TbButton"
 import { IconFormatter } from "@/common/components/notification-center/icon"
 import type { TNotificationData } from "@/common/components/notification-center/types"
 import { useNotificationsData } from "@/common/hooks/useNotificationsData"
@@ -26,8 +27,32 @@ export function NotificationPopup() {
 	}
 
 	const [isOpen, setIsOpen] = useState<boolean>(false)
+
 	const toggleNotification = () => {
 		setIsOpen((prev) => !prev)
+	}
+
+	const setAllRead = async () => {
+		try {
+			await axiosInstance.patch("/Notifications/setAllRead?status=true")
+			console.log("setAllRead")
+			refetch()
+		} catch (error) {
+			console.error("setAllRead 오류: is_read 상태 업데이트 실패:", error)
+		}
+	}
+
+	const setAllReadReverse = async () => {
+		try {
+			await axiosInstance.patch("/Notifications/setAllRead?status=false")
+			console.log("setAllReadReverse")
+			refetch()
+		} catch (error) {
+			console.error(
+				"setAllReadReverse 오류: is_read 상태 업데이트 실패:",
+				error,
+			)
+		}
 	}
 
 	const setIsRead = async (id: string | number) => {
@@ -41,7 +66,7 @@ export function NotificationPopup() {
 
 			refetch()
 		} catch (error) {
-			console.error("오류: is_read 상태 업데이트 실패:", error)
+			console.error("setIsRead 오류: is_read 상태 업데이트 실패:", error)
 		}
 	}
 
@@ -56,7 +81,10 @@ export function NotificationPopup() {
 
 			refetch()
 		} catch (error) {
-			console.error("오류: is_read 상태 업데이트 실패:", error)
+			console.error(
+				"toggleIsReadState 오류: is_read 상태 업데이트 실패:",
+				error,
+			)
 		}
 	}
 
@@ -68,7 +96,7 @@ export function NotificationPopup() {
 
 	const deleteNotification = async (id: string) => {
 		if (!id) {
-			console.error("오류: 잘못된 ID:", id)
+			console.error("deleteNotification 오류: 잘못된 ID:", id)
 			return
 		}
 
@@ -120,6 +148,24 @@ export function NotificationPopup() {
 						"absolute -right-8 top-14 z-20 mt-2 flex h-96 w-72 flex-col gap-1 overflow-y-auto rounded-2xl bg-white p-3 text-slate-700 shadow-md transition duration-200 ease-in [&::-webkit-scrollbar]:hidden"
 					}
 				>
+					<div className="flex h-fit w-full justify-end gap-1">
+						<Button
+							size="sm"
+							color="green"
+							onClick={() => setAllRead()}
+							className="gap-1"
+						>
+							<MailOpen className="h-4 w-4" /> All
+						</Button>
+						<Button
+							size="sm"
+							color="green"
+							onClick={() => setAllReadReverse()}
+							className="gap-1"
+						>
+							<Mail className="h-4 w-4" /> All
+						</Button>
+					</div>
 					<div className="flex flex-col gap-1">
 						{notifications.map((noti: TNotificationData) => {
 							const formattedDate = new Date(noti.created_at)
@@ -130,7 +176,7 @@ export function NotificationPopup() {
 								>
 									<div
 										className={`absolute left-2 top-2 z-10 h-2 w-2 rounded-full bg-red-400 ${noti.is_read && "opacity-0"}`}
-									></div>
+									/>
 									<div className={`flex h-full w-full flex-row gap-2 px-2`}>
 										<div
 											className={`${styles.icon} relative col-span-1 flex h-full w-fit items-center justify-center ${noti.is_read && "opacity-50"}`}
