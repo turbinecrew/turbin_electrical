@@ -30,10 +30,19 @@ export function NotificationPopup() {
 		setIsOpen((prev) => !prev)
 	}
 
-	const setIsRead = (id: string | number) => {
-		setNotifications((prev: TNotificationData[]) =>
-			prev.map((noti) => (noti._id === id ? { ...noti, is_read: true } : noti)),
-		)
+	const setIsRead = async (id: string | number) => {
+		if (!id) {
+			console.error("오류: 잘못된 ID:", id)
+			return
+		}
+
+		try {
+			await axiosInstance.patch(`/Notifications/setIsRead?id=${id}`)
+
+			refetch()
+		} catch (error) {
+			console.error("오류: is_read 상태 업데이트 실패:", error)
+		}
 	}
 
 	const toggleIsReadState = async (id: string) => {
