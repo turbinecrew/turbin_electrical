@@ -59,10 +59,26 @@ export function NotificationPopup() {
 		}
 	}
 
-	const deleteNotification = (id: string) => {
-		setNotifications((prev: TNotificationData[]) =>
-			prev.filter((noti) => noti._id !== id),
-		)
+	const deleteNotification = async (id: string) => {
+		if (!id) {
+			console.error("오류: 잘못된 ID:", id)
+			return
+		}
+
+		try {
+			const response = await axiosInstance.patch(
+				`/Notifications/deleteNotification?id=${id}`,
+			)
+			console.log("서버 응답:", response.data)
+
+			// 'deleted_at' 값이 유효한 날짜인지 확인
+			const deletedAt = response.data.deleted_at
+			console.log("알림 삭제된 날짜: ", deletedAt)
+
+			refetch()
+		} catch (error) {
+			console.error("오류: 알림 삭제 실패:", error)
+		}
 	}
 
 	const handleClickOutside = (event: MouseEvent) => {
@@ -106,7 +122,7 @@ export function NotificationPopup() {
 				>
 					<div className="flex flex-col gap-1">
 						{notifications.map((noti: TNotificationData) => {
-							const formattedDate = new Date(noti.created_at.$date)
+							const formattedDate = new Date(noti.created_at)
 							return (
 								<div
 									key={noti._id}

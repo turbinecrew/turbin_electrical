@@ -35,23 +35,20 @@ export async function PATCH(req: Request) {
 			)
 		}
 
-		// is_read 상태 토글
-		const updatedStatus = !notification.is_read
-
 		await collection.updateOne(
-			{ _id: new ObjectId(id) },
-			{ $set: { updated_at: new Date(), is_read: updatedStatus } },
+			{ _id: new ObjectId(id as string) },
+			{ $set: { updated_at: new Date(), deleted_at: new Date() } },
 		)
 
 		return NextResponse.json(
-			{ success: true, is_read: updatedStatus },
+			{ message: "Notification marked as deleted", deleted_at: new Date() },
 			{ status: 200 },
 		)
 	} catch (error) {
-		console.error("Error updating notification:", error)
+		console.error("Error marking notification as deleted", error)
 		return NextResponse.json(
 			{
-				message: "Error updating notification",
+				message: "Error marking notification as deleted",
 				error: error instanceof Error ? error.message : "Unknown error",
 			},
 			{ status: 500 },

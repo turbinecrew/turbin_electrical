@@ -8,7 +8,7 @@ export type TNotificationData = {
 		content_link: string
 	}
 	is_read: boolean
-	created_at: { $date: string }
-	updated_at: { $date: Date } | null
-	deleted_at: { $date: Date } | null
+	created_at: Date
+	updated_at: Date | null
+	deleted_at: Date | null
 }

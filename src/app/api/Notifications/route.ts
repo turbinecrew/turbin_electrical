@@ -7,12 +7,12 @@ export async function GET() {
 		const db = await connectDB()
 		if (!db) {
 			return NextResponse.json(
-				{ message: "AMGO_Database connection failed" },
+				{ message: "Database connection failed" },
 				{ status: 500 },
 			)
 		}
 		const collection = db.collection("Notifications")
-		const data = await collection.find({}).toArray()
+		const data = await collection.find({ deleted_at: null }).toArray()
 
 		return NextResponse.json(data, { status: 200 })
 	} catch (err) {
