@@ -41,7 +41,7 @@ export async function PATCH(req: Request) {
 		)
 
 		return NextResponse.json(
-			{ message: "Notification marked as deleted", deleted_at: new Date() },
+			{ message: "Notification marked as deleted" },
 			{ status: 200 },
 		)
 	} catch (error) {

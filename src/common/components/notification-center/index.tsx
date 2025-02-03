@@ -43,9 +43,7 @@ export function NotificationPopup() {
 		}
 
 		try {
-			const response = await axiosInstance.patch(
-				`/Notifications/toggleIsReadState?id=${id}`,
-			)
+			await axiosInstance.patch(`/Notifications/toggleIsReadState?id=${id}`)
 
 			refetch()
 		} catch (error) {
@@ -66,14 +64,7 @@ export function NotificationPopup() {
 		}
 
 		try {
-			const response = await axiosInstance.patch(
-				`/Notifications/deleteNotification?id=${id}`,
-			)
-			console.log("서버 응답:", response.data)
-
-			// 'deleted_at' 값이 유효한 날짜인지 확인
-			const deletedAt = response.data.deleted_at
-			console.log("알림 삭제된 날짜: ", deletedAt)
+			await axiosInstance.patch(`/Notifications/deleteNotification?id=${id}`)
 
 			refetch()
 		} catch (error) {

@@ -43,10 +43,7 @@ export async function PATCH(req: Request) {
 			{ $set: { updated_at: new Date(), is_read: updatedStatus } },
 		)
 
-		return NextResponse.json(
-			{ success: true, is_read: updatedStatus },
-			{ status: 200 },
-		)
+		return NextResponse.json({ success: true }, { status: 200 })
 	} catch (error) {
 		console.error("Error updating notification:", error)
 		return NextResponse.json(
