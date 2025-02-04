@@ -27,7 +27,6 @@ export async function PATCH(req: Request) {
 		// 모든 알림의 is_read 상태를 status(true/false)으로 변경 (boolean으로 저장)
 		const updatedStatus = status === "true"
 
-		// 모든 알림의 is_read를 true로 업데이트
 		const result = await collection.updateMany(
 			{ deleted_at: null }, // 삭제되지 않은 알림만 업데이트
 			{ $set: { updated_at: new Date(), is_read: updatedStatus } },

@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query"
 
 import { QUERY_KEYS } from "@/constants/queryKeys"
 
-import { fetchNotificationsData } from "../api/notification-center/fetchNotificationsData"
+import { fetchNotificationsData } from "../../api/notification-center/fetchNotificationsData"
 
 export const useNotificationsData = () => {
 	return useQuery({

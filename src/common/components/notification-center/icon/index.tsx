@@ -12,6 +12,7 @@ import {
 } from "lucide-react"
 
 const alertIconFormat = [
+	{ type: "notice", icon: Bell },
 	{ type: "warnig", icon: TriangleAlert },
 	{ type: "alram", icon: AlarmClock },
 	{ type: "regionPage", icon: Map },

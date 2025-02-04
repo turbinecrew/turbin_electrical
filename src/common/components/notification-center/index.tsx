@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from "react"
 import Button from "@/common/components/button/TbButton"
 import { IconFormatter } from "@/common/components/notification-center/icon"
 import type { TNotificationData } from "@/common/components/notification-center/types"
-import { useNotificationsData } from "@/common/hooks/useNotificationsData"
+import { useNotificationsData } from "@/common/hooks/notification-center/useNotificationsData"
 import { axiosInstance } from "@/config/axios"
 
 import styles from "./style/notification.module.css"
