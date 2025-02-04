@@ -181,7 +181,7 @@ export function NotificationPopup() {
 										<div
 											className={`${styles.icon} relative col-span-1 flex h-full w-fit items-center justify-center ${noti.is_read && "opacity-50"}`}
 										>
-											<IconFormatter type={noti.type} size={16} />
+											<IconFormatter type={noti.data.type} size={16} />
 											<button
 												onClick={() => toggleIsReadState(noti._id)}
 												className={`absolute left-1/2 top-1/2 flex h-fit w-fit -translate-x-1/2 -translate-y-1/2 transform items-center justify-center bg-white text-black opacity-0 transition-all duration-300 ${styles.check}`}
@@ -202,7 +202,7 @@ export function NotificationPopup() {
 										>
 											<div className="flex w-full justify-between">
 												<div className="alert-title text-start text-sm font-semibold">
-													{noti.title}
+													{noti.data.title}
 												</div>
 												<div className="alert-date text-end text-xs text-gray-400">
 													{formattedDate.getMonth() +
@@ -216,7 +216,7 @@ export function NotificationPopup() {
 												</div>
 											</div>
 											<div className="alert-message whitespace-nowrap text-start text-xs">
-												{noti.message}
+												{noti.data.message}
 											</div>
 										</button>
 										<div className={`${styles.bar} h-full w-2`}>

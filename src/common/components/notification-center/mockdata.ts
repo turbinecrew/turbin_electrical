@@ -6,10 +6,10 @@ export const notificationData = [
 		user_id: {
 			$oid: "65bcf5e5a4b0d6a9a7b8c9d0",
 		},
-		type: "notice",
-		title: "알림입니다",
-		message: "알림상세메시지",
 		data: {
+			type: "notice",
+			title: "알림입니다",
+			message: "알림상세메시지",
 			content_link: "/trading",
 		},
 		is_read: false,
@@ -26,10 +26,10 @@ export const notificationData = [
 		user_id: {
 			$oid: "65bcf5e5a4b0d6a9a7b8c9d0",
 		},
-		type: "regionPage",
-		title: "지역",
-		message: "지역별데이터에업데이트",
 		data: {
+			type: "regionPage",
+			title: "지역",
+			message: "지역별데이터에업데이트",
 			content_link: "/region",
 		},
 		is_read: false,
@@ -46,10 +46,10 @@ export const notificationData = [
 		user_id: {
 			$oid: "65bcf5e5a4b0d6a9a7b8c9d0",
 		},
-		type: "user",
-		title: "유저정보",
-		message: "내정보변경완료",
 		data: {
+			type: "user",
+			title: "유저정보",
+			message: "내정보변경완료",
 			content_link: "/profile",
 		},
 		is_read: false,
@@ -66,10 +66,10 @@ export const notificationData = [
 		user_id: {
 			$oid: "65bcf5e5a4b0d6a9a7b8c9d0",
 		},
-		type: "warnig",
-		title: "경고 알림",
-		message: "계좌에 이상 징후가 감지되었습니다.",
 		data: {
+			type: "warnig",
+			title: "경고 알림",
+			message: "계좌에 이상 징후가 감지되었습니다.",
 			content_link: "/profile",
 		},
 		is_read: false,
@@ -86,10 +86,10 @@ export const notificationData = [
 		user_id: {
 			$oid: "65bcf5e5a4b0d6a9a7b8c9d0",
 		},
-		type: "tradingConfirm",
-		title: "거래 확인",
-		message: "거래가 성공적으로 확인되었습니다.",
 		data: {
+			type: "tradingConfirm",
+			title: "거래 확인",
+			message: "거래가 성공적으로 확인되었습니다.",
 			content_link: "/trading",
 		},
 		is_read: false,
@@ -106,10 +106,10 @@ export const notificationData = [
 		user_id: {
 			$oid: "65bcf5e5a4b0d6a9a7b8c9d0",
 		},
-		type: "security",
-		title: "보안 알림",
-		message: "로그인 시도 실패가 감지되었습니다.",
 		data: {
+			type: "security",
+			title: "보안 알림",
+			message: "로그인 시도 실패가 감지되었습니다.",
 			content_link: "/profile",
 		},
 		is_read: false,
