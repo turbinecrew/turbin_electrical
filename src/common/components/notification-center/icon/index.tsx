@@ -1,31 +1,26 @@
 "use client"
 import {
-	Home,
 	User,
 	Bell,
-	TrendingUp,
-	TrendingDown,
+	ClipboardX,
 	ClipboardCheck,
 	LockKeyhole,
 	Map,
 	TriangleAlert,
 	AlarmClock,
-	Settings,
 	ChartCandlestick,
 } from "lucide-react"
 
 const alertIconFormat = [
+	{ type: "notice", icon: Bell },
 	{ type: "warnig", icon: TriangleAlert },
 	{ type: "alram", icon: AlarmClock },
-	{ type: "region page", icon: Map },
+	{ type: "regionPage", icon: Map },
 	{ type: "user", icon: User },
-	{ type: "priceUp", icon: TrendingUp },
-	{ type: "priceDown", icon: TrendingDown },
 	{ type: "tradingConfirm", icon: ClipboardCheck },
 	{ type: "tradingPage", icon: ChartCandlestick },
 	{ type: "security", icon: LockKeyhole },
-	{ type: "setting", icon: Settings },
-	{ type: "home", icon: Home },
+	{ type: "tradingDeny", icon: ClipboardX },
 ]
 
 type IconFormatterPT = {
