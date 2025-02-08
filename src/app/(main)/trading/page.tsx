@@ -14,24 +14,16 @@ export default function Trading() {
 
 	return (
 		<div className="flex flex-col gap-8 p-8">
-			<div className="flex w-full flex-col gap-4">
-				<div className="grid w-full grid-cols-4 gap-4">
-					<PriceCard
-						activeChart={activeChart}
-						setActiveChart={setActiveChart}
-					/>
-					<div className="col-span-2">
-						<TradingVolumeCards />
-					</div>
-				</div>
-
-				<div className="grid grid-cols-2 gap-4">
-					{activeChart === 0 && <SmpLineChart />}
-					{activeChart === 1 && <RecLineChart />}
-					<VolumeChart />
-				</div>
+			<div className="flex w-full flex-col gap-4 md:grid md:grid-cols-2">
+				<PriceCard activeChart={activeChart} setActiveChart={setActiveChart} />
+				<TradingVolumeCards />
 			</div>
-			<div className="flex w-full justify-center">
+			<div className="grid h-fit grid-rows-2 gap-4 md:grid-cols-2 md:grid-rows-1">
+				{activeChart === 0 && <SmpLineChart />}
+				{activeChart === 1 && <RecLineChart />}
+				<VolumeChart />
+			</div>
+			<div className="flex h-fit w-full justify-center">
 				<TradingDataTable />
 			</div>
 		</div>

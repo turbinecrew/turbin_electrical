@@ -1,15 +1,18 @@
-"use client"
 import { useEffect, useState } from "react"
 
-import type { MiniCardPT } from "@/common/components/card"
-import { MiniCard } from "@/common/components/card"
+import {
+	MiniCardContent,
+	MiniCardHeader,
+	TbCard,
+} from "@/common/components/card/new-card"
+import type { MiniCardPT } from "@/common/components/card/new-card/types"
 import { timeCardDatas } from "@/features/trading-dashboard/components/slide-card/data"
 
 export function TradingVolumeCards() {
 	const [data, setData] = useState(timeCardDatas[0])
 
 	useEffect(() => {
-		const transformCard = setInterval(() => {
+		setInterval(() => {
 			setData((prevData) =>
 				prevData === timeCardDatas[0] ? timeCardDatas[1] : timeCardDatas[0],
 			)
@@ -17,16 +20,17 @@ export function TradingVolumeCards() {
 	}, [])
 
 	return (
-		<div className="grid w-full transform grid-cols-2 gap-4">
+		<div className="grid w-full grid-cols-2 gap-4">
 			{data.map((items: MiniCardPT, idx) => (
-				<MiniCard
-					title={items.title}
-					value={items.value}
-					unit={items.unit}
-					color={items.color}
+				<TbCard
 					key={idx}
-					className="h-fit"
-				/>
+					variant="mini"
+					color={idx ? "deep" : "light"}
+					className="h-full"
+				>
+					<MiniCardHeader title={items.title} />
+					<MiniCardContent value={items.value} unit={items.unit} />
+				</TbCard>
 			))}
 		</div>
 	)

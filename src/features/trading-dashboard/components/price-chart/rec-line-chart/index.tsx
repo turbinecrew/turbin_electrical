@@ -40,7 +40,7 @@ export function RecLineChart() {
 			className="h-full"
 			rightArea={TimeRangeOptions(timeRange, setTimeRange, timeRangeOptions)}
 		>
-			<div className="pt-2">
+			<div className="pt-4">
 				<LineChartComponent
 					chartConfig={chartConfig}
 					chartData={filteredData}
