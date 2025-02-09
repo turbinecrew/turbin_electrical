@@ -11,11 +11,12 @@ type TChartData = {
 export type LineChartComponentPT = {
 	chartConfig: ChartConfig
 	chartData: TChartData[]
-	LineDataKey: string
-	XAixsDataKey: string
+	lineDataKey: string
+	xAixsDataKey: string
 	type: CurveType
 	dot: boolean
-	Ymin: AxisDomainItem
-	Ymax: AxisDomainItem
+	xAxisFormat: "MD" | "DT" | "YM"
+	yMin: AxisDomainItem
+	yMax: AxisDomainItem
 	// AxisDomainItem : string | number | Function | 'auto' | 'dataMin' | 'dataMax'
 }

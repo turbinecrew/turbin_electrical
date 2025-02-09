@@ -2,25 +2,27 @@
 
 import { TitleCard } from "@/common/components/card"
 import { LineChartComponent } from "@/common/components/chart/line-chart"
-
-import { getChartConfig } from "./data"
-import { chartData } from "./mock"
+import { groupByApprovedDate } from "@/features/realtime/components/chart/trading-volume-chart/detaildata/groupByApprovedDate"
+import { mockdata } from "@/features/realtime/components/chart/trading-volume-chart/detaildata/mockdata"
+import { generateChartConfig } from "@/features/trading-dashboard/utils/generateChartConfig"
 
 export function VolumeChart() {
-	const chartConfig = getChartConfig()
+	const data = groupByApprovedDate(mockdata)
+	const chartConfig = generateChartConfig(data)
 
 	return (
 		<TitleCard title="월별 거래량">
 			<div className="pt-4">
 				<LineChartComponent
 					chartConfig={chartConfig}
-					chartData={chartData}
-					LineDataKey={"volume"}
-					XAixsDataKey={"date"}
+					chartData={data}
+					lineDataKey={"volume"}
+					xAixsDataKey={"date"}
 					type={"monotone"}
 					dot={false}
-					Ymin={1000}
-					Ymax={2500}
+					yMin={0}
+					yMax={"auto"}
+					xAxisFormat={"YM"}
 				/>
 			</div>
 		</TitleCard>
