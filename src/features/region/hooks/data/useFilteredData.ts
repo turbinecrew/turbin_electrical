@@ -1,41 +1,44 @@
 import { useMemo } from "react"
 
-import type { DataEntry } from "@/features/region/types/regionTable"
+import { roundToOneDecimal } from "@/util/utils"
 
-export interface FilterOptions {
+import type { DataEntry } from "../../types/regionTable"
+
+export type FilterOptions = {
 	selectedRegion: string
 	today: string
 	startHour?: number
 	endHour?: number
 }
 
-export function roundToOneDecimal(value: number): number {
-	return Math.round(value * 10) / 10 // 소수점 한 자리에서 반올림
-}
-
 export default function useFilteredData(
-	data: DataEntry[],
+	data: DataEntry[] | undefined,
 	{ selectedRegion, today, startHour = 9, endHour = 17 }: FilterOptions,
 ): DataEntry[] {
 	return useMemo(() => {
+		if (!data || data.length === 0) return []
+
 		return data
 			.filter(
 				(item) =>
-					(selectedRegion === "전국" || item.지역 === selectedRegion) &&
-					item.날짜 === today &&
-					parseInt(item.시간.replace("시", ""), 10) >= startHour &&
-					parseInt(item.시간.replace("시", ""), 10) <= endHour,
+					item.time &&
+					(selectedRegion === "전국" || item.region === selectedRegion) &&
+					item.date === today &&
+					parseInt(item.time.split(":")[0], 10) >= startHour &&
+					parseInt(item.time.split(":")[0], 10) <= endHour,
 			)
 			.map((item) => ({
 				...item,
-				"기온(℃)": roundToOneDecimal(item["기온(℃)"]),
-				"풍속(㎧)": roundToOneDecimal(item["풍속(㎧)"]),
-				"일사량(W/㎡)": roundToOneDecimal(item["일사량(W/㎡)"]),
+				"기온(℃)": roundToOneDecimal(item.temperature_c),
+				"풍속(㎧)": roundToOneDecimal(item.wind_speed_m_s),
+				"일사량(W/㎡)": roundToOneDecimal(item.solar_radiation_w_m2),
+				"발전량(kW)": item.generation_kw,
+				"누적발전량(kWh)": item.cumulative_generation_kwh,
 			}))
 			.sort(
 				(a, b) =>
-					parseInt(a.시간.replace("시", ""), 10) -
-					parseInt(b.시간.replace("시", ""), 10),
+					parseInt(a.time.split(":")[0], 10) -
+					parseInt(b.time.split(":")[0], 10),
 			)
 	}, [data, selectedRegion, today, startHour, endHour])
 }

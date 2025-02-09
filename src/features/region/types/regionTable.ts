@@ -1,13 +1,11 @@
 export type DataEntry = {
-	_id: {
-		$oid: string
-	}
-	날짜: string
-	지역: string
-	시간: string
-	"발전량(kW)": number
-	"누적발전량(kWh)": number
-	"일사량(W/㎡)": number
-	"기온(℃)": number
-	"풍속(㎧)": number
+	_id: string
+	date: string
+	region: string
+	time: string
+	generation_kw: number
+	cumulative_generation_kwh: number
+	solar_radiation_w_m2: number
+	temperature_c: number
+	wind_speed_m_s: number
 }
